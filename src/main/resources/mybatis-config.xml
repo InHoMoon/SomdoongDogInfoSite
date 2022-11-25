@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	
+	<!-- 마이바티스 동작 설정 -->
+	<settings>
+	
+		<!-- 조회된 컬럼의 Snack Case(_) 를 DTO의 Camel Case로 자동 변환(매핑)해주는 설정 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		
+		<!-- JDBC타입이 명시되지 않은 컬럼의 NULL값을 처리하는 방법을 설정 -->
+		<!-- 	-> value값으로 대체한다  -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+		
+	</settings>
+	
+</configuration>
