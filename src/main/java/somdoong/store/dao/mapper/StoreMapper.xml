@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="somdoong.store.dao.face.StoreDao">
+	<select id="selectFood" resultType="somdoong.store.dto.Store">
+		SELECT s.store_no, s.title, s.category, p.product_name, p.price
+		FROM store s, product p
+		WHERE s.product_no = p.product_no
+		AND category = '사료';
+		ORDER BY 
+	</select>
+</mapper>
