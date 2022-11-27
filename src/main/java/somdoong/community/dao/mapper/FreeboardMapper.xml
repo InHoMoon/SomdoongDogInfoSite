@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.community.dao.face.FreeboardDao">
+
+	<select id="selectCntAll" resultType="int">
+		select count(*) from freeboard
+	</select>
+
+
+	<select id="selectList" resultType="Freeboard" parameterType="Paging" >
+		SELECT * FROM (
+			SELECT rownum rnum, F.* FROM (
+				SELECT
+					fno, title, content , userid
+					, hit, write_date
+				FROM freeboard
+				ORDER BY fno DESC
+			) F
+		) freeboard
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+
+	<update id="hit" parameterType="Freeboard">
+		update freeboard
+		set hit= hit + 1
+		where fno =  #{fno}
+	</update>
+	
+	
+	<select id="selectBoard" resultType="Freeboard" parameterType="Freeboard">
+		select
+			fno, title, content, userid, hit, write_date
+		from freeboard
+		where fno = #{fno}
+	</select>
+
+
+	<insert id="insertBoard" parameterType="Freeboard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="fno">
+			SELECT fboard_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO freeboard ( fno, title, content , userid, userno )
+		VALUES ( #{fno }, #{title }, #{content }, #{userid }, #{userno } )
+	</insert>
+
+	
+	<insert id="insertFile" parameterType="FboardFile">
+		INSERT INTO fboard_file ( f_fileno, fno, origin_name, stored_name)
+		VALUES ( fboard_file_seq.nextval, #{fno }, #{originName }, #{storedName } )
+	</insert>
+
+
+	<select id="selectFileByBoardno" resultType="FboardFile" parameterType="Freeboard">
+		SELECT
+			f_fileno, fno, origin_name, stored_name
+		FROM fboard_file
+		WHERE fno = #{fno }
+	</select>
+	
+	
+	<select id="selectFileByFileno" resultType="FboardFile" parameterType="FboardFile">
+		SELECT
+			f_fileno, fno, origin_name, stored_name
+		FROM fboard_file
+		WHERE f_fileno = #{fFileno }
+	</select>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

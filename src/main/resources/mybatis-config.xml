@@ -18,4 +18,9 @@
 		
 	</settings>
 	
+	<typeAliases>
+		<package name="somdoong.community.dto"/>
+		<package name="somdoong.util"/>
+	</typeAliases>
+	
 </configuration>

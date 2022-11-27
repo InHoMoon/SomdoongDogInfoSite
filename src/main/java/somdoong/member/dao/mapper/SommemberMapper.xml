@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="somdoong.member.dao.face.SommemberDao">
+
+	<select id="selectCntMember" resultType="int" parameterType="somdoong.member.dto.Sommember">
+		SELECT count(*) FROM sommember
+		WHERE userid = #{userid} AND userpw = #{userpw}
+	</select>
+
+	<select id="selectUserno" resultType="int" parameterType="somdoong.member.dto.Sommember">
+		SELECT userno FROM sommember
+		WHERE userid = #{userid}
+	</select>
+
+
+</mapper>
