@@ -14,10 +14,12 @@ public class Store {
 	private int hit;
 	private int likepost;
 	
+	private Product product;
+	
 	public Store() { }
 
 	public Store(int storeNo, int productNo, String category, String title, String info, String content,
-			Date reportingDate, int hit, int likepost) {
+			Date reportingDate, int hit, int likepost, Product product) {
 		super();
 		this.storeNo = storeNo;
 		this.productNo = productNo;
@@ -28,13 +30,14 @@ public class Store {
 		this.reportingDate = reportingDate;
 		this.hit = hit;
 		this.likepost = likepost;
+		this.product = product;
 	}
 
 	@Override
 	public String toString() {
 		return "Store [storeNo=" + storeNo + ", productNo=" + productNo + ", category=" + category + ", title=" + title
 				+ ", info=" + info + ", content=" + content + ", reportingDate=" + reportingDate + ", hit=" + hit
-				+ ", likepost=" + likepost + "]";
+				+ ", likepost=" + likepost + ", product=" + product + "]";
 	}
 
 	public int getStoreNo() {
@@ -108,5 +111,14 @@ public class Store {
 	public void setLikepost(int likepost) {
 		this.likepost = likepost;
 	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 	
 }

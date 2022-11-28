@@ -26,6 +26,8 @@ public class StoreController {
 		
 		List<Store> foodList = storeService.getFoodList();
 		
+//		logger.info("{}", foodList);
+		
 		model.addAttribute("foodList", foodList);
 		
 		return "store/list_food";
