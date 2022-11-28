@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script type="text/javascript">
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
+    <c:import url="../layout/header.jsp" />
+    
+    	<script type="text/javascript">
 window.onload = function () {
 	
 ("use strict");
@@ -80,17 +79,7 @@ checkAll.addEventListener("click", (e) => {
 	box-sizing: border-box;
 }
 
-html, body {
-	height: 100%;
-}
 
-body {
-	display: flex;
-	margin: 0;
-	background-color: #f5f6f7;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
 
 ul {
 	list-style: none;
@@ -102,18 +91,9 @@ ul {
 	margin: auto;
 }
 
-.wrap .logo {
-	text-align: center;
-	margin-bottom: 10px;
-}
-
-.wrap .logo h1 {
-	margin: 0;
-	font-size: 50px;
-}
 
 .wrap .contents {
-	padding: 50px;
+	padding: 120px;
 	background-color: #ffffff;
 	border: 1px solid #dadada;
 	border-radius: 5px;
@@ -196,19 +176,16 @@ label.required::after {
 	}
 }
 </style>
-<body>
+
 	<div class="wrap">
-		<div class="logo">
-			<h1>솜이네둥이네</h1>
-		</div>
 		<div class="contents">
 			<form action="/member/join" method="get" id="form__wrap">
 			
 				<div class="terms__check__all">
 					<input type="checkbox" name="checkAll" id="checkAll"/> 
 					<label for="checkAll">
-						솜이네둥이네 이용약관, 개인정보 수집 및 이용,
-						프로모션 정보 수신(선택)에 모두 동의합니다.
+						솜이네둥이네 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신<br>
+						(선택)에 모두 동의합니다.
 					</label>
 				</div>
 				
@@ -222,7 +199,8 @@ label.required::after {
 								</label>
 						</div>
 						<div class="terms__content">
-				
+						솜이네 둥이네 에서는 사실만을 작성해야 하며 거짓 및 잘못된 글로 인해 
+						피해가 생기면 그에 따른 소송을 제기할 수 있습니다.
 						</div>
 					</li>
 					<li class="terms__box">
@@ -233,7 +211,7 @@ label.required::after {
 								수집 및 이용 동의</label>
 						</div>
 						<div class="terms__content">
-						
+						개인정보는 3년간 유지되며 오로지 솜이네 둥이네를 위해서만 사용됩니다.
 						</div>
 					</li>
 					<li class="terms__box">
@@ -243,7 +221,7 @@ label.required::after {
 								for="allowPromotions">프로모션 정보 수신 동의</label>
 						</div>
 						<div class="terms__content">
-						
+						이벤트, 정보 등을 문자나 이메일로 보내드립니다.
 						</div>
 					</li>
 				</ul>
@@ -251,6 +229,17 @@ label.required::after {
 			</form>
 		</div>
 	</div>
-</body>
-</html>
+    
+
+   
+   
+   
+   
+   
+   
+   
+   
+  
+    
+    <c:import url="../layout/footer.jsp" />
 
