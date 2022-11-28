@@ -17,7 +17,7 @@ $(document).ready(function() {
 <style type="text/css">
 .container {
 	width: auto;
-    padding: 57px 34px 0px;
+    padding: 57px 175px 0px;
 }
 
 table {

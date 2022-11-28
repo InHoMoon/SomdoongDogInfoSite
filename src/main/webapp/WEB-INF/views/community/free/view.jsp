@@ -9,8 +9,11 @@
 <style type="text/css">
 
 .all {
-	width: auto;
-    padding: 57px 34px 0px;
+	padding: 57px 91px 0px;
+    margin: 0 auto;
+    width: 90%;
+    min-width: 1000px;
+    max-width: 1200px;
 }
 
 /* 제목, 작성자, 작성일, 조회수 영역 */
@@ -64,23 +67,15 @@
 
 /* 하트이미지 들어가는 영역 */
 .like{
-	float: left;
-    padding: 0 9px;
-    border-radius: 16px;
-    border: 1px solid #959595;
-    border-color: rgba(185,185,185,0.5);
-    width: 80px;
-    height: 32px;
-    margin-right: 10px;
+	margin: 20px 0px;
+    text-align: center;
 }
 
 /* 하트 이미지 */
 .heart {
-	width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     position: relative;
-    left: 18px;
-    top: 4px;
 }
 
 /* 목록버튼 */
@@ -95,65 +90,6 @@
     box-sizing: border-box;
     background: none;
 }
-
-
-/* 총 댓글 갯수 Comments */
-.comm_num{
-	font-weight: normal;
-    font-size: 20px;
-    color: #222;
-    display: block;
-    margin-bottom: 14px;
-}
-
-/* 댓글 작성 전체 영역(회색배경) */
-.comm_box{
-	border-top: 1px solid #e8e8e8;
-    background-color: #fafafa;
-    position: relative;
-    height: 200px;
-    border-bottom: 1px solid #e8e8e8;
-}
-
-/* 댓글 작성자 아이디 */
-.writer_info{
-	margin-bottom: 5px;
-    position: relative;
-    left: 13px;
-}
-
-/* 댓글 input 감싸는 흰색 영역 */
-.write_area{
-	position: relative;
-    left: 13px;
-    padding: 7px 12px;
-    border: 1px solid #e8e8e8;
-    background-color: #fff;
-    height: 130px;
-    width: 1002px;
-}
-
-/* 댓글 input창 */
-#comm{
-	width: 100%;
-    height: 70px;
-    border: none;
-    font-size: 13px;
-    resize: none;
-    box-sizing: border-box;
-}
-
-/* 댓글 등록 버튼 */
-#commBtn{
-	float: right;
-    width: 54px;
-    height: 34px;
-    border-radius: 10px;
-    font-size: 13px;
-    border: none;
-    background-color: #6bacce;
-    color: #fff;
-}
 </style>
 
 
@@ -163,11 +99,11 @@ $(document).ready(function(){
 		console.log("좋아요 클릭");
 // 		$(".heart").attr("src", "https://cdn-icons-png.flaticon.com/512/7757/7757506.png");
 		
-		if ( $(".heart").attr("src") == "https://cdn-icons-png.flaticon.com/512/8719/8719659.png")  {
-			$(".heart").attr("src", "https://cdn-icons-png.flaticon.com/512/7757/7757506.png");
+		if ( $(".heart").attr("src") == "/resources/empty_heart.png")  {
+			$(".heart").attr("src", "/resources/heart.png");
 			console.log("좋아요 클릭");
 		} else {
-			$(".heart").attr("src", "https://cdn-icons-png.flaticon.com/512/8719/8719659.png"); 
+			$(".heart").attr("src", "/resources/empty_heart.png"); 
 			console.log("좋아요 취소");
 		}
 	})
@@ -221,8 +157,7 @@ $(document).ready(function(){
 		
 	<div class="like_list">
 		<div class="like">
-			<img src="https://cdn-icons-png.flaticon.com/512/8719/8719659.png" class="heart">
-<!-- 				<span class="heart"><img src="https://cdn-icons-png.flaticon.com/512/7757/7757506.png"></span> -->
+			<img src="/resources/empty_heart.png" class="heart">
 		</div>
 		
 <!-- 		<div class="list"> -->
@@ -231,34 +166,12 @@ $(document).ready(function(){
 	</div> <!-- like_list -->
 		
 		
-<!-- 	<div class="file-area"> -->
-<%-- 		<a href="/community/free/download?fFileno=${fboardFile.fFileno }">${fboardFile.originName }</a> --%>
-<!-- 	</div> -->
-	
 		
 	
 </div> <!-- all -->
 
+<c:import url="./comment.jsp" />
 
-
-<!-- 댓글입력창 -->
-<div class="comm_area" style="padding: 0 34px 30px;">
-
-	<strong class="comm_num">
-		<span>1</span> Comments
-	</strong>
-
-	<div class="comm_box" style="padding-top: 10px;">
-		<div class="writer_info" style="margin-bottom: 5px;">
-			<span>${userid }</span>
-		</div>
-		
-		<div class="write_area">
-			<textarea id="comm" name="comm" placeholder="댓글을 입력해주세요"></textarea>
-			<button id="commBtn">등록</button>
-		</div>
-	</div> <!-- comm_box -->
-	
-</div> <!-- comm_area -->
 
 <c:import url="../../layout/footer.jsp" />
+

@@ -2,6 +2,8 @@ package somdoong.community.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class FboardComment {
 	
 	private int fCommno;
@@ -9,6 +11,7 @@ public class FboardComment {
 	private int userno;
 	private String userid;
 	private String commContent;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm")
 	private Date commDate;
 	
 	public FboardComment() {}
@@ -76,6 +79,7 @@ public class FboardComment {
 	public void setCommDate(Date commDate) {
 		this.commDate = commDate;
 	}
+	
 	
 	
 

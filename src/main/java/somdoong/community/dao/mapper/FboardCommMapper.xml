@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.community.dao.face.FboardCommentDao">
+
+	<select id="getListByfno" resultType="FboardComment" parameterType="int">
+		select * from fboard_comment
+		where fno = #{fno}
+		order by f_commno desc
+	</select>
+	
+	<select id="getTotal" resultType="int" parameterType="int">
+		select count(*) from fboard_comment
+		where fno = #{fno}
+	</select>
+
+</mapper>
