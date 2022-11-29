@@ -15,13 +15,31 @@ public class SomDoongMemberServiceImpl implements SomDoongMemberService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired SomDoongMemberDao somDoongMemberDao;
-	
+
+
 	@Override
 	public void join(SomDoongMember joinproc) {
 		
 		somDoongMemberDao.insert(joinproc);
 		
 	}
+	
+	@Override
+	public boolean login(SomDoongMember member) {
+		
+		int loginChk = somDoongMemberDao.selectCntMember(member);
+		logger.info("loginChk : {}", loginChk);
+		
+		if( loginChk > 0) return true;
+		return false;
+	}
+	
+	@Override
+	public String getUsername(SomDoongMember member) {
+		
+		return somDoongMemberDao.selectName(member) ;
+	}
+
 
 	
 	

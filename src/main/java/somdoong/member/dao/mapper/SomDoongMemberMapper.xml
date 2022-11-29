@@ -14,4 +14,16 @@
     
     </insert>
     
+    <select id="selectCntMember" resultType="int" parameterType="SomDoongMember">
+		SELECT count(*) FROM sommember
+		WHERE userid = #{userid} AND userpw = #{userpw}		
+	</select>
+	
+	<select id="selectName" resultType="String" parameterType="SomDoongMember">
+		SELECT username FROM sommember
+		WHERE userid = #{userid}
+	</select>
+    
+
+    
     </mapper>

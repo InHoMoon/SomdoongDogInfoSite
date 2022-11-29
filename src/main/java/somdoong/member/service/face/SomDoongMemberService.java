@@ -8,6 +8,19 @@ public interface SomDoongMemberService {
 
 	public void join(SomDoongMember joinproc);
 
+	public boolean login(SomDoongMember member);
+
+	public String getUsername(SomDoongMember member);
+
+	
+
+	
+
+	
+	
+	
+
+
 
 
 }

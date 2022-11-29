@@ -6,4 +6,14 @@ public interface SomDoongMemberDao {
 
 	public void insert(SomDoongMember joinproc);
 
+	public int selectCntMember(SomDoongMember member);
+
+	public String selectName(SomDoongMember member);
+
+	
+
+
+
+	
+
 }

@@ -9,6 +9,8 @@
 	<!-- 마이바티스 동작 설정 -->
 	<settings>
 	
+	
+	
 		<!-- 조회된 컬럼의 Snack Case(_) 를 DTO의 Camel Case로 자동 변환(매핑)해주는 설정 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		
