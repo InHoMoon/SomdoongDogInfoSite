@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class FboardComment {
 	
-	private int fCommno;
-	private int fno;
+	private int cno;
+	private int bno;
 	private int userno;
 	private String userid;
 	private String commContent;
@@ -16,10 +16,10 @@ public class FboardComment {
 	
 	public FboardComment() {}
 
-	public FboardComment(int fCommno, int fno, int userno, String userid, String commContent, Date commDate) {
+	public FboardComment(int cno, int bno, int userno, String userid, String commContent, Date commDate) {
 		super();
-		this.fCommno = fCommno;
-		this.fno = fno;
+		this.cno = cno;
+		this.bno = bno;
 		this.userno = userno;
 		this.userid = userid;
 		this.commContent = commContent;
@@ -28,24 +28,24 @@ public class FboardComment {
 
 	@Override
 	public String toString() {
-		return "FboardComment [fCommno=" + fCommno + ", fno=" + fno + ", userno=" + userno + ", userid=" + userid
+		return "FboardComment [cno=" + cno + ", bno=" + bno + ", userno=" + userno + ", userid=" + userid
 				+ ", commContent=" + commContent + ", commDate=" + commDate + "]";
 	}
 
-	public int getfCommno() {
-		return fCommno;
+	public int getCno() {
+		return cno;
 	}
 
-	public void setfCommno(int fCommno) {
-		this.fCommno = fCommno;
+	public void setCno(int cno) {
+		this.cno = cno;
 	}
 
-	public int getFno() {
-		return fno;
+	public int getBno() {
+		return bno;
 	}
 
-	public void setFno(int fno) {
-		this.fno = fno;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 
 	public int getUserno() {
@@ -79,6 +79,10 @@ public class FboardComment {
 	public void setCommDate(Date commDate) {
 		this.commDate = commDate;
 	}
+	
+	
+	
+	
 	
 	
 	

@@ -141,51 +141,56 @@
 
 
 <script type="text/javascript">
-$(function(){
-    init();
-})
+$(document).ready(function(){
+	getList();
+});
 
-function init(){
-    var fno = ${fboard.fno}
-    sendData={"fno":fno}
-    $.ajax({
-        data : sendData,
-        method :'POST',
-        url: '/community/free/commlist',
-        success : output
-    })
-}
 
-function output(data){
-	if(data.total > 0){
-		var list = data.list;
-		
-		var comment_html = "<div class='comm_result'>";
-		
-		$('#cCnt').html(data.total);
-		for(i = 0;i < list.length;i++){
-			var content = list[i].commContent;
-			var userid = list[i].userid;
-			comment_html += "<span id='list_userid'><strong>" + userid + "</strong></span>";
-			comment_html += "<span id='list_content'>" + content + "</span>";
-			if(userid == $("#userid").val()){
-				 comment_html += "<span id='delete' style='cursor:pointer;' data-id ="+content+">[삭제]</span><br><hr>";
-				 
+
+function getList() {
+	
+	const fno = ${fno};
+// 	const com_writer = $('#com_writer').val();
+// 	const com_content = $('#com_content').val();
+// 		/* const com_no = ${com}; */
+	$.getJSON(
+		"<c:url value='/community/free/commlist/'/>"+fno,
+		function(data) {
+			if(data.total > 0){
+				var list = data.list;
+				
+				var comment_html = "<div class='comm_result'>";
+				
+				$('#cCnt').html(data.total);
+				for(i = 0;i < list.length;i++){
+					var content = list[i].commContent;
+					var writer = list[i].userid;
+					comment_html += "<span id='list_userid'><strong>" + userid + "</strong></span>";
+					comment_html += "<span id='list_content'>" + content + "</span>";
+					if(userid === $("#userid").val()){
+						comment_html += "<span id='delete' style='cursor:pointer;' data-id ="+content+">[삭제]</span><br><hr>";
+						 
+					}
+					else{
+						comment_html += "</div><hr>";
+					}
+				}
+				
+				$(".comm_result").html(comment_html);
+				
+				
 			}
 			else{
-				comment_html += "</div><hr>";
+				var comment_html = "<div>등록된 댓글이 없습니다.</div>";
+				$(".comm_result").html(comment_html);
 			}
+	
+		
 		}
-		
-		$(".comm_box").html(comment_html);
-		
-		
-	}
-	else{
-		var comment_html = "<span id='list_content'>등록된 댓글이 없습니다.</span>";
-		$(".comm_box").html(comment_html);
-	}
-}
+		);//getJson
+	
+
+};//fucntion getList
 
 </script>
 

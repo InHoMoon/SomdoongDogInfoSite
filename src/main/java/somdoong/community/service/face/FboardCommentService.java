@@ -1,13 +1,11 @@
 package somdoong.community.service.face;
 
-import java.util.List;
-
 import somdoong.community.dto.FboardComment;
 
 public interface FboardCommentService {
 
-	public List<FboardComment> getList(int fno);
+	public void writeC(FboardComment fcomm);
 	
-	public int getTotal(int fno);
+
 
 }

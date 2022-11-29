@@ -1,6 +1,5 @@
 package somdoong.community.service.impl;
 
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,16 +17,11 @@ public class FboardCommentServiceImpl implements FboardCommentService {
 	
 	@Autowired FboardCommentDao  commDao;
 	
-	@Override
-	public List<FboardComment> getList(int fno) {
-		logger.info("댓글목록조회 : {}", commDao.getListByfno(fno));
-		return commDao.getListByfno(fno);
-	}
 	
 	@Override
-	public int getTotal(int fno) {
-		logger.info("댓글수 조회 : {}", commDao.getTotal(fno));
-		return commDao.getTotal(fno);
+	public void writeC(FboardComment fcomm) {
+		commDao.insertComm(fcomm);
 	}
+	
 
 }

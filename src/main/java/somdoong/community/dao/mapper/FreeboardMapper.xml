@@ -16,7 +16,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, F.* FROM (
 				SELECT
-					fno, title, content , userid
+					fno, title, content , userid, userno
 					, hit, write_date
 				FROM freeboard
 				ORDER BY fno DESC
@@ -35,7 +35,7 @@
 	
 	<select id="selectBoard" resultType="Freeboard" parameterType="Freeboard">
 		select
-			fno, title, content, userid, hit, write_date
+			fno, title, content, userid, userno, hit, write_date
 		from freeboard
 		where fno = #{fno}
 	</select>
