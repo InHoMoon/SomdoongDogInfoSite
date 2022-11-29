@@ -18,4 +18,8 @@
 		
 	</settings>
 	
+	<typeAliases>
+		<package name="somdoong"/>
+	</typeAliases>
+	
 </configuration>

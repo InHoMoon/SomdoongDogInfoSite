@@ -65,6 +65,7 @@
 										somdoong.main.controller, somdoong.main.service,
 										somdoong.member.controller, somdoong.member.service,
 										somdoong.mypage.controller, somdoong.mypage.service,
-										somdoong.store.controller, somdoong.store.service" />
+										somdoong.store.controller, somdoong.store.service
+										somdoong.notice.controller, somdoong.notice.service" />
 	
 </beans:beans>

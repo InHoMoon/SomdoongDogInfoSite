@@ -49,13 +49,14 @@
 				<value>classpath:/somdoong/member/dao/**/*Mapper.xml</value>
 				<value>classpath:/somdoong/mypage/dao/**/*Mapper.xml</value>
 				<value>classpath:/somdoong/store/dao/**/*Mapper.xml</value>
+				<value>classpath:/somdoong/notice/dao/**/*Mapper.xml</value>
 			</array>
 		</property>
 	</bean>
 	
 	<!-- 마이바티스를 이용하는 인터페이스 설정(DAO 설정) -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="somdoong.admin.dao, somdoong.community.dao, somdoong.customerService.dao, somdoong.main.dao, somdoong.member.dao, somdoong.mypage.dao, somdoong.store.dao" />
+		<property name="basePackage" value="somdoong.admin.dao, somdoong.community.dao, somdoong.customerService.dao, somdoong.main.dao, somdoong.member.dao, somdoong.mypage.dao, somdoong.store.dao, somdoong.notice.dao" />
 	</bean>
 	
 	<!-- 트랜잭션 매니저 빈 설정 -->
