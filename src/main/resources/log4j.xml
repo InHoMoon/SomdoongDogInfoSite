@@ -36,7 +36,7 @@
 	</logger>
 	
 	<logger name="somdoong.mypage">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="somdoong.store">
@@ -58,7 +58,7 @@
 	</logger>
 	
 	<logger name="jdbc.sqltiming">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="jdbc.resultset">
@@ -66,7 +66,7 @@
 	</logger>
 	
 	<logger name="jdbc.resultsettable">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="org.mybatis">
