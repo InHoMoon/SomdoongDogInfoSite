@@ -164,7 +164,7 @@ footer #footer_wrap {
 <header>
 <div>
 	<h1 class="logo">
-	<a href="/member/main"><img src="/resources/logo.PNG"></a>
+	<a href="#"><img src="/resources/logo.PNG"></a>
 	</h1>
 	<div class="menu_wrap">
 	<nav>
@@ -185,7 +185,7 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
-		<li><a href="/member/main">로그인</a></li>
+		<li><a href="#">로그인</a></li>
 		</c:if>
 		<c:if test="${not empty login }">
 		<li><a href="#">마이페이지</a>
@@ -196,7 +196,7 @@ footer #footer_wrap {
 			<li><a href="#">게시글 수정</a></li>
 		</ul>
 		</li>
-		<li><a href="/member/logout">로그아웃</a></li>
+		<li><a href="#">로그아웃</a></li>
 		</c:if>
 	</ul>
 	</nav>
