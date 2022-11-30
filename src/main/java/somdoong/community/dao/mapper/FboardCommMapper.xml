@@ -11,5 +11,26 @@
 		INSERT INTO fboard_comment ( cno, bno, userno, userid, comm_content ) 
 		VALUES ( fboard_comment_seq.nextval, #{bno}, #{userno}, #{userid}, #{commContent} )
 	</insert>
+	
+	<select id="selectClistByBno" resultType="FboardComment" parameterType="int">
+		select cno, userid, comm_content, comm_date from fboard_comment
+		where bno = #{bno}
+		order by cno desc
+	</select>
+	
+	<select id="getCntByBno" resultType="int" parameterType="int">
+		select count(*) from fboard_comment
+		where bno = #{bno}
+	</select>
+	
+	<select id="getDetailByCno" resultType="FboardComment" parameterType="int">
+		select * from fboard_comment
+		where cno = #{cno}
+	</select>
+	
+	<update id="updateComm" parameterType="FboardComment">
+		UPDATE fboard_comment SET comm_content= #{commContent}
+		WHERE cno = #{cno}
+	</update>
 
 </mapper>

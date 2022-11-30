@@ -179,11 +179,15 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+//댓글 리스트 가져오는 함수
+getList2();
+	
+	//댓글등록 -  [등록]버튼 클릭 시
 	$("#commBtn").click(function(){
 		
 		//변수 선언
 		var bno = ${fboard.fno};
-		var commContent = $("#commContent").val();
+		var commContent = $("#commContent").val().replace("\n", "<br>");
 		
 		
 		//로그인 여부 검사
@@ -199,23 +203,102 @@ $(document).ready(function() {
 			url : "/community/free/writeC"
 			, type : "POST"
 			, data : { "bno" : bno, "commContent" : commContent }
-			, dataType : "json"
+			, dataType : "text"
 			, success : function(data){
-				if(data == "success"){
-					alert("댓글 등록 완료");
+				if(data == "success"){        
+					console.log("댓글 등록 완료");
+					getList2();
 				} else {
-					alert("댓글 등록 실패");
+					console.log("댓글 등록 실패");
 				}
 			},
 			error : function(){
 				console.log("ajax 통신 실패");
 			}
 		}); //ajax end
-
+	
 		$("#commContent").val("");
 		
 	}); // click end
-})
+}) // document end
+
+
+function getList(){
+	$.ajax({
+		url : "/community/free/listC?bno=${fboard.fno}"
+		, type : "get"
+		, success : function(res){
+			$(".comm_result").html(res);
+		}
+	}); //ajax end
+}// getList end
+
+
+//댓글 리스트 조회 함수 (json방식)
+function getList2(){
+	$.ajax({
+		url : "/community/free/listJson?bno=${fboard.fno}"
+		, type : "get"
+		, contentType : "application/json"
+		, success : function(res){
+			console.log(res);
+			
+			if(res.total > 0){
+				var list = res.list;
+// 				var userid = '${fboard.userid}';
+				var userid = '${sessionScope.userid}';
+				
+				var output = "<div>";
+				
+				$("#cCnt").html(res.total);
+				for(i = 0; i < list.length; i++){
+					output += "<div><span id='comm_userid'><strong>" + list[i].userid + "</strong></span><br/>";
+					output += "<span id='comm_content'>" + list[i].commContent + "</span>";
+					
+// 					if(list[i].userid == userid){
+					if(${userid eq list[i].userid}){
+// 						output += "<span id='delete' style='cursor:pointer;' data-id ="+list[i].comContent+">[삭제]</span><br></div><hr>";
+						output += " <span id='updelete'><button type='button' id='updateBtn'>수정</button> <button id='deleteBtn'>삭제</button></span><br></div><hr>";
+						 
+					}
+					else{
+						output += "</div><hr>";
+					}
+					
+				} //for end
+				$(".comm_result").html(output);
+				
+			} else {
+				var output = "<div>등록된 댓글이 없습니다.</div>";
+				$(".comm_result").html(output);
+			}
+		}
+			
+	}); //ajax end
+} //getList2 end
+
+
+//댓글 수정화면 생성 함수
+function showModify(cno){
+	$.ajax({
+		type: "get",
+		url: "/community/free/detailC"+cno,
+		success: function(res){
+			$("#comm_modify").html(res);
+			// 태그.css("속성", "값")
+			$("#comm_modify").css("visibility", "visible");
+		}
+	})
+}
+
+
+$("#updateBtn").click(function(){
+	showModify();
+	console.log("수정버튼 클릭");
+	
+}); //updateBtn
+
+
 </script>
 
 <div class="all">
@@ -277,9 +360,10 @@ $(document).ready(function() {
 		<span id="cCnt"></span> Comments
 	</strong>
 	
-	<div class="comm_result"> <!-- 댓글이 들어갈 박스 -->
-		<strong><span id="list_userid"></span></strong>
-		<span id="list_content"></span>
+	<!-- 댓글 목록 영역 -->
+	<div class="comm_result">
+<%-- 		<strong><span id="list_userid" style="display: hidden;">${list.userid }</span></strong> --%>
+<%-- 		<span id="list_content" style="display: hidden;">${list.comContent }</span> --%>
 	</div>
 
 	<div class="comm_box" style="padding-top: 10px;">
@@ -296,9 +380,6 @@ $(document).ready(function() {
 </form>
 </div> <!-- comm_area -->
 
-
-
-
 <!-- <div class="box-footer"> 페이지네이션 -->
 <!-- 	<div class="text-center"> -->
 <!-- 		<ul class="pagination pagination-sm no-margin"> -->
@@ -306,6 +387,10 @@ $(document).ready(function() {
 <!-- 		</ul> -->
 <!-- 	</div> -->
 <!-- </div> -->
+
+
+<!-- 댓글 수정 영역-->
+<div class="comm_modify"></div>
 
 
 
