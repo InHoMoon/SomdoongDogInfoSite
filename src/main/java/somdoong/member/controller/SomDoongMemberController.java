@@ -68,7 +68,7 @@ public class SomDoongMemberController {
 			
 			session.setAttribute("login", loginResult);
 			session.setAttribute("userid", member.getUserid());
-			session.setAttribute("usernick",somDoongMemberService.getUsername(member));
+			session.setAttribute("username",somDoongMemberService.getUsername(member));
 			
 			return "redirect:/member/loginsuc";
 			
@@ -100,7 +100,17 @@ public class SomDoongMemberController {
 		return "redirect:/member/login";
 	}
 
+	
+	@GetMapping("idfind")
+	public void idfind() {
 		
+	}
+	
+	
+	@GetMapping("pwfind")
+	public void pwfind() {
+		
+	}
 }
 	
 	

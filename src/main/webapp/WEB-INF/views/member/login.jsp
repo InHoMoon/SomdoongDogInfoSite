@@ -15,32 +15,52 @@
     </script>
     
     
+
+    
+    <style  type="text/css">
+
+	.container {
+
+	height: 800px;
+
+}
+
+#login {
+	position: relative;
+	top: 300px;
+	
+}
+
+    
+    </style>
+    
+    
     <div class="container">
-    <h1>로그인</h1>
+   
    
     
-    <div>
+    <div id="login">
     <form action="./login" method="post" class="form-horizontal">
     
   
    <div class="form-group">
     	<label for="userid" class="col-sm-4 control-label">아이디</label>
-  	  	<div class="col-sm-5">
+  	  	<div class="col-sm-4">
     		<input type="text" class="form-control" id="userid" name="userid" placeholder="아이디 입력">
    		</div>
    </div>
     
     <div class="form-group">
    		 <label for="userpw" class="col-sm-4 control-label">패스워드</label>
-   		 <div class="col-sm-5">
+   		 <div class="col-sm-4">
    		 	<input type="password" class="form-control" id="userpw" name="userpw" placeholder="패스워드 입력">
     	 </div>
     </div>
    
    <div class="form-group">
     <div class="col-sm-offset-5">
-    	 <a href="#" >아이디 찾기</a> 
-   		 <a href="#" >비밀번호 찾기</a> 
+    	 <a href="./idfind" >아이디 찾기</a> 
+   		 <a href="./pwfind" >비밀번호 찾기</a> 
    		 <a href="./join" >회원가입</a>
     </div>
    </div>

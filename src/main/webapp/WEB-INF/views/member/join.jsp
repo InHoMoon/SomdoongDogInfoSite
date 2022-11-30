@@ -8,6 +8,15 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	$("#cancel").click(function() {
+		history.go(-1);
+	})
+	
+})
+
+
 $(document).ready(function(){
 	
     var hobbyCheck = false;
@@ -188,11 +197,31 @@ $(document).ready(function(){
 
 </script>
 
+<style type="text/css">
+.container {
+
+	height: 800px;
+
+}
+
+#join {
+	position: relative;
+	top: 70px;
+	
+}
+
+h1{
+	text-align: center;
+}
+
+
+</style>
+
 
 <div class="container">
 	<h1>회원가입</h1>
 	<br>
-	<div>
+	<div id="join">
 		<form action="./join" method="post" class="form-horizontal">
 
 			<div class="form-group">
@@ -274,7 +303,7 @@ $(document).ready(function(){
 			<div class="form-group">
 
 				<div class="col-sm-offset-5">
-					<button type= "submit" id="submit" class="btn btn-primary">회원가입</button>
+					<button type= "submit" id="submit" class="btn btn-warning">회원가입</button>
 					<input type="reset" id="cancel" class="btn btn-danger" value="취소" />
 				</div>
 
