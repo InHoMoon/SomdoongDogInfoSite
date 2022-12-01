@@ -40,6 +40,14 @@ public class SomDoongMemberServiceImpl implements SomDoongMemberService{
 		return somDoongMemberDao.selectName(member) ;
 	}
 
+	
+	@Override
+	public int idcheck(SomDoongMember member) {
+
+		int result = somDoongMemberDao.idcheck(member);
+		
+		return result;
+	}
 
 	
 	

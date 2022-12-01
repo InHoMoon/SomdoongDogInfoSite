@@ -10,6 +10,8 @@ public interface SomDoongMemberDao {
 
 	public String selectName(SomDoongMember member);
 
+	public int idcheck(SomDoongMember member);
+
 	
 
 

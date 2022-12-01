@@ -9,8 +9,49 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
+
 $(document).ready(function() {
-	$("#cancel").click(function() {
+
+	$("#idcheck").click(function(){
+		$("#submit").attr("type", "button");
+		const id = $("#userid").val();
+		$.ajax({
+		type: "get",
+		async: false,
+		url: "/member/idcheck",
+		data: {userid: id},
+		success: function (data) {
+		if (id =="") {
+			alert("아이디를 입력 후 중복확인 해 주세요.");
+		}else if(data == 1) {
+			$("#olmessage").text("이미 사용중인 ID 입니다.");
+			$("#me_id_yn").val("N");
+			$("#olmessage").addClass("olmessagef");
+			$("#olmessage").removeClass("olmessaget");
+		}else if (data == 0) {
+			$("#olmessage").text("사용 가능한 ID 입니다.");
+			$("#me_id_yn").val("Y");
+			$("#olmessage").addClass("olmessaget");
+			$("#olmessage").removeClass("olmessagef");
+			$("#submit").attr("type", "submit");		
+		}	
+
+	
+		},
+			error : function(){
+			alert("서버요청실패");
+	
+			}
+
+		})
+
+	})
+	
+});
+
+$(document).ready(function() {
+	
+	$("#goback").click(function() {
 		history.go(-1);
 	})
 	
@@ -45,7 +86,15 @@ $(document).ready(function(){
 	        $("#userid").focus();
 	        return false;
 	      }
-		 
+		  
+	      if ($("#me_id_yn").val() != 'Y') {
+	    	  alert("아이디 중복체크를 눌러주세요.");
+	    	  $("#me_id_yn").focus();
+	    	   
+	    	  return false;
+	    	  }
+		  
+		  	 
 	    //비밀번호 공백 확인  
 		if($("#userpw").val()==""){
 			alert("비밀번호를 입력해주세요.");
@@ -206,23 +255,23 @@ $(document).ready(function(){
 
 #join {
 	position: relative;
-	top: 70px;
+	top: 200px;
 	
 }
 
-h1{
-	text-align: center;
-}
 
+
+.olmessagef {color: red; font-style: Italic;}
+.olmessaget {color: blue; font-style: Italic;}
 
 </style>
 
 
 <div class="container">
-	<h1>회원가입</h1>
-	<br>
+
 	<div id="join">
 		<form action="./join" method="post" class="form-horizontal">
+		<input type="hidden" id="me_id_yn" name="me_id_yn" value="N"/>
 
 			<div class="form-group">
 				<label for="userid" class="col-sm-4 control-label">아이디</label>
@@ -230,6 +279,7 @@ h1{
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="userid" name="userid"
 						placeholder="4~12자리의 영문 대소문자와 숫자로만 입력">
+					<span id="olmessage"></span>	
 				</div>
 
 				<div>
@@ -305,10 +355,11 @@ h1{
 				<div class="col-sm-offset-5">
 					<button type= "submit" id="submit" class="btn btn-warning">회원가입</button>
 					<input type="reset" id="cancel" class="btn btn-danger" value="취소" />
+					<button type= "button" id="goback" class="btn btn-info">돌아가기</button>
 				</div>
 
 			</div>
-
+ 
 
 
 

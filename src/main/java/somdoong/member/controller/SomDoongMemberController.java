@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import somdoong.member.dto.SomDoongMember;
 import somdoong.member.service.face.SomDoongMemberService;
@@ -24,13 +25,13 @@ public class SomDoongMemberController {
 
 	@RequestMapping("/agree")
 	public void agree() {
-		logger.info("/member/agree 요청완료!");
+		logger.info("/member/agree [GET] 요청완료!");
 		
 	}
 	
 	@GetMapping("join")
 	public void join() {
-		logger.info("/member/join get 요청완료!");
+		logger.info("/member/join [GET] 요청완료!");
 	}
 	
 	
@@ -53,6 +54,7 @@ public class SomDoongMemberController {
 	
 	@GetMapping("login")
 	public void login() {
+		logger.info("login [GET] 요청완료!");
 		
 	}
 	
@@ -110,6 +112,15 @@ public class SomDoongMemberController {
 	@GetMapping("pwfind")
 	public void pwfind() {
 		
+	}
+	
+	@ResponseBody
+	@GetMapping("idcheck")
+	public int idcheck(SomDoongMember member) {
+		logger.info("idcheck [GET] 요청완료!");
+		int result = somDoongMemberService.idcheck(member);
+		
+		return result;
 	}
 }
 	

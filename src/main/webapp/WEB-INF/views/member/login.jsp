@@ -61,7 +61,7 @@
     <div class="col-sm-offset-5">
     	 <a href="./idfind" >아이디 찾기</a> 
    		 <a href="./pwfind" >비밀번호 찾기</a> 
-   		 <a href="./join" >회원가입</a>
+   		 <a href="./agree" >회원가입</a>
     </div>
    </div>
     

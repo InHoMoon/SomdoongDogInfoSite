@@ -12,6 +12,8 @@ public interface SomDoongMemberService {
 
 	public String getUsername(SomDoongMember member);
 
+	public int idcheck(SomDoongMember member);
+
 	
 
 	

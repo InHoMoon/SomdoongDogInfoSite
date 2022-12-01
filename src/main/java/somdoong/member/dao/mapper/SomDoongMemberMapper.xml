@@ -23,6 +23,10 @@
 		SELECT username FROM sommember
 		WHERE userid = #{userid}
 	</select>
+	
+	 <select id="idcheck" parameterType="SomDoongMember" resultType="int">
+		select count(userid) From sommember where userid=#{userid}
+	</select>
     
 
     
