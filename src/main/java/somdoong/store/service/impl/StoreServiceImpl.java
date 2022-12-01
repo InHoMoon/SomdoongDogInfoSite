@@ -19,8 +19,22 @@ public class StoreServiceImpl implements StoreService {
 	@Autowired StoreDao storeDao;
 	
 	@Override
-	public List<Store> getFoodList() {
-		return storeDao.selectFood();
+	public List<Store> getList(String category) {
+		logger.info("{}", category);
+		
+		//카테고리별 게시글 조회
+		return storeDao.selectByCategory(category);
 	}
+
+	@Override
+	public Store view(Store viewStore) {
+		
+		//조회수 증가
+		storeDao.updateHit(viewStore);
+		
+		//상세보기 조회 결과 리턴
+		return storeDao.selectStore(viewStore);
+	}
+
 
 }

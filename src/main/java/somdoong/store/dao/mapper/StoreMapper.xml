@@ -28,12 +28,28 @@
 	</resultMap>
 
 <!-- 카테고리가 일치하는 상품들만 조회하는 쿼리로 수정 -->
-	<select id="selectFood" resultMap="StoreMap">
+	<select id="selectByCategory" resultMap="StoreMap" parameterType="String">
 		SELECT s.store_no, s.title, s.category, p.product_name, p.price
 		FROM store s, product p
 		WHERE s.product_no = p.product_no
-		AND category = '사료'
+		AND category = #{category }
 		ORDER BY s.store_no
 	</select>
+	
+	<update id="updateHit" parameterType="somdoong.store.dto.Store">
+		UPDATE store
+		SET hit = hit + 1
+		WHERE store_no = #{storeNo }
+	</update>
+	
+	<select id="selectStore" resultMap="StoreMap" parameterType="somdoong.store.dto.Store">
+		SELECT s.store_no, s.product_no, s.category, s.title
+			, s.info, s.content, s.reportingDate, s.hit, s.likepost
+			, p.product_name, p.price, p.stock
+		FROM store s, product p
+		WHERE s.product_no = p.product_no
+		AND store_no = #{storeNo }
+	</select>
+	
 	
 </mapper>

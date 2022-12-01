@@ -11,6 +11,17 @@ public interface StoreService {
 	 * 
 	 * @return - 조회된 상품 목록
 	 */
-	public List<Store> getFoodList();
+	public List<Store> getList(String category);
+
+	/**
+	 * 게시글 상세보기 
+	 * 
+	 * @param viewStore - 상세 조회할 게시글 번호 객체
+	 * @return 조회된 상세 게시글 객체 
+	 * 
+	 */
+	public Store view(Store viewStore);
+
+
 
 }
