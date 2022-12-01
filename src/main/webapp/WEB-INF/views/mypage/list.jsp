@@ -5,6 +5,15 @@
 
 <c:import url="../layout/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnWrite").click(function(){
+		location.href="/mypage/write"
+	})
+})
+
+</script>
+
 <style type="text/css">
 table {
 	table-layout: fixed;
@@ -38,7 +47,7 @@ td:nth-child(2) {
 <c:forEach items="${list }" var="inquire">
 	<tr>
 		<td>${inquire.iNum }</td>
-		<td>${inquire.iTitle }</td>
+		<td><a href="/mypage/view?iNum=${inquire.iNum }">${inquire.iTitle }</a></td>
 		<td>${inquire.iCategory }</td>
 		<td>${inquire.ihit }</td>
 		<td><fmt:formatDate value="${inquire.iwriteDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
@@ -46,6 +55,9 @@ td:nth-child(2) {
 </c:forEach>
 </tbody>
 </table>
+
+<button id="btnWrite">글쓰기</button>
+
 
 <span class="pull-right">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>

@@ -5,6 +5,8 @@ import java.util.Date;
 public class Inquire {
 
 	private int iNum ;
+	private int userno;
+	private String iUsername;
 	private String iTitle;
 	private String iContent;
 	private String iCategory;
@@ -17,9 +19,12 @@ public class Inquire {
 	}
 
 
-	public Inquire(int iNum, String iTitle, String iContent, String iCategory, int ihit, Date iwriteDate) {
+	public Inquire(int iNum, int userno, String iUsername, String iTitle, String iContent, String iCategory, int ihit,
+			Date iwriteDate) {
 		super();
 		this.iNum = iNum;
+		this.userno = userno;
+		this.iUsername = iUsername;
 		this.iTitle = iTitle;
 		this.iContent = iContent;
 		this.iCategory = iCategory;
@@ -30,8 +35,9 @@ public class Inquire {
 
 	@Override
 	public String toString() {
-		return "Inquire [iNum=" + iNum + ", iTitle=" + iTitle + ", iContent=" + iContent + ", iCategory=" + iCategory
-				+ ", ihit=" + ihit + ", iwriteDate=" + iwriteDate + "]";
+		return "Inquire [iNum=" + iNum + ", userno=" + userno + ", iUsername=" + iUsername + ", iTitle=" + iTitle
+				+ ", iContent=" + iContent + ", iCategory=" + iCategory + ", ihit=" + ihit + ", iwriteDate="
+				+ iwriteDate + "]";
 	}
 
 
@@ -42,6 +48,26 @@ public class Inquire {
 
 	public void setiNum(int iNum) {
 		this.iNum = iNum;
+	}
+
+
+	public int getUserno() {
+		return userno;
+	}
+
+
+	public void setUserno(int userno) {
+		this.userno = userno;
+	}
+
+
+	public String getiUsername() {
+		return iUsername;
+	}
+
+
+	public void setiUsername(String iUsername) {
+		this.iUsername = iUsername;
 	}
 
 
@@ -93,6 +119,13 @@ public class Inquire {
 	public void setIwriteDate(Date iwriteDate) {
 		this.iwriteDate = iwriteDate;
 	}
+	
+	
+	
+	
+
+
+
 	
 	
 	

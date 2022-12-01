@@ -14,12 +14,55 @@
 		SELECT * FROM (
 			SELECT rownum rnum, I.* FROM (
 				SELECT
-					i_num, i_title, i_content , i_category,i_writedate
+					i_num, i_title, i_content , i_category,i_writedate,i_hit
 				FROM inquire
 				ORDER BY i_num DESC
 			) I
 		) INQUIRE
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
+	
+	
+	<update id="hit" parameterType="Inquire">
+		UPDATE inquire
+		SET i_hit = i_hit + 1
+		WHERE i_num = #{iNum}
+	</update>
+	
+	
+	<select id="selectInquire" resultType="Inquire" parameterType="Inquire">
+		SELECT i_num, i_title, i_content , i_category,i_writedate,i_hit ,i_username
+		FROM inquire
+		WHERE i_num = #{iNum}
+	</select>	
+	
+	
+	<insert id="insertInquire" parameterType="Inquire">
+		<selectKey order="BEFORE" resultType="int" keyProperty="iNum">
+			SELECT inquire_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO inquire (  i_num, i_title, i_content , i_category,i_username )
+		VALUES (#{iNum}, #{iTitle}, #{iContent }, #{iCategory}, #{iUsername } )
+	</insert>
+	
+	<insert id="insertFile" parameterType="IBoardFile">
+		INSERT INTO iboard_file (i_fileno, i_num , i_origin_name ,i_stored_name )
+		VALUES (iboard_file_seq.nextval, #{iNum} , #{iOriginName} , #{iStoredName })
+	
+	
+	</insert>
+	
+	<select id="selectBoardFileByBoardNo" resultType="IBoardFile" parameterType="Inquire">
+		SELECT i_fileno ,i_num, i_origin_name, i_stored_name
+		FROM iboard_file
+		WHERE i_num = #{iNum}
+	</select>
+	
+<!-- 	<select id="selectBoardFileByFileNo" resultType="IBoardFile" parameterType="IBoardFile "> -->
+<!-- 		SELECT i_fileno ,i_num, i_origin_name, i_stored_name -->
+<!-- 		FROM iboard_file -->
+<!-- 		WHERE i_fileno = #{iFileno} -->
+<!-- 	</select> -->
+	
 	
 </mapper>
