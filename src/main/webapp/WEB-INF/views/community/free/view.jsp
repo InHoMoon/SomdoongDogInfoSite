@@ -58,25 +58,6 @@
     margin-top: 30px;
 }
 
-/* 하트, 목록 영역 */
-.like_list{
-	padding: 35px 0;
-    position: relative;
-    clear: both;
-}
-
-/* 하트이미지 들어가는 영역 */
-.like{
-	margin: 20px 0px;
-    text-align: center;
-}
-
-/* 하트 이미지 */
-.heart {
-    width: 40px;
-    height: 40px;
-    position: relative;
-}
 
 /* 목록버튼 */
 .btnList{
@@ -94,6 +75,7 @@
 /* 댓글영역 전체 */
 .comm_area{
 	padding: 0 91px 30px;
+	padding-top: 100px;
     width: 90%;
     min-width: 1000px;
     max-width: 1200px;
@@ -109,18 +91,12 @@
     margin-bottom: 14px;
 }
 
+/* 댓글 목록 영역 */
 .comm_list{
 	width: 90%;
     min-width: 1000px;
     max-width: 1200px;
     padding-bottom: 30px;
-}
-
-#list_content{
-	border-bottom: 1px solid #e8e8e8;
-    padding-bottom: 10px;
-    width: 1018px;
-    display: inline-block;
 }
 
 
@@ -178,11 +154,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+	cCount();
+    listReplyRest("1");
 	
-//댓글 리스트 가져오는 함수
-getList2();
 	
-	//댓글등록 -  [등록]버튼 클릭 시
+	//댓글등록
 	$("#commBtn").click(function(){
 		
 		//변수 선언
@@ -205,9 +182,12 @@ getList2();
 			, data : { "bno" : bno, "commContent" : commContent }
 			, dataType : "text"
 			, success : function(data){
-				if(data == "success"){        
+				if(data == "success"){   
+					
 					console.log("댓글 등록 완료");
-					getList2();
+					cCount();
+					listReplyRest("1");
+					
 				} else {
 					console.log("댓글 등록 실패");
 				}
@@ -223,80 +203,58 @@ getList2();
 }) // document end
 
 
-function getList(){
-	$.ajax({
-		url : "/community/free/listC?bno=${fboard.fno}"
-		, type : "get"
-		, success : function(res){
-			$(".comm_result").html(res);
-		}
-	}); //ajax end
-}// getList end
 
 
-//댓글 리스트 조회 함수 (json방식)
-function getList2(){
+function cCount(){
 	$.ajax({
-		url : "/community/free/listJson?bno=${fboard.fno}"
+		url : "/community/free/cCount?bno=${fboard.fno}"
 		, type : "get"
 		, contentType : "application/json"
 		, success : function(res){
 			console.log(res);
 			
-			if(res.total > 0){
-				var list = res.list;
-// 				var userid = '${fboard.userid}';
-				var userid = '${sessionScope.userid}';
-				
-				var output = "<div>";
-				
-				$("#cCnt").html(res.total);
-				for(i = 0; i < list.length; i++){
-					output += "<div><span id='comm_userid'><strong>" + list[i].userid + "</strong></span><br/>";
-					output += "<span id='comm_content'>" + list[i].commContent + "</span>";
-					
-// 					if(list[i].userid == userid){
-					if(${userid eq list[i].userid}){
-// 						output += "<span id='delete' style='cursor:pointer;' data-id ="+list[i].comContent+">[삭제]</span><br></div><hr>";
-						output += " <span id='updelete'><button type='button' id='updateBtn'>수정</button> <button id='deleteBtn'>삭제</button></span><br></div><hr>";
-						 
-					}
-					else{
-						output += "</div><hr>";
-					}
-					
-				} //for end
-				$(".comm_result").html(output);
-				
+			if(res > 0){
+				$("#cCnt").html(res);
 			} else {
-				var output = "<div>등록된 댓글이 없습니다.</div>";
-				$(".comm_result").html(output);
+				$("#cCnt").html("0");
 			}
+			
 		}
 			
 	}); //ajax end
-} //getList2 end
+} //cCount end
 
 
-//댓글 수정화면 생성 함수
-function showModify(cno){
-	$.ajax({
-		type: "get",
-		url: "/community/free/detailC"+cno,
-		success: function(res){
-			$("#comm_modify").html(res);
-			// 태그.css("속성", "값")
-			$("#comm_modify").css("visibility", "visible");
-		}
-	})
+
+
+//댓글 목록
+function listReplyRest(num){
+    $.ajax({
+        type: "get",
+        url: "/community/free/listC?bno=${fboard.fno}&curPage="+num,
+        success: function(result){
+            $(".comm_result").html(result);
+        }
+    });
 }
 
 
-$("#updateBtn").click(function(){
-	showModify();
-	console.log("수정버튼 클릭");
-	
-}); //updateBtn
+
+//댓글 수정화면 생성 함수
+function showReplyModify(cno){
+    $.ajax({
+        type: "get",
+        url: "/community/free/detailC/"+cno,
+        success: function(result){
+        	console.log("수정 버튼 클릭");
+        	
+            $("#modifyReply").html(result);
+            
+            $("#listContent").css("visibility", "hidden");
+            $("#modifyReply").css("visibility", "visible");
+        }
+    }); //ajax
+}
 
 
 </script>
@@ -339,20 +297,11 @@ $("#updateBtn").click(function(){
 				<p>${fboard.content }</p>
 		</div>
 	</div> <!-- view_area -->
-		
-		
-	<div class="like_list">
-		<div class="like">
-			<img src="/resources/empty_heart.png" class="heart">
-		</div>
-	</div> <!-- like_list -->
-		
-		
-		
-	
 </div> <!-- all -->
 
-<!-- 댓글입력창 -->
+
+
+<!-- 댓글 영역 -->
 <div class="comm_area">
 <form method="POST" id="commForm" name="commForm">
 
@@ -360,13 +309,15 @@ $("#updateBtn").click(function(){
 		<span id="cCnt"></span> Comments
 	</strong>
 	
+	
 	<!-- 댓글 목록 영역 -->
 	<div class="comm_result">
-<%-- 		<strong><span id="list_userid" style="display: hidden;">${list.userid }</span></strong> --%>
-<%-- 		<span id="list_content" style="display: hidden;">${list.comContent }</span> --%>
 	</div>
 
+
+	<!-- 댓글 등록 영역 -->
 	<div class="comm_box" style="padding-top: 10px;">
+	
 		<div class="writer_info" style="margin-bottom: 5px;">
 			<strong><span id="userid">${userid }</span></strong>
 		</div>
@@ -375,22 +326,11 @@ $("#updateBtn").click(function(){
 			<textarea id="commContent" name="commContent" placeholder="댓글을 입력해주세요"></textarea>
 			<button id="commBtn" type="button">등록</button>
 		</div>
+		
 	</div> <!-- comm_box -->
 	
 </form>
 </div> <!-- comm_area -->
-
-<!-- <div class="box-footer"> 페이지네이션 -->
-<!-- 	<div class="text-center"> -->
-<!-- 		<ul class="pagination pagination-sm no-margin"> -->
-		
-<!-- 		</ul> -->
-<!-- 	</div> -->
-<!-- </div> -->
-
-
-<!-- 댓글 수정 영역-->
-<div class="comm_modify"></div>
 
 
 

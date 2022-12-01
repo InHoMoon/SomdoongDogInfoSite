@@ -24,6 +24,7 @@ $(document).ready(function() {
 
 function updateContents() {
 	//스마트 에디터에 작성된 내용을 #content에 반영한다
+// 	$("#content").val().replace("\n", "<br>");
 	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
 }
 </script>
