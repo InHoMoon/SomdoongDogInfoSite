@@ -58,11 +58,12 @@
 		WHERE i_num = #{iNum}
 	</select>
 	
-<!-- 	<select id="selectBoardFileByFileNo" resultType="IBoardFile" parameterType="IBoardFile "> -->
-<!-- 		SELECT i_fileno ,i_num, i_origin_name, i_stored_name -->
-<!-- 		FROM iboard_file -->
-<!-- 		WHERE i_fileno = #{iFileno} -->
-<!-- 	</select> -->
+
 	
+	<select id="selectBoardFileByFileNo" resultType="IBoardFile" parameterType="IBoardFile">
+		SELECT i_fileno ,i_num, i_origin_name, i_stored_name
+			FROM iboard_file
+		WHERE i_fileno = #{iFileno}
+	</select>
 	
 </mapper>

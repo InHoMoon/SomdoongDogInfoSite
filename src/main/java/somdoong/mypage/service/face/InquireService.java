@@ -20,6 +20,6 @@ public interface InquireService {
 
 	public IBoardFile getAttachFile(Inquire viewInquire);
 
-//	public IBoardFile getFile(IBoardFile iBoardFile);
+	public IBoardFile getFile(IBoardFile iBoardFile);
 
 }

@@ -4,22 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="../layout/header.jsp" />
 
+
 <script type="text/javascript">
-$(document).ready(function(){
-	$("btnList").click(function(){
-		location.href="/mypage/list"
+$(document).ready(function() {
+	$("#btnList").click(function() {
+		location.href = "/mypage/list"
 	})
 	
-	$("btnUpdate").click(function(){
-		location.href="/mypage/update?iNum=${viewInquire.iNum}"
+	$("#btnUpdate").click(function() {
+		location.href = "/mypage/update?iNum=${viewInquire.iNum }"
 	})
 	
-	$("btnDelete").click(function(){
-		location.href="/mypage/delete?iNum=${viewInquire.iNum}"
+	$("#btnDelete").click(function() {
+		location.href = "/mypage/delete?iNum=${viewInquire.iNum }"
 	})
 })
-
-
 </script>
 <!DOCTYPE html>
 <html>

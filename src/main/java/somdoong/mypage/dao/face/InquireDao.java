@@ -22,6 +22,6 @@ public interface InquireDao {
 
 	public IBoardFile selectBoardFileByBoardNo(Inquire viewInquire);
 
-//	public IBoardFile selectBoardFileByFileNo(IBoardFile iBoardFile);
+	public IBoardFile selectBoardFileByFileNo(IBoardFile iBoardFile);
 
 }

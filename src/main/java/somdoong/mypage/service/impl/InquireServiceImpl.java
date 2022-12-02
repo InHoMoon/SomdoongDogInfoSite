@@ -109,12 +109,11 @@ public class InquireServiceImpl implements InquireService {
 		return inquireDao.selectBoardFileByBoardNo(viewInquire);
 	}
 	
-//	@Override
-//	public IBoardFile getFile(IBoardFile iBoardFile) {
-//		
-//		
-//		return inquireDao.selectBoardFileByFileNo(iBoardFile);
-//	}
-//	
+	@Override
+	public IBoardFile getFile(IBoardFile iBoardFile) {
+		
+		return inquireDao.selectBoardFileByFileNo(iBoardFile);
+	}
+
 	
 }

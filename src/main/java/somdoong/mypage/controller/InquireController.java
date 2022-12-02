@@ -87,14 +87,44 @@ public class InquireController {
 		return "redirect:/mypage/list";  
 	}
 	
-//	@RequestMapping("/download")
-//	public String download(IBoardFile iBoardFile,Model model) {
-//		
-//		iBoardFile = inquireService.getFile(iBoardFile);
-//		logger.debug("{}",iBoardFile);
-//		
-//		
-//		return null;
-//	}
+	@RequestMapping("/download")
+	public String download(IBoardFile iBoardFile,Model model) {
+		
+		iBoardFile = inquireService.getFile(iBoardFile);
+		logger.debug("{}",iBoardFile);
+		
+		model.addAttribute("downFile" , iBoardFile);
+		
+		return "down";
+	}
 	
+	@GetMapping("/update")
+	public String update(Inquire inquire, Model model) {
+		
+		logger.debug("/mypage/view - {}" , inquire);
+		
+		 
+		if( inquire.getiNum()<0) {
+			return "redirect:/mypage/list";
+		}
+		
+		inquire = inquireService.view(inquire);
+		logger.debug("조회된 게시글 {}",inquire);
+		
+		model.addAttribute("updateInquire",inquire);
+		
+		
+		//첨부파일 모델값 전달
+		IBoardFile iBoardFile = inquireService.getAttachFile(inquire);
+		model.addAttribute("iBoardFile",iBoardFile);
+		
+		return "mypage/update";
+	}
+	
+	@PostMapping("/update")
+	public String updateProcess(Inquire inquire) {
+		logger.debug( "{}" , inquire);
+		
+		return "mypage/update";
+	}
 }
