@@ -80,7 +80,7 @@ td:nth-child(2) {
 <tbody>
 <c:forEach items="${list }" var="notice">
 	<tr>
-		<td>${notice.notiNo }</td>
+		<td>${notice.notiNo}</td>
 		<td><a href="/notice/view?notiNo=${notice.notiNo }">${notice.notiTitle }</a></td>
 		<td>${notice.adminId }</td>
 		<td>${notice.notiHit }</td>

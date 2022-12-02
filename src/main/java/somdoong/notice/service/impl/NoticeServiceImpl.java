@@ -7,8 +7,6 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,10 +20,7 @@ import somdoong.util.Paging;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired NoticeDao noticeDao;
-	
 	@Autowired ServletContext context;
 	
 	@Override
@@ -71,7 +66,7 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		//빈 파일일 경우
 		if( file.getSize() <= 0 ) {
-			return;
+		return;
 		}
 		
 		//파일이 저장될 경로

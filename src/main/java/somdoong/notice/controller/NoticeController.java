@@ -76,11 +76,11 @@ public class NoticeController {
 		logger.debug("{}", file);
 		
 		//작성자 정보 추가
-		notice.setAdminId( (String) session.getAttribute("id") );
+		notice.setAdminId( (String) session.getAttribute("adminId") );
 		logger.debug("{}", notice);
 		
-		//게시글, 첨부파일 처리
-		noticeService.write(notice, file);
+//		//게시글, 첨부파일 처리
+//		noticeService.write(notice, file);
 		
 		return "redirect:/notice/list";
 	}

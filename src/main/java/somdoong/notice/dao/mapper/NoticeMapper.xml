@@ -34,17 +34,22 @@
 		SELECT
 			notino, adminid, notititle , noticontent
 					, notihit, notidate
-		FROM board
+		FROM notice
 		WHERE notino = #{notiNo}
 	</select>
 	
+	<select id="getNotice" resultType="Notice" parameterType="Notice">
+		SELECT * FROM notice
+			WHERE seq = #{seq}
+	</select>
+	
 	<insert id="insertNotice" parameterType="Notice">
-		<selectKey order="BEFORE" resultType="int" keyProperty="notiNo">
-			SELECT notice_seq.nextval FROM dual
-		</selectKey>
+<!-- 		<selectKey order="BEFORE" resultType="int" keyProperty="notiNo"> -->
+<!-- 			SELECT notice_seq.nextval FROM dual -->
+<!-- 		</selectKey> -->
 	
 		INSERT INTO notice ( notino, adminid, notititle , noticontent )
-		VALUES ( #{notiNo }, #{adminId }, #{notiTitle }, #{notiContent } )
+		VALUES ( notice_seq.nextval, #{adminId }, #{notiTitle }, #{notiContent } )
 	</insert>
 
 	<insert id="insertFile" parameterType="NoticeFile">
@@ -68,8 +73,8 @@
 	
 	<update id="updateNotice" parameterType="Notice">
 		UPDATE notice
-		SET notititle = #{notititle}
-			, noticontent = #{noticontent}
+		SET notititle = #{notiTitle}
+			, noticontent = #{notiContent}
 		WHERE notino = #{notiNo}
 	</update>
 	
