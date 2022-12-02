@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import somdoong.community.dao.face.FboardCommentDao;
 import somdoong.community.dto.FboardComment;
 import somdoong.community.service.face.FboardCommentService;
+import somdoong.util.Paging2;
 
 @Service
 public class FboardCommentServiceImpl implements FboardCommentService {
@@ -33,6 +34,7 @@ public class FboardCommentServiceImpl implements FboardCommentService {
 	public int getTotal(int bno) {
 		return commDao.getCntByBno(bno);
 	}
+	
 	
 	
 	//댓글 목록

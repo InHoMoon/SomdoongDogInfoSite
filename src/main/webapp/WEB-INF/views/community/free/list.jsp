@@ -12,6 +12,19 @@ $(document).ready(function() {
 		location.href = "/community/free/write"
 	})
 })
+
+
+$(".search-btn").click(function(){
+	
+	$.ajax({
+		
+		url : "/community/free/search"
+		, type : "post"
+		
+		
+	});// ajax end
+	
+})//search-btn clikc
 </script>
 
 <style type="text/css">
@@ -31,6 +44,26 @@ table, th {
 td:nth-child(2) {
 	text-align: left;
 }
+
+
+#btnWrite{
+	float: right;
+    width: 54px;
+    height: 34px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.search { text-align: right; font-size: 12px;}
+.search-op { height: 30px; width: 80px; text-align: center; border: 1px solid #e8e8e8; }
+.search-text { height: 30px; width: 200px; border: 1px solid #e8e8e8; }
+.search-btn { height: 30px; width:35px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
+
+
+#title > a{ color: #333; }
 </style>
 
 <div class="container">
@@ -39,7 +72,35 @@ td:nth-child(2) {
 <hr>
 
 <span class="pull-left">total : ${paging.totalCount }</span>
-<div class="clearfix" style="padding-bottom: 15px;"></div>
+
+<form id="form">
+	<div class="search">
+		<select class="search-op">
+			<option>제목</option>
+			<option>작성자</option>
+		</select>
+		<input type="text" class="search-text" value="검색어를 입력하세요">
+		<button class="search-btn">찾기</button>
+	</div> 
+</form>
+<!-- <form id="form"> -->
+<!-- 	<div class="dropdown"> -->
+<!-- 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"> -->
+<!-- 			제목 -->
+<!-- 			<span class="caret"></span> -->
+<!-- 		</button> -->
+<!-- 		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> -->
+<!-- 		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">제목</a></li> -->
+<!-- 		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">작성자</a></li> -->
+<!-- 		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">제목+작성자</a></li> -->
+<!-- 	  	</ul> -->
+	  	
+<!-- 		<input type="text" class="search-text" value="검색어를 입력하세요"> -->
+<!-- 		<button class="search-btn">찾기</button> -->
+<!-- 	</div>  -->
+<!-- </form> -->
+
+<div class="clearfix" style="padding-bottom: 30px;"></div>
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
@@ -59,18 +120,17 @@ td:nth-child(2) {
 <%-- 		<td>${fboard.title }</td> --%>
 		<td>${fboard.userid }</td>
 		<td>${fboard.hit }</td>
-		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd HH:mm"/></td>
+		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 
-<button id="btnWrite" class="btn btn-default pull-right">글쓰기</button>
+<c:if test="${login eq true }">
+<button id="btnWrite">글쓰기</button>
+</c:if>
 <div class="clearfix"></div>
 
-
-
-<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
 
 <!-- <form action="/community/list" method="post"> -->
 <!-- 	<div class="search"> -->
@@ -78,10 +138,14 @@ td:nth-child(2) {
 <!-- 			<option>제목</option> -->
 <!-- 			<option>작성자</option> -->
 <!-- 		</select> -->
-<!-- 		<input type="text" class="search-text"> -->
-<!-- 		<button class="search-btn">검색</button> -->
-<!-- 	</div> search -->
+<!-- 		<input type="text" class="search-text" value="검색어를 입력하세요"> -->
+<!-- 		<button class="search-btn">찾기</button> -->
+<!-- 	</div>  -->
 <!-- </form> -->
+
+
+<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
+
 
 </div> <!-- container -->
 

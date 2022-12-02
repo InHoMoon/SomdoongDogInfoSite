@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
+import somdoong.community.service.face.FboardCommentService;
 import somdoong.community.service.face.FreeboardService;
 import somdoong.util.Paging;
 
@@ -26,9 +27,12 @@ public class FreeboardController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired FreeboardService fboardService;
+	@Autowired FboardCommentService commService;
 	
+	
+	//게시판 목록
 	@RequestMapping("/community/free/list")
-	public void list(@RequestParam(defaultValue = "0") int curPage, Model model) {
+	public void list(@RequestParam(defaultValue = "0") int curPage, Freeboard fboard, Model model) {
 		
 		logger.info("/community/free/list");
 		
@@ -36,13 +40,15 @@ public class FreeboardController {
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
+		fboard.setComm( commService.getTotal(curPage) );
+		
 		List<Freeboard> list = fboardService.list(paging);
 		for( Freeboard f : list )	logger.info("{}", f);
 		model.addAttribute("list", list);
 	}
 	
 	
-	
+	//게시글 상세보기
 	@RequestMapping("/community/free/view")
 	public String view(Freeboard fboard, Model model) {
 		logger.info("/community/free/view");
@@ -69,6 +75,7 @@ public class FreeboardController {
 	}
 	
 	
+	//글 작성
 	@GetMapping("/community/free/write")
 	public void write() {}
 	
@@ -87,6 +94,7 @@ public class FreeboardController {
 	}
 	
 	
+	//첨부파일 다운로드
 	@RequestMapping("/community/free/download")
 	public String download(FboardFile fboardfile, Model model) {
 		//첨부파일 정보 객체
@@ -99,8 +107,7 @@ public class FreeboardController {
 		return "down";
 	}
 	
-	
-	
+
 	
 	
 	

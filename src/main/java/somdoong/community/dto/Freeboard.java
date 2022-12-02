@@ -11,10 +11,11 @@ public class Freeboard {
 	private String userid;
 	private int hit;
 	private Date writeDate;
+	private int comm;
 	
 	public Freeboard() {}
 
-	public Freeboard(int fno, int userno, String title, String content, String userid, int hit, Date writeDate) {
+	public Freeboard(int fno, int userno, String title, String content, String userid, int hit, Date writeDate, int comm) {
 		super();
 		this.fno = fno;
 		this.userno = userno;
@@ -23,12 +24,13 @@ public class Freeboard {
 		this.userid = userid;
 		this.hit = hit;
 		this.writeDate = writeDate;
+		this.comm = comm;
 	}
 
 	@Override
 	public String toString() {
 		return "Freeboard [fno=" + fno + ", userno=" + userno + ", title=" + title + ", content=" + content
-				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + "]";
+				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", comm=" + comm + "]";
 	}
 
 	public int getFno() {
@@ -85,6 +87,14 @@ public class Freeboard {
 
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+	
+	public int getComm() {
+		return comm;
+	}
+	
+	public void setComm(int comm) {
+		this.comm = comm;
 	}
 	
 	

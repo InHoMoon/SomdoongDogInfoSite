@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import somdoong.community.dto.FboardComment;
+import somdoong.util.Paging2;
 
 public interface FboardCommentService {
 
@@ -25,6 +26,8 @@ public interface FboardCommentService {
 	
 	//댓글 삭제
 	public void delete(int cno);
+
+
 
 	
 	

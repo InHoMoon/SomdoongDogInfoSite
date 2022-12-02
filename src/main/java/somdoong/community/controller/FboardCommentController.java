@@ -1,5 +1,6 @@
 package somdoong.community.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import somdoong.community.dto.FboardComment;
 import somdoong.community.service.face.FboardCommentService;
 import somdoong.util.CommPaging;
+import somdoong.util.Paging2;
 
 @Controller
 @RequestMapping("/community/free")
@@ -94,13 +96,14 @@ public class FboardCommentController {
     
     //댓글 상세보기
     @RequestMapping(value="/detailC/{cno}", method=RequestMethod.GET)
-    public ModelAndView replyDetail(@PathVariable("cno") int cno, ModelAndView mav){
+    public ModelAndView detailC(@PathVariable("cno") int cno, ModelAndView mav){
     	
         FboardComment fcomm = commService.detail(cno);
         logger.info("수정할 댓글 조회 : {}", fcomm);
         
         // 뷰이름 지정
-        mav.setViewName("/community/free/commDetail");
+//        mav.setViewName("/community/free/commDetail");
+        mav.setViewName("/community/free/commList");
         
         // 뷰에 전달할 데이터 지정
         mav.addObject("fcomm", fcomm);
@@ -112,7 +115,7 @@ public class FboardCommentController {
     
     //댓글 수정 처리
     @RequestMapping(value="/updateC/{cno}", method={RequestMethod.PUT, RequestMethod.PATCH})
-    public ResponseEntity<String> replyUpdate(@PathVariable("cno") int cno, @RequestBody FboardComment fcomm){
+    public ResponseEntity<String> updateC(@PathVariable("cno") int cno, @RequestBody FboardComment fcomm){
     	
         ResponseEntity<String> entity = null;
         try {
@@ -134,7 +137,7 @@ public class FboardCommentController {
     
     //댓글 삭제
     @RequestMapping(value="/deleteC/{cno}")
-    public ResponseEntity<String> replyDelete(@PathVariable("cno") int cno){
+    public ResponseEntity<String> deleteC(@PathVariable("cno") int cno){
     	
         ResponseEntity<String> entity = null;
         

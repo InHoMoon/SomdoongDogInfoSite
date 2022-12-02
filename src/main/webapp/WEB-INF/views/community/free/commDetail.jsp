@@ -8,10 +8,10 @@
 
 <script type="text/javascript">
 
-$("#btnReplyUpdate").click(function(){
+$(".btnReplyUpdate").click(function(){
 	
     var detailCommContent = $("#detailCommContent").val().replace("\n", "<br>");
-    
+    console.log("e")
     $.ajax({
         url: "/community/free/updateC/${fcomm.cno}"
         , type: "put"
@@ -20,7 +20,11 @@ $("#btnReplyUpdate").click(function(){
         , dataType: "text"
         , success: function(result){
             if(result == "success"){
-                $("#modifyReply").css("visibility", "hidden");
+            	let cno = ${fcomm.cno};
+            	$("#mw_" + cno).hide();
+            	$("#comm_txt" + cno).show();
+                //$("#modifyReply").css("visibility", "hidden");
+                //$("#modifyReply").hide();
                 listReplyRest("1");
             }
         } // success
@@ -29,10 +33,15 @@ $("#btnReplyUpdate").click(function(){
 
 
 
-$("#btnReplyClose").click(function(){
-    $("#modifyReply").css("visibility", "hidden");
-    $("#listContent").css("visibility", "visible");
-});
+/* $(".btnReplyClose").click(function(){
+    /* $("#modifyReply").css("visibility", "hidden");
+    $("#listContent").css("visibility", "visible"); 
+    console.log($(this))
+    //rplyClose_${row.cno}
+    $("#modifyReply").hide();
+    $("#btnModify").show();
+    // 해바,,
+}); */
 
 
 
@@ -52,20 +61,13 @@ $("#btnReplyDelete").click(function(){
         }); //ajax
     } // if
 }); //deleteBtn click
+
 </script>
 
 
 댓글 번호 : ${fcomm.cno}<br>
-<textarea id="detailCommContent" rows="5" cols="82">${fcomm.commContent}</textarea>
-
+<!--  여기에,, 일단 주석을 할개,, -->
+<%-- <textarea id="detailCommContent" rows="5" cols="82">${fcomm.commContent}</textarea>
 <div style="text-align: center;">
-
-	<c:if test="${sessionScope.userid == fcomm.userid}">
-		<button type="button" id="btnReplyUpdate" >완료</button>
-		<button type="button" id="btnReplyDelete" >삭제</button>
-	</c:if>
-	
-	<button type="button" id="btnReplyClose" >취소</button>
-	
-</div>
+</div>--%>
 

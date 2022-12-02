@@ -64,7 +64,7 @@
     width: 80px;
     height: 32px;
     padding: 0;
-    border: 1px solid rgba(185,185,185,.5);
+    border: 1px solid rgba(185,185,185,5);
     border-radius: 16px;
     line-height: 30px;
     color: inherit;
@@ -80,6 +80,7 @@
     min-width: 1000px;
     max-width: 1200px;
     margin: 0 auto;
+    color: #5c5c5c;
 }
 
 /* 총 댓글 갯수 Comments */
@@ -149,6 +150,14 @@
     background-color: #6bacce;
     color: #fff;
 }
+
+#detailCommContent{
+	width: 1016px;
+    height: 98px;
+  	padding: 7px 12px;
+    border: 1px solid #e8e8e8;
+    resize: none;
+}
 </style>
 
 
@@ -158,7 +167,7 @@ $(document).ready(function() {
 	cCount();
     listReplyRest("1");
 	
-	
+
 	//댓글등록
 	$("#commBtn").click(function(){
 		
@@ -200,6 +209,7 @@ $(document).ready(function() {
 		$("#commContent").val("");
 		
 	}); // click end
+	
 }) // document end
 
 
@@ -240,23 +250,29 @@ function listReplyRest(num){
 
 
 
-//댓글 수정화면 생성 함수
-function showReplyModify(cno){
+//댓글 수정화면 생성
+function showReplyModify(cno,comment,target){
+	
     $.ajax({
         type: "get",
         url: "/community/free/detailC/"+cno,
         success: function(result){
+        	
         	console.log("수정 버튼 클릭");
         	
-            $("#modifyReply").html(result);
+        	$("#comm_txt"+ cno).hide(); //댓글
+        	
+            $(".bm_btn_" + cno).hide(); //수정버튼
+            $("#rplyDelete_" + cno).hide(); //삭제버튼
+            $("#text_bar2_" + cno).hide(); // |
             
-            $("#listContent").css("visibility", "hidden");
-            $("#modifyReply").css("visibility", "visible");
+            //- txt el 생성
+            console.log($(target).next())
+            $(target).next().find(".textarea_wrap").html('<textarea id="detailCommContent" rows="5" cols="82">' + comment + '</textarea>');
+            $("#mw_" + cno).show();
         }
     }); //ajax
 }
-
-
 </script>
 
 <div class="all">
