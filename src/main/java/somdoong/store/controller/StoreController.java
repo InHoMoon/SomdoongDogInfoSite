@@ -95,5 +95,17 @@ public class StoreController {
 		
 		return "store/list_detail"; 
 	}
+	
+	@RequestMapping("/product/info")
+	public String productInfo() {
+		
+		return "store/product_info";
+	}
+	
+	@RequestMapping("/product/review")
+	public String productReview() {
+		
+		return "store/product_review";
+	}
 
 }
