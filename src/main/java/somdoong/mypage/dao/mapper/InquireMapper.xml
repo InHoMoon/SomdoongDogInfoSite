@@ -66,4 +66,17 @@
 		WHERE i_fileno = #{iFileno}
 	</select>
 	
+	<update id="updateInquire" parameterType="Inquire">
+		UPDATE inquire
+		SET i_title = #{iTitle}
+			,i_content = #{iContent}
+			,i_category = #{iCategory}
+		WHERE i_num = #{iNum}
+	</update>
+	
+	<delete id="deleteFile" parameterType="Inquire">
+		DELETE iboard_file
+		WHERE i_num = #{iNum}
+	</delete>
+	
 </mapper>

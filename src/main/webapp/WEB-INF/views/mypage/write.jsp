@@ -33,10 +33,22 @@ function updateContents() {
 <hr>
 
 <form action="./write" method="post" enctype="multipart/form-data">
+
+<div class="form-group">
+	<select name="iCategory" id="iCategory">
+		<option value=""> </option>
+		<option value="1번">1번 </option>
+		<option value="2번">2번 </option>
+		<option value="3번">3번 </option>
+	</select>
+<!-- 	<input type="text" id="iCategory" name="iCategory" class="form-control"> -->
+</div>
+
 <div class="form-group">
 	<label for="writer">작성자</label>
 	<input type="text" id="writer" value="${nick }"  class="form-control" readonly="readonly">
 </div>
+
 
 <div class="form-group">
 	<label for="iTitle">제목</label>

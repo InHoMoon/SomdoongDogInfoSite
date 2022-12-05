@@ -116,4 +116,57 @@ public class InquireServiceImpl implements InquireService {
 	}
 
 	
+	@Override
+	public void update(Inquire inquire, MultipartFile file) {
+		
+		if("".equals(inquire.getiTitle() ) ) {
+			inquire.setiTitle("(제목없음)");
+		}
+		
+		inquireDao.updateInquire(inquire);
+		
+		
+		//-------------------------------------------------
+		//첨부 파일
+		if(file.getSize() <=0) {
+			return;
+		}
+		
+		//파일이 저장될 경로
+		
+		String storedPath = context.getRealPath("upload");
+		File storedFolder = new File(storedPath);
+		if(!storedFolder.exists()) {
+			storedFolder.mkdir();
+		}
+		
+		//파일 저장 이름
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+		
+		File dest = new File(storedFolder,storedName);
+		
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//-------------------------------------------------
+		
+		IBoardFile iBoardFile = new IBoardFile();
+		iBoardFile.setiNum(inquire.getiNum());
+		iBoardFile.setiOriginName(originName);
+		iBoardFile.setiStoredName(storedName) ;
+		
+		
+		inquireDao.deleteFile(inquire);
+		
+		inquireDao.insertFile(iBoardFile);
+		
+		
+	}
+	
 }

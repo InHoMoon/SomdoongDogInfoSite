@@ -122,9 +122,10 @@ public class InquireController {
 	}
 	
 	@PostMapping("/update")
-	public String updateProcess(Inquire inquire) {
+	public String updateProcess(Inquire inquire,MultipartFile file) {
 		logger.debug( "{}" , inquire);
 		
-		return "mypage/update";
+		inquireService.update(inquire, file); 
+		return "redirect:/mypage/view?iNum=" + inquire.getiNum();
 	}
 }

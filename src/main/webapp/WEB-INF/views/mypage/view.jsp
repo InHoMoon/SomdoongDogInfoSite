@@ -36,7 +36,7 @@ $(document).ready(function() {
 </tr>
 
 <tr>
-	<td> 아이디 :</td><td> ${viewInquire.iCategory } </td>
+	<td> 카테고리 :</td><td> ${viewInquire.iCategory } </td>
 	<td> 아이디 :</td><td> ${viewInquire.iCategory } </td>	
 </tr>
 

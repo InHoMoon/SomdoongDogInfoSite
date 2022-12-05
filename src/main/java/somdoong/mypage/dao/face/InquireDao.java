@@ -24,4 +24,8 @@ public interface InquireDao {
 
 	public IBoardFile selectBoardFileByFileNo(IBoardFile iBoardFile);
 
+	public void updateInquire(Inquire inquire);
+
+	public void deleteFile(Inquire inquire);
+
 }

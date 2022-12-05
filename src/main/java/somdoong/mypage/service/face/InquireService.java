@@ -22,4 +22,6 @@ public interface InquireService {
 
 	public IBoardFile getFile(IBoardFile iBoardFile);
 
+	public void update(Inquire inquire, MultipartFile file);
+
 }

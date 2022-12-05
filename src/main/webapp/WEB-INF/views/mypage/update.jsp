@@ -19,17 +19,19 @@ $(document).ready(function() {
 		$("form").submit();
 	})
 	
-	if(${empty iBoardFile}){
-		$("#newFile").show()
-	}else{
-		${"#originFile"}.show()
-	}
+
 	
 	if( ${empty iBoardFile} ) {
 		$("#newFile").show()
 	} else {
 		$("#originFile").show()
 	}
+	
+	
+	$("#deleteFile").click(function() {
+		$("#newFile").toggle()
+		$("#originFile").toggle()
+	})
 })
 
 function updateContents() {
@@ -54,6 +56,17 @@ function updateContents() {
 <form action="./update" method="post" enctype="multipart/form-data">
 
 <input type="hidden" name="iNum" value="${param.iNum  }">
+
+<div class="form-group">
+	<select name="iCategory" id="iCategory" value="${updateInquire.iCategory }">
+		<option value=""> </option>
+		<option value="1번">1번 </option>
+		<option value="2번">2번 </option>
+		<option value="3번">3번 </option>
+	</select>
+<!-- 	<input type="text" id="iCategory" name="iCategory" class="form-control"> -->
+</div>
+
 
 <div class="form-group">
 	<label for="writer">작성자</label>
