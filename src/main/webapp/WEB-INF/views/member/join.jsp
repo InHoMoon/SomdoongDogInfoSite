@@ -47,12 +47,22 @@ $(document).ready(function() {
 
 	})
 	
+	$("#userid").click(function(){
+		if($("#userid").val()==""){
+			$("#olmessage").text("아이디를 입력 해주세요.");
+			$("#userid").focus();
+			$("#olmessage").addClass("olmessaget");
+			$("#olmessage").removeClass("olmessagef");
+			return false;
+		}
+	})
+	
 });
 
 $(document).ready(function() {
 	
 	$("#goback").click(function() {
-		history.go(-1);
+		$(location).attr("href", "/member/login")
 	})
 	
 })
@@ -255,7 +265,7 @@ $(document).ready(function(){
 
 #join {
 	position: relative;
-	top: 200px;
+	top: 170px;
 	
 }
 
@@ -279,7 +289,7 @@ $(document).ready(function(){
 				<div class="col-sm-5">
 					<input type="text" class="form-control" id="userid" name="userid"
 						placeholder="4~12자리의 영문 대소문자와 숫자로만 입력">
-					<span id="olmessage"></span>	
+					<span id="olmessage"></span>
 				</div>
 
 				<div>

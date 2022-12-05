@@ -8,9 +8,16 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$("#cancel").click(function() {
-		history.go(-1);
-	})
+		
+	    var hobbyCheck = false;
+	    var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+	    var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+	    var getName= RegExp(/^[가-힣]+$/);
+	    var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
+	    var buf = new Array(13); //주민등록번호 배열
+	    var regExp = /^[0-9]*$/; //숫자만
+	
+	
 	
 	$("#submit").on("click", function(){
 		
@@ -28,9 +35,26 @@ $(document).ready(function() {
 			$("#userphone").focus();
 			return false;
 		}
+		 
+	      //휴대폰 유효성 검사
+	      if(!regExp.test($("#userphone").val())){
+	        alert("숫자만 입력해 주세요")
+	        $("#userphone").val("");
+	        $("#userphone").focus();
+	        return false;
+	      }
 	
+	      
 	})
 
+})
+
+$(document).ready(function() {
+	
+	$("#goback").click(function() {
+		$(location).attr("href", "/member/login")
+	})
+	
 })
 
 
@@ -52,6 +76,17 @@ $(document).ready(function() {
 	left: 100px;
 }
 
+
+#findform{
+	position: relative;
+	right: 100px;
+}
+
+#findform  .col-sm-offset-4 {
+	position: relative;
+	left: 90px;
+}
+
 </style>
 
 
@@ -64,30 +99,31 @@ $(document).ready(function() {
     <div id="idfind">
     <form action="./idfind" method="post" class="form-horizontal">
     
-  
+  <div id="findform">
    <div class="form-group">
     	<label for="userid" class="col-sm-4 control-label">이름</label>
-  	  	<div class="col-sm-3">
+  	  	<div class="col-sm-4">
     		<input type="text" class="form-control" id="username" name="username" placeholder="이름 입력">
    		</div>
    </div>
     
     <div class="form-group">
    		 <label for="userpw" class="col-sm-4 control-label">휴대폰</label>
-   		 <div class="col-sm-3">
+   		 <div class="col-sm-4">
    		 	<input type="text" class="form-control" id="userphone" name="userphone" placeholder="휴대폰 입력">
     	 </div>
     </div>
     
         <div class="form-group">
     
-     	 <div class="col-sm-offset-5">
+     	 <div class="col-sm-offset-4">
      	 	<button id= "submit" class="btn btn-warning">확인</button>
      	 	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
+     	 	<button type= "button" id="goback" class="btn btn-info">돌아가기</button>
     	 </div>
     
     </div>
-    
+ </div>   
         </form>   
     </div>
     
