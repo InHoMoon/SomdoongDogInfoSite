@@ -12,6 +12,12 @@ public interface SomDoongMemberDao {
 
 	public int idcheck(SomDoongMember member);
 
+	public SomDoongMember memberIdSearch(SomDoongMember searchMember);
+
+	public SomDoongMember memberPwSearch(SomDoongMember searchMember);
+
+	
+
 	
 
 

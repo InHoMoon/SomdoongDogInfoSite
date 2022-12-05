@@ -14,6 +14,14 @@ public interface SomDoongMemberService {
 
 	public int idcheck(SomDoongMember member);
 
+	public SomDoongMember memberIdSearch(SomDoongMember searchMember);
+
+	public SomDoongMember memberPwdCheck(SomDoongMember searchMember);
+
+	
+
+	
+
 	
 
 	

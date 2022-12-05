@@ -96,7 +96,7 @@ $(document).ready(function() {
    
     
     <div id="pwfind">
-    <form action="./idfind" method="post" class="form-horizontal">
+    <form action="./pwfindresult" method="post" class="form-horizontal">
     
  <div id="findform"> 
    <div class="form-group">
@@ -109,7 +109,7 @@ $(document).ready(function() {
     <div class="form-group">
    		 <label for="userpw" class="col-sm-4 control-label">이메일</label>
    		 <div class="col-sm-4">
-   		 	<input type="text" class="form-control" id="useremail" name="useremail" placeholder="이메일 입력">
+   		 	<input type="text" class="form-control" id="email" name="email" placeholder="이메일 입력">
     	 </div> 
     </div>
     

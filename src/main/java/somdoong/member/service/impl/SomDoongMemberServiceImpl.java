@@ -48,6 +48,20 @@ public class SomDoongMemberServiceImpl implements SomDoongMemberService{
 		
 		return result;
 	}
+	
+
+	@Override
+	public SomDoongMember memberIdSearch(SomDoongMember searchMember) {
+		
+		return somDoongMemberDao.memberIdSearch(searchMember);
+	}
+	
+
+	@Override
+	public SomDoongMember memberPwdCheck(SomDoongMember searchMember) {
+		// TODO Auto-generated method stub
+		return somDoongMemberDao.memberPwSearch(searchMember);
+	}
 
 	
 	

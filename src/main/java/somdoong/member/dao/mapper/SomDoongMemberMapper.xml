@@ -29,5 +29,19 @@
 	</select>
     
 
+	<select id="memberIdSearch" parameterType="SomDoongMember" resultType="SomDoongMember">
+	<![CDATA[
+  	  SELECT * FROM sommember
+      WHERE username = #{username} AND userphone = #{userphone}
+    ]]>     
+	</select>
+	
+	<select id="memberPwSearch" parameterType="SomDoongMember" resultType="SomDoongMember">
+		<![CDATA[
+  		SELECT * FROM sommember
+  		WHERE userid = #{userid} AND email =#{email}
+		]]>    
+	</select>
+
     
     </mapper>

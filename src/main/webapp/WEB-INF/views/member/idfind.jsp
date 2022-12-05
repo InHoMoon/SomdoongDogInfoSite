@@ -97,7 +97,7 @@ $(document).ready(function() {
    
     
     <div id="idfind">
-    <form action="./idfind" method="post" class="form-horizontal">
+    <form action="./idfindresult" method="post" class="form-horizontal">
     
   <div id="findform">
    <div class="form-group">
