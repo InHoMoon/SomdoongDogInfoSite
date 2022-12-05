@@ -7,28 +7,7 @@
 <c:import url="../../layout/header.jsp" />
 
 <script type="text/javascript">
-$(document).ready(function() {
-	$("#btnWrite").click(function() {
-		location.href = "/community/free/write"
-	})
-})
 
-
-$(".search-btn").click(function(){
-	
-	$.ajax({
-		
-		url : "/community/free/search"
-		, type : "post"
-		, data : { "searchType" : searchType, "keyword" : keyword }
-		, dataType : "text"
-		, success : function(result){
-			console.log("검색 성공");
-		}
-		
-	});// ajax end
-	
-})//search-btn click
 </script>
 
 <style type="text/css">
@@ -50,17 +29,6 @@ td:nth-child(2) {
 }
 
 
-#btnWrite{
-	float: right;
-    width: 54px;
-    height: 34px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    color: #555;
-    border: 1px solid #ccc;
-}
-
 .search { text-align: right; font-size: 12px;}
 .search-op { height: 40px; width: 100px; border: 1px solid #e8e8e8; }
 .search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
@@ -72,10 +40,10 @@ td:nth-child(2) {
 
 <div class="container">
 
-<h1>자유게시판</h1>
+<h1>검색결과</h1>
 <hr>
 
-<span class="pull-left">total : ${paging.totalCount }</span>
+<%-- <span class="pull-left">total : ${paging.totalCount }</span> --%>
 
 <form id="form">
 	<div class="search">
@@ -83,7 +51,6 @@ td:nth-child(2) {
 			<option value="title">제목</option>
 			<option value="content">내용</option>
 			<option value="writer">작성자</option>
-<!-- 			<option value="title_writer">제목+작성자</option> -->
 		</select>
 		<input type="text" class="search-text" placeholder="검색어를 입력하세요" id="keyword" name="keyword">
 		<button class="search-btn">찾기</button>
@@ -107,7 +74,6 @@ td:nth-child(2) {
 	<tr>
 		<td>${fboard.fno }</td>
 		<td id="title"><a href="/community/free/view?fno=${fboard.fno }">${fboard.title }</a></td>
-<%-- 		<td>${fboard.title }</td> --%>
 		<td>${fboard.userid }</td>
 		<td>${fboard.hit }</td>
 		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
@@ -116,16 +82,11 @@ td:nth-child(2) {
 </tbody>
 </table>
 
-<c:if test="${login eq true }">
-<button id="btnWrite">글쓰기</button>
-</c:if>
-<div class="clearfix"></div>
 
-
-
-<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
-
+<%-- <c:import url="/WEB-INF/views/community/free/paging_f.jsp" /> --%>
 
 </div> <!-- container -->
+
+
 
 <c:import url="../../layout/footer.jsp" />

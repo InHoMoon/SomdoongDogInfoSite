@@ -63,4 +63,11 @@ public interface FreeboardService {
 	 */
 	public FboardFile getFile(FboardFile fboardfile);
 
+
+	//키워드로 리스트 받아오기
+	public List<Freeboard> getList(String searchType, String keyword);
+
+
+	public Paging getPagingSearch(int curPage);
+
 }

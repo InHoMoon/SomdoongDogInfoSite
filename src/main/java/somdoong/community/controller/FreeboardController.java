@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
@@ -21,17 +22,18 @@ import somdoong.community.service.face.FboardCommentService;
 import somdoong.community.service.face.FreeboardService;
 import somdoong.util.Paging;
 
+@RequestMapping("/community/free")
 @Controller
 public class FreeboardController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired FreeboardService fboardService;
-	@Autowired FboardCommentService commService;
+//	@Autowired FboardCommentService commService;
 	
 	
 	//게시판 목록
-	@RequestMapping("/community/free/list")
+	@RequestMapping("/list")
 	public void list(@RequestParam(defaultValue = "0") int curPage, Freeboard fboard, Model model) {
 		
 		logger.info("/community/free/list");
@@ -40,7 +42,7 @@ public class FreeboardController {
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
-		fboard.setComm( commService.getTotal(curPage) );
+//		fboard.setComm( commService.getTotal(curPage) );
 		
 		List<Freeboard> list = fboardService.list(paging);
 		for( Freeboard f : list )	logger.info("{}", f);
@@ -49,7 +51,7 @@ public class FreeboardController {
 	
 	
 	//게시글 상세보기
-	@RequestMapping("/community/free/view")
+	@RequestMapping("/view")
 	public String view(Freeboard fboard, Model model) {
 		logger.info("/community/free/view");
 		
@@ -76,10 +78,10 @@ public class FreeboardController {
 	
 	
 	//글 작성
-	@GetMapping("/community/free/write")
+	@GetMapping("/write")
 	public void write() {}
 	
-	@PostMapping("/community/free/write")
+	@PostMapping("/write")
 	public String writeProc(Freeboard fboard, MultipartFile file, HttpSession session) {
 		logger.info("{}", fboard);
 		logger.info("{}", file);
@@ -95,7 +97,7 @@ public class FreeboardController {
 	
 	
 	//첨부파일 다운로드
-	@RequestMapping("/community/free/download")
+	@RequestMapping("/download")
 	public String download(FboardFile fboardfile, Model model) {
 		//첨부파일 정보 객체
 		fboardfile = fboardService.getFile(fboardfile);
@@ -108,6 +110,24 @@ public class FreeboardController {
 	}
 	
 
+	@RequestMapping("/search")
+	public void search(@RequestParam(defaultValue = "title") String searchType, @RequestParam(defaultValue = "") String keyword, 
+						@RequestParam(defaultValue = "0") int curPage, Model model) {
+		
+		logger.info("/community/free/search");
+		
+		Paging paging = fboardService.getPagingSearch(curPage);
+		logger.info("{}", paging);
+		model.addAttribute("paging", paging);
+		
+		
+		List<Freeboard> list = fboardService.getList(searchType, keyword);
+		
+		model.addAttribute("list", list);
+		
+//		return "redirect:/community/free/search";
+		
+	}
 	
 	
 	

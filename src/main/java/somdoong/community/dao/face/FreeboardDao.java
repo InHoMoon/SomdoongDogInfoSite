@@ -1,6 +1,7 @@
 package somdoong.community.dao.face;
 
 import java.util.List;
+import java.util.Map;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
@@ -74,5 +75,11 @@ public interface FreeboardDao {
 	 * @return
 	 */
 	public FboardFile selectFileByFileno(FboardFile fboardfile);
+
+
+	public List<Freeboard> selectSearchlist(Map<String, String> map);
+
+
+	public int selectCntSearch();
 
 }

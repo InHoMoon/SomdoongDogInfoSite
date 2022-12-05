@@ -2,7 +2,9 @@ package somdoong.community.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -114,6 +116,27 @@ public class FreeboardServiceImpl implements FreeboardService {
 	}
 	
 	
+	@Override
+	public List<Freeboard> getList(String searchType, String keyword) {
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		
+		List<Freeboard> flist = fboardDao.selectSearchlist(map);
+		
+		return flist;
+	}
+	
+	
+	@Override
+	public Paging getPagingSearch(int curPage) {
+		int totalCount = fboardDao.selectCntSearch();
+		
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
 	
 	
 	

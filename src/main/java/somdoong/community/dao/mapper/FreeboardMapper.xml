@@ -72,6 +72,36 @@
 		WHERE f_fileno = #{fFileno }
 	</select>
 	
+	
+	<select id="selectSearchlist" parameterType="hashMap" resultType="Freeboard">
+		select * from freeboard
+		<include refid="sear"></include>
+	</select>
+
+	<sql id="sear">
+		<choose>
+			<when test="searchType == 'title'">
+<!-- 				where b_title like concat ('%', #{word}, '%') -->
+				where title like '%'|| #{keyword} ||'%'
+			</when>
+
+			<when test="searchType == 'content'">
+<!-- 				where b_title like concat ('%', #{word}, '%') -->
+				where content like '%'|| #{keyword} ||'%'
+			</when>
+			
+			<when test="searchType == 'writer'">
+<!-- 				where b_title like concat ('%', #{word}, '%') -->
+				where userid like '%'|| #{keyword} ||'%'
+			</when>
+		</choose>
+	</sql>
+	
+	
+	<select id="selectCntSearch" resultType="int">
+		select count(*) from freeboard
+		<include refid="sear"></include>
+	</select>
 
 
 
