@@ -2,6 +2,7 @@ package somdoong.community.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,10 +20,12 @@ import somdoong.community.dao.face.FreeboardDao;
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
 import somdoong.community.service.face.FreeboardService;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging;
 
 @Service
 public class FreeboardServiceImpl implements FreeboardService {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired FreeboardDao fboardDao;
 	@Autowired ServletContext context;
@@ -127,16 +132,44 @@ public class FreeboardServiceImpl implements FreeboardService {
 		
 		return flist;
 	}
-	
-	
+
+
 	@Override
-	public Paging getPagingSearch(int curPage) {
-		int totalCount = fboardDao.selectCntSearch();
+	public Paging getPagingSearch(Paging sPaging) {
 		
-		Paging paging = new Paging(totalCount, curPage);
+		int totalCount = fboardDao.selectCntSear(sPaging);
+		
+		//페이징 계산
+		Paging paging = new Paging(totalCount,sPaging.getCurPage());
 		
 		return paging;
 	}
+	
+	
+//	@Override
+//	public Paging getPagingSearch(int curPage, String searchType, String keyword) {
+//	public List<Paging> getPagingSearch(int curPage, String searchType, String keyword) {
+//		int totalCount = fboardDao.selectCntSearch(searchType, keyword);
+//		logger.info("search cnt: {}", totalCount);
+//		
+//		Paging paging = new Paging(totalCount, curPage);
+//		logger.info("search paging : {}", paging);
+//		
+//		return paging;
+//	}
+	
+//	@Override
+//	public List<Paging> getPagingSearch(int curPage, String searchType, String keyword) {
+//		
+//		Map<String, String> map = new HashMap<>();
+//		map.put("searchType", searchType);
+//		map.put("keyword", keyword);
+//		
+//		int totalCount = fboardDao.selectCntSearch(searchType, keyword);
+//		
+//		return flist;
+//		
+//	}
 	
 	
 	

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging;
 
 public interface FreeboardDao {
 
@@ -80,6 +80,9 @@ public interface FreeboardDao {
 	public List<Freeboard> selectSearchlist(Map<String, String> map);
 
 
-	public int selectCntSearch();
+	public int selectCntSearch(String searchType, String keyword);
+
+
+	public int selectCntSear(Paging sPaging);
 
 }

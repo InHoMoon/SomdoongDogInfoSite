@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import somdoong.community.dto.FboardComment;
-import somdoong.util.Paging2;
 
 public interface FboardCommentService {
 

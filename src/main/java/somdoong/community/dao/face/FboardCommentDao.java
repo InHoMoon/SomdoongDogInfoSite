@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import somdoong.community.dto.FboardComment;
-import somdoong.util.Paging2;
 
 public interface FboardCommentDao {
 

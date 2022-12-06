@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
-import somdoong.community.service.face.FboardCommentService;
 import somdoong.community.service.face.FreeboardService;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging;
 
 @RequestMapping("/community/free")
 @Controller
@@ -33,7 +33,7 @@ public class FreeboardController {
 	
 	
 	//게시판 목록
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public void list(@RequestParam(defaultValue = "0") int curPage, Freeboard fboard, Model model) {
 		
 		logger.info("/community/free/list");
@@ -42,11 +42,58 @@ public class FreeboardController {
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
-//		fboard.setComm( commService.getTotal(curPage) );
 		
 		List<Freeboard> list = fboardService.list(paging);
 		for( Freeboard f : list )	logger.info("{}", f);
 		model.addAttribute("list", list);
+	}
+	
+	
+	// 게시글 검색 목록
+	@PostMapping ("/listS")
+	@ResponseBody
+	public ModelAndView search(@RequestParam(defaultValue = "title") String searchType, 
+								@RequestParam(defaultValue = "") String keyword, 
+								@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
+		
+		logger.info("/community/free/search");
+		logger.info("searchType값 : {}", searchType);
+		logger.info("keyword값 : {}", keyword);
+		
+		Paging sPaging = new Paging();
+		sPaging.setCurPage(curPage);
+		sPaging.setSearchType(searchType);
+		sPaging.setKeyword(keyword);
+		
+		Paging paging = fboardService.getPagingSearch(sPaging);
+		paging.setSearchType(searchType);
+		paging.setKeyword(keyword);
+		logger.info("searchPaging : {}", paging);
+		
+		List<Freeboard> sList = fboardService.getList(searchType, keyword);
+		
+		mav.setViewName("/community/free/search");
+		mav.addObject("paging", paging);
+		mav.addObject("sList", sList);
+		return mav;
+		
+		
+//		Paging sPaging = fboardService.getPagingSearch(curPage, searchType, keyword);
+//		List<Paging> sPaging = fboardService.getPagingSearch(curPage, searchType, keyword);
+//		logger.info("sPaging : {}", sPaging);
+		
+//		Paging paging = fboardService.getPagingSearch(curPage);
+//		logger.info("{}", paging);
+//		model.addAttribute("paging", paging);
+		
+		
+//		List<Freeboard> sList = fboardService.getList(searchType, keyword);
+		
+//		model.addAttribute("list", list);
+		
+//		mav.setViewName("/community/free/search");
+//		mav.addObject("sList", sList);
+//		return mav;
 	}
 	
 	
@@ -110,24 +157,7 @@ public class FreeboardController {
 	}
 	
 
-	@RequestMapping("/search")
-	public void search(@RequestParam(defaultValue = "title") String searchType, @RequestParam(defaultValue = "") String keyword, 
-						@RequestParam(defaultValue = "0") int curPage, Model model) {
-		
-		logger.info("/community/free/search");
-		
-		Paging paging = fboardService.getPagingSearch(curPage);
-		logger.info("{}", paging);
-		model.addAttribute("paging", paging);
-		
-		
-		List<Freeboard> list = fboardService.getList(searchType, keyword);
-		
-		model.addAttribute("list", list);
-		
-//		return "redirect:/community/free/search";
-		
-	}
+	
 	
 	
 	

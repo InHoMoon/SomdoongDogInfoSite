@@ -4,62 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="../../layout/header.jsp" />
 
-<script type="text/javascript">
-
-</script>
-
-<style type="text/css">
-.container {
-	width: auto;
-    padding: 57px 175px 0px;
-}
-
-table {
-	table-layout: fixed;
-}
-
-table, th {
-	text-align: center;
-}
-
-td:nth-child(2) {
-	text-align: left;
-}
-
-
-.search { text-align: right; font-size: 12px;}
-.search-op { height: 40px; width: 100px; border: 1px solid #e8e8e8; }
-.search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
-.search-btn { height: 30px; width:35px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
-
-
-#title > a{ color: #333; }
-</style>
-
-<div class="container">
-
-<h1>검색결과</h1>
-<hr>
-
-<%-- <span class="pull-left">total : ${paging.totalCount }</span> --%>
-
-<form id="form">
-	<div class="search">
-		<select class="search-op" name="searchType">
-			<option value="title">제목</option>
-			<option value="content">내용</option>
-			<option value="writer">작성자</option>
-		</select>
-		<input type="text" class="search-text" placeholder="검색어를 입력하세요" id="keyword" name="keyword">
-		<button class="search-btn">찾기</button>
-	</div> 
-</form>
-
-<div class="clearfix" style="padding-bottom: 30px;"></div>
-
-<table class="table table-striped table-hover table-condensed">
 <thead>
 	<tr>
 		<th style="width: 10%;">글번호</th>
@@ -70,23 +15,36 @@ td:nth-child(2) {
 	</tr>
 </thead>
 <tbody>
-<c:forEach items="${list }" var="fboard">
+<c:forEach items="${sList }" var="s">
 	<tr>
-		<td>${fboard.fno }</td>
-		<td id="title"><a href="/community/free/view?fno=${fboard.fno }">${fboard.title }</a></td>
-		<td>${fboard.userid }</td>
-		<td>${fboard.hit }</td>
-		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
+		<td>${s.fno }</td>
+		<td id="title"><a href="/community/free/view?fno=${s.fno }">${s.title }</a></td>
+		<td>${s.userid }</td>
+		<td>${s.hit }</td>
+		<td><fmt:formatDate value="${s.writeDate }" pattern="yy-MM-dd"/></td>
 	</tr>
 </c:forEach>
 </tbody>
-</table>
 
+<%-- <c:if test="${not empty param.keyword }"> --%>
+<%-- <c:set var="searchParam" value="&searchType=${param.searchType }&keyword=${param.keyword }"/> --%>
+<%-- </c:if> --%>
 
-<%-- <c:import url="/WEB-INF/views/community/free/paging_f.jsp" /> --%>
-
-</div> <!-- container -->
-
-
-
-<c:import url="../../layout/footer.jsp" />
+<!-- <div id="page_btn"> -->
+<%-- 	<c:if test="${paging.curPage > 1 }"> --%>
+<%-- 		<div class="page" onclick="location.href='/community/free/list?curPage=${paging.curPage - 1 }${searchParam}'">◀</div> --%>
+<%-- 	</c:if> --%>
+	
+<%-- 	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i"> --%>
+<%-- 		<c:if test="${paging.curPage eq i}"> --%>
+<%-- 			<div class="page curPage" onclick="location.href='/community/free/list?curPage=${i}${searchParam}'">${i}</div> --%>
+<%-- 		</c:if> --%>
+<%-- 		<c:if test="${paging.curPage ne i}"> --%>
+<%-- 			<div class="page" onclick="location.href='/community/free/list?curPage=${i}${searchParam}'">${i}</div> --%>
+<%-- 		</c:if> --%>
+<%-- 	</c:forEach> --%>
+	
+<%-- 	<c:if test="${paging.curPage < paging.totalPage}"> --%>
+<%-- 		<div class="page" onclick="location.href='/community/free/list?curPage=${paging.curPage +1 }${searchParam}'">▶</div> --%>
+<%-- 	</c:if> --%>
+<!-- </div> -->

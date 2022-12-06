@@ -73,35 +73,40 @@
 	</select>
 	
 	
-	<select id="selectSearchlist" parameterType="hashMap" resultType="Freeboard">
-		select * from freeboard
-		<include refid="sear"></include>
-	</select>
-
 	<sql id="sear">
 		<choose>
 			<when test="searchType == 'title'">
-<!-- 				where b_title like concat ('%', #{word}, '%') -->
 				where title like '%'|| #{keyword} ||'%'
+				order by fno desc
 			</when>
 
 			<when test="searchType == 'content'">
-<!-- 				where b_title like concat ('%', #{word}, '%') -->
 				where content like '%'|| #{keyword} ||'%'
+				order by fno desc
 			</when>
 			
 			<when test="searchType == 'writer'">
-<!-- 				where b_title like concat ('%', #{word}, '%') -->
 				where userid like '%'|| #{keyword} ||'%'
+				order by fno desc
 			</when>
 		</choose>
 	</sql>
 	
 	
-	<select id="selectCntSearch" resultType="int">
+	<select id="selectSearchlist" parameterType="hashMap" resultType="Freeboard">
+		select * from freeboard
+		<include refid="sear"></include>
+	</select>
+
+	<select id="selectCntSear" parameterType="Paging" resultType="int">
 		select count(*) from freeboard
 		<include refid="sear"></include>
 	</select>
+	
+<!-- 	<select id="selectCntSearch" resultType="int"> -->
+<!-- 		select count(*) from freeboard -->
+<!-- 		<include refid="sear"></include> -->
+<!-- 	</select> -->
 
 
 

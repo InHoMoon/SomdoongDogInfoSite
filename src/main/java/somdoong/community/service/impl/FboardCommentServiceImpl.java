@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import somdoong.community.dao.face.FboardCommentDao;
 import somdoong.community.dto.FboardComment;
 import somdoong.community.service.face.FboardCommentService;
-import somdoong.util.Paging2;
 
 @Service
 public class FboardCommentServiceImpl implements FboardCommentService {

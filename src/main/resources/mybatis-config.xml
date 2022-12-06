@@ -20,7 +20,7 @@
 	
 	<typeAliases>
 		<package name="somdoong.community.dto"/>
-		<package name="somdoong.util"/>
+		<package name="somdoong.community.util"/>
 	</typeAliases>
 	
 </configuration>

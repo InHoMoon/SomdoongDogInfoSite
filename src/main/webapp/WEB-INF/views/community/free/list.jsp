@@ -5,32 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="../../layout/header.jsp" />
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#btnWrite").click(function() {
-		location.href = "/community/free/write"
-	})
-})
-
-
-$(".search-btn").click(function(){
-	
-	$.ajax({
-		
-		url : "/community/free/search"
-		, type : "post"
-		, data : { "searchType" : searchType, "keyword" : keyword }
-		, dataType : "text"
-		, success : function(result){
-			console.log("검색 성공");
-		}
-		
-	});// ajax end
-	
-})//search-btn click
-</script>
-
 <style type="text/css">
 .container {
 	width: auto;
@@ -77,20 +51,20 @@ td:nth-child(2) {
 
 <span class="pull-left">total : ${paging.totalCount }</span>
 
-<form id="form">
-	<div class="search">
-		<select class="search-op" name="searchType">
+<div class="search">
+	<form id="form" id="searForm">
+		<select class="search-op" id="searchType">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
 			<option value="writer">작성자</option>
-<!-- 			<option value="title_writer">제목+작성자</option> -->
 		</select>
 		<input type="text" class="search-text" placeholder="검색어를 입력하세요" id="keyword" name="keyword">
-		<button class="search-btn">찾기</button>
-	</div> 
-</form>
+	</form>
+		<button class="search-btn" id="searBtn">찾기</button	>
+</div> 
 
 <div class="clearfix" style="padding-bottom: 30px;"></div>
+
 
 <table class="table table-striped table-hover table-condensed">
 <thead>
@@ -107,7 +81,6 @@ td:nth-child(2) {
 	<tr>
 		<td>${fboard.fno }</td>
 		<td id="title"><a href="/community/free/view?fno=${fboard.fno }">${fboard.title }</a></td>
-<%-- 		<td>${fboard.title }</td> --%>
 		<td>${fboard.userid }</td>
 		<td>${fboard.hit }</td>
 		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
@@ -122,10 +95,60 @@ td:nth-child(2) {
 <div class="clearfix"></div>
 
 
-
+<div id="paging">
 <c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
+</div>
+
+<div id="pagingS" style="display: none;">
+<c:import url="/WEB-INF/views/community/free/pagingS.jsp" />
+</div>
+
+
 
 
 </div> <!-- container -->
 
+
+<div class="searchList"></div>
+
 <c:import url="../../layout/footer.jsp" />
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btnWrite").click(function() {
+		location.href = "/community/free/write"
+	})
+	
+// 	$("#keyword").on("keydown",function(key){
+//         if(key.keyCode == 13) {
+//         	$("#searBtn").click();
+//         }
+//     });
+	
+	
+	$("#searBtn").click(function(){
+		
+		var searchType = $("#searchType option:selected").val();
+		var keyword = $("#keyword").val();
+		
+		if(keyword == ''){
+			alert("검색어를 입력하세요");
+			return false;
+		}
+		
+		$.ajax({
+			url : "/community/free/listS"
+			, type : "post"
+// 			, data : $('#searForm').serialize()
+			, data : { "searchType" : searchType, "keyword" : keyword }
+			, dataType: "html"
+			, success : function(result){
+				$(".table-condensed").html(result);
+				$("#paging").hide();
+				$("#pagingS").show();
+			}
+			
+		});// ajax end
+	
+	});//searBtn click
+});
+</script>

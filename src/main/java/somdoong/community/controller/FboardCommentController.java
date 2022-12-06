@@ -1,6 +1,5 @@
 package somdoong.community.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,8 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import somdoong.community.dto.FboardComment;
 import somdoong.community.service.face.FboardCommentService;
-import somdoong.util.CommPaging;
-import somdoong.util.Paging2;
+import somdoong.community.util.CommPaging;
 
 @Controller
 @RequestMapping("/community/free")

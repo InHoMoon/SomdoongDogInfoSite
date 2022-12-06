@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging;
 
 public interface FreeboardService {
 
@@ -68,6 +68,10 @@ public interface FreeboardService {
 	public List<Freeboard> getList(String searchType, String keyword);
 
 
-	public Paging getPagingSearch(int curPage);
+//	public Paging getPagingSearch(int curPage, String searchType, String keyword);
+//	public List<Paging> getPagingSearch(int curPage, String searchType, String keyword);
+
+
+	public Paging getPagingSearch(Paging sPaging);
 
 }
