@@ -3,6 +3,8 @@ package somdoong.community.dao.face;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
 import somdoong.community.util.Paging;
@@ -80,9 +82,20 @@ public interface FreeboardDao {
 	public List<Freeboard> selectSearchlist(Map<String, String> map);
 
 
-	public int selectCntSearch(String searchType, String keyword);
+//	public int selectCntSearch(@Param("searchType") String searchType, @Param("keyword") String keyword);
 
 
 	public int selectCntSear(Paging sPaging);
+
+
+	public void updateBoard(Freeboard fboard);
+
+
+	public void deleteFile(Freeboard fboard);
+
+
+	public void delete(Freeboard fboard);
+
+
 
 }

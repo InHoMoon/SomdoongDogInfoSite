@@ -29,7 +29,6 @@ public class FreeboardController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired FreeboardService fboardService;
-//	@Autowired FboardCommentService commService;
 	
 	
 	//게시판 목록
@@ -42,9 +41,10 @@ public class FreeboardController {
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
-		
 		List<Freeboard> list = fboardService.list(paging);
 		for( Freeboard f : list )	logger.info("{}", f);
+		
+		
 		model.addAttribute("list", list);
 	}
 	
@@ -57,43 +57,30 @@ public class FreeboardController {
 								@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
 		
 		logger.info("/community/free/search");
-		logger.info("searchType값 : {}", searchType);
-		logger.info("keyword값 : {}", keyword);
 		
 		Paging sPaging = new Paging();
-		sPaging.setCurPage(curPage);
+//		sPaging.setCurPage(curPage);
 		sPaging.setSearchType(searchType);
 		sPaging.setKeyword(keyword);
+		logger.info("타입 : {}", searchType);
+		logger.info("키워드 : {}", keyword);
 		
-		Paging paging = fboardService.getPagingSearch(sPaging);
-		paging.setSearchType(searchType);
-		paging.setKeyword(keyword);
-		logger.info("searchPaging : {}", paging);
+//		sPaging = fboardService.getPagingSearch(curPage);
+		sPaging = fboardService.getPagingSearch(sPaging, curPage);
+//		Paging sPaging = fboardService.getPagingSearch(searchType, keyword, curPage);
+		
+		logger.info("searchPaging : {}", sPaging);
 		
 		List<Freeboard> sList = fboardService.getList(searchType, keyword);
 		
 		mav.setViewName("/community/free/search");
-		mav.addObject("paging", paging);
+		mav.addObject("sPaging", sPaging);
 		mav.addObject("sList", sList);
+		
+		logger.info("sPaging type : {}", sPaging.getSearchType());
+		logger.info("sPaging keyword : {}", sPaging.getKeyword());
+		
 		return mav;
-		
-		
-//		Paging sPaging = fboardService.getPagingSearch(curPage, searchType, keyword);
-//		List<Paging> sPaging = fboardService.getPagingSearch(curPage, searchType, keyword);
-//		logger.info("sPaging : {}", sPaging);
-		
-//		Paging paging = fboardService.getPagingSearch(curPage);
-//		logger.info("{}", paging);
-//		model.addAttribute("paging", paging);
-		
-		
-//		List<Freeboard> sList = fboardService.getList(searchType, keyword);
-		
-//		model.addAttribute("list", list);
-		
-//		mav.setViewName("/community/free/search");
-//		mav.addObject("sList", sList);
-//		return mav;
 	}
 	
 	
@@ -156,8 +143,55 @@ public class FreeboardController {
 		return "down";
 	}
 	
-
 	
+	//게시글 수정
+	@GetMapping("/update")
+	public String update(Freeboard fboard, Model model) {
+		logger.info("/update get");
+		logger.info("{}", fboard);
+		
+		//잘못된 게시글 번호 처리
+		if( fboard.getFno() < 0 ) {
+			return "redirect:/community/free/list";
+		}
+		
+		//게시글 조회
+		fboard = fboardService.view(fboard);
+		logger.info("조회된 게시글 {}", fboard);
+		
+		//모델값 전달
+		model.addAttribute("updateBoard", fboard);
+		
+		
+		//첨부파일 모델값 전달
+		FboardFile fboardfile = fboardService.getAttachFile(fboard);
+		model.addAttribute("fboardfile", fboardfile);
+		
+		
+		return "community/free/update";
+	}
+	
+
+	//게시글 수정 처리
+	@PostMapping("/update")
+	public String updateProcess(Freeboard fboard, MultipartFile file) {
+		logger.info("update post");
+		logger.info("{}", fboard);
+		
+		fboardService.update(fboard, file);
+		
+		return "redirect:/community/free/view?fno=" + fboard.getFno();
+	}
+	
+	
+	//게시글 삭제
+	@RequestMapping("/delete")
+	public String delete(Freeboard fboard) {
+		
+		fboardService.delete(fboard);
+		
+		return "redirect:/community/free/list";
+	}
 	
 	
 	

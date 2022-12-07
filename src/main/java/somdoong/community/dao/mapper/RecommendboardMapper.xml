@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.community.dao.face.RecommendboardDao">
+
+	<select id="selectCntAll" resultType="int">
+		select count(*) from freeboard
+	</select>
+
+
+	<select id="selectList" resultType="Recommendboard" parameterType="Paging" >
+		SELECT * FROM (
+			SELECT rownum rnum, R.* FROM (
+				SELECT
+					rno, title, content , userid, userno
+					, hit, write_date
+				FROM recommendboard
+				ORDER BY rno DESC
+			) R
+		) recommendboard
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+
+</mapper>

@@ -164,7 +164,7 @@ footer #footer_wrap {
 <header>
 <div>
 	<h1 class="logo">
-	<a href="#"><img src="/resources/logo.PNG"></a>
+	<a href="/member/main"><img src="/resources/logo.PNG"></a>
 	</h1>
 	<div class="menu_wrap">
 	<nav>
@@ -173,7 +173,7 @@ footer #footer_wrap {
 		<li><a href="#">커뮤니티</a>
 			<ul class="dept2">
 				<li><a href="#">강아지 자랑</a></li>
-				<li><a href="#">맛집 추천</a></li>
+				<li><a href="/community/recommend/list">맛집 추천</a></li>
 				<li><a href="/community/free/list">강아지 Q&A</a></li>
 				<li><a href="#">강아지 정보</a></li>
 			</ul>
@@ -185,7 +185,7 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
-		<li><a href="#">로그인</a></li>
+		<li><a href="/member/main">로그인</a></li>
 		</c:if>
 		<c:if test="${not empty login }">
 		<li><a href="#">마이페이지</a>

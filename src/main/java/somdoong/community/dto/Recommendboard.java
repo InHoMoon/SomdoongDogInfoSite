@@ -2,43 +2,41 @@ package somdoong.community.dto;
 
 import java.util.Date;
 
-public class Freeboard {
+public class Recommendboard {
 	
-	private int fno;
+	private int rno;
 	private int userno;
 	private String title;
 	private String content;
 	private String userid;
 	private int hit;
 	private Date writeDate;
-	private int commCnt;
 	
-	public Freeboard() {}
+	public Recommendboard() {}
 
-	public Freeboard(int fno, int userno, String title, String content, String userid, int hit, Date writeDate, int commCnt) {
+	public Recommendboard(int rno, int userno, String title, String content, String userid, int hit, Date writeDate) {
 		super();
-		this.fno = fno;
+		this.rno = rno;
 		this.userno = userno;
 		this.title = title;
 		this.content = content;
 		this.userid = userid;
 		this.hit = hit;
 		this.writeDate = writeDate;
-		this.commCnt = commCnt;
 	}
 
 	@Override
 	public String toString() {
-		return "Freeboard [fno=" + fno + ", userno=" + userno + ", title=" + title + ", content=" + content
-				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", commCnt=" + commCnt + "]";
+		return "Recommendboard [rno=" + rno + ", userno=" + userno + ", title=" + title + ", content=" + content
+				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + "]";
 	}
 
-	public int getFno() {
-		return fno;
+	public int getRno() {
+		return rno;
 	}
 
-	public void setFno(int fno) {
-		this.fno = fno;
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 
 	public int getUserno() {
@@ -81,21 +79,14 @@ public class Freeboard {
 		this.hit = hit;
 	}
 
-	public Date getWriteDate() {
+	public Date getwriteDate() {
 		return writeDate;
 	}
 
-	public void setWriteDate(Date writeDate) {
+	public void setwriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
-	
-	public int getcommCnt() {
-		return commCnt;
-	}
-	
-	public void setcommCnt(int commCnt) {
-		this.commCnt = commCnt;
-	}
+
 	
 	
 

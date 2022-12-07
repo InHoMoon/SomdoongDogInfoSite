@@ -9,26 +9,26 @@
 
 <div id="page_btn">
 
-	<c:if test="${paging.curPage > 1 }">
-		<li><a href="/community/free/list?curPage=${paging.curPage - 1 }${searchParam}">◀</a></li>	
+	<c:if test="${sPaging.curPage > 1 }">
+		<li><a href="/community/free/list?curPage=${sPaging.curPage - 1 }${searchParam}">◀</a></li>	
 		
-<%-- 		<div class="page" onclick="location.href='/community/free/list?curPage=${paging.curPage - 1 }${searchParam}'">◀</div> --%>
+<%-- 		<div class="page" onclick="location.href='/community/free/list?curPage=${sPaging.curPage - 1 }${searchParam}'">◀</div> --%>
 	</c:if>
 	
-	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
-		<c:if test="${paging.curPage eq i}">
+	<c:forEach begin="${sPaging.startPage}" end="${sPaging.endPage}" var="i">
+		<c:if test="${sPaging.curPage eq i}">
 			<li><a href="/community/free/list?curPage=${i}${searchParam}">${i}</a></li>
 <%-- 			<div class="page curPage" onclick="location.href='/community/free/list?curPage=${i}${searchParam}'">${i}</div> --%>
 		</c:if>
-		<c:if test="${paging.curPage ne i}">
+		<c:if test="${sPaging.curPage ne i}">
 			<li><a href="/community/free/list?curPage=${i}${searchParam}">${i}</a></li>
 <%-- 			<div class="page" onclick="location.href='/community/free/list?curPage=${i}${searchParam}'">${i}</div> --%>
 		</c:if>
 	</c:forEach>
 	
-	<c:if test="${paging.curPage < paging.totalPage}">
-		<li><a href="/community/free/list?curPage=${paging.curPage +1 }${searchParam}">▶</a></li>	
-<%-- 		<div class="page" onclick="location.href='/community/free/list?curPage=${paging.curPage +1 }${searchParam}'">▶</div> --%>
+	<c:if test="${sPaging.curPage < sPaging.totalPage}">
+		<li><a href="/community/free/list?curPage=${sPaging.curPage +1 }${searchParam}">▶</a></li>	
+<%-- 		<div class="page" onclick="location.href='/community/free/list?curPage=${sPaging.curPage +1 }${searchParam}'">▶</div> --%>
 	</c:if>
 	
 </div>

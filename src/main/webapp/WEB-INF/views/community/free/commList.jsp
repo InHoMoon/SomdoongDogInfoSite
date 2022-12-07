@@ -38,8 +38,25 @@
     color: #f84720;
 }
 
-.pagingC { text-align: center; }
+.pagingC { text-align: center; font-size: 18px; padding-bottom: 10px;}
 .pagingC > li{ display: inline-block; }
+/* .num:hover { color: #2e9cdf; } */
+.pagingC a { text-decoration: none; color: #96a0ad;}
+.num{
+	background: #6bacce;
+    text-align: center;
+    color: #fff;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.listnum{ padding: 10px; }
+.listnum a:hover { color: #ccc; }
+.next { padding: 10px; }
+.next a:hover { color: #ccc; }
+  
 
 .btnReplyClose{ 
 	float: right;
@@ -82,7 +99,6 @@
 			<div class="textarea_wrap"></div>
 			
 			<button type="button" class="btnReplyUpdate" id="rplyUpdate_${row.cno}">완료</button>
-<%-- 			<button type="button" class="btnReplyDelete" id="rplyDelete_${row.cno}">삭제</button> --%>
 			<button type="button" class="btnReplyClose" id="rplyClose_${row.cno}" >취소</button>
 		</div>
 	</c:if>
@@ -96,45 +112,42 @@
 
 <br>
 
-<!-- <div class="text-center"> -->
-<!-- 	<ul class="pagination pagination-sm"> -->
 <div>
 	<ul class="pagingC">
 	
 		<%-- 첫 페이지로 이동 --%>
-		<c:if test="${commPaging.curBlock > 1}">
-			<li><a href="javascript:listReplyRest('1')">처음</a></li>
-<!-- 			<a href="javascript:listReplyRest('1')">[처음]</a> -->
-		</c:if>
+<%-- 		<c:if test="${commPaging.curBlock > 1}"> --%>
+<!-- 			<li><a href="javascript:listReplyRest('1')">처음</a></li> -->
+<%-- 		</c:if> --%>
 		
 		<%-- 현재 페이지 블럭이 1보다 크면 이전 페이지 블럭으로 이동 --%>
 		<c:if test="${commPaging.curBlock > 1}">
-			<li><a href="javascript:listReplyRest('${commPaging.prevPage}">[이전]</a></li>
-<%-- 			<a href="javascript:listReplyRest('${commPaging.prevPage}')">[이전]</a> --%>
+			<li class="next"><a href="javascript:listReplyRest('${commPaging.prevPage}')"> « </a></li>
 		</c:if>
 		
 		<%-- 페이지 블럭 처음부터 마지막 블럭까지 --%>
 		<c:forEach var="num" begin="${commPaging.blockBegin}" end="${commPaging.blockEnd}">
 			<c:choose>
 				<c:when test="${num == commPaging.curPage}">
-					<li>${num}&nbsp;</li>
+					<li class="num">${num}&nbsp;</li>
 				</c:when>
 				
 				<c:otherwise>
-					<li><a href="javascript:listReplyRest('${num}')">${num}</a>&nbsp;</li>
+					<li class="listnum"><a href="javascript:listReplyRest('${num}')">${num}</a>&nbsp;</li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
+		
 		<%-- 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 다음페이지로 이동 --%>
 		<c:if test="${commPaging.curBlock <= commPaging.totBlock}">
-			<li><a href="javascript:listReplyRest('${commPaging.nextPage}')">[다음]</a><li>
+			<li class="next"><a href="javascript:listReplyRest('${commPaging.nextPage}')"> » </a><li>
 		</c:if>
 		
 		<%-- 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 끝으로 이동 --%>
-		<c:if test="${commPaging.curBlock <= commPaging.totBlock}">
-			<li><a href="javascript:listReplyRest('${commPaging.totPage}')">[끝]</a></li>
-		</c:if>
+<%-- 		<c:if test="${commPaging.curBlock <= commPaging.totBlock}"> --%>
+<%-- 			<li><a href="javascript:listReplyRest('${commPaging.totPage}')">[끝]</a></li> --%>
+<%-- 		</c:if> --%>
 	
 	</ul>
 </div>

@@ -18,7 +18,7 @@
 <c:forEach items="${sList }" var="s">
 	<tr>
 		<td>${s.fno }</td>
-		<td id="title"><a href="/community/free/view?fno=${s.fno }">${s.title }</a></td>
+		<td id="title"><a href="/community/free/view?fno=${s.fno }">${s.title } <span style="color: tomato;">&nbsp;[${s.commCnt }]</span></a></td>
 		<td>${s.userid }</td>
 		<td>${s.hit }</td>
 		<td><fmt:formatDate value="${s.writeDate }" pattern="yy-MM-dd"/></td>

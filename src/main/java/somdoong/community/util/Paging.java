@@ -54,6 +54,18 @@ public class Paging {
 	}
 	
 	
+	//-------
+	public Paging(int totalCount, int curPage, String searchType, String keyword) {
+		setTotalCount(totalCount);
+		setCurPage(curPage);
+		setSearchType(searchType);
+		setKeyword(keyword);
+		
+		makePaging();
+	}
+	//-------
+	
+	
 	
 	
 	//페이지 정보를 생성(계산)하는 메소드

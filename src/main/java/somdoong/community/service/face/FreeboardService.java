@@ -10,57 +10,27 @@ import somdoong.community.util.Paging;
 
 public interface FreeboardService {
 
-	/**
-	 * 게시글 목록 페이징
-	 * 
-	 * @param curPage
-	 * @return
-	 */
+	//게시글 목록 페이징
 	public Paging getPaging(int curPage);
 
 	
-	/**
-	 * 페이징이 적용될 게시판 조회
-	 * 
-	 * @param paging
-	 * @return
-	 */
+	//게시글 리스트 조회
 	public List<Freeboard> list(Paging paging);
 
 
-	/**
-	 * 게시글 상세보기
-	 * 
-	 * @param fboard
-	 * @return
-	 */
+	//게시글 상세보기
 	public Freeboard view(Freeboard fboard);
 
 
-	/**
-	 * 게시글 정보, 첨부파일을 함께 처리한다
-	 * 
-	 * @param fboard
-	 * @param file
-	 */
+	//게시글, 첨부파일 작성
 	public void write(Freeboard fboard, MultipartFile file);
 
 
-	/**
-	 * 게시글 번호를 이용하여 업로드된 파일 정보 조회
-	 * 
-	 * @param fboard
-	 * @return
-	 */
+	//게시글 번호를 이용하여 업로드된 파일 정보 조회
 	public FboardFile getAttachFile(Freeboard fboard);
 
 
-	/**
-	 * 파일 번호를 이용하여 업로드된 파일 정보 조회
-	 * 
-	 * @param fboardfile
-	 * @return
-	 */
+	//파일 번호를 이용하여 업로드된 파일 정보 조회
 	public FboardFile getFile(FboardFile fboardfile);
 
 
@@ -68,10 +38,17 @@ public interface FreeboardService {
 	public List<Freeboard> getList(String searchType, String keyword);
 
 
-//	public Paging getPagingSearch(int curPage, String searchType, String keyword);
-//	public List<Paging> getPagingSearch(int curPage, String searchType, String keyword);
+	//검색된 리스트 페이징
+//	public Paging getPagingSearch(Paging sPaging);
+	public Paging getPagingSearch(Paging sPaing, int curPage);
+//	public Paging getPagingSearch(String searchType, String keyword, int curPage);
 
 
-	public Paging getPagingSearch(Paging sPaging);
+	//게시글 수정
+	public void update(Freeboard fboard, MultipartFile file);
+
+
+	//게시글 삭제
+	public void delete(Freeboard fboard);
 
 }

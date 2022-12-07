@@ -67,7 +67,8 @@ public class FboardCommentController {
 	
 	//댓글 목록
     @RequestMapping(value="/listC", method=RequestMethod.GET)
-    public ModelAndView replyList(@RequestParam int bno, @RequestParam(defaultValue="1") int curPage, ModelAndView mav, HttpSession session){
+    public ModelAndView replyList(@RequestParam int bno, @RequestParam(defaultValue="1") int curPage, 
+    								ModelAndView mav, HttpSession session){
         
     	// 페이징 처리
         int count = commService.getTotal(bno); // 댓글 갯수

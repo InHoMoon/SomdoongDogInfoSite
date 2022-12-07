@@ -46,7 +46,7 @@ td:nth-child(2) {
 
 <div class="container">
 
-<h1>자유게시판</h1>
+<h1>맛집 추천</h1>
 <hr>
 
 <span class="pull-left">total : ${paging.totalCount }</span>
@@ -77,13 +77,15 @@ td:nth-child(2) {
 	</tr>
 </thead>
 <tbody>
-<c:forEach items="${list }" var="fboard">
+<c:forEach items="${list }" var="rboard">
 	<tr>
-		<td>${fboard.fno }</td>
-		<td id="title"><a href="/community/free/view?fno=${fboard.fno }">${fboard.title } <span style="color: tomato;">&nbsp;[${fboard.commCnt }]</span></a></td>
-		<td>${fboard.userid }</td>
-		<td>${fboard.hit }</td>
-		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
+		<td>${rboard.rno }</td>
+<%-- 		<td id="title"><a href="/community/free/view?fno=${rboard.rno }">${rboard.title } <span style="color: tomato;">&nbsp;[${fboard.commCnt }]</span></a></td> --%>
+<%-- 		<td id="title"><a href="/community/recommend/view?rno=${rboard.rno }">${rboard.title }</a></td> --%>
+		<td id="title">${rboard.title }</td>
+		<td>${rboard.userid }</td>
+		<td>${rboard.hit }</td>
+		<td><fmt:formatDate value="${rboard.writeDate }" pattern="yy-MM-dd"/></td>
 	</tr>
 </c:forEach>
 </tbody>
@@ -96,13 +98,12 @@ td:nth-child(2) {
 
 
 <div id="paging">
-<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
+<c:import url="/WEB-INF/views/community/recommend/paging_r.jsp" />
 </div>
 
-<div id="pagingS" style="display: none;">
+<!-- <div id="pagingS" style="display: none;"> -->
 <%-- <c:import url="/WEB-INF/views/community/free/pagingS.jsp" /> --%>
-<c:import url="/WEB-INF/views/community/free/paging_s.jsp" />
-</div>
+<!-- </div> -->
 
 
 
@@ -116,7 +117,7 @@ td:nth-child(2) {
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#btnWrite").click(function() {
-		location.href = "/community/free/write"
+		location.href = "/community/recommend/write"
 	})
 	
 // 	$("#keyword").on("keydown",function(key){
@@ -137,7 +138,7 @@ $(document).ready(function() {
 		}
 		
 		$.ajax({
-			url : "/community/free/listS"
+			url : "/community/recommend/listS"
 			, type : "post"
 // 			, data : $('#searForm').serialize()
 			, data : { "searchType" : searchType, "keyword" : keyword }

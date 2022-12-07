@@ -12,16 +12,34 @@
 	</select>
 
 
+<!-- 	<select id="selectList" resultType="Freeboard" parameterType="Paging" > -->
+<!-- 		SELECT * FROM ( -->
+<!-- 			SELECT rownum rnum, F.* FROM ( -->
+<!-- 				SELECT -->
+<!-- 					fno, title, content , userid, userno -->
+<!-- 					, hit, write_date, comm_cnt -->
+<!-- 				FROM freeboard -->
+<!-- 				ORDER BY fno DESC -->
+<!-- 			) F -->
+<!-- 		) freeboard -->
+<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+<!-- 	</select> -->
 	<select id="selectList" resultType="Freeboard" parameterType="Paging" >
 		SELECT * FROM (
-			SELECT rownum rnum, F.* FROM (
-				SELECT
-					fno, title, content , userid, userno
-					, hit, write_date
-				FROM freeboard
-				ORDER BY fno DESC
-			) F
+		    SELECT rownum rnum, F.* FROM (
+		        SELECT
+		            fno, title, content , userid, userno
+		            , hit, write_date
+		        FROM freeboard
+		        ORDER BY fno DESC
+		    ) F
 		) freeboard
+		left join (
+		    SELECT fno, count(fno) as commCnt
+		    from freeboard f
+		    join FBOARD_COMMENT c on fno = c.bno
+		    group by fno
+		) c on freeboard.fno = c.fno
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 
@@ -33,9 +51,10 @@
 	</update>
 	
 	
+	
 	<select id="selectBoard" resultType="Freeboard" parameterType="Freeboard">
 		select
-			fno, title, content, userid, userno, hit, write_date
+			fno, title, content, userid, userno, hit, write_date, comm_cnt
 		from freeboard
 		where fno = #{fno}
 	</select>
@@ -98,18 +117,33 @@
 		<include refid="sear"></include>
 	</select>
 
+<!-- 	<select id="selectCntSearch" parameterType="String" resultType="int"> -->
+<!-- 		select count(*) from freeboard -->
+<!-- 		<include refid="sear"></include> -->
+<!-- 	</select> -->
+	
 	<select id="selectCntSear" parameterType="Paging" resultType="int">
 		select count(*) from freeboard
 		<include refid="sear"></include>
 	</select>
+
+
+	<update id="updateBoard" parameterType="Freeboard">
+		UPDATE freeboard
+		SET title = #{title}
+			, content = #{content}
+		WHERE fno = #{fno}
+	</update>
+
+	<delete id="deleteFile" parameterType="Freeboard">
+		DELETE fboard_file
+		WHERE fno = #{fno}	
+	</delete>
 	
-<!-- 	<select id="selectCntSearch" resultType="int"> -->
-<!-- 		select count(*) from freeboard -->
-<!-- 		<include refid="sear"></include> -->
-<!-- 	</select> -->
-
-
-
+	<delete id="delete" parameterType="Freeboard">
+		delete freeboard
+		where fno = #{fno}
+	</delete>
 
 
 
