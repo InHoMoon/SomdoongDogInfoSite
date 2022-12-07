@@ -6,7 +6,7 @@ public class Inquire {
 
 	private int iNum ;
 	private int userno;
-	private String iUsername;
+	private String iUsername; //작성자 아이디
 	private String iTitle;
 	private String iContent;
 	private String iCategory;

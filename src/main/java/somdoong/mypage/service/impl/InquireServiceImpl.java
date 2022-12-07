@@ -169,4 +169,13 @@ public class InquireServiceImpl implements InquireService {
 		
 	}
 	
+	@Override
+	public void delete(Inquire inquire) {
+		
+		inquireDao.deleteFile(inquire);
+		
+		inquireDao.delete(inquire);
+		
+		
+	}
 }

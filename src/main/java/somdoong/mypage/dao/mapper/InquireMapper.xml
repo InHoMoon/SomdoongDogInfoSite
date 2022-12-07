@@ -79,4 +79,10 @@
 		WHERE i_num = #{iNum}
 	</delete>
 	
+	<delete id="delete" parameterType="Inquire">
+		DELETE inquire
+		WHERE i_num= #{iNum}
+	</delete>
+	
+	
 </mapper>

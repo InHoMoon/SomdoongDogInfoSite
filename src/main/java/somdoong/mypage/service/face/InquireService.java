@@ -24,4 +24,6 @@ public interface InquireService {
 
 	public void update(Inquire inquire, MultipartFile file);
 
+	public void delete(Inquire inquire);
+
 }

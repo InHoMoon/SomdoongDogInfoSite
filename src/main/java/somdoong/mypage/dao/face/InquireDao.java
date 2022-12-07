@@ -28,4 +28,6 @@ public interface InquireDao {
 
 	public void deleteFile(Inquire inquire);
 
+	public void delete(Inquire inquire);
+
 }

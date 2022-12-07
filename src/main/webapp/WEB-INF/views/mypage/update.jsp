@@ -58,7 +58,7 @@ function updateContents() {
 <input type="hidden" name="iNum" value="${param.iNum  }">
 
 <div class="form-group">
-	<select name="iCategory" id="iCategory" value="${updateInquire.iCategory }">
+	<select name="iCategory" id="iCategory" value="${updateInquire.iCategory }sssss">
 		<option value=""> </option>
 		<option value="1번">1번 </option>
 		<option value="2번">2번 </option>

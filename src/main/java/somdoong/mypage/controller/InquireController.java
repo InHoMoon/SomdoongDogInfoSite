@@ -79,7 +79,7 @@ public class InquireController {
 		logger.debug("{}" , inquire);
 		logger.debug("{}" , file);
 		
-		inquire.setiUsername ((String) session.getAttribute("id"));
+		inquire.setiUsername ((String) session.getAttribute("userid"));
 		logger.debug("{}", inquire);
 		
 		inquireService.write(inquire,file);
@@ -128,4 +128,15 @@ public class InquireController {
 		inquireService.update(inquire, file); 
 		return "redirect:/mypage/view?iNum=" + inquire.getiNum();
 	}
+	
+	
+	@RequestMapping("/delete")
+	public String delete(Inquire inquire) {
+		
+		
+		inquireService.delete(inquire);
+		
+		return "redirect:/mypage/list";
+	}
+	
 }
