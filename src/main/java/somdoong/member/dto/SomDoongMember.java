@@ -5,17 +5,23 @@ public class SomDoongMember {
 	private String userid;
 	private String userpw;
 	private String username;
-	private int userphone;
+	private String userphone;
 	private String useradd;
 	private String useraddd;
 	private String email;
 
 	public SomDoongMember() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public SomDoongMember(String userid, String userpw, String username, int userphone, String useradd, String useraddd,
-			String email) {
+	@Override
+	public String toString() {
+		return "SomDoongMember [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", userphone="
+				+ userphone + ", useradd=" + useradd + ", useraddd=" + useraddd + ", email=" + email + "]";
+	}
+
+	public SomDoongMember(String userid, String userpw, String username, String userphone, String useradd,
+			String useraddd, String email) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
@@ -24,12 +30,6 @@ public class SomDoongMember {
 		this.useradd = useradd;
 		this.useraddd = useraddd;
 		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "SomDoongMember [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", userphone="
-				+ userphone + ", useradd=" + useradd + ", useraddd=" + useraddd + ", email=" + email + "]";
 	}
 
 	public String getUserid() {
@@ -56,11 +56,11 @@ public class SomDoongMember {
 		this.username = username;
 	}
 
-	public int getUserphone() {
+	public String getUserphone() {
 		return userphone;
 	}
 
-	public void setUserphone(int userphone) {
+	public void setUserphone(String userphone) {
 		this.userphone = userphone;
 	}
 

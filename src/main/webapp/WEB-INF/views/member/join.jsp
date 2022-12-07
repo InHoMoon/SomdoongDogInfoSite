@@ -49,7 +49,7 @@ $(document).ready(function() {
 	
 	$("#userid").click(function(){
 		if($("#userid").val()==""){
-			$("#olmessage").text("아이디를 입력 해주세요.");
+			$("#olmessage").text("아이디를 입력 후 중복확인 해 주세요.");
 			$("#userid").focus();
 			$("#olmessage").addClass("olmessaget");
 			$("#olmessage").removeClass("olmessagef");
@@ -72,7 +72,7 @@ $(document).ready(function(){
 	
     var hobbyCheck = false;
     var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-    var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+    var getCheck= RegExp(/^[a-zA-Z0-9]{3,12}$/);
     var getName= RegExp(/^[가-힣]+$/);
     var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
     var buf = new Array(13); //주민등록번호 배열

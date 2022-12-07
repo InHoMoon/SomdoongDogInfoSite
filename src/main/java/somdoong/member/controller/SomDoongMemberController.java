@@ -122,7 +122,7 @@ public class SomDoongMemberController {
 	@RequestMapping("idfindresult")
 	public String idfindresult(HttpServletRequest request, Model model,
 		    @RequestParam(required = true, value = "username") String username, 
-		    @RequestParam(required = true, value = "userphone") int userphone,
+		    @RequestParam(required = true, value = "userphone") String userphone,
 		    SomDoongMember searchMember) {
 		
 		try {
