@@ -59,7 +59,7 @@ $(document).ready(function() {
         <a class="small" href="/member/login">이미 계정이 있으신가요? 로그인하세요!</a>          
     </div>
      
-   	</div>                                                                                   
+   	</div>                                                                                    
 </div>  
 
 

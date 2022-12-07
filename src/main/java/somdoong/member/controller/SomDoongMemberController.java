@@ -1,6 +1,10 @@
 package somdoong.member.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -62,7 +66,7 @@ public class SomDoongMemberController {
 	}
 	
 	@PostMapping("login")
-	public String loginProcess(SomDoongMember member, HttpSession session) {
+	public String loginProcess(SomDoongMember member, HttpSession session, HttpServletRequest request, HttpServletResponse response ) throws IOException {
 		logger.info("{}", member);
 		
 		boolean loginResult = somDoongMemberService.login(member);
@@ -80,9 +84,13 @@ public class SomDoongMemberController {
 		}else {
 			logger.info("로그인 실패");
 			
-			session.invalidate();
 			
-			return"redirect:/member/login";
+				response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('아이디와 비밀번호를 확인해 주세요!'); history.go(-1);</script>");
+	            out.flush(); 
+
+	    	return null;
 			
 		}
 		

@@ -8,10 +8,12 @@
     
     
     <script type="text/javascript">
-    &(document).ready(function() {
- 
+    $(document).ready(function() {
     	
-    })    
+
+    })
+
+
     </script>
     
     
@@ -61,13 +63,14 @@
    		 	<input type="password" class="form-control" id="userpw" name="userpw" placeholder="패스워드 입력">
     	 </div>
     </div>
+    
 
  <div id="find">
    <div class="form-group">
     <div class="col-sm-offset-4">
     	 <a href="./idfind" >아이디 찾기</a> 
    		 <a href="./pwfind" >비밀번호 찾기</a> 
-   		 <a href="./agree" >회원가입</a>
+   		 <a href="./agree" >회원가입</a> 
     </div>
    </div>
  </div>   
@@ -75,7 +78,7 @@
     <div class="form-group">
     
      	 <div class="col-sm-offset-5">
-     	 	<button class="btn btn-warning">로그인</button>
+     	 	<button id="loginbu" class="btn btn-warning">로그인</button>
      	 	<input type="reset" id="cancel" class="btn btn-danger" value="취소"/>
     	 </div>
     
