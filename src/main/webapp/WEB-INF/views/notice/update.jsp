@@ -17,23 +17,7 @@ $(document).ready(function() {
 		updateContents();
 		
 		$("form").submit();
-	})
-
-	
-	
-	if( ${empty boardFile} ) {
-		$("#newFile").show()
-	} else {
-		$("#originFile").show()
-	}
-	
-	$("#deleteFile").click(function() {
-		$("#newFile").toggle()
-		
-// 		$("#originFile").toggle()
-		$("#originFile").toggleClass("through")
-	})
-	
+	})	
 })
 
 function updateContents() {
@@ -67,39 +51,21 @@ function updateContents() {
 
 <form action="./update" method="post" enctype="multipart/form-data">
 
-<input type="hidden" name="notiNo" value="${param.notiNo }">
+<input type="hidden" name="notiNo" value="${param.notino }">
 
 <div class="form-group">
 	<label for="writer">작성자</label>
-	<input type="text" id="writer" value="${adminId }" class="form-control" readonly="readonly">
+	<input type="text" id="writer" value="${adminid }" class="form-control" readonly="readonly">
 </div>
 
 <div class="form-group">
 	<label for="title">제목</label>
-	<input type="text" id="title" name="title" class="form-control" value="${updateNotice.notiTitle }">
+	<input type="text" id="title" name="title" class="form-control" value="${updateNotice.title }">
 </div>
 
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="content">${updateNotice.notiContent }</textarea>
-</div>
-
-<div class="form-group">
-
-	<div id="fileBox">
-
-		<div id="originFile">
-			<a href="/notice/download?fileNo=${noticeFile.nFileNo }">${noticeFile.originName }</a>
-			<span id="deleteFile">X</span>
-		</div>
-
-		<div id="newFile">
-			<label for="file">새로운 첨부파일</label>
-			<input type="file" id="file" name="file">
-		</div>
-
-	</div>
-
+	<textarea rows="10" style="width: 100%;" id="content" name="content">${updateNotice.content }</textarea>
 </div>
 
 <div class="text-center">

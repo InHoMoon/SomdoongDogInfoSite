@@ -13,57 +13,150 @@ $(document).ready(function() {
 	})
 	
 	$("#btnUpdate").click(function() {
-		location.href = "/notice/update?notiNo=${viewNotice.notiNo }"
+		location.href = "/notice/update?notino=${notice.notino }"
 	})
 	
 	$("#btnDelete").click(function() {
-		location.href = "/notice/delete?notiNo=${viewNotice.notiNo }"
+		location.href = "/notice/delete?notino=${notice.notino }"
 	})
 })
 </script>
 
 <style type="text/css">
-table {
-	table-layout: fixed;
+
+.title{
+    font-family: 'Dongle';
+    font-size: 40px;
+  	font-style: normal;
+  	font-weight: 300;
+  	font-display: swap;
+ 	margin-left: 535px;
+  	margin-top: 30px;
+  	margin-bottom: 40px;
+  	border-bottom: 2px solid #FFCD00;
+  	width: 80px;
 }
+
+.layout-content {
+    width: 860px;
+    margin: 0px auto;
+}
+
+.content-wrap {
+    position: relative;
+    width: 860px;
+    margin: 0px auto;
+    font-size: 12px;
+}
+.content-box {
+	padding: 29px 29px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.content-header {
+	position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.content-title {
+	margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.content-title_area {
+	margin-top: 10px;
+}
+
+.content-title_areaText {
+	font-weight: 400;
+    font-size: 26px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.content-info {
+	display: block;
+}
+
+.content-info_area {
+	display: block;
+}
+
+.content-info_areaId {
+	font-size: 15px;
+    line-height: 13px;
+	float: left;
+}
+
+.content-info_areaDate {
+	font-size: 15px;
+    line-height: 13px;
+    color: #ccc;
+    float: right;
+}
+
+.content-main {
+	display: block;
+	margin-bottom:10px;
+}
+
+#btn {
+	width: 80px; height: 35px; color: #fff; 
+   background-color: #68ae6d;
+   color: #FFFFFF;
+   border:none; 
+   border-radius: 5px;
+}
+
+#btn:hover { 
+   background: #3A7F03; 
+}
+
 </style>
 
 <div class="container">
 
-<h1>게시글 상세보기</h1>
-<hr>
+<div class="title">
+공지사항
+</div>
 
-<table class="table table-bordered">
-<tr>
-	<td class="info">글번호</td><td colspan="3">${viewNotice.notiNo }</td>
-</tr>
-<tr>
-	<td class="info">아이디</td><td>${viewNotice.adminId }</td>
-</tr>
-<tr>
-	<td class="info">조회수</td><td>${viewNotice.notiHit }</td>
-	<td class="info">작성일</td><td><fmt:formatDate value="${viewNotice.notiDate }" pattern="yy-MM-dd"/></td>
-</tr>
-<tr>
-	<td class="info">제목</td><td colspan="3">${viewNotice.notiTitle }</td>
-</tr>
-<tr>
-	<td class="info" colspan="4">본문</td>
-</tr>
-<tr>
-	<td colspan="4">${viewNotice.notiContent }</td>
-</tr>
-</table>
+<div class="layout-content">
+<div class="content-wrap">
 
-<a href="/notice/download?nFileNo=${noticeFile.nFileNo }">${noticeFile.originName }</a>
+<div class="content-box">
 
-<div class="text-center">
-	<button id="btnList" class="btn btn-default">목록</button>
-	
-	<c:if test="${id eq viewNotice.adminId }">
-		<button id="btnUpdate" class="btn btn-primary">수정</button>
-		<button id="btnDelete" class="btn btn-danger">삭제</button>
-	</c:if>
+	<div class="content-header">
+		<div class="content-title">
+			<div class="content-title_area">
+				<div class="content-title_areaText">${notice.title }</div>
+			</div>
+		</div>
+			<div class="content-info">
+				<div class="content-info_area">
+					<div class="content-info_areaId">${notice.adminid }</div>
+					<div class="content-info_areaDate"><fmt:formatDate value="${notice.notidate }" pattern="yy-MM-dd"/></div>
+				</div>
+			</div>
+	</div>
+	<div class="content-main">
+	${notice.content }
+	</div>
+		
+</div>
+
+	<div class="text-center">
+			<button id="btnList" class="btn btn-default">목록</button>
+			
+			<c:if test="${id eq notice.adminid }">
+				<button id="btnUpdate" class="btn btn-primary">수정</button>
+				<button id="btnDelete" class="btn btn-danger">삭제</button>
+			</c:if>
+		</div>
+		
+</div>
 </div>
 
 </div><!-- .container end -->

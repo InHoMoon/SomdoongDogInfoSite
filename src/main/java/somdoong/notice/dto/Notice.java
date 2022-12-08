@@ -4,79 +4,78 @@ import java.util.Date;
 
 public class Notice {
 
-	private int notiNo;
-	private String adminId;
-	private String notiTitle;
-	private String notiContent;
-	private int notiHit;
-	private Date notiDate;
+	private int notino;
+	private String adminid;
+	private String title;
+	private String content;
+	private int hit;
+	private Date notidate;
 	
 	public Notice () {}
-	
-	public Notice(int notiNo, String adminId, String notiTitle, String notiContent, int notiHit, Date notiDate) {
+
+	public Notice(int notino, String adminid, String title, String content, int hit, Date notidate) {
 		super();
-		this.notiNo = notiNo;
-		this.adminId = adminId;
-		this.notiTitle = notiTitle;
-		this.notiContent = notiContent;
-		this.notiHit = notiHit;
-		this.notiDate = notiDate;
+		this.notino = notino;
+		this.adminid = adminid;
+		this.title = title;
+		this.content = content;
+		this.hit = hit;
+		this.notidate = notidate;
 	}
 
 	@Override
 	public String toString() {
-		return "Notice [notiNo=" + notiNo + ", adminId=" + adminId + ", notiTitle=" + notiTitle + ", notiContent="
-				+ notiContent + ", notiHit=" + notiHit + ", notiDate=" + notiDate + "]";
+		return "Notice [notino=" + notino + ", adminid=" + adminid + ", title=" + title + ", content=" + content
+				+ ", hit=" + hit + ", notidate=" + notidate + "]";
 	}
 
-	public int getNotiNo() {
-		return notiNo;
+	public int getNotino() {
+		return notino;
 	}
 
-	public void setNotiNo(int notiNo) {
-		this.notiNo = notiNo;
+	public void setNotino(int notino) {
+		this.notino = notino;
 	}
 
-	public String getAdminId() {
-		return adminId;
+	public String getAdminid() {
+		return adminid;
 	}
 
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setAdminid(String adminid) {
+		this.adminid = adminid;
 	}
 
-	public String getNotiTitle() {
-		return notiTitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setNotiTitle(String notiTitle) {
-		this.notiTitle = notiTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getNotiContent() {
-		return notiContent;
+	public String getContent() {
+		return content;
 	}
 
-	public void setNotiContent(String notiContent) {
-		this.notiContent = notiContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public int getNotiHit() {
-		return notiHit;
+	public int getHit() {
+		return hit;
 	}
 
-	public void setNotiHit(int notiHit) {
-		this.notiHit = notiHit;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 
-	public Date getNotiDate() {
-		return notiDate;
+	public Date getNotidate() {
+		return notidate;
 	}
 
-	public void setNotiDate(Date notiDate) {
-		this.notiDate = notiDate;
+	public void setNotidate(Date notidate) {
+		this.notidate = notidate;
 	}
-	
 	
 	
 }

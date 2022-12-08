@@ -31,7 +31,7 @@ $(document).ready(function() {
 
 function updateContents() {
 	//스마트 에디터에 작성된 내용을 #content에 반영한다
-	oEditors.getById["noticontent"].exec("UPDATE_CONTENTS_FIELD", [])
+	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
 }
 </script>
 
@@ -43,23 +43,18 @@ function updateContents() {
 <form action="/notice/write" method="post" enctype="multipart/form-data">
 <div class="form-group">
 	<label for="adminid">작성자</label>
-	<input type="text" id="adminid" value="${adminId}" class="form-control">
+	<input type="text" id="adminid" value="${adminid}" class="form-control" readonly="readonly">
 </div>
 
 <div class="form-group">
-	<label for="notititle">제목</label>
-	<input type="text" id="notititle" name="notititle" class="form-control">
+	<label for="title">제목</label>
+	<input type="text" id="title" name="title" class="form-control">
 </div>
 
 <div class="form-group">
-	<label for="noticontent">본문</label>
-	<textarea rows="10" style="width: 100%;" id="noticontent" name="noticontent"></textarea>
+	<label for="content">본문</label>
+	<textarea rows="10" style="width: 100%;" id="content" name="content"></textarea>
 </div>
-
-<!-- <div class="form-group"> -->
-<!-- 	<label for="file">첨부파일</label> -->
-<!-- 	<input type="file" id="file" name="file"> -->
-<!-- </div> -->
 
 <div class="text-center">
 	<button class="btn btn-primary" id="btnWrite">작성</button>
@@ -72,7 +67,7 @@ function updateContents() {
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
-	elPlaceHolder: "noticontent",
+	elPlaceHolder: "content",
 	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 	fCreator: "createSEditor2"
 })

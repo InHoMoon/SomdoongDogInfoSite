@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.admin.dao.face.InCommDao">
+
+	<!-- 댓글 등록 -->
+	<insert id="insertInComm" parameterType="InComm">
+		INSERT INTO fboard_comment ( incno, i_num, adminid, incommcontent ) 
+		VALUES ( incomm_seq.nextval, #{inum}, #{adminid}, #{incommContent} )
+	</insert>
+	
+	<!-- 댓글 수 조회 -->
+	<select id="getCntByInum" resultType="int" parameterType="int">
+		select count(*) from incomm
+		where i_num = #{inum}
+	</select>
+    
+    <!-- 댓글 수정 -->
+    <update id="update" parameterType="InComm">
+     	UPDATE incomm
+        SET comm_content = #{incommContent}
+        WHERE incno = #{incno}
+    </update>
+    
+    
+    <!-- 댓글 삭제 -->
+    <delete id="delete" parameterType="int">
+    	DELETE FROM incomm
+        WHERE incno = #{incno}
+    </delete>    
+
+</mapper>
+			

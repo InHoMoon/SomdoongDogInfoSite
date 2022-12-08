@@ -27,27 +27,36 @@ $(document).ready(function() {
 	padding: 0; /* 모든 마진과 패딩 값 초기화*/
 }
 
-.title-wrap {
-
-}
 .title{
     font-family: 'Dongle';
     font-size: 40px;
   	font-style: normal;
   	font-weight: 300;
   	font-display: swap;
-  	margin-left: 520px;
+  	margin-left: 535px;
   	margin-top: 30px;
   	margin-bottom: 40px;
   	border-bottom: 2px solid #FFCD00;
   	width: 80px;
 }
  
+.table-wrap {
+	width: 90%;
+	margin-left: 80px;
+	margin-bottom: 40px;
 }
 
 
 table {
 	table-layout: fixed;
+	border-collapse: collapse;
+  	border-spacing: 0;
+}
+
+thead {
+	display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
 }
 
 table, th {
@@ -58,6 +67,21 @@ td:nth-child(2) {
 	text-align: left;
 	text-align: justify;
 }
+
+#btnWrite {
+	padding: 3px 12px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    background-color: #FFCD00;
+    border-color: #ccc;
+    box-shadow: var(--color-btn-primary-shadow),var(--color-btn-primary-inset-shadow);
+}
+
+/* #btnWrite:hover {  */
+/*    background: #FFCD00;  */
+/* } */
+
 </style>
 
 <div class="container">
@@ -66,35 +90,36 @@ td:nth-child(2) {
 공지사항
 </div>
 
-
+<div class="table-wrap">
 <table class="table table-hover table-condensed">
 <thead>
 	<tr>
 		<th style="width: 10%;">글번호</th>
-		<th style="width: 45%;">제목</th>
+		<th style="width: 35%;">제목</th>
 		<th style="width: 20%;">작성자</th>
-		<th style="width: 10%;">조회수</th>
 		<th style="width: 15%;">작성일</th>
+		<th style="width: 10%;">조회수</th>
 	</tr>
 </thead>
 <tbody>
 <c:forEach items="${list }" var="notice">
 	<tr>
-		<td>${notice.notiNo}</td>
-		<td><a href="/notice/view?notiNo=${notice.notiNo }">${notice.notiTitle }</a></td>
-		<td>${notice.adminId }</td>
-		<td>${notice.notiHit }</td>
-		<td><fmt:formatDate value="${notice.notiDate }" pattern="yy-MM-dd"/></td>
+		<td>${notice.notino}</td>
+		<td><a href="/notice/view?notino=${notice.notino }">${notice.title }</a></td>
+		<td>${notice.adminid }</td>
+		<td><fmt:formatDate value="${notice.notidate }" pattern="yy-MM-dd"/></td>
+		<td>${notice.hit }</td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 
-<button id="btnWrite" class="btn btn-primary pull-right">글쓰기</button>
+<button id="btnWrite" class=" pull-right">글쓰기</button>
 <span class="pull-left">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
+</div>
 
 </div><!-- .container -->
 

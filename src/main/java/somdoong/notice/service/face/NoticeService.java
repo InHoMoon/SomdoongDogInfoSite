@@ -33,42 +33,25 @@ public interface NoticeService {
 	/**
 	 * 게시글 상세보기
 	 * 
-	 * @param viewNotice - 상세 조회할 게시글 번호 객체
+	 * @param notice - 상세 조회할 게시글 번호 객체
 	 * @return 조회된 상세 게시글 객체
 	 */
-	public Notice view(Notice viewNotice);
+	public Notice view(Notice notice);
 
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다
 	 * 
 	 * @param notice - 게시글 정보 객체
-	 * @param file - 첨부파일 정보 객체
 	 */
-	public void write(Notice notice, MultipartFile file);
+	public void write(Notice notice);
 
-	/**
-	 * 게시글 번호를 이용하여 업로드된 파일 정보를 조회한다
-	 * 
-	 * @param viewNotice - 조회할 게시글 번호 객체
-	 * @return 첨부 파일 정보
-	 */
-	public NoticeFile getAttachFile(Notice viewNotice);
-
-	/**
-	 * 파일 번호를 이용하여 업로드된 파일 정보를 조회한다
-	 * 
-	 * @param noticeFile - 조회할 파일 번호 객체
-	 * @return 첨부 파일 정보
-	 */
-	public NoticeFile getFile(NoticeFile noticeFile);
 
 	/**
 	 * 게시글 정보, 첨부파일을 함께 처리한다
 	 * 
 	 * @param notice - 게시글 정보 객체
-	 * @param file - 첨부파일 정보 객체
 	 */
-	public void update(Notice notice, MultipartFile file);
+	public void update(Notice notice);
 
 	/**
 	 * 게시글 삭제 + 첨부파일 삭제

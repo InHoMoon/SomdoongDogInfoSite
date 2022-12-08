@@ -12,7 +12,7 @@ public class NoticeFile {
 		super();
 		this.nFileNo = nFileNo;
 		this.originName = originName;
-		StoredName = storedName;
+		this.StoredName = storedName;
 	}
 
 	@Override
