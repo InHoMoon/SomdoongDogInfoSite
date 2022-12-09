@@ -27,13 +27,14 @@
 	
 	<dependencies>
 	
-	
+	<!-- JackSon Databind -->
 	<dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
     	<version>2.14.0</version>
 	</dependency>
 	
+	<!-- log4jdbc -->
 	<dependency>
 	    <groupId>org.lazyluke</groupId>
 	    <artifactId>log4jdbc-remix</artifactId>
@@ -90,7 +91,27 @@
 		<version>12.1.0.2</version>
 	</dependency>
 		
-		
+	<!-- AspectJ -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>${org.aspectj-version}</version>
+	</dependency>
+	
+	<!-- AspectJ Weaver -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>${org.aspectj-version}</version>
+	</dependency>	
+	
+	<!-- 썸네일 -->
+	<dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.17</version>
+	</dependency>
+	
 		
 		<!-- Spring -->
 		<dependency>

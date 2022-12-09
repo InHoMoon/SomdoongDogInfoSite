@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="somdoong.community.dao.face.ShowboardDao">
+
+	<select id="selectAll" resultType="int">
+		SELECT count(*) FROM showboard
+	</select>
+	
+	<select id="selectList" resultType="hashmap">
+		SELECT * FROM (
+		SELECT rownum rnum, B.* FROM ( SELECT sno, title, content , write_date,
+				 hit, userid 
+			FROM showboard ORDER BY sno DESC) B) showboard
+		INNER JOIN sboard_file F
+		ON showboard.sno = F.sno AND rnum BETWEEN  #{startNo } AND #{endNo }
+	</select>
+	
+	<select id="selectFile" resultType="somdoong.community.dto.SboardFile" parameterType="somdoong.community.dto.Showboard">
+		SELECT s_fileno, origin_name, stored_name, sno FROM sboard_file
+		WHERE sno = #{sno } 	
+	</select>
+	
+	<insert id="insertBoard" parameterType="somdoong.community.dto.Showboard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="sno">
+			SELECT seq_showboard.nextval FROM dual
+		</selectKey>
+		INSERT INTO showboard (sno, title, content , userid)
+		VALUES ( #{sno}, #{title}, #{content}, #{userid} )	
+	</insert>
+	
+	<insert id="insertFile" parameterType="somdoong.community.dto.SboardFile">
+		INSERT INTO sboard_file( s_fileno, origin_name, stored_name, sno)
+		VALUES (seq_boardfile.nextval, #{origin_name}, #{stored_name}, #{sno})	
+	</insert>
+	
+	<update id="upHit" parameterType="somdoong.community.dto.Showboard">
+		UPDATE showboard SET hit = hit+1
+		WHERE sno = #{sno}
+	</update>
+	
+	<select id="selectBySno" resultType="somdoong.community.dto.Showboard" parameterType="somdoong.community.dto.Showboard">
+		SELECT * FROM showboard
+		WHERE sno = #{sno}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
