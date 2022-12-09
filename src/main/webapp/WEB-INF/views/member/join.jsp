@@ -14,27 +14,36 @@ $(document).ready(function() {
 
 	$("#idcheck").click(function(){
 		$("#submit").attr("type", "button");
+
 		const id = $("#userid").val();
+		
+		if (id =="") {
+			alert("아이디를 입력 후 중복확인 해 주세요.");
+			return false;
+		}
+		
+		
 		$.ajax({
+			
 		type: "get",
 		async: false,
 		url: "/member/idcheck",
 		data: {userid: id},
+		
+		
 		success: function (data) {
-		if (id =="") {
-			alert("아이디를 입력 후 중복확인 해 주세요.");
-		}else if(data == 1) {
-			$("#olmessage").text("이미 사용중인 ID 입니다.");
-			$("#me_id_yn").val("N");
-			$("#olmessage").addClass("olmessagef");
-			$("#olmessage").removeClass("olmessaget");
-		}else if (data == 0) {
-			$("#olmessage").text("사용 가능한 ID 입니다.");
-			$("#me_id_yn").val("Y");
-			$("#olmessage").addClass("olmessaget");
-			$("#olmessage").removeClass("olmessagef");
-			$("#submit").attr("type", "submit");		
-		}	
+			if(data == 1) {
+				$("#olmessage").text("이미 사용중인 ID 입니다.");
+				$("#me_id_yn").val("N");
+				$("#olmessage").addClass("olmessagef");
+				$("#olmessage").removeClass("olmessaget");
+			}else if (data == 0) {
+				$("#olmessage").text("사용 가능한 ID 입니다.");
+				$("#me_id_yn").val("Y");
+				$("#olmessage").addClass("olmessaget");
+				$("#olmessage").removeClass("olmessagef");
+				$("#submit").attr("type", "submit");		
+			}	
 
 	
 		},
@@ -97,6 +106,7 @@ $(document).ready(function(){
 	        return false;
 	      }
 		  
+		  //중복체크 유효성 검사
 	      if ($("#me_id_yn").val() != 'Y') {
 	    	  alert("아이디 중복체크를 눌러주세요.");
 	    	  $("#me_id_yn").focus();
@@ -130,7 +140,7 @@ $(document).ready(function(){
 	      
 	      //비밀번호 확인란 공백 확인
 	      if($("#userpwcheck").val() == ""){
-	        alert("패스워드 확인란을 입력해주세요");
+	        alert("비밀번호 확인란을 입력해주세요");
 	        $("#userpwcheck").focus();
 	        return false;
 	      }
@@ -153,7 +163,7 @@ $(document).ready(function(){
 	      
 	      //이름 유효성 검사
 	      if(!getCheck.test($("#username").val())){
-	        alert("이름형식에 맞게 입력해주세요")
+	        alert("올바른 이름을 입력해주세요")
 	        $("#username").val("");
 	        $("#username").focus();
 	        return false;
@@ -207,6 +217,7 @@ $(document).ready(function(){
 
 }) 
 
+	
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

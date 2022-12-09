@@ -54,10 +54,7 @@ public class SomDoongMemberController {
 		return "redirect:/member/login";
 	}
 	
-	@RequestMapping("joinsuc")
-	public void joinsuc() {
-		logger.info("/member/joinsuc 요청완료!");
-	}
+
 	
 	@GetMapping("login")
 	public void login() {
@@ -171,7 +168,7 @@ public class SomDoongMemberController {
 
 	
 	@ResponseBody
-	@GetMapping("idcheck")
+	@GetMapping("/idcheck")
 	public int idcheck(SomDoongMember member) {
 		logger.info("idcheck [GET] 요청완료!");
 		int result = somDoongMemberService.idcheck(member);

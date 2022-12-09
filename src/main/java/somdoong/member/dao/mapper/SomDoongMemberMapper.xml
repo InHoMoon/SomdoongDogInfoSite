@@ -16,7 +16,7 @@
     
     <select id="selectCntMember" resultType="int" parameterType="SomDoongMember">
 		SELECT count(*) FROM sommember
-		WHERE userid = #{userid} AND userpw = #{userpw}		
+		WHERE userid = #{userid} AND userpw = #{userpw}		 
 	</select>
 	
 	<select id="selectName" resultType="String" parameterType="SomDoongMember">
@@ -32,7 +32,7 @@
 	<select id="memberIdSearch" parameterType="SomDoongMember" resultType="SomDoongMember">
 	<![CDATA[
   	  SELECT * FROM sommember
-      WHERE username = #{username} AND userphone = #{userphone}
+      WHERE username = #{username} AND userphone = #{userphone} 
     ]]>     
 	</select>
 	
