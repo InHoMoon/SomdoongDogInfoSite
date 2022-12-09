@@ -8,4 +8,9 @@ public interface UpdateService {
 	
 	public void memberDelete(SomDoongMember member);
 
+
+	public SomDoongMember getid(SomDoongMember member);
+
+	public SomDoongMember getdeleteid(SomDoongMember member);
+
 }

@@ -26,4 +26,14 @@ public class UpdateServiceImpl implements UpdateService {
 		
 	}
 	
+	@Override
+	public SomDoongMember getid(SomDoongMember member) {
+		
+		return updateDao.memberSelect(member);
+	}
+
+	@Override
+	public SomDoongMember getdeleteid(SomDoongMember member) {
+		return updateDao.memberDeleteGetid(member);
+	}
 }

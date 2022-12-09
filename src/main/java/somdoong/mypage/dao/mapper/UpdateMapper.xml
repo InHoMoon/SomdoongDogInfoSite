@@ -24,4 +24,15 @@
 		WHERE userid = #{userid}
 	 	AND userpw = #{userpw}
 	</delete>
+	
+	<select id="memberSelect" parameterType="SomDoongMember" resultType="SomDoongMember">
+		SELECT * FROM sommember
+		WHERE userid = #{userid}
+	</select>
+
+
+	<select id="memberDeleteGetid" parameterType="SomDoongMember" resultType="SomDoongMember">
+		SELECT userid, username,userpw FROM sommember
+		WHERE userid = #{userid}
+	</select>
 </mapper>

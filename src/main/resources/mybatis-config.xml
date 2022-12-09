@@ -21,6 +21,8 @@
 	<typeAliases>
 		<package name="somdoong.mypage.dto"/>
 		<package name="somdoong.util"/>
+		
+		<package name="somdoong.member.dto"/>
 	</typeAliases>
 	
 </configuration>

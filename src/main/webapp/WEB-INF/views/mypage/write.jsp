@@ -5,6 +5,8 @@
 
 <c:import url="../layout/header.jsp" />
 
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <!-- 스마트 에디터 2 로드 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
@@ -46,7 +48,7 @@ function updateContents() {
 
 <div class="form-group">
 	<label for="writer">작성자</label>
-	<input type="text" id="writer" value="${nick }"  class="form-control" readonly="readonly">
+	<input type="text" id="writer" value="${username }"  class="form-control"  readonly="readonly">
 </div>
 
 
@@ -84,7 +86,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 </div><!-- .container end -->
 
-<c:import url="../layout/footer.jsp" />
+<%-- <c:import url="../layout/footer.jsp" /> --%>
 
 
 

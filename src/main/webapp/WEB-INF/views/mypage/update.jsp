@@ -58,7 +58,7 @@ function updateContents() {
 <input type="hidden" name="iNum" value="${param.iNum  }">
 
 <div class="form-group">
-	<select name="iCategory" id="iCategory" value="${updateInquire.iCategory }sssss">
+	<select name="iCategory" id="iCategory" value="${updateInquire.iCategory }">
 		<option value=""> </option>
 		<option value="1번">1번 </option>
 		<option value="2번">2번 </option>
@@ -70,7 +70,7 @@ function updateContents() {
 
 <div class="form-group">
 	<label for="writer">작성자</label>
-	<input type="text" id="writer" value="${nick }"  class="form-control" readonly="readonly">
+	<input type="text" id="writer"   class="form-control" value="${username }" readonly="readonly">
 </div>
 
 <div class="form-group">

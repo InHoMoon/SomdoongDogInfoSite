@@ -36,7 +36,7 @@ td:nth-child(2) {
 <table>
 <thead>
 	<tr>
-		<th style="width: 10%;">카테고리</th>
+		<th style="width: 10%;">구분</th>
 		<th style="width: 10%;">글번호</th>
 		<th style="width: 35%;">제목</th>
 		<th style="width: 20%;">작성자</th>
@@ -45,16 +45,20 @@ td:nth-child(2) {
 	</tr>
 </thead>
 <tbody>
+
 <c:forEach items="${list }" var="inquire">
+<%-- <c:if test="${id == inquire.iUsername }"> --%>
 	<tr>
-		<td>${inquire.iCategory }</td>
+		<td>${inquire.iCategory }</td>  
 		<td>${inquire.iNum }</td>
 		<td><a href="/mypage/view?iNum=${inquire.iNum }">${inquire.iTitle }</a></td>
 		<td>${inquire.iUsername }</td>
 		<td>${inquire.ihit }</td>
 		<td><fmt:formatDate value="${inquire.iwriteDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
+<%-- </c:if> --%>
 </c:forEach>
+
 </tbody>
 </table>
 

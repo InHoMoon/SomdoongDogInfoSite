@@ -14,7 +14,7 @@
 		SELECT * FROM (
 			SELECT rownum rnum, I.* FROM (
 				SELECT
-					i_num, i_title, i_content , i_category,i_writedate,i_hit
+					i_num, i_title, i_content , i_category,i_writedate,i_hit,i_username,i_userid
 				FROM inquire
 				ORDER BY i_num DESC
 			) I
@@ -31,7 +31,8 @@
 	
 	
 	<select id="selectInquire" resultType="Inquire" parameterType="Inquire">
-		SELECT i_num, i_title, i_content , i_category,i_writedate,i_hit ,i_username
+		SELECT i_num, i_title, i_content , i_category,i_writedate,i_hit 
+		,i_username,i_userid
 		FROM inquire
 		WHERE i_num = #{iNum}
 	</select>	
@@ -41,8 +42,8 @@
 		<selectKey order="BEFORE" resultType="int" keyProperty="iNum">
 			SELECT inquire_seq.nextval FROM dual
 		</selectKey>
-		INSERT INTO inquire (  i_num, i_title, i_content , i_category,i_username )
-		VALUES (#{iNum}, #{iTitle}, #{iContent }, #{iCategory}, #{iUsername } )
+		INSERT INTO inquire (  i_num, i_title, i_content , i_category,i_username,i_userid )
+		VALUES (#{iNum}, #{iTitle}, #{iContent }, #{iCategory}, #{iUsername }, #{iUserid} )
 	</insert>
 	
 	<insert id="insertFile" parameterType="IBoardFile">

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,8 +23,13 @@ public class UpdateController {
 	@Autowired UpdateService updateService;
 	
 	@RequestMapping(value="/memberUpdateView", method = RequestMethod.GET)
-	public String updateView(){
+	public String updateView(SomDoongMember member, HttpSession session,Model model){
+	
+		member= updateService.getid(member);
+		logger.info("{}",member);
+		model.addAttribute("member",member);
 		
+	
 		return "/mypage/update/memberUpdateView";
 	}
 
@@ -40,8 +46,14 @@ public class UpdateController {
 	
 	
 	@RequestMapping(value="/memberDeleteView", method = RequestMethod.GET)
-	public String memberDeleteView(){
-		return "member/memberDeleteView";
+	public String memberDeleteView(SomDoongMember member,Model model){
+		
+		member= updateService.getdeleteid(member);
+		logger.info("{}" , member);
+		model.addAttribute("member",member);
+		
+
+		return "/mypage/update/memberDeleteView";
 	}
 	
 	// 회원 탈퇴 post
@@ -50,8 +62,9 @@ public class UpdateController {
 		
 		
 		updateService.memberDelete(member);
+	
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/mypage/list";
 	}
 	
 	

@@ -2,8 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:import url="../layout/header.jsp" />
 
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -37,7 +40,8 @@ $(document).ready(function() {
 
 <tr>
 	<td> 카테고리 :</td><td> ${viewInquire.iCategory } </td>
-	<td> 아이디 :</td><td> ${viewInquire.iCategory } </td>	
+	<td> 아이디 :</td><td> ${viewInquire.iUserid } </td>	
+	<td> 이름 : </td> <td> ${viewInquire.iUsername } </td>
 </tr>
 
 <tr>

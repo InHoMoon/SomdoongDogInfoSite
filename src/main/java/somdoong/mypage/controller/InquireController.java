@@ -79,7 +79,8 @@ public class InquireController {
 		logger.debug("{}" , inquire);
 		logger.debug("{}" , file);
 		
-		inquire.setiUsername ((String) session.getAttribute("userid"));
+		inquire.setiUsername ((String) session.getAttribute("username"));
+		inquire.setiUserid((String) session.getAttribute("userid"));
 		logger.debug("{}", inquire);
 		
 		inquireService.write(inquire,file);
@@ -107,6 +108,7 @@ public class InquireController {
 		if( inquire.getiNum()<0) {
 			return "redirect:/mypage/list";
 		}
+		
 		
 		inquire = inquireService.view(inquire);
 		logger.debug("조회된 게시글 {}",inquire);
