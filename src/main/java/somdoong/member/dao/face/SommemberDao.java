@@ -13,13 +13,6 @@ public interface SommemberDao {
 	 */
 	public int selectCntMember(Sommember smember);
 
-	/**
-	 * id를 이용하여 userno를 조회한다
-	 * 
-	 * @param member - 조회하려는 회원의 id를 가진 객체
-	 * @return 조회된 userno
-	 */
-	public int selectUserno(Sommember smember);
 
 	
 

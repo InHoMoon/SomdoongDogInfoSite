@@ -9,8 +9,8 @@
 
 	<!-- 댓글 등록 -->
 	<insert id="insertComm" parameterType="FboardComment">
-		INSERT INTO fboard_comment ( cno, bno, userno, userid, comm_content ) 
-		VALUES ( fboard_comment_seq.nextval, #{bno}, #{userno}, #{userid}, #{commContent} )
+		INSERT INTO fboard_comment ( cno, bno, userid, comm_content ) 
+		VALUES ( fboard_comment_seq.nextval, #{bno}, #{userid}, #{commContent} )
 	</insert>
 	
 	

@@ -8,7 +8,7 @@
 <mapper namespace="somdoong.community.dao.face.RecommendboardDao">
 
 	<select id="selectCntAll" resultType="int">
-		select count(*) from freeboard
+		select count(*) from recommendboard
 	</select>
 
 
@@ -16,13 +16,28 @@
 		SELECT * FROM (
 			SELECT rownum rnum, R.* FROM (
 				SELECT
-					rno, title, content , userid, userno
-					, hit, write_date
+					rno, title, content , userid, hit, write_date
 				FROM recommendboard
 				ORDER BY rno DESC
 			) R
 		) recommendboard
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
+	
+	
+	<update id="hit" parameterType="Recommendboard">
+		update recommendboard
+		set hit = hit+1
+		where rno = #{rno}
+	</update>
+	
+	<select id="selectBoard" resultType="Recommendboard" parameterType="Recommendboard">
+		select
+			rno, title, content, userid, hit, write_date
+			from recommendboard
+		where rno = #{rno}
+	</select>
+	
+	
 
 </mapper>

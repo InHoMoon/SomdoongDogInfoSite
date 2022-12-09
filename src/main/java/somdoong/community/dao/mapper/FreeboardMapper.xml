@@ -7,43 +7,39 @@
     
 <mapper namespace="somdoong.community.dao.face.FreeboardDao">
 
+	<!-- 페이징 -->
 	<select id="selectCntAll" resultType="int">
 		select count(*) from freeboard
 	</select>
 
-
-<!-- 	<select id="selectList" resultType="Freeboard" parameterType="Paging" > -->
-<!-- 		SELECT * FROM ( -->
-<!-- 			SELECT rownum rnum, F.* FROM ( -->
-<!-- 				SELECT -->
-<!-- 					fno, title, content , userid, userno -->
-<!-- 					, hit, write_date, comm_cnt -->
-<!-- 				FROM freeboard -->
-<!-- 				ORDER BY fno DESC -->
-<!-- 			) F -->
-<!-- 		) freeboard -->
-<!-- 		WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
-<!-- 	</select> -->
+	<!-- 전체 리스트 조회 -->
 	<select id="selectList" resultType="Freeboard" parameterType="Paging" >
 		SELECT * FROM (
 		    SELECT rownum rnum, F.* FROM (
 		        SELECT
-		            fno, title, content , userid, userno
-		            , hit, write_date
+		            fno, title, content , userid, hit, write_date
 		        FROM freeboard
 		        ORDER BY fno DESC
 		    ) F
 		) freeboard
-		left join (
-		    SELECT fno, count(fno) as commCnt
-		    from freeboard f
-		    join FBOARD_COMMENT c on fno = c.bno
-		    group by fno
-		) c on freeboard.fno = c.fno
+		LEFT JOIN (
+		    SELECT fno, count(fno) AS commCnt
+		    FROM freeboard f
+		    JOIN fboard_comment c ON fno = c.bno
+		    GROUP BY fno
+		) c ON freeboard.fno = c.fno
+		LEFT OUTER JOIN (
+		    SELECT f.fno, count(fi.fno) fiCnt
+		    FROM freeboard f 
+		    JOIN fboard_file fi ON f.fno = fi.fno
+		    GROUP BY f.fno
+		)fi ON freeboard.fno = fi.fno
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		ORDER BY freeboard.fno desc
 	</select>
 
 
+	<!-- 조회수 -->
 	<update id="hit" parameterType="Freeboard">
 		update freeboard
 		set hit= hit + 1
@@ -51,31 +47,34 @@
 	</update>
 	
 	
-	
+	<!-- 게시글 상세보기 -->
 	<select id="selectBoard" resultType="Freeboard" parameterType="Freeboard">
 		select
-			fno, title, content, userid, userno, hit, write_date, comm_cnt
+			fno, title, content, userid, hit, write_date, comm_cnt
 		from freeboard
 		where fno = #{fno}
 	</select>
 
 
+	<!-- 게시글 등록 -->
 	<insert id="insertBoard" parameterType="Freeboard">
 		<selectKey order="BEFORE" resultType="int" keyProperty="fno">
 			SELECT fboard_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO freeboard ( fno, title, content , userid, userno )
-		VALUES ( #{fno }, #{title }, #{content }, #{userid }, #{userno } )
+		INSERT INTO freeboard ( fno, title, content , userid )
+		VALUES ( #{fno }, #{title }, #{content }, #{userid })
 	</insert>
 
 	
+	<!-- 첨부파일 등록 -->
 	<insert id="insertFile" parameterType="FboardFile">
 		INSERT INTO fboard_file ( f_fileno, fno, origin_name, stored_name)
 		VALUES ( fboard_file_seq.nextval, #{fno }, #{originName }, #{storedName } )
 	</insert>
 
 
+	<!-- 게시글번호로 파일 조회 -->
 	<select id="selectFileByBoardno" resultType="FboardFile" parameterType="Freeboard">
 		SELECT
 			f_fileno, fno, origin_name, stored_name
@@ -84,6 +83,7 @@
 	</select>
 	
 	
+	<!-- 파일번호로 게시글 조회 -->
 	<select id="selectFileByFileno" resultType="FboardFile" parameterType="FboardFile">
 		SELECT
 			f_fileno, fno, origin_name, stored_name
@@ -92,42 +92,64 @@
 	</select>
 	
 	
-	<sql id="sear">
+	<!-- 검색 리스트 조회 -->
+	<select id="selectSearchlist" resultType="Freeboard" parameterType="Paging" >
+		SELECT * FROM (
+		    SELECT rownum rnum, F.* FROM (
+		        SELECT
+		            fno, title, content , userid, hit, write_date
+		        FROM freeboard
+		        <choose>
+					<when test="searchType == 'title'">
+						where title like '%'|| #{keyword} ||'%'
+					</when>
+		
+					<when test="searchType == 'content'">
+						where content like '%'|| #{keyword} ||'%'
+					</when>
+					
+					<when test="searchType == 'writer'">
+						where userid like '%'|| #{keyword} ||'%'
+					</when>
+				</choose>
+		        ORDER BY fno DESC
+		    ) F
+		) freeboard
+		LEFT JOIN (
+		    SELECT fno, count(fno) AS commCnt
+		    FROM freeboard f
+		    JOIN fboard_comment c ON fno = c.bno
+		    GROUP BY fno
+		) c ON freeboard.fno = c.fno
+		LEFT OUTER JOIN (
+		    SELECT f.fno, count(fi.fno) fiCnt
+		    FROM freeboard f 
+		    JOIN fboard_file fi ON f.fno = fi.fno
+		    GROUP BY f.fno
+		)fi ON freeboard.fno = fi.fno
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		ORDER BY freeboard.fno desc
+	</select>
+	
+	
+	<!-- 검색 리스트 페이징 -->
+	<select id="getPagingSearchCnt" parameterType="Paging" resultType="int">
+		select count(*) from freeboard 
 		<choose>
 			<when test="searchType == 'title'">
-				where title like '%'|| #{keyword} ||'%'
-				order by fno desc
+				WHERE title like '%'|| #{keyword} ||'%'
 			</when>
-
 			<when test="searchType == 'content'">
-				where content like '%'|| #{keyword} ||'%'
-				order by fno desc
+				WHERE content like '%'|| #{keyword} ||'%'
 			</when>
-			
 			<when test="searchType == 'writer'">
-				where userid like '%'|| #{keyword} ||'%'
-				order by fno desc
+				WHERE userid like '%'|| #{keyword} ||'%'
 			</when>
 		</choose>
-	</sql>
-	
-	
-	<select id="selectSearchlist" parameterType="hashMap" resultType="Freeboard">
-		select * from freeboard
-		<include refid="sear"></include>
 	</select>
-
-<!-- 	<select id="selectCntSearch" parameterType="String" resultType="int"> -->
-<!-- 		select count(*) from freeboard -->
-<!-- 		<include refid="sear"></include> -->
-<!-- 	</select> -->
 	
-	<select id="selectCntSear" parameterType="Paging" resultType="int">
-		select count(*) from freeboard
-		<include refid="sear"></include>
-	</select>
-
-
+	
+	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="Freeboard">
 		UPDATE freeboard
 		SET title = #{title}
@@ -135,19 +157,23 @@
 		WHERE fno = #{fno}
 	</update>
 
+	
+	<!-- 게시글 수정 시 첨부파일 삭제 -->
 	<delete id="deleteFile" parameterType="Freeboard">
 		DELETE fboard_file
 		WHERE fno = #{fno}	
 	</delete>
 	
+	
+	<!-- 게시글 삭제 -->
 	<delete id="delete" parameterType="Freeboard">
 		delete freeboard
 		where fno = #{fno}
 	</delete>
 
+	
 
-
-
+	
 
 
 

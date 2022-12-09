@@ -24,11 +24,6 @@ public class SommemberServiceImpl implements SommemberService {
 		if( loginChk > 0 )	return true;
 		return false;
 	}
-	
-	@Override
-	public int getUserno(Sommember smember) {
-		return smemberDao.selectUserno(smember);
-	}
 
 	
 }

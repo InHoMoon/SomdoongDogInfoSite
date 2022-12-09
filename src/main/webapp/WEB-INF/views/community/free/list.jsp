@@ -38,7 +38,7 @@ td:nth-child(2) {
 .search { text-align: right; font-size: 12px;}
 .search-op { height: 40px; width: 100px; border: 1px solid #e8e8e8; }
 .search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
-.search-btn { height: 30px; width:35px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
+.search-btn { height: 40px; width:37px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
 
 
 #title > a{ color: #333; }
@@ -49,59 +49,60 @@ td:nth-child(2) {
 <h1>자유게시판</h1>
 <hr>
 
-<span class="pull-left">total : ${paging.totalCount }</span>
+<span class="pull-left">total : <span id="totalCnt">${paging.totalCount }</span></span>
 
 <div class="search">
-	<form id="form" id="searForm">
+	<form id="form" id="searForm" style="display: inline-block;">
 		<select class="search-op" id="searchType">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
 			<option value="writer">작성자</option>
 		</select>
-		<input type="text" class="search-text" placeholder="검색어를 입력하세요" id="keyword" name="keyword">
+		<input type="text" class="search-text" placeholder="검색어를 입력하세요" id="keyword">
 	</form>
 		<button class="search-btn" id="searBtn">찾기</button	>
 </div> 
 
 <div class="clearfix" style="padding-bottom: 30px;"></div>
 
-
-<table class="table table-striped table-hover table-condensed">
-<thead>
-	<tr>
-		<th style="width: 10%;">글번호</th>
-		<th style="width: 45%; text-align: center;">제목</th>
-		<th style="width: 20%;">작성자</th>
-		<th style="width: 10%;">조회수</th>
-		<th style="width: 15%;">작성일</th>
-	</tr>
-</thead>
-<tbody>
-<c:forEach items="${list }" var="fboard">
-	<tr>
-		<td>${fboard.fno }</td>
-		<td id="title"><a href="/community/free/view?fno=${fboard.fno }">${fboard.title } <span style="color: tomato;">&nbsp;[${fboard.commCnt }]</span></a></td>
-		<td>${fboard.userid }</td>
-		<td>${fboard.hit }</td>
-		<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
-	</tr>
-</c:forEach>
-</tbody>
-</table>
-
-<c:if test="${login eq true }">
-<button id="btnWrite">글쓰기</button>
-</c:if>
-<div class="clearfix"></div>
-
-
-<div id="paging">
-<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
-</div>
-
-<div id="pagingS" style="display: none;">
-<%-- <c:import url="/WEB-INF/views/community/free/pagingS.jsp" /> --%>
-<c:import url="/WEB-INF/views/community/free/paging_s.jsp" />
+<div id="apeend_wrap">
+	<table class="table table-striped table-hover table-condensed">
+	<thead>
+		<tr>
+			<th style="width: 10%;">글번호</th>
+			<th style="width: 45%; text-align: center;">제목</th>
+			<th style="width: 20%;">작성자</th>
+			<th style="width: 10%;">조회수</th>
+			<th style="width: 15%;">작성일</th>
+		</tr>
+	</thead>
+	<tbody>
+	<c:forEach items="${list }" var="fboard">
+		<tr>
+			<td>${fboard.fno }</td>
+			<td id="title">
+				<a href="/community/free/view?fno=${fboard.fno }">${fboard.title }&nbsp;</a>
+				<c:if test="${fboard.fiCnt > 0 }">
+					<img src="/resources/picture.png" style="width: 15px; height: 17px;">
+				</c:if>
+				<span style="color: tomato;">[${fboard.commCnt }]</span>
+			</td>
+			<td>${fboard.userid }</td>
+			<td>${fboard.hit }</td>
+			<td><fmt:formatDate value="${fboard.writeDate }" pattern="yy-MM-dd"/></td>
+		</tr>
+	</c:forEach>
+	</tbody>
+	</table>
+	<c:if test="${login eq true }">
+	<button id="btnWrite">글쓰기</button>
+	</c:if>
+	<div class="clearfix"></div>
+	
+	
+	<div id="paging">
+		<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
+	</div>
 </div>
 
 
@@ -117,39 +118,41 @@ td:nth-child(2) {
 $(document).ready(function() {
 	$("#btnWrite").click(function() {
 		location.href = "/community/free/write"
-	})
+	});
 	
-// 	$("#keyword").on("keydown",function(key){
-//         if(key.keyCode == 13) {
-//         	$("#searBtn").click();
-//         }
-//     });
+	$("#searBtn").click(function() {
+		search(0);
+	});
 	
+	$("#keyword").on("keydown",function(e){
+        if(e.keyCode == 13) {
+        	e.preventDefault();
+        	search(0);
+        }
+    });
 	
-	$("#searBtn").click(function(){
-		
-		var searchType = $("#searchType option:selected").val();
-		var keyword = $("#keyword").val();
-		
-		if(keyword == ''){
-			alert("검색어를 입력하세요");
-			return false;
-		}
-		
-		$.ajax({
-			url : "/community/free/listS"
-			, type : "post"
-// 			, data : $('#searForm').serialize()
-			, data : { "searchType" : searchType, "keyword" : keyword }
-			, dataType: "html"
-			, success : function(result){
-				$(".table-condensed").html(result);
-				$("#paging").hide();
-				$("#pagingS").show();
-			}
-			
-		});// ajax end
-	
-	});//searBtn click
+	$(document).on("click","[data-curpage]", function(e) {
+		search($(this).data("curpage")); 
+	});
 });
+
+function search(curPage){
+	var searchType = $("#searchType option:selected").val();
+	var keyword = $("#keyword").val();
+	
+	if(keyword == ''){
+		alert("검색어를 입력하세요");
+		return false;
+	}
+	$.ajax({
+		url : "/community/free/listS"
+		, type : "post"
+		, data : { "searchType" : searchType, "keyword" : keyword, curPage : curPage }
+		, dataType: "html"
+		, success : function(result){
+			$("#apeend_wrap").html(result);
+			$("#totalCnt").text($("#iptsTotal").val());
+		}
+	});// ajax end
+};//search function
 </script>

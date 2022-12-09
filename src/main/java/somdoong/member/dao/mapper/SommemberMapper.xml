@@ -12,10 +12,6 @@
 		WHERE userid = #{userid} AND userpw = #{userpw}
 	</select>
 
-	<select id="selectUserno" resultType="int" parameterType="somdoong.member.dto.Sommember">
-		SELECT userno FROM sommember
-		WHERE userid = #{userid}
-	</select>
 
 
 </mapper>

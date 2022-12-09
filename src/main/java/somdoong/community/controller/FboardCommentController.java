@@ -40,7 +40,6 @@ public class FboardCommentController {
 		logger.info("writeC 실행");
 		
 		//로그인한 사용자 정보 적용
-		fcomm.setUserno((int)session.getAttribute("userno"));
 		fcomm.setUserid((String)session.getAttribute("userid"));
 		
 		logger.info("새 댓글 : {}", fcomm);

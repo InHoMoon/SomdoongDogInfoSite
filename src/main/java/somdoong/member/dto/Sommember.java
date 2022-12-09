@@ -2,7 +2,6 @@ package somdoong.member.dto;
 
 public class Sommember {
 	
-	private int userno;
 	private String userid;
 	private String userpw;
 	private String username;
@@ -13,10 +12,9 @@ public class Sommember {
 	
 	public Sommember() {}
 
-	public Sommember(int userno, String userid, String userpw, String username, String userphone, String useradd,
-			String useraddd, String email) {
+	public Sommember(String userid, String userpw, String username, String userphone, String useradd, String useraddd,
+			String email) {
 		super();
-		this.userno = userno;
 		this.userid = userid;
 		this.userpw = userpw;
 		this.username = username;
@@ -28,17 +26,8 @@ public class Sommember {
 
 	@Override
 	public String toString() {
-		return "Sommember [userno=" + userno + ", userid=" + userid + ", userpw=" + userpw + ", username=" + username
-				+ ", userphone=" + userphone + ", useradd=" + useradd + ", useraddd=" + useraddd + ", email=" + email
-				+ "]";
-	}
-
-	public int getUserno() {
-		return userno;
-	}
-
-	public void setUserno(int userno) {
-		this.userno = userno;
+		return "Sommember [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", userphone="
+				+ userphone + ", useradd=" + useradd + ", useraddd=" + useraddd + ", email=" + email + "]";
 	}
 
 	public String getUserid() {
@@ -96,6 +85,7 @@ public class Sommember {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	
 	
 

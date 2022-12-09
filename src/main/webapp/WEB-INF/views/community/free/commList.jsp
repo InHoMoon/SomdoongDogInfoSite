@@ -115,11 +115,6 @@
 <div>
 	<ul class="pagingC">
 	
-		<%-- 첫 페이지로 이동 --%>
-<%-- 		<c:if test="${commPaging.curBlock > 1}"> --%>
-<!-- 			<li><a href="javascript:listReplyRest('1')">처음</a></li> -->
-<%-- 		</c:if> --%>
-		
 		<%-- 현재 페이지 블럭이 1보다 크면 이전 페이지 블럭으로 이동 --%>
 		<c:if test="${commPaging.curBlock > 1}">
 			<li class="next"><a href="javascript:listReplyRest('${commPaging.prevPage}')"> « </a></li>
@@ -129,7 +124,7 @@
 		<c:forEach var="num" begin="${commPaging.blockBegin}" end="${commPaging.blockEnd}">
 			<c:choose>
 				<c:when test="${num == commPaging.curPage}">
-					<li class="num">${num}&nbsp;</li>
+					<li class="num">${num}</li>
 				</c:when>
 				
 				<c:otherwise>
@@ -144,11 +139,6 @@
 			<li class="next"><a href="javascript:listReplyRest('${commPaging.nextPage}')"> » </a><li>
 		</c:if>
 		
-		<%-- 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 끝으로 이동 --%>
-<%-- 		<c:if test="${commPaging.curBlock <= commPaging.totBlock}"> --%>
-<%-- 			<li><a href="javascript:listReplyRest('${commPaging.totPage}')">[끝]</a></li> --%>
-<%-- 		</c:if> --%>
-	
 	</ul>
 </div>
 

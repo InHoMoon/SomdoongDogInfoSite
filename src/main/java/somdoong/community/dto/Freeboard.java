@@ -11,11 +11,14 @@ public class Freeboard {
 	private String userid;
 	private int hit;
 	private Date writeDate;
-	private int commCnt;
+	
+	private int commCnt; //댓글수
+	private int fiCnt; //첨부파일 유무
 	
 	public Freeboard() {}
 
-	public Freeboard(int fno, int userno, String title, String content, String userid, int hit, Date writeDate, int commCnt) {
+	public Freeboard(int fno, int userno, String title, String content, String userid, int hit, Date writeDate,
+			int commCnt, int fiCnt) {
 		super();
 		this.fno = fno;
 		this.userno = userno;
@@ -25,12 +28,14 @@ public class Freeboard {
 		this.hit = hit;
 		this.writeDate = writeDate;
 		this.commCnt = commCnt;
+		this.fiCnt = fiCnt;
 	}
 
 	@Override
 	public String toString() {
 		return "Freeboard [fno=" + fno + ", userno=" + userno + ", title=" + title + ", content=" + content
-				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", commCnt=" + commCnt + "]";
+				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", commCnt=" + commCnt
+				+ ", fiCnt=" + fiCnt + "]";
 	}
 
 	public int getFno() {
@@ -88,14 +93,24 @@ public class Freeboard {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
-	
-	public int getcommCnt() {
+
+	public int getCommCnt() {
 		return commCnt;
 	}
-	
-	public void setcommCnt(int commCnt) {
+
+	public void setCommCnt(int commCnt) {
 		this.commCnt = commCnt;
 	}
+
+	public int getFiCnt() {
+		return fiCnt;
+	}
+
+	public void setFiCnt(int fiCnt) {
+		this.fiCnt = fiCnt;
+	}
+
+	
 	
 	
 

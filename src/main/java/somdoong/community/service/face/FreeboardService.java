@@ -35,13 +35,11 @@ public interface FreeboardService {
 
 
 	//키워드로 리스트 받아오기
-	public List<Freeboard> getList(String searchType, String keyword);
+	public List<Freeboard> getList(Paging paging);
+	
 
-
-	//검색된 리스트 페이징
-//	public Paging getPagingSearch(Paging sPaging);
-	public Paging getPagingSearch(Paging sPaing, int curPage);
-//	public Paging getPagingSearch(String searchType, String keyword, int curPage);
+	//검색 게시물 페이징
+	public Paging getPagingSearchCnt(Paging paging);
 
 
 	//게시글 수정
@@ -50,5 +48,7 @@ public interface FreeboardService {
 
 	//게시글 삭제
 	public void delete(Freeboard fboard);
+
+
 
 }

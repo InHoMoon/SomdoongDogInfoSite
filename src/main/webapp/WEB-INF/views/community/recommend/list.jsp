@@ -38,7 +38,7 @@ td:nth-child(2) {
 .search { text-align: right; font-size: 12px;}
 .search-op { height: 40px; width: 100px; border: 1px solid #e8e8e8; }
 .search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
-.search-btn { height: 30px; width:35px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
+.search-btn { height: 40px; width:37px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
 
 
 #title > a{ color: #333; }
@@ -52,7 +52,7 @@ td:nth-child(2) {
 <span class="pull-left">total : ${paging.totalCount }</span>
 
 <div class="search">
-	<form id="form" id="searForm">
+	<form id="form" id="searForm" style="display: inline-block;">
 		<select class="search-op" id="searchType">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
@@ -81,8 +81,7 @@ td:nth-child(2) {
 	<tr>
 		<td>${rboard.rno }</td>
 <%-- 		<td id="title"><a href="/community/free/view?fno=${rboard.rno }">${rboard.title } <span style="color: tomato;">&nbsp;[${fboard.commCnt }]</span></a></td> --%>
-<%-- 		<td id="title"><a href="/community/recommend/view?rno=${rboard.rno }">${rboard.title }</a></td> --%>
-		<td id="title">${rboard.title }</td>
+		<td id="title"><a href="/community/recommend/view?rno=${rboard.rno }">${rboard.title }</a></td>
 		<td>${rboard.userid }</td>
 		<td>${rboard.hit }</td>
 		<td><fmt:formatDate value="${rboard.writeDate }" pattern="yy-MM-dd"/></td>

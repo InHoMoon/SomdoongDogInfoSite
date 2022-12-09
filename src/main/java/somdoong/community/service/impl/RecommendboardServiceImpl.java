@@ -20,19 +20,32 @@ public class RecommendboardServiceImpl implements RecommendboardService {
 	@Autowired RecommendboardDao rboardDao;
 	
 	
+	//페이징
 	@Override
 	public Paging getPaging(int curPage) {
 		
 		int totalCount = rboardDao.selectCntAll();
+		logger.info("cnt :{}", totalCount);
 		
 		Paging paging = new Paging(totalCount, curPage);
 		
 		return paging;
 	}
 	
+	
+	//게시글 리스트 조회
 	@Override
 	public List<Recommendboard> list(Paging paging) {
 		return rboardDao.selectList(paging);
+	}
+	
+	
+	//게시글 상세보기
+	@Override
+	public Recommendboard view(Recommendboard rboard) {
+		rboardDao.hit(rboard);
+		
+		return rboardDao.selectBoard(rboard);
 	}
 
 }

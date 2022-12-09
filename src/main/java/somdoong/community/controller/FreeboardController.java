@@ -42,46 +42,41 @@ public class FreeboardController {
 		model.addAttribute("paging", paging);
 		
 		List<Freeboard> list = fboardService.list(paging);
-		for( Freeboard f : list )	logger.info("{}", f);
+//		for( Freeboard f : list )	logger.info("{}", f);
 		
 		
 		model.addAttribute("list", list);
 	}
 	
 	
+	
 	// 게시글 검색 목록
 	@PostMapping ("/listS")
 	@ResponseBody
 	public ModelAndView search(@RequestParam(defaultValue = "title") String searchType, 
-								@RequestParam(defaultValue = "") String keyword, 
-								@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
+			@RequestParam(defaultValue = "") String keyword, 
+			@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
 		
 		logger.info("/community/free/search");
+		//- 검색된 전체 게시물 수 조회
+		Paging paging = new Paging();
 		
-		Paging sPaging = new Paging();
-//		sPaging.setCurPage(curPage);
-		sPaging.setSearchType(searchType);
-		sPaging.setKeyword(keyword);
-		logger.info("타입 : {}", searchType);
-		logger.info("키워드 : {}", keyword);
+		paging.setSearchType(searchType);
+		paging.setKeyword(keyword);
+		paging.setCurPage(curPage);
 		
-//		sPaging = fboardService.getPagingSearch(curPage);
-		sPaging = fboardService.getPagingSearch(sPaging, curPage);
-//		Paging sPaging = fboardService.getPagingSearch(searchType, keyword, curPage);
+		Paging sePaging = fboardService.getPagingSearchCnt(paging);
+		sePaging.setSearchType(searchType);
+		sePaging.setKeyword(keyword);
 		
-		logger.info("searchPaging : {}", sPaging);
-		
-		List<Freeboard> sList = fboardService.getList(searchType, keyword);
+		List<Freeboard> sList = fboardService.getList(sePaging);
 		
 		mav.setViewName("/community/free/search");
-		mav.addObject("sPaging", sPaging);
+		mav.addObject("sePaging", sePaging);
 		mav.addObject("sList", sList);
-		
-		logger.info("sPaging type : {}", sPaging.getSearchType());
-		logger.info("sPaging keyword : {}", sPaging.getKeyword());
-		
+		mav.addObject("totalCnt",sePaging.getTotalCount());
 		return mav;
-	}
+	} 
 	
 	
 	//게시글 상세보기
@@ -121,7 +116,6 @@ public class FreeboardController {
 		logger.info("{}", file);
 		
 		fboard.setUserid( (String) session.getAttribute("userid") );
-		fboard.setUserno( (Integer) session.getAttribute("userno") );
 		logger.info("{}", fboard);
 		
 		fboardService.write(fboard, file);
@@ -167,13 +161,12 @@ public class FreeboardController {
 		FboardFile fboardfile = fboardService.getAttachFile(fboard);
 		model.addAttribute("fboardfile", fboardfile);
 		
-		
 		return "community/free/update";
 	}
 	
 
 	//게시글 수정 처리
-	@PostMapping("/update")
+	@PostMapping("/updateConn")
 	public String updateProcess(Freeboard fboard, MultipartFile file) {
 		logger.info("update post");
 		logger.info("{}", fboard);

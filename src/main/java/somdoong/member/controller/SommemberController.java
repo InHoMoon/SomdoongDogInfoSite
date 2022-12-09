@@ -40,9 +40,7 @@ public class SommemberController {
 			
 			session.setAttribute("login", loginResult);
 			session.setAttribute("userid", smember.getUserid());
-			session.setAttribute("userno", smemberService.getUserno(smember));
 			
-			logger.info("userno : {}", session.getAttribute("userno"));
 			
 			return "redirect:/member/main";
 			

@@ -177,14 +177,18 @@ $(document).ready(function() {
 		
 		
 		//로그인 여부 검사
-		if(${empty userid}){
-			alert("로그인 후 이용해주세요");
-			$("#commContent").val("");
-			return;
-		} else if(commContent == "") {
+// 		if(${empty userid}){
+// 			alert("로그인 후 이용해주세요");
+// 			$("#commContent").val("");
+// 			return;
+// 		} else if(commContent == "") {
+// 			alert("내용을 입력하세요");
+// 		}
+		if(commContent == ""){
 			alert("내용을 입력하세요");
+			return;
 		}
-			
+		
 		$.ajax({
 			url : "/community/free/writeC"
 			, type : "POST"
@@ -301,16 +305,21 @@ function showReplyModify(cno,comment,target){
 	
 	<div class="file-area">
 		<c:if test="${not empty fboardFile }">
-		<span style="color: #a7a7a7;"> 첨부파일명 : 
+<!-- 		<span style="color: #a7a7a7;"> 첨부파일명 :  -->
+		<span><img src="/resources/download.png" style="width: 15px; height: 17px;"></span>
 			<a href="/community/free/download?fFileno=${fboardFile.fFileno }">${fboardFile.originName }</a>
-		</span>
+<!-- 		</span> -->
 		</c:if>
 	</div> <!-- file=area -->
 	
+	<div style="padding-bottom: 30px;"></div>
 	
 	<div class="view_area">
 		<div class="view">
 				<p>${fboard.content }</p>
+				<c:if test="${not empty fboardFile }">
+				<img src="/upload/${fboardFile.storedName }" style="width: 40%; height: auto;">
+				</c:if>
 		</div>
 	</div> <!-- view_area -->
 </div> <!-- all -->
@@ -332,6 +341,7 @@ function showReplyModify(cno,comment,target){
 
 
 	<!-- 댓글 등록 영역 -->
+	<c:if test="${not empty userid }">
 	<div class="comm_box" style="padding-top: 10px;">
 	
 		<div class="writer_info" style="margin-bottom: 5px;">
@@ -342,8 +352,8 @@ function showReplyModify(cno,comment,target){
 			<textarea id="commContent" name="commContent" placeholder="댓글을 입력해주세요"></textarea>
 			<button id="commBtn" type="button">등록</button>
 		</div>
-		
 	</div> <!-- comm_box -->
+	</c:if>
 	
 </form>
 </div> <!-- comm_area -->

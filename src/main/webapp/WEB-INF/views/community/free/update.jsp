@@ -17,7 +17,7 @@ $(document).ready(function() {
 		//스마트에디터에 작성된 내용을 #content에 반영
 		updateContents();
 		
-		$("form").submit();
+		$("#uptForms").submit();
 		
 	})
 
@@ -69,7 +69,7 @@ function updateContents() {
 <h1>글수정</h1>
 <hr>
 
-<form action="community/free/update" method="post" enctype="multipart/form-data">
+<form action="/community/free/updateConn" id="uptForms" method="post" enctype="multipart/form-data">
 
 <%-- <input type="hidden" name="boardNo" value="${updateBoard.boardNo }"> --%>
 

@@ -2,9 +2,7 @@ package somdoong.community.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -81,6 +79,7 @@ public class FreeboardServiceImpl implements FreeboardService {
 		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
+		logger.info("이미지 경로 : {}", storedPath);
 		File storedFolder = new File( storedPath );
 		if( !storedFolder.exists() ) {
 			storedFolder.mkdir();
@@ -128,61 +127,25 @@ public class FreeboardServiceImpl implements FreeboardService {
 	
 	//검색 리스트
 	@Override
-	public List<Freeboard> getList(String searchType, String keyword) {
+	public List<Freeboard> getList(Paging paging) {
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
-		
-		List<Freeboard> flist = fboardDao.selectSearchlist(map);
+		List<Freeboard> flist = fboardDao.selectSearchlist(paging);
+		logger.info("paging : {]", paging);
+		logger.info("flist : {]", flist);
 		
 		return flist;
 	}
-
-
+	
+	
 	//검색 리스트 페이징
 	@Override
-//	public Paging getPagingSearch(Paging sPaging) {
-	public Paging getPagingSearch(Paging sPaging, int curPage) {
-//	public Paging getPagingSearch(String searchType, String keyword, int curPage) {
-		
-//		int totalCount = fboardDao.selectCntSearch(searchType, keyword);
-		int totalCount = fboardDao.selectCntSear(sPaging);
-		logger.info("cnt : {}", totalCount);
-		
-		//페이징 계산
-//		Paging paging = new Paging(totalCount,sPaging.getCurPage());
-		Paging paging = new Paging(totalCount, curPage);
-		
-		return paging;
+	public Paging getPagingSearchCnt(Paging paging) {
+		int totalCount = fboardDao.getPagingSearchCnt(paging);
+		return new Paging(totalCount, paging.getCurPage());
 	}
 	
-	
-//	@Override
-//	public Paging getPagingSearch(int curPage, String searchType, String keyword) {
-//	public List<Paging> getPagingSearch(int curPage, String searchType, String keyword) {
-//		int totalCount = fboardDao.selectCntSearch(searchType, keyword);
-//		logger.info("search cnt: {}", totalCount);
-//		
-//		Paging paging = new Paging(totalCount, curPage);
-//		logger.info("search paging : {}", paging);
-//		
-//		return paging;
-//	}
-	
-//	@Override
-//	public List<Paging> getPagingSearch(int curPage, String searchType, String keyword) {
-//		
-//		Map<String, String> map = new HashMap<>();
-//		map.put("searchType", searchType);
-//		map.put("keyword", keyword);
-//		
-//		int totalCount = fboardDao.selectCntSearch(searchType, keyword);
-//		
-//		return flist;
-//		
-//	}
-	
+
+
 	
 	//게시글 수정
 	@Override
@@ -250,10 +213,8 @@ public class FreeboardServiceImpl implements FreeboardService {
 		//게시글 삭제
 		fboardDao.delete(fboard);
 	}
-	
-	
-	
-	
+
+
 	
 	
 }

@@ -23,8 +23,6 @@ $(".btnReplyUpdate").click(function(){
             	let cno = ${fcomm.cno};
             	$("#mw_" + cno).hide();
             	$("#comm_txt" + cno).show();
-                //$("#modifyReply").css("visibility", "hidden");
-                //$("#modifyReply").hide();
                 listReplyRest("1");
             }
         } // success
@@ -40,7 +38,6 @@ $(".btnReplyUpdate").click(function(){
     //rplyClose_${row.cno}
     $("#modifyReply").hide();
     $("#btnModify").show();
-    // 해바,,
 }); */
 
 
@@ -66,7 +63,6 @@ $("#btnReplyDelete").click(function(){
 
 
 댓글 번호 : ${fcomm.cno}<br>
-<!--  여기에,, 일단 주석을 할개,, -->
 <%-- <textarea id="detailCommContent" rows="5" cols="82">${fcomm.commContent}</textarea>
 <div style="text-align: center;">
 </div>--%>
