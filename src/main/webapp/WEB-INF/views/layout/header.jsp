@@ -164,7 +164,7 @@ footer #footer_wrap {
 <header>
 <div>
 	<h1 class="logo">
-	<a href="/member/main"><img src="/resources/logo.PNG"></a>
+	<a href="/member/main"><img src="/resources/img/logo.PNG"></a>
 	</h1>
 	<div class="menu_wrap">
 	<nav>

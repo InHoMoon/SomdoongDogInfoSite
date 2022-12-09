@@ -10,6 +10,32 @@
 <!-- 스마트 에디터 2 로드 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
+
+<style>
+.btn_wrap { margin-bottom: 30px; }
+
+#btnWrite{
+	width: 57px;
+    height: 37px;
+    border-radius: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: #6bacce;
+    color: #fff;
+}
+
+#cancel{
+	width: 57px;
+    height: 37px;
+    border-radius: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: #f84720;
+    color: #fff;
+}
+</style>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -34,7 +60,7 @@ function updateContents() {
 <h1>글쓰기</h1>
 <hr>
 
-<form action="/community/free/write" method="post" enctype="multipart/form-data">
+<form action="/community/recommend/write" method="post" enctype="multipart/form-data">
 <div class="form-group">
 	<label for="userid">작성자</label>
 	<input type="text" id="userid" value="${userid }" class="form-control" readonly="readonly">
@@ -55,9 +81,9 @@ function updateContents() {
 	<input type="file" id="file" name="file">
 </div>
 
-<div class="text-center">
-	<button class="btn btn-primary" id="btnWrite">작성</button>
-	<input type="reset" id="cancel" class="btn btn-danger" value="취소">
+<div class="text-center btn_wrap">
+	<button id="btnWrite">작성</button>
+	<input type="reset" id="cancel" value="취소">
 </div>
 </form>
 

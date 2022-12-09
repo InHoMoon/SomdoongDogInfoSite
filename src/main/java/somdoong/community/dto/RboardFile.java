@@ -4,23 +4,23 @@ public class RboardFile {
 	
 	private int rFileno;
 	private int rno;
-	private String origin_name;
-	private String stored_name;
+	private String originName;
+	private String storedName;
 	
 	public RboardFile() {}
 
-	public RboardFile(int rFileno, int rno, String origin_name, String stored_name) {
+	public RboardFile(int rFileno, int rno, String originName, String storedName) {
 		super();
 		this.rFileno = rFileno;
 		this.rno = rno;
-		this.origin_name = origin_name;
-		this.stored_name = stored_name;
+		this.originName = originName;
+		this.storedName = storedName;
 	}
 
 	@Override
 	public String toString() {
-		return "RboardFile [rFileno=" + rFileno + ", rno=" + rno + ", origin_name=" + origin_name + ", stored_name="
-				+ stored_name + "]";
+		return "RboardFile [rFileno=" + rFileno + ", rno=" + rno + ", originName=" + originName + ", storedName="
+				+ storedName + "]";
 	}
 
 	public int getrFileno() {
@@ -39,21 +39,24 @@ public class RboardFile {
 		this.rno = rno;
 	}
 
-	public String getOrigin_name() {
-		return origin_name;
+	public String getOriginName() {
+		return originName;
 	}
 
-	public void setOrigin_name(String origin_name) {
-		this.origin_name = origin_name;
+	public void setOriginName(String originName) {
+		this.originName = originName;
 	}
 
-	public String getStored_name() {
-		return stored_name;
+	public String getStoredName() {
+		return storedName;
 	}
 
-	public void setStored_name(String stored_name) {
-		this.stored_name = stored_name;
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
 	}
+
+	
+	
 	
 	
 

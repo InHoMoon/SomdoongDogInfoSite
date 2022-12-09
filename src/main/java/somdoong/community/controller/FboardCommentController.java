@@ -92,24 +92,6 @@ public class FboardCommentController {
     }
     
     
-    //댓글 상세보기
-    @RequestMapping(value="/detailC/{cno}", method=RequestMethod.GET)
-    public ModelAndView detailC(@PathVariable("cno") int cno, ModelAndView mav){
-    	
-        FboardComment fcomm = commService.detail(cno);
-        logger.info("수정할 댓글 조회 : {}", fcomm);
-        
-        // 뷰이름 지정
-//        mav.setViewName("/community/free/commDetail");
-        mav.setViewName("/community/free/commList");
-        
-        // 뷰에 전달할 데이터 지정
-        mav.addObject("fcomm", fcomm);
-        
-        // commDetail.jsp로 포워딩
-        return mav;
-    }
-    
     
     //댓글 수정 처리
     @RequestMapping(value="/updateC/{cno}", method={RequestMethod.PUT, RequestMethod.PATCH})

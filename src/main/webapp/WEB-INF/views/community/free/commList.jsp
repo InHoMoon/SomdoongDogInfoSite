@@ -90,13 +90,12 @@
 	<span class="comm_txt" id="comm_txt${row.cno}">${row.commContent }</span>
 	
 	<c:if test="${sessionScope.userid == row.userid}">
-	
 		<button type="button" class="btnReplyDelete" id="rplyDelete_${row.cno}">삭제</button>
 		<span class="text_bar2" id="text_bar2_${row.cno}"></span>
 		<input type="button" id="btnModify" class="bm_btn_${row.cno}" value="수정" onclick="showReplyModify('${row.cno}','${row.commContent}',this)">
 		
 		<div class="modi_wrap" id="mw_${row.cno}" style="display:none;">
-			<div class="textarea_wrap"></div>
+			<div class="textarea_wrap"></div> <!-- 댓 수정 입력창 영역 -->
 			
 			<button type="button" class="btnReplyUpdate" id="rplyUpdate_${row.cno}">완료</button>
 			<button type="button" class="btnReplyClose" id="rplyClose_${row.cno}" >취소</button>
@@ -104,10 +103,6 @@
 	</c:if>
 	
 </div><br>
-
-
-<!-- 댓글 수정 영역-->
-<div id="modifyReply"></div>
 </c:forEach>
 
 <br>
@@ -144,6 +139,7 @@
 
 <script>
 $(document).ready(function() {
+	
 	$(".btnReplyClose").click(function(){
 		var cno = $(this).attr("id").replace("rplyClose_","");
 		
@@ -158,32 +154,25 @@ $(document).ready(function() {
 	
 	
 	
-	
 	$(".btnReplyUpdate").click(function(){
-		
 	    var detailCommContent = $("#detailCommContent").val().replace("\n", "<br>");
        	var cno = $(this).attr("id").replace("rplyUpdate_","");
 	    console.log("e")
 	    
 	    $.ajax({
-// 	    	url: "/community/free/updateC/${fcomm.cno}"
 	        url: "/community/free/updateC/" + cno
 	        , type: "put"
 	        , headers: { "Content-Type":"application/json" }
 	        , data: JSON.stringify({ commContent : detailCommContent })
 	        , dataType: "text"
 	        , success: function(result){
+	        	
 	            if(result == "success"){
-	            	
-	            	
-// 	            	let cno = ${fcomm.cno};
-
 	            	$("#mw_" + cno).hide();
 	            	$("#comm_txt" + cno).show();
-	                //$("#modifyReply").css("visibility", "hidden");
-	                //$("#modifyReply").hide();
 	                listReplyRest("1");
 	            }
+	            
 	        } // success
 	    }); // ajax
 	}); //updateBtn click
@@ -199,7 +188,6 @@ $(document).ready(function() {
 	            , success : function(result){
 	                if(result == "success"){
 	                    alert("삭제되었습니다.");
-// 	                    $("#modifyReply").css("visibility", "hidden");
 	                    cCount();
 	                    listReplyRest("1");
 	                }

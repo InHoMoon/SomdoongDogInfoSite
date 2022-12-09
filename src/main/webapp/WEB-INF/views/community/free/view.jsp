@@ -176,14 +176,6 @@ $(document).ready(function() {
 		var commContent = $("#commContent").val().replace("\n", "<br>");
 		
 		
-		//로그인 여부 검사
-// 		if(${empty userid}){
-// 			alert("로그인 후 이용해주세요");
-// 			$("#commContent").val("");
-// 			return;
-// 		} else if(commContent == "") {
-// 			alert("내용을 입력하세요");
-// 		}
 		if(commContent == ""){
 			alert("내용을 입력하세요");
 			return;
@@ -250,32 +242,26 @@ function listReplyRest(num){
             $(".comm_result").html(result);
         }
     });
-}
+}// listReplyRest end
 
 
 
 //댓글 수정화면 생성
 function showReplyModify(cno,comment,target){
 	
-    $.ajax({
-        type: "get",
-        url: "/community/free/detailC/"+cno,
-        success: function(result){
-        	
-        	console.log("수정 버튼 클릭");
-        	
-        	$("#comm_txt"+ cno).hide(); //댓글
-        	
-            $(".bm_btn_" + cno).hide(); //수정버튼
-            $("#rplyDelete_" + cno).hide(); //삭제버튼
-            $("#text_bar2_" + cno).hide(); // |
-            
-            //- txt el 생성
-            console.log($(target).next())
-            $(target).next().find(".textarea_wrap").html('<textarea id="detailCommContent" rows="5" cols="82">' + comment + '</textarea>');
-            $("#mw_" + cno).show();
-        }
-    }); //ajax
+	console.log("수정 버튼 클릭");
+	
+	$("#comm_txt"+ cno).hide(); //댓글
+	
+	$(".bm_btn_" + cno).hide(); //수정버튼
+	$("#rplyDelete_" + cno).hide(); //삭제버튼
+	$("#text_bar2_" + cno).hide(); // |
+	
+	//- txt el 생성
+	console.log($(target).next())
+	$(target).next().find(".textarea_wrap").html('<textarea id="detailCommContent" rows="5" cols="82">' + comment + '</textarea>');
+	$("#mw_" + cno).show();
+
 }
 </script>
 
@@ -305,10 +291,8 @@ function showReplyModify(cno,comment,target){
 	
 	<div class="file-area">
 		<c:if test="${not empty fboardFile }">
-<!-- 		<span style="color: #a7a7a7;"> 첨부파일명 :  -->
-		<span><img src="/resources/download.png" style="width: 15px; height: 17px;"></span>
+		<span><img src="/resources/img/download.png" style="width: 15px; height: 17px;"></span>
 			<a href="/community/free/download?fFileno=${fboardFile.fFileno }">${fboardFile.originName }</a>
-<!-- 		</span> -->
 		</c:if>
 	</div> <!-- file=area -->
 	
@@ -316,10 +300,10 @@ function showReplyModify(cno,comment,target){
 	
 	<div class="view_area">
 		<div class="view">
-				<p>${fboard.content }</p>
 				<c:if test="${not empty fboardFile }">
 				<img src="/upload/${fboardFile.storedName }" style="width: 40%; height: auto;">
 				</c:if>
+				<p>${fboard.content }</p>
 		</div>
 	</div> <!-- view_area -->
 </div> <!-- all -->
@@ -330,8 +314,8 @@ function showReplyModify(cno,comment,target){
 <div class="comm_area">
 <form method="POST" id="commForm" name="commForm">
 
-	<strong class="comm_num">
-		<span id="cCnt"></span> Comments
+	<strong class="comm_num" style="font-size: 30px;">
+		<img src="/resources/img/comm.png" style="width: 40px; height: 40px;"> <span id="cCnt"></span> Comments
 	</strong>
 	
 	

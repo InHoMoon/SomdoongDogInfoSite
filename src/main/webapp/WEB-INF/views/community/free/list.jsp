@@ -46,7 +46,7 @@ td:nth-child(2) {
 
 <div class="container">
 
-<h1>자유게시판</h1>
+<h1>무엇이든지 물어보세요!</h1>
 <hr>
 
 <span class="pull-left">total : <span id="totalCnt">${paging.totalCount }</span></span>
@@ -83,7 +83,7 @@ td:nth-child(2) {
 			<td id="title">
 				<a href="/community/free/view?fno=${fboard.fno }">${fboard.title }&nbsp;</a>
 				<c:if test="${fboard.fiCnt > 0 }">
-					<img src="/resources/picture.png" style="width: 15px; height: 17px;">
+					<img src="/resources/img/pic.png" style="width: 17px; height: 17px;">
 				</c:if>
 				<span style="color: tomato;">[${fboard.commCnt }]</span>
 			</td>

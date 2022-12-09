@@ -50,7 +50,7 @@
 	<!-- 게시글 상세보기 -->
 	<select id="selectBoard" resultType="Freeboard" parameterType="Freeboard">
 		select
-			fno, title, content, userid, hit, write_date, comm_cnt
+			fno, title, content, userid, hit, write_date
 		from freeboard
 		where fno = #{fno}
 	</select>

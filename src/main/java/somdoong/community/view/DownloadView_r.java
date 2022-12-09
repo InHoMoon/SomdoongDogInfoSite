@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.AbstractView;
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.RboardFile;
 
-public class DownloadView extends AbstractView {
+public class DownloadView_r extends AbstractView {
 	
 	@Autowired private ServletContext context;
 	
@@ -26,7 +26,7 @@ public class DownloadView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 
 		//파일 모델값 가져오기
-		FboardFile file = (FboardFile) model.get("downFile");
+		RboardFile file = (RboardFile) model.get("downFile");
 	
 		//업로드된 파일 객체
 		File src = new File( context.getRealPath("upload"), file.getStoredName() );

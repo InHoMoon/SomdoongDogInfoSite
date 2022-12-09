@@ -72,6 +72,23 @@
     background: none;
 }
 
+
+/* 컨텐츠 아래로 여백주기 */
+.clear{ 
+	margin-top: 300px;
+    margin-bottom: 100px;
+    border-bottom: 1px solid #efefef;
+}
+
+
+.like img {
+	margin-left: 15px;
+    width: 38px;
+    height: 38px;
+    top: -8px;
+    position: relative;
+}
+
 </style>
 
 
@@ -88,7 +105,7 @@
 			<span class="post_info"><fmt:formatDate value="${rboard.writeDate }" pattern="yyyy.MM.dd HH:mm"/></span>
 			<span class="text_bar"></span>
 			<span class="post_info">조회 ${rboard.hit }</span>
-			
+			<span class="like"><img class="heart" src="/resources/img/empty_heart.png"></span>
 			
 			<c:if test="${userid eq rboard.userid }">
 				<span class="up-delete">
@@ -102,8 +119,8 @@
 	
 	<div class="file-area">
 		<c:if test="${not empty rboardFile }">
-		<span><img src="/resources/download.png" style="width: 15px; height: 17px;"></span>
-			<a href="/community/recommend/download?fFileno=${rboardFile.fFileno }">${rboardFile.originName }</a>
+		<span><img src="/resources/img/download.png" style="width: 15px; height: 17px;"></span>
+			<a href="/community/recommend/download?rFileno=${rboardFile.rFileno }">${rboardFile.originName }</a>
 		</c:if>
 	</div> <!-- file=area -->
 	
@@ -111,15 +128,56 @@
 	
 	<div class="view_area">
 		<div class="view">
-				<p>${rboard.content }</p>
 				<c:if test="${not empty rboardFile }">
 				<img src="/upload/${rboardFile.storedName }" style="width: 40%; height: auto;">
 				</c:if>
+				<p>${rboard.content }</p>
 		</div>
 	</div> <!-- view_area -->
+<div class="clear"></div>
 </div> <!-- all -->
 
 
-
 <c:import url="../../layout/footer.jsp" />
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	
+	//변수선언
+	var findLike = ${findLike}
+	
+	if(findLike > 0){
+		console.log("already like....");
+		$(".heart").prop("src", "/resources/img/heart.png");
+	} else {
+		console.log("you can like this post!")
+		$(".heart").prop("src", "/resources/img/empty_heart.png");
+	}
+	
+	$(".heart").click(function(){
+		
+		if(${empty userid}){
+			alert("로그인 후 이용해주세요");
+			return;
+		}
+		
+		$.ajax({
+			url : "/community/recommend/like"
+			, type : "post"
+			, data : { "rno" : ${rboard.rno}, "userid" : `${rboard.userid}` }
+			, success : function(data){
+				if(data == 1){
+					$(".heart").prop("src", "/resources/img/heart.png");
+				} else if(data == 0){
+					$(".heart").prop("src", "/resources/img/empty_heart.png");
+					alert("좋아요가 취소되었습니다");
+				}
+			}
+		});//ajax end
+	}); // .heart click end
+	
+}); // document end
+</script>
 

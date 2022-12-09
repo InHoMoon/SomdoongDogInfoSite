@@ -46,6 +46,7 @@
 	
 	<!-- DownloadView 스프링 빈 등록 -->
 	<beans:bean id="down" class="somdoong.community.view.DownloadView" />
+	<beans:bean id="down_r" class="somdoong.community.view.DownloadView_r" />
 	
 	<!-- MultipartResolver 설정 -->
 	<!-- 	-> 파일업로드 요청을 처리하는 클래스(스프링 빈) -->

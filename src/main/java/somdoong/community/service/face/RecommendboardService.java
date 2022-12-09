@@ -2,7 +2,10 @@ package somdoong.community.service.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import somdoong.community.dto.RboardFile;
+import somdoong.community.dto.RboardLike;
 import somdoong.community.dto.Recommendboard;
 import somdoong.community.util.Paging;
 
@@ -16,6 +19,21 @@ public interface RecommendboardService {
 
 	//게시글 상세보기
 	public Recommendboard view(Recommendboard rboard);
+	
+	//해당 유저의 좋아요 여부 확인
+	public int findLike(RboardLike rLike);
+
+	//좋아요
+	public int insertLike(RboardLike rLike);
+
+	//게시글 작성
+	public void write(Recommendboard rboard, MultipartFile file);
+
+	//게시글 번호를 이용하여 업로드된 파일 정보 조회
+	public RboardFile getAttachFile(Recommendboard rboard);
+
+	//파일 번호를 이용하여 업로드된 파일 정보 조회
+	public RboardFile getFile(RboardFile rboardfile);
 
 
 }
