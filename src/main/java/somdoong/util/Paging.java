@@ -15,6 +15,9 @@ public class Paging {
 	private int startNo; //화면에 보이는 게시글의 시작 번호
 	private int endNo; //화면에 보이는 게시글의 끝 번호
 	
+	private String searchType;
+	private String keyword;
+	
 	
 	//디폴트 생성자 - 페이징 로직이 처리되지 않는다
 	public Paging() {}
@@ -49,6 +52,18 @@ public class Paging {
 		
 		makePaging();
 	}
+	
+	
+	//-------
+	public Paging(int totalCount, int curPage, String searchType, String keyword) {
+		setTotalCount(totalCount);
+		setCurPage(curPage);
+		setSearchType(searchType);
+		setKeyword(keyword);
+		
+		makePaging();
+	}
+	//-------
 	
 	
 	
@@ -91,13 +106,15 @@ public class Paging {
 		
 	}
 
-
+	
 	@Override
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + "]";
+				+ ", startNo=" + startNo + ", endNo=" + endNo + ", searchType=" + searchType + ", keyword=" + keyword
+				+ "]";
 	}
+
 
 	public int getCurPage() {
 		return curPage;
@@ -153,4 +170,21 @@ public class Paging {
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
+	
+	public String getSearchType() {
+		return searchType;
+	}
+	
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
 }

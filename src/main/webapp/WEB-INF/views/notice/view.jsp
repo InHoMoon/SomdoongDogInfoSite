@@ -105,14 +105,19 @@ $(document).ready(function() {
 
 #btn {
 	width: 80px; height: 35px; color: #fff; 
-   background-color: #68ae6d;
-   color: #FFFFFF;
-   border:none; 
-   border-radius: 5px;
+  	background-color: #68ae6d;
+  	color: #FFFFFF;
+   	border:none; 
+   	border-radius: 5px;
 }
 
 #btn:hover { 
    background: #3A7F03; 
+}
+
+.btn-wrap {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 </style>
@@ -147,14 +152,16 @@ $(document).ready(function() {
 		
 </div>
 
+<div class="btn-wrap">
 	<div class="text-center">
 			<button id="btnList" class="btn btn-default">목록</button>
 			
-			<c:if test="${id eq notice.adminid }">
+			<c:if test="${adminid eq notice.adminid }">
 				<button id="btnUpdate" class="btn btn-primary">수정</button>
 				<button id="btnDelete" class="btn btn-danger">삭제</button>
 			</c:if>
 		</div>
+</div>
 		
 </div>
 </div>
@@ -162,19 +169,3 @@ $(document).ready(function() {
 </div><!-- .container end -->
 
 <c:import url="../layout/footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

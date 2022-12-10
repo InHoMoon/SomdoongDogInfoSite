@@ -4,14 +4,13 @@ import java.util.List;
 
 import somdoong.notice.dto.Notice;
 import somdoong.util.Paging;
-import somdoong.notice.dto.NoticeFile;
 
 public interface NoticeDao {
 
 	/**
-	 * 전체 게시글 수를 조회한다
+	 * 전체 게시글 수
 	 * 
-	 * @return 총 게시글 수
+	 * @return
 	 */
 	public int selectCntAll();
 	
@@ -22,6 +21,14 @@ public interface NoticeDao {
 	 * @return 페이징이 적용된 게시글 목록
 	 */
 	public List<Notice> selectList(Paging paging);
+	
+	//검색 리스트
+	public List<Notice> selectSearchlist(Paging paging);
+
+		
+	//검색 리스트 페이징
+	public int getPagingSearchCnt(Paging paging);
+
 	
 	/**
 	 * 조회하려는 게시글의 조회수를 1 증가시킨다

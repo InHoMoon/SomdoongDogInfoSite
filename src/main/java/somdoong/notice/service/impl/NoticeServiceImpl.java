@@ -1,35 +1,33 @@
 package somdoong.notice.service.impl;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.notice.dao.face.NoticeDao;
 import somdoong.notice.dto.Notice;
-import somdoong.notice.dto.NoticeFile;
 import somdoong.notice.service.face.NoticeService;
 import somdoong.util.Paging;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired NoticeDao noticeDao;
 	@Autowired ServletContext context;
 	
+	//페이징
 	@Override
 	public Paging getPaging(int curPage) {
 		
-		//총 게시글 수 조회
 		int totalCount = noticeDao.selectCntAll();
 		
-		//페이징 계산
 		Paging paging = new Paging(totalCount, curPage);
 		
 		return paging;
@@ -37,7 +35,28 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public List<Notice> list(Paging paging) {
+		
 		return noticeDao.selectList(paging);
+		
+	}
+	
+	//검색 리스트
+	@Override
+	public List<Notice> getList(Paging paging) {
+		
+		List<Notice> list = noticeDao.selectSearchlist(paging);
+		logger.info("paging : {}", paging);
+		logger.info("list : {}", list);
+		
+		return list;
+	}
+	
+	
+	//검색 리스트 페이징
+	@Override
+	public Paging getPagingSearchCnt(Paging paging) {
+		int totalCount = noticeDao.getPagingSearchCnt(paging);
+		return new Paging(totalCount, paging.getCurPage());
 	}
 	
 	@Override

@@ -12,12 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import somdoong.notice.dto.Notice;
-import somdoong.notice.dto.NoticeFile;
 import somdoong.notice.service.face.NoticeService;
 import somdoong.util.Paging;
 
@@ -25,12 +24,13 @@ import somdoong.util.Paging;
 public class NoticeController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
 	@Autowired NoticeService noticeService;
 	
-	//공지사항 목록
-	@RequestMapping("/notice/list")
-	public void list(@RequestParam(defaultValue = "0") int curPage, Notice notice, Model model ) {
+	
+	//게시판 목록
+	@GetMapping("/notice/list")
+	public void list(@RequestParam(defaultValue = "0") int curPage, Notice notice, Model model) {
 		
 		logger.info("/notice/list");
 		
@@ -38,10 +38,38 @@ public class NoticeController {
 		logger.info("{}", paging);
 		model.addAttribute("paging", paging);
 		
-		List<Notice> list = noticeService.list(paging);
-		for( Notice n : list )	logger.info("{}", n);
+		List<Notice> list = noticeService.list(paging);	
+		
 		model.addAttribute("list", list);
 	}
+	
+	// 게시글 검색 목록
+	@PostMapping ("/notice/slist")
+	@ResponseBody
+	public ModelAndView search(@RequestParam(defaultValue = "title") String searchType, 
+			@RequestParam(defaultValue = "") String keyword, 
+			@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
+		
+		logger.info("/notice/search");
+		//- 검색된 전체 게시물 수 조회
+		Paging paging = new Paging();
+		
+		paging.setSearchType(searchType);
+		paging.setKeyword(keyword);
+		paging.setCurPage(curPage);
+		
+		Paging sePaging = noticeService.getPagingSearchCnt(paging);
+		sePaging.setSearchType(searchType);
+		sePaging.setKeyword(keyword);
+		
+		List<Notice> sList = noticeService.getList(sePaging);
+		
+		mav.setViewName("/notice/search");
+		mav.addObject("sePaging", sePaging);
+		mav.addObject("sList", sList);
+		mav.addObject("totalCnt",sePaging.getTotalCount());
+		return mav;
+	} 
 	
 	
 	//공지사항 상세보기

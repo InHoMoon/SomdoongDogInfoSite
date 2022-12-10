@@ -8,20 +8,52 @@
 <mapper namespace="somdoong.notice.dao.face.NoticeDao">
 	
 	<select id="selectCntAll" resultType="int">
-		SELECT count(*) FROM notice 
+		SELECT count(*) FROM notice
 	</select>
 	
 	<select id="selectList" resultType="Notice" parameterType="Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, N.* FROM (
-				SELECT
-					notino, adminid, title, content
-					, hit, notidate
-				FROM notice
+				SELECT notice.*
+				FROM notice	
 				ORDER BY notino DESC
 			) N
 		) notice
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 검색 리스트 조회 -->
+	<select id="selectSearchlist" resultType="Notice" parameterType="Paging" >
+		SELECT * FROM (
+		    SELECT rownum rnum, N.* FROM (
+		        SELECT notice.*
+		        FROM notice
+		        <choose>
+					<when test="searchType == 'title'">
+						where title like '%'|| #{keyword} ||'%'
+					</when>
+		
+					<when test="searchType == 'content'">
+						where content like '%'|| #{keyword} ||'%'
+					</when>
+				</choose>
+		        ORDER BY notino DESC
+		    ) N
+		) Notice
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 검색 리스트 페이징 -->
+	<select id="getPagingSearchCnt" parameterType="Paging" resultType="int">
+		select count(*) from notice 
+		<choose>
+			<when test="searchType == 'title'">
+				WHERE title like '%'|| #{keyword} ||'%'
+			</when>
+			<when test="searchType == 'content'">
+				WHERE content like '%'|| #{keyword} ||'%'
+			</when>
+		</choose>
 	</select>
 
 	<update id="hit" parameterType="Notice">
@@ -42,8 +74,8 @@
 			SELECT notice_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO notice ( notino, adminid, title , content, notidate )
-		VALUES ( #{notino }, #{adminid }, #{title }, #{content }, CURRENT_TIMESTAMP )
+		INSERT INTO notice ( notino, adminid, title , content, notidate, hit )
+		VALUES ( #{notino }, #{adminid }, #{title }, #{content }, CURRENT_TIMESTAMP, 0 )
 	</insert>
 	
 	<update id="updateNotice" parameterType="Notice">
