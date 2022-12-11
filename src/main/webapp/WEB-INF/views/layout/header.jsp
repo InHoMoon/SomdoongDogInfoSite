@@ -33,7 +33,7 @@ a {
 }
 
 #header_wrap {
-	height: 100vh
+	height: 100%;
 }
 
 header {
@@ -164,7 +164,7 @@ footer #footer_wrap {
 <header>
 <div>
 	<h1 class="logo">
-	<a href="#"><img src="../resources/logo.PNG"></a>
+	<a href="#"><img src="/resources/logo.PNG"></a>
 	</h1>
 	<div class="menu_wrap">
 	<nav>

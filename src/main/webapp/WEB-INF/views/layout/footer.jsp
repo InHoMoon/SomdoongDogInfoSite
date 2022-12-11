@@ -18,8 +18,6 @@ Copyright ⓒ
 
 </footer>
 
-
-
 </div> <!-- #header_wrap END -->
 
 </body>

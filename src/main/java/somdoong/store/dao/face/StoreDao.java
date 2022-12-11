@@ -2,11 +2,19 @@ package somdoong.store.dao.face;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import somdoong.store.dto.Store;
 
 public interface StoreDao {
 	
-
+	/**
+	 * 상품목록 전체 조회
+	 * 
+	 * @return - 조회된 상품목록
+	 */
+	public List<Store> selectAll();
+	
 	/**
 	 * 카테고리 별 상품 전체 조회
 	 * 
@@ -27,6 +35,14 @@ public interface StoreDao {
 	 * @param viewStore - 조회하려는 게시글 번호
 	 * @return 조회된 게시글 정보
 	 */
-	public Store selectStore(Store viewStore);
+	public Store selectPostByStoreNo(Store viewStore);
+
+	/**
+	 * 게시글 정보 삽입
+	 * 
+	 * @param store - 삽입할 게시글 정보
+	 */
+	public void insertStore(Store store);
+
 	
 }

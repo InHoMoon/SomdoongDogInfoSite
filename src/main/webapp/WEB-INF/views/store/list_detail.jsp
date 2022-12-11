@@ -6,6 +6,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		$(".heart").click(function() {
+			$(this).toggleClass('change');
+		})
 
 		$(".menu").click(function() {
 			
@@ -124,6 +128,10 @@
 	left: -50%;
 }
 
+.heart.change , .heart.change:after, .heart.change:before {
+	background: #ea2027;
+}
+
 .heart::after {
 	top: -50%;
 }
@@ -152,6 +160,10 @@
 	border-bottom: 1px solid #d3d3d3;
 	height: 40px;
 }
+
+.menu:hover {
+	box-shadow: 2px 2px 10px #d3d3d3;
+}
 </style>
 
 <div id="wrap-detail">
@@ -165,17 +177,11 @@
 		<div style="width: 34%;"><img src="/resources/monster08.gif" width="340px" height="405px"></div>
 		<div style="width: 66%; padding-left: 30px;">
 			<div style="font-size: 25px; font-weight: bold; margin-bottom: 10px;">상품 설명</div>
-			<div id="product-info">${viewStore.info }국가는 재해를 예방하고 그 위험으로부터 국민을 보호하기 위하여 노력하여야 한다. 제1항의 지시를 받은 당해 행정기관은 이에 응하여야 한다. 모든 국민은 직업선택의 자유를 가진다.
-
-국가는 지역간의 균형있는 발전을 위하여 지역경제를 육성할 의무를 진다. 헌법개정안은 국회가 의결한 후 30일 이내에 국민투표에 붙여 국회의원선거권자 과반수의 투표와 투표자 과반수의 찬성을 얻어야 한다.
-
-정당의 목적이나 활동이 민주적 기본질서에 위배될 때에는 정부는 헌법재판소에 그 해산을 제소할 수 있고, 정당은 헌법재판소의 심판에 의하여 해산된다.
-
-재판의 심리와 판결은 공개한다. 다만, 심리는 국가의 안전보장 또는 안녕질서를 방해하거나 선량한 풍속을 해할 염려가 있을 때에는 법원의 결정으로 공개하지 아니할 수 있다.</div>
-			<div id="product-price"><fmt:formatNumber type="currency" value="${viewStore.product.price }"/></div>
+			<div id="product-info">${viewStore.info }</div>
+			<div id="product-price"><fmt:formatNumber type="currency" value="${viewStore.price }"/></div>
 			<div id="product-quantity-stock">
-				<div id="product-quantity"><input type="number" value="1"></div>
-				<div id="product-stock">재고 ${viewStore.product.stock }개</div>
+				<div id="product-quantity"><input type="number" value="1" min=""></div>
+				<div id="product-stock">재고 ${viewStore.stock }개</div>
 			</div>
 			<div id="store-btn"><input type="button" value="구매하기"></div>
 			<div>
@@ -196,7 +202,7 @@
 			<li class="menu" id="review">상품후기</li>
 		</ul>
 	</div>
-	<div id="product-content">
+	<div id="product-content" style="text-align: center;">
 		<%@	include file="./product_info.jsp" %>
 	</div>
 </div>

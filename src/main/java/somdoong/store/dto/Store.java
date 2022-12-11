@@ -3,41 +3,40 @@ package somdoong.store.dto;
 import java.util.Date;
 
 public class Store {
-	
+
 	private int storeNo;
-	private int productNo;
+	private String productName;
 	private String category;
 	private String title;
 	private String info;
-	private String content;
+	private int price;
+	private int stock;
 	private Date reportingDate;
 	private int hit;
 	private int likepost;
 	
-	private Product product;
-	
 	public Store() { }
 
-	public Store(int storeNo, int productNo, String category, String title, String info, String content,
-			Date reportingDate, int hit, int likepost, Product product) {
+	public Store(int storeNo, String productName, String category, String title, String info, int price, int stock,
+			Date reportingDate, int hit, int likepost) {
 		super();
 		this.storeNo = storeNo;
-		this.productNo = productNo;
+		this.productName = productName;
 		this.category = category;
 		this.title = title;
 		this.info = info;
-		this.content = content;
+		this.price = price;
+		this.stock = stock;
 		this.reportingDate = reportingDate;
 		this.hit = hit;
 		this.likepost = likepost;
-		this.product = product;
 	}
 
 	@Override
 	public String toString() {
-		return "Store [storeNo=" + storeNo + ", productNo=" + productNo + ", category=" + category + ", title=" + title
-				+ ", info=" + info + ", content=" + content + ", reportingDate=" + reportingDate + ", hit=" + hit
-				+ ", likepost=" + likepost + ", product=" + product + "]";
+		return "Store [storeNo=" + storeNo + ", productName=" + productName + ", category=" + category + ", title="
+				+ title + ", info=" + info + ", price=" + price + ", stock=" + stock + ", reportingDate="
+				+ reportingDate + ", hit=" + hit + ", likepost=" + likepost + "]";
 	}
 
 	public int getStoreNo() {
@@ -48,12 +47,12 @@ public class Store {
 		this.storeNo = storeNo;
 	}
 
-	public int getProductNo() {
-		return productNo;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	public String getCategory() {
@@ -80,12 +79,20 @@ public class Store {
 		this.info = info;
 	}
 
-	public String getContent() {
-		return content;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public Date getReportingDate() {
@@ -112,13 +119,4 @@ public class Store {
 		this.likepost = likepost;
 	}
 
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	
 }

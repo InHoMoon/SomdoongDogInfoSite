@@ -7,49 +7,55 @@
 
 <mapper namespace="somdoong.store.dao.face.StoreDao">
 
-	<resultMap type="somdoong.store.dto.Store" id="StoreMap">
-		<id column="store_no" property="storeNo"/>
-		<result column="category" property="category"/>
-		<result column="title" property="title"/>
-		<result column="info" property="info"/>
-		<result column="content" property="content"/>
-		<result column="reportingDate" property="reportingDate"/>
-		<result column="hit" property="hit"/>
-		<result column="likepost" property="likepost"/>
-		
-		<association property="product" javaType="somdoong.store.dto.Product">
-			<id column="product_no" property="productNo"/>
-			<result column="product_name" property="productName"/>
-			<result column="price" property="price"/>
-			<result column="stork" property="stock"/>
-		</association>
-	
-	
-	</resultMap>
+<!-- 	<resultMap type="somdoong.store.dto.Store" id="StoreMap"> -->
+<!-- 		<id column="store_no" property="storeNo"/> -->
+<!-- 		<result column="category" property="category"/> -->
+<!-- 		<result column="title" property="title"/> -->
+<!-- 		<result column="info" property="info"/> -->
+<!-- 		<result column="content" property="content"/> -->
+<!-- 		<result column="reportingDate" property="reportingDate"/> -->
+<!-- 		<result column="hit" property="hit"/> -->
+<!-- 		<result column="likepost" property="likepost"/> -->
+<!-- 	</resultMap> -->
 
 <!-- 카테고리가 일치하는 상품들만 조회하는 쿼리로 수정 -->
-	<select id="selectByCategory" resultMap="StoreMap" parameterType="String">
-		SELECT s.store_no, s.title, s.category, p.product_name, p.price
-		FROM store s, product p
-		WHERE s.product_no = p.product_no
-		AND category = #{category }
-		ORDER BY s.store_no
+
+	<!-- 상품목록 전체 조회 -->
+	<select id="selectAll" resultType="somdoong.store.dto.Store">
+		SELECT * FROM store
+		ORDER BY store_no
+	</select>
+
+	<!-- 카테고리별 상품 조회 -->
+	<select id="selectByCategory" resultType="somdoong.store.dto.Store" parameterType="String">
+		SELECT title, category, product_name, price
+		FROM store
+		WHERE category = #{category }
 	</select>
 	
+	<!-- 조회수 증가 -->
 	<update id="updateHit" parameterType="somdoong.store.dto.Store">
 		UPDATE store
 		SET hit = hit + 1
 		WHERE store_no = #{storeNo }
 	</update>
 	
-	<select id="selectStore" resultMap="StoreMap" parameterType="somdoong.store.dto.Store">
-		SELECT s.store_no, s.product_no, s.category, s.title
-			, s.info, s.content, s.reportingDate, s.hit, s.likepost
-			, p.product_name, p.price, p.stock
-		FROM store s, product p
-		WHERE s.product_no = p.product_no
-		AND store_no = #{storeNo }
+	<!-- 상품정보 상세보기 -->
+	<select id="selectPostByStoreNo" resultType="somdoong.store.dto.Store" parameterType="somdoong.store.dto.Store">
+		SELECT * FROM store
+		WHERE store_no = #{storeNo }
 	</select>
+	
+	<insert id="insertStore" parameterType="somdoong.store.dto.Store">
+		<selectKey order="BEFORE" resultType="int" keyProperty="storeNo">
+			SELECT store_seq.nextval FROM dual
+		</selectKey>
+
+		INSERT INTO store( store_no, product_name, category, title,
+							info, price, stock, reportingdate, hit, likepost )
+		VALUES ( #{storeNo }, #{productName} , #{category }, #{title }, 
+				#{info }, #{price}, #{stock }, default, 0, 0 )
+	</insert>
 	
 	
 </mapper>

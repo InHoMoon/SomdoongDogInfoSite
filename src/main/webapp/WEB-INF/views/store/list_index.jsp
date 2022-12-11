@@ -33,6 +33,29 @@
 				}
 			})
 		});
+		
+		$(".view-all").click(function() {
+			
+			$.ajax({
+				type: "POST",
+				url: "/store/list/all",
+				async : true,
+				cache : "false",
+				data : {},
+				dataType : "html",
+				success : function(data) {
+					console.log("ajax 성공")
+					
+					$("#list-content").children().remove();
+
+					$("#list-content").html(data);
+				},
+				error : function() {
+					console.log("ajax 실패")
+				}
+				
+			})
+		})
 	})
 </script>
 
@@ -56,7 +79,7 @@
 }
 
 #wrap-index {
-	width: 1920px;
+	width: 1900px;
 	height: 100%;
 	min-height: 100%;
 }
@@ -100,16 +123,16 @@ ul > li > img:hover {
 
 #list-content {
 	float: right;
-	width: 80%;
+	width: 81%;
 	height: 100%;
 	
-	padding: 0 20px;
+	padding-left: 20px;
 	
 	border-left: 2px solid #d3d3d3;
 }
 
-footer {
-	bottom: 0;
+.view-all {
+	cursor: pointer;
 }
 
 </style>
@@ -119,6 +142,7 @@ footer {
 <div id="nav">
 	<div>
 		<ul>
+			<li class="view-all">전체</li>
 			<li class="category" id="food">사료</li>
 			<li class="category" id="snack">간식</li>
 			<li class="category" id="medical">의료</li>
