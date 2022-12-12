@@ -118,6 +118,7 @@ public class RecommendboardController {
 		
 		rboardService.write(rboard, file);
 		
+		
 		return "redirect:/community/recommend/list";
 	}
 	

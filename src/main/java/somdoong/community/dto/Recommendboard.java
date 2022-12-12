@@ -11,10 +11,13 @@ public class Recommendboard {
 	private String userid;
 	private int hit;
 	private Date writeDate;
+	private String address;
+	private String planame;
 	
 	public Recommendboard() {}
 
-	public Recommendboard(int rno, int userno, String title, String content, String userid, int hit, Date writeDate) {
+	public Recommendboard(int rno, int userno, String title, String content, String userid, int hit, Date writeDate,
+			String address, String planame) {
 		super();
 		this.rno = rno;
 		this.userno = userno;
@@ -23,12 +26,15 @@ public class Recommendboard {
 		this.userid = userid;
 		this.hit = hit;
 		this.writeDate = writeDate;
+		this.address = address;
+		this.planame = planame;
 	}
 
 	@Override
 	public String toString() {
 		return "Recommendboard [rno=" + rno + ", userno=" + userno + ", title=" + title + ", content=" + content
-				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + "]";
+				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", address=" + address
+				+ ", planame=" + planame + "]";
 	}
 
 	public int getRno() {
@@ -79,14 +85,32 @@ public class Recommendboard {
 		this.hit = hit;
 	}
 
-	public Date getwriteDate() {
+	public Date getWriteDate() {
 		return writeDate;
 	}
 
-	public void setwriteDate(Date writeDate) {
+	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPlaname() {
+		return planame;
+	}
+
+	public void setPlaname(String planame) {
+		this.planame = planame;
+	}
+
+	
+	
 	
 	
 

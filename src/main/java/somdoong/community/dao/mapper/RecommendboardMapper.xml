@@ -30,7 +30,7 @@
 	<!-- 게시글 상세보기 -->
 	<select id="selectBoard" resultType="Recommendboard" parameterType="Recommendboard">
 		SELECT
-			rno, title, content, userid, hit, write_date
+			rno, title, content, userid, hit, write_date, address, planame
 			FROM recommendboard
 		WHERE rno = #{rno}
 	</select>
@@ -71,8 +71,8 @@
 			SELECT recommendboard_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO recommendboard ( rno, title, content , userid )
-		VALUES ( #{rno }, #{title }, #{content }, #{userid })
+		INSERT INTO recommendboard ( rno, title, content , userid, address, planame )
+		VALUES ( #{rno }, #{title }, #{content }, #{userid }, #{address}, #{planame})
 	</insert>
 	
 	

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.community.dao.face.RecommendboardDao;
-import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.RboardFile;
 import somdoong.community.dto.RboardLike;
 import somdoong.community.dto.Recommendboard;
