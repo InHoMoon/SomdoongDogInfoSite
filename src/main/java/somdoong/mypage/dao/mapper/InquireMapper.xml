@@ -10,16 +10,17 @@
 		SELECT count(*) FROM inquire
 	</select>
     
-    <select id="selectList" resultType="Inquire" parameterType="Paging">
+    <select id="selectList" resultType="Inquire">
 		SELECT * FROM (
 			SELECT rownum rnum, I.* FROM (
 				SELECT
 					i_num, i_title, i_content , i_category,i_writedate,i_hit,i_username,i_userid
-				FROM inquire
-				ORDER BY i_num DESC
+				FROM inquire  WHERE i_userid =#{iUserid}
+				ORDER BY i_num DESC 
 			) I
-		) INQUIRE
+		) INQUIRE 
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+
 	</select>
 	
 	

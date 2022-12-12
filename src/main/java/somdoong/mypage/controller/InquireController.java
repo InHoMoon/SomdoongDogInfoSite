@@ -31,12 +31,14 @@ public class InquireController {
 	@RequestMapping("/list")
 	public void inquireList(
 			@RequestParam(defaultValue="0") int curPage
-			,Model model) {
+			,Model model , HttpSession session) {
 		
 		Paging paging = inquireService.getPaging(curPage);
 		logger.debug("{}" , paging);
 		model.addAttribute("paging", paging);
 		
+		paging.setiUserid((String) session.getAttribute("userid"));
+
 		List<Inquire> list = inquireService.list(paging);
 		for( Inquire I : list )	logger.debug("{}", I);
 		model.addAttribute("list", list);

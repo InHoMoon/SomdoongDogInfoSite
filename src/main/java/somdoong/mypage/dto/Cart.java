@@ -2,53 +2,42 @@ package somdoong.mypage.dto;
 
 public class Cart {
 
-	private int c_id;
-	private int userno;
-	private int product_no;
+	private int cId;
+	private int productNo;
 	private String userid;
-	private int c_amount;
+	private int cAmount;
 	
 	public Cart() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(int c_id, int userno, int product_no, String userid, int c_amount) {
+	public Cart(int cId, int productNo, String userid, int cAmount) {
 		super();
-		this.c_id = c_id;
-		this.userno = userno;
-		this.product_no = product_no;
+		this.cId = cId;
+		this.productNo = productNo;
 		this.userid = userid;
-		this.c_amount = c_amount;
+		this.cAmount = cAmount;
 	}
 
 	@Override
 	public String toString() {
-		return "Cart [c_id=" + c_id + ", userno=" + userno + ", product_no=" + product_no + ", userid=" + userid
-				+ ", c_amount=" + c_amount + "]";
+		return "Cart [cId=" + cId + ", productNo=" + productNo + ", userid=" + userid + ", cAmount=" + cAmount + "]";
 	}
 
-	public int getC_id() {
-		return c_id;
+	public int getcId() {
+		return cId;
 	}
 
-	public void setC_id(int c_id) {
-		this.c_id = c_id;
+	public void setcId(int cId) {
+		this.cId = cId;
 	}
 
-	public int getUserno() {
-		return userno;
+	public int getProductNo() {
+		return productNo;
 	}
 
-	public void setUserno(int userno) {
-		this.userno = userno;
-	}
-
-	public int getProduct_no() {
-		return product_no;
-	}
-
-	public void setProduct_no(int product_no) {
-		this.product_no = product_no;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
 	public String getUserid() {
@@ -59,13 +48,17 @@ public class Cart {
 		this.userid = userid;
 	}
 
-	public int getC_amount() {
-		return c_amount;
+	public int getcAmount() {
+		return cAmount;
 	}
 
-	public void setC_amount(int c_amount) {
-		this.c_amount = c_amount;
+	public void setcAmount(int cAmount) {
+		this.cAmount = cAmount;
 	}
+	
+	
+	
+	
 	
 	
 	

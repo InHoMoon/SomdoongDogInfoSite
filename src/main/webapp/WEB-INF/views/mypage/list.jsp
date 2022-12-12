@@ -70,6 +70,8 @@ td:nth-child(2) {
 
 <c:import url="/WEB-INF/views/layout/paging.jsp" />
 
+<a href="/mypage/myboard/list?userid=${userid }"> 내가쓴글</a>
+
 </div><!-- .container -->
 
 <c:import url="../layout/footer.jsp" />

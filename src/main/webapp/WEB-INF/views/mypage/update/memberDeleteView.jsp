@@ -29,7 +29,7 @@
 		
 		<div class="form-group has-feedback">
 			<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
-			<button class="cencle btn btn-danger" type="button">취소</button>
+			<button class="cancle btn btn-danger" type="button">취소</button>
 		</div>
 	</form>
 </body>
