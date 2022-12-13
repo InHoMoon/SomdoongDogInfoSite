@@ -2,14 +2,35 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
 
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<c:import url="../../layout/header.jsp" />
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			// 취소
+			$(".cancle").on("click", function(){
+				
+				location.href = "/";
+						    
+			})
+		
+			$("#submit").on("click", function(){
+				if($("#userpw").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#userpw").focus();
+					return false;
+				}	
+			});
+			
+				
+			
+		})
+	</script>
+	
+<h1>회원 탈퇴</h1>
+<hr>
+
+
 <form action="/mypage/update/memberDelete" method="post">
 
 		<div class="form-group has-feedback">
@@ -31,6 +52,6 @@
 			<button class="btn btn-success" type="submit" id="submit">회원탈퇴</button>
 			<button class="cancle btn btn-danger" type="button">취소</button>
 		</div>
-	</form>
-</body>
-</html>
+</form>
+
+<c:import url="../../layout/footer.jsp" />

@@ -33,11 +33,15 @@
     	
     	
     	<select id="listAll" resultType="Myboard">	
-    	SELECT fno AS num,title ,hit,userid,content,write_date FROM freeboard
-    	WHERE userid = #{userid}
+    	SELECT fno AS num,title ,hit,userid,content,write_date, 'f' type FROM freeboard
+    		WHERE userid = #{userid}
 		union
-		SELECT sno AS num,title ,hit ,userid,content,write_date FROM showboard
-		WHERE userid = #{userid}
+		SELECT sno AS num,title ,hit ,userid,content,write_date ,'s' type FROM showboard
+			WHERE userid = #{userid}
+		union
+		SELECT rno AS num,title,hit,userid,content,write_date , 'r' type FROM recommendboard
+			WHERE userid = #{userid}
+		order by num      
     	</select>
     	
     </mapper>

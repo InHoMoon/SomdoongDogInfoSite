@@ -2,14 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
+<c:import url="../../layout/header.jsp" />
+<h1>내가 쓴 글</h1>
 		
 <table>
 <thead>
@@ -27,17 +22,27 @@
 	<tr>
 		<td>${list.num }</td>
 		<td>${list.userid }</td>
-		<td>${list.title }</td>
+		
+	
+	<c:choose>
+		<c:when test="${list.type eq 'f' }">
+			<td><a href="/mypage/view?iNum=${list.num }">${list.title }</a></td>
+		</c:when>
+		
+		<c:when test="${list.type eq 's' }">
+			<td><a href="/mypage/view?iNum=${list.num }">${list.title }</a></td>
+		</c:when>
+		<c:when test="${list.type eq 'r' }">
+			<td><a href="/mypage/view?iNum=${list.num }">${list.title }</a></td>
+		</c:when>
+	</c:choose>
 		<td>${list.content }</td>
-		<td><fmt:formatDate value="${list.write_date }" pattern="yy-MM-dd HH:mm:ss"/></td>
+		<td><fmt:formatDate value="${list.writedate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
 </c:forEach>
 
 </tbody>
 </table>
-</body>
 
+<c:import url="../../layout/footer.jsp" />
 
-
-
-</html>

@@ -193,7 +193,8 @@ footer #footer_wrap {
 			<li><a href="/mypage/update/memberUpdateView?userid=${userid}">정보 수정</a></li>
 			<li><a href="#">장바구니</a></li>
 			<li><a href="#">구매내역</a></li>
-			<li><a href="#">게시글 수정</a></li>
+			<li><a href="/mypage/myboard/list?userid=${userid }">내가 쓴 글 </a></li>
+			
 		</ul>
 		</li>
 		<li><a href="#">로그아웃</a></li>

@@ -7,22 +7,25 @@ public class Myboard {
 	   private int num;
 	   private String title;
 	   private String content;
-	   private Date write_date;
+	   private Date writedate;
 	   private int hit;
 	   private String userid;
 	   
-	   public Myboard() {
+	   private String type;
+	   
+	public Myboard() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Myboard(int num, String title, String content, Date write_date, int hit, String userid) {
+	public Myboard(int num, String title, String content, Date writedate, int hit, String userid, String type) {
 		super();
 		this.num = num;
 		this.title = title;
 		this.content = content;
-		this.write_date = write_date;
+		this.writedate = writedate;
 		this.hit = hit;
 		this.userid = userid;
+		this.type = type;
 	}
 
 	public int getNum() {
@@ -49,12 +52,12 @@ public class Myboard {
 		this.content = content;
 	}
 
-	public Date getWrite_date() {
-		return write_date;
+	public Date getWritedate() {
+		return writedate;
 	}
 
-	public void setWrite_date(Date write_date) {
-		this.write_date = write_date;
+	public void setWritedate(Date writedate) {
+		this.writedate = writedate;
 	}
 
 	public int getHit() {
@@ -73,11 +76,29 @@ public class Myboard {
 		this.userid = userid;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "Myboard [num=" + num + ", title=" + title + ", content=" + content + ", write_date=" + write_date
-				+ ", hit=" + hit + ", userid=" + userid + "]";
+		return "Myboard [num=" + num + ", title=" + title + ", content=" + content + ", writedate=" + writedate
+				+ ", hit=" + hit + ", userid=" + userid + ", type=" + type + "]";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	   
 	
 	

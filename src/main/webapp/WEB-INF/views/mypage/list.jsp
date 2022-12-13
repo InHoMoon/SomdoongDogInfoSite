@@ -47,7 +47,7 @@ td:nth-child(2) {
 <tbody>
 
 <c:forEach items="${list }" var="inquire">
-<%-- <c:if test="${id == inquire.iUsername }"> --%>
+
 	<tr>
 		<td>${inquire.iCategory }</td>  
 		<td>${inquire.iNum }</td>
@@ -56,7 +56,7 @@ td:nth-child(2) {
 		<td>${inquire.ihit }</td>
 		<td><fmt:formatDate value="${inquire.iwriteDate }" pattern="yy-MM-dd HH:mm:ss"/></td>
 	</tr>
-<%-- </c:if> --%>
+
 </c:forEach>
 
 </tbody>

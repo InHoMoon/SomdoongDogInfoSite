@@ -23,13 +23,6 @@ $(document).ready(function() {
 	})
 })
 </script>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <h1>1대1문의</h1>
 <hr>
 
@@ -65,13 +58,12 @@ $(document).ready(function() {
 <div>
 
 	<button id="btnList">목록</button>
+	
+	<c:if test="${userid eq viewInquire.iUserid }">
 	<button id="btnUpdate">수정</button>
 	<button id="btnDelete" >삭제</button>
-	
-	<c:if test="${id eq viewInquire.iUsername }">
-
 	</c:if>
 	
 </div>
-</body>
-</html>
+
+<c:import url="../layout/footer.jsp" />

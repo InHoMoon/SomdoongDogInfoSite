@@ -86,7 +86,7 @@ nhn.husky.EZCreator.createInIFrame({
 
 </div><!-- .container end -->
 
-<%-- <c:import url="../layout/footer.jsp" /> --%>
+<c:import url="../layout/footer.jsp" />
 
 
 
