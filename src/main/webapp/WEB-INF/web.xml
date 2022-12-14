@@ -3,9 +3,58 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
+<<<<<<< HEAD
 	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
 	<!-- 	-> WEB.xml 파일의 가장 윗줄에 작성! -->
 	<!-- 	-> <web-app>태그의 첫번째 자식으로 작성할 것!! -->
+=======
+<<<<<<< HEAD
+	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
+=======
+	<!-- POST 데이터의 한글 인코딩 (UTF-8) 설정 필터  -->
+	<!--	-> web.xml 파일의 가장 윗줄에 작성할 것  -->
+	<!--	-> <web-app> 태그의 첫번째 자식으로 작성 할 것  -->
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+<<<<<<< HEAD
+		</filter-class>
+=======
+<<<<<<< HEAD
+		</filter-class>
+=======
+		</filter-class>		
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+<<<<<<< HEAD
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+=======
+<<<<<<< HEAD
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+=======
+	<filter-mapping>	
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>	
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+	</filter-mapping>
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
+
+	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
@@ -21,8 +70,6 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -49,5 +96,9 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 </web-app>
