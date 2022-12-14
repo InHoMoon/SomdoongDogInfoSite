@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
@@ -44,13 +45,44 @@ public class RecommendboardController {
 		model.addAttribute("paging", paging);
 		
 		List<Recommendboard> list = rboardService.list(paging);
-		for( Recommendboard r : list )	logger.info("{}", r);
-		
+		for( Recommendboard r : list )	{
+			logger.info("{}", r.toString());
+		}
 		
 		model.addAttribute("list", list);
 	}
 	
 
+	
+	// 게시글 검색 목록
+	@PostMapping ("/listS")
+	@ResponseBody
+	public ModelAndView search(@RequestParam(defaultValue = "title") String searchType, 
+			@RequestParam(defaultValue = "") String keyword, 
+			@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
+		
+		logger.info("/community/recommend/search");
+		//- 검색된 전체 게시물 수 조회
+		Paging paging = new Paging();
+		
+		paging.setSearchType(searchType);
+		paging.setKeyword(keyword);
+		paging.setCurPage(curPage);
+		
+		Paging sePaging = rboardService.getPagingSearchCnt(paging);
+		sePaging.setSearchType(searchType);
+		sePaging.setKeyword(keyword);
+		
+		List<Recommendboard> sList = rboardService.getList(sePaging);
+		
+		mav.setViewName("/community/recommend/search");
+		mav.addObject("sePaging", sePaging);
+		mav.addObject("sList", sList);
+		mav.addObject("totalCnt",sePaging.getTotalCount());
+		return mav;
+	} 
+	
+	
 
 	//게시글 상세보기
 	@RequestMapping("/view")
@@ -110,6 +142,7 @@ public class RecommendboardController {
 	
 	@PostMapping("/write")
 	public String writeProc(Recommendboard rboard, MultipartFile file, HttpSession session) {
+//	public String writeProc(Recommendboard rboard, List<MultipartFile> file, HttpSession session) {
 		logger.info("{}", rboard);
 		logger.info("{}", file);
 		
@@ -117,7 +150,6 @@ public class RecommendboardController {
 		logger.info("{}", rboard);
 		
 		rboardService.write(rboard, file);
-		
 		
 		return "redirect:/community/recommend/list";
 	}
@@ -137,8 +169,55 @@ public class RecommendboardController {
 	}
 	
 	
+	//게시글 수정
+	@GetMapping("/update")
+	public String update(Recommendboard rboard, Model model) {
+		logger.info("/update get");
+		logger.info("{}", rboard);
+		
+		//잘못된 게시글 번호 처리
+		if( rboard.getRno() < 0 ) {
+			return "redirect:/community/recommend/list";
+		}
+		
+		//게시글 조회
+		rboard = rboardService.view(rboard);
+		logger.info("조회된 게시글 {}", rboard);
+		
+		//모델값 전달
+		model.addAttribute("updateBoard", rboard);
+		
+		
+		//첨부파일 모델값 전달
+		RboardFile rboardfile = rboardService.getAttachFile(rboard);
+		model.addAttribute("rboardfile", rboardfile);
+		
+		return "community/recommend/update";
+	}
 	
 	
+	
+	//게시글 수정 처리
+	@PostMapping("/updateConn")
+	public String updateProcess(Recommendboard rboard, MultipartFile file) {
+		logger.info("update post");
+		logger.info("{}", rboard);
+		
+		rboardService.update(rboard, file);
+		
+		return "redirect:/community/recommend/view?rno=" + rboard.getRno();
+	}
+	
+	
+	
+	//게시글 삭제
+	@RequestMapping("/delete")
+	public String delete(Recommendboard rboard) {
+		
+		rboardService.delete(rboard);
+		
+		return "redirect:/community/recommend/list";
+	}
 	
 	
 

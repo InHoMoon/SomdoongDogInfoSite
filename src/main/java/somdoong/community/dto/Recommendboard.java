@@ -14,10 +14,13 @@ public class Recommendboard {
 	private String address;
 	private String planame;
 	
+	private int likeCnt; //좋아요수
+	private String fiName; //파일 저장 이름
+	
 	public Recommendboard() {}
 
 	public Recommendboard(int rno, int userno, String title, String content, String userid, int hit, Date writeDate,
-			String address, String planame) {
+			String address, String planame, int likeCnt, String fiName) {
 		super();
 		this.rno = rno;
 		this.userno = userno;
@@ -28,13 +31,15 @@ public class Recommendboard {
 		this.writeDate = writeDate;
 		this.address = address;
 		this.planame = planame;
+		this.likeCnt = likeCnt;
+		this.fiName = fiName;
 	}
 
 	@Override
 	public String toString() {
 		return "Recommendboard [rno=" + rno + ", userno=" + userno + ", title=" + title + ", content=" + content
 				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", address=" + address
-				+ ", planame=" + planame + "]";
+				+ ", planame=" + planame + ", likeCnt=" + likeCnt + ", fiName=" + fiName + "]";
 	}
 
 	public int getRno() {
@@ -109,6 +114,27 @@ public class Recommendboard {
 		this.planame = planame;
 	}
 
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
+
+	public String getFiName() {
+		return fiName;
+	}
+
+	public void setFiName(String fiName) {
+		this.fiName = fiName;
+	}
+	
+	
+
+
+	
+	
 	
 	
 	

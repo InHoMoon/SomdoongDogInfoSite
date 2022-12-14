@@ -40,7 +40,7 @@
 
 /* 작성자, 작성일, 조회수 사이에 있는 | 표시 */
 .text_bar{
-	margin: 0 9px 0 5px;
+	margin: 0 9px 0 9px;
 	display: inline-block;
     width: 1px;
     height: 9px;
@@ -59,6 +59,7 @@
 	color: #5c5c5c;
     word-wrap: break-word;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 
@@ -78,18 +79,23 @@
 
 /* 컨텐츠 아래로 여백주기 */
 .clear{ 
-	margin-top: 300px;
+	margin-top: 30px;
     margin-bottom: 100px;
     border-bottom: 1px solid #efefef;
 }
 
 
 .like img {
-	margin-left: 15px;
-    width: 38px;
-    height: 38px;
-    top: -8px;
+    width: 20px;
+    height: 20px;
     position: relative;
+}
+
+#loc {
+	font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    top: 2px;
 }
 
 </style>
@@ -108,13 +114,14 @@
 			<span class="post_info"><fmt:formatDate value="${rboard.writeDate }" pattern="yyyy.MM.dd HH:mm"/></span>
 			<span class="text_bar"></span>
 			<span class="post_info">조회 ${rboard.hit }</span>
+			<span class="text_bar"></span>
 			<span class="like"><img class="heart" src="/resources/img/empty_heart.png"></span>
 			
 			<c:if test="${userid eq rboard.userid }">
 				<span class="up-delete">
-					<a href="/community/recommend/update?fno=${rboard.rno }" id="update">수정</a>
+					<a href="/community/recommend/update?rno=${rboard.rno }" id="update">수정</a>
 					<span class="text_bar"></span>
-					<a href="/community/recommend/delete?fno=${rboard.rno }" style="color: #f84720;">삭제</a>
+					<a href="/community/recommend/delete?rno=${rboard.rno }" style="color: #f84720;">삭제</a>
 				</span>
 			</c:if>
 		
@@ -139,8 +146,11 @@
 	</div> <!-- view_area -->
 
 
-<div id="map" style="width:100%;height:350px;"></div>
-
+	<!-- 지도 -->
+	<c:if test="${not empty rboard.address }">
+		<div><img src="/resources/img/location.png" style="width: 35px; height: auto;"><span id="loc">위치</span></div>
+		<div id="map" style="width:100%;height:350px;"></div>
+	</c:if>
 	
 <div class="clear"></div>
 
@@ -176,7 +186,8 @@ $(document).ready(function(){
 		$.ajax({
 			url : "/community/recommend/like"
 			, type : "post"
-			, data : { "rno" : ${rboard.rno}, "userid" : `${rboard.userid}` }
+// 			, data : { "rno" : ${rboard.rno}, "userid" : `${rboard.userid}` }
+			, data : { "rno" : ${rboard.rno}, "userid" : `${userid}` }
 			, success : function(data){
 				if(data == 1){
 					$(".heart").prop("src", "/resources/img/heart.png");

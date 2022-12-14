@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../../layout/header.jsp" />
-
 
 <!-- 스마트 에디터 2 로드 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
@@ -13,10 +12,74 @@
 <!-- 지도 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fa965ef2afc1eb7b03b2c26751de05b&libraries=services,clusterer,drawing"></script>
 
-<style>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#btnUpdate").click(function() {
+		
+		//스마트에디터에 작성된 내용을 #content에 반영
+		updateContents();
+		
+		$("#uptForms").submit();
+		
+	})
+	
+	
+	$("#place").on("keydown",function(e){
+        if(e.keyCode == 13) {
+        	e.preventDefault();
+        }
+    });
+
+	
+	
+	if( ${empty rboardfile} ) {
+		$("#newFile").show()
+	} else {
+		$("#originFile").show()
+	}
+	
+	$("#deleteFile").click(function() {
+		$("#newFile").toggle()
+		
+		$("#originFile").toggleClass("through")
+	})
+	
+})
+
+function updateContents() {
+	//스마트 에디터에 작성된 내용을 #content에 반영한다
+	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
+}
+</script>
+
+
+<style type="text/css">
+
+#originFile, #newFile {
+	display: none;
+}
+
+.through {
+	text-decoration: line-through;
+}
+
+#deleteFile {
+	font-weight: bold;
+	color: red;
+	cursor: pointer;
+}
+
+#place { width: 95%; }
+#btnSear{ 
+	position: relative;
+    float: right;
+    top: -34px; 
+}
+
 .btn_wrap { margin-bottom: 30px; }
 
-#btnWrite{
+#btnUpdate{
 	width: 57px;
     height: 37px;
     border-radius: 10px;
@@ -36,84 +99,66 @@
     color: #fff;
 }
 
-#place { width: 95%; }
-#btnSear{ 
-	position: relative;
-    float: right;
-    top: -34px; 
-}
 </style>
 
 
-
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	$("#btnWrite").click(function() {
-		
-		//스마트에디터에 작성된 내용을 #content에 반영
-		updateContents();
-		
-		$("form").submit();
-	})
-	
-	$("#place").on("keydown",function(e){
-        if(e.keyCode == 13) {
-        	e.preventDefault();
-        }
-    });
-	
-})
-
-function updateContents() {
-	//스마트 에디터에 작성된 내용을 #content에 반영한다
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
-}
-</script>
-
 <div class="container">
 
-<h1>글쓰기</h1>
+<h1>글수정</h1>
 <hr>
 
-<form action="/community/recommend/write" method="post" enctype="multipart/form-data">
+<form action="/community/recommend/updateConn" id="uptForms" method="post" enctype="multipart/form-data">
+
+
+<input type="hidden" name="rno" value="${param.rno }">
+
 <div class="form-group">
 	<label for="userid">작성자</label>
-	<input type="text" id="userid" value="${userid }" class="form-control" readonly="readonly">
+	<input type="text" id="userid" value="${userid}" class="form-control" readonly="readonly">
 </div>
 
 <div class="form-group">
 	<label for="title">제목</label>
-	<input type="text" id="title" name="title" class="form-control">
+	<input type="text" id="title" name="title" class="form-control" value="${updateBoard.title }">
 </div>
-
-
 
 <div class="form-group">
 	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="content"></textarea>
+	<textarea rows="10" style="width: 100%;" id="content" name="content">${updateBoard.content }</textarea>
 </div>
 
 
 <!-- 지도 -->
 <div class="form-group">
 	<label for="title">장소 추가하기</label>
-<!-- 	<input type="text" id="title" name="title" class="form-control"> -->
-	<input type="text" id="place" name="place" class="form-control">
+	<input type="text" id="place" name="place" class="form-control" value="${updateBoard.planame }">
 	<button type="button" onclick="getKeyword()" class="btn btn-default" id="btnSear">검색</button>
 	<div id="map" style="width:100%;height:350px; top: -25px;"></div>
 </div>
 <input type="hidden" id="address" name="address" value="" /><input type="hidden" id="planame" name="planame" value="" />
 <!-- 지도 -->
 
+
 <div class="form-group">
-	<label for="file">첨부파일</label>
-<!-- 	<input type="file" id="file" name="file"> -->
-	<input multiple="multiple" type="file" id="file" name="file">
+
+	<div id="fileBox">
+
+		<div id="originFile">
+			<a href="/community/recommend/download?fileNo=${rboardfile.rFileno }">${rboardfile.originName }</a>
+			<span id="deleteFile">X</span>
+		</div>
+
+		<div id="newFile">
+			<label for="file">새로운 첨부파일</label>
+			<input type="file" id="file" name="file">
+		</div>
+
+	</div>
+
 </div>
 
 <div class="text-center btn_wrap">
-	<button id="btnWrite">작성</button>
+	<button id="btnUpdate">수정</button>
 	<input type="reset" id="cancel" value="취소">
 </div>
 </form>
@@ -133,6 +178,41 @@ nhn.husky.EZCreator.createInIFrame({
 
 <script type="text/javascript">
 
+var _marker;	//전역변수
+var _info;		//전역변수	
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+geocoder.addressSearch('${updateBoard.address}', function(result, status) {
+
+	// 정상적으로 검색이 완료됐으면 
+	 if (status === kakao.maps.services.Status.OK) {
+
+	    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	    // 결과값으로 받은 위치를 마커로 표시합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: coords
+	    });
+
+	    _marker = marker;
+	    
+	    // 인포윈도우로 장소에 대한 설명을 표시합니다
+	     var infowindow = new kakao.maps.InfoWindow({
+	        content: '<div class="markerTxt" style="width:150px;text-align:center;padding:6px 0;">' + `${updateBoard.planame}` + '</div>'
+	    });
+	    
+	     _info = infowindow;
+	     
+	    infowindow.open(map, marker); 
+
+	    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	    map.setCenter(coords);
+	} 
+});
+//-------------------------------------------------------------------------------------------------------
+
 //마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -150,7 +230,10 @@ var ps = new kakao.maps.services.Places();
 
 // 키워드 가져오기
 function getKeyword() {
-	ps.keywordSearch($('#place').val(), placesSearchCB); 
+	_marker.setMap(null); //원래 마커 삭제
+	_info.setMap(null);
+	//$(".markerTxt").parent().parent().remove(); //원래 마커말풍선 삭제
+	ps.keywordSearch($('#place').val(), placesSearchCB); //키워드 가져오기
 }
 
 
@@ -189,18 +272,17 @@ function displayMarker(place) {
         
         var ad = place.address_name;
         var pn = place.place_name;
+        console.log("pn : ", pn);
         
         $('#address').attr('value', ad);
         $('#planame').attr('value', pn);
     });
 }
-
 </script>
+
 
 
 </div><!-- .container end -->
 
+
 <c:import url="../../layout/footer.jsp" />
-
-
-    

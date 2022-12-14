@@ -58,7 +58,7 @@ td:nth-child(2) {
 			<option value="content">내용</option>
 			<option value="writer">작성자</option>
 		</select>
-		<input type="text" class="search-text" placeholder="검색어를 입력하세요" id="keyword">
+		<input type="text" class="search-text" placeholder="🔍 검색어를 입력하세요" id="keyword">
 	</form>
 		<button class="search-btn" id="searBtn">찾기</button	>
 </div> 

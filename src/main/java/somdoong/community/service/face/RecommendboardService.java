@@ -28,12 +28,25 @@ public interface RecommendboardService {
 
 	//게시글 작성
 	public void write(Recommendboard rboard, MultipartFile file);
+//	public void write(Recommendboard rboard, List<MultipartFile> file);
 
 	//게시글 번호를 이용하여 업로드된 파일 정보 조회
 	public RboardFile getAttachFile(Recommendboard rboard);
 
 	//파일 번호를 이용하여 업로드된 파일 정보 조회
 	public RboardFile getFile(RboardFile rboardfile);
+
+	//검색 게시물 페이징
+	public Paging getPagingSearchCnt(Paging paging);
+
+	//검색 리스트
+	public List<Recommendboard> getList(Paging paging);
+
+	//게시글 수정
+	public void update(Recommendboard rboard, MultipartFile file);
+
+	//게시글 삭제
+	public void delete(Recommendboard rboard);
 
 
 }

@@ -40,6 +40,7 @@ public class SommemberController {
 			
 			session.setAttribute("login", loginResult);
 			session.setAttribute("userid", smember.getUserid());
+			logger.info("로그인 한 아이디 : {}", session.getAttribute("userid"));
 			
 			
 			return "redirect:/member/main";

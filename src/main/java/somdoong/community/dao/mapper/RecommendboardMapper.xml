@@ -15,15 +15,23 @@
 	
 	<!-- rboard 전체 게시글 리스트 -->
 	<select id="selectList" resultType="Recommendboard" parameterType="Paging" >
-		SELECT * FROM (
-			SELECT rownum rnum, R.* FROM (
-				SELECT
-					rno, title, content , userid, hit, write_date
-				FROM recommendboard
-				ORDER BY rno DESC
-			) R
-		) recommendboard
+	    SELECT recommendboard.rno, title,content, userid, hit, write_date, likecnt, stored_name AS finame 
+	    FROM (
+			    SELECT rownum rnum, R.* FROM (
+			        SELECT
+			            rno, title, content , userid, hit, write_date
+			        FROM recommendboard
+			        ORDER BY rno DESC
+			    ) R
+			) recommendboard
+	        LEFT JOIN (
+			    SELECT rno, count(rno) AS likeCnt
+			    from rboard_like
+			    GROUP BY rno
+			) l ON recommendboard.rno = l.rno
+	        LEFT OUTER JOIN rboard_file fi on recommendboard.rno = fi.rno 
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		ORDER BY recommendboard.rno desc
 	</select>
 	
 	
@@ -101,7 +109,78 @@
 	</select>
 	
 	
+	<!-- 검색 리스트 조회 -->
+	<select id="selectSearchlist" resultType="Recommendboard" parameterType="Paging" >
+		SELECT recommendboard.rno, title,content, userid, hit, write_date, likecnt, stored_name AS finame 
+	    FROM (
+			    SELECT rownum rnum, R.* FROM (
+			        SELECT
+			            rno, title, content , userid, hit, write_date
+			        FROM recommendboard
+			        <choose>
+						<when test="searchType == 'title'">
+							where title like '%'|| #{keyword} ||'%'
+						</when>
+			
+						<when test="searchType == 'content'">
+							where content like '%'|| #{keyword} ||'%'
+						</when>
+						
+						<when test="searchType == 'writer'">
+							where userid like '%'|| #{keyword} ||'%'
+						</when>
+					</choose>
+			        ORDER BY rno DESC
+			    ) R
+			) recommendboard
+			LEFT JOIN (
+			    SELECT rno, count(rno) AS likeCnt
+			    from rboard_like
+			    GROUP BY rno
+			) l ON recommendboard.rno = l.rno
+	        LEFT OUTER JOIN rboard_file fi on recommendboard.rno = fi.rno 
+			WHERE rnum BETWEEN #{startNo } AND #{endNo }
+			ORDER BY recommendboard.rno desc
+	</select>
 	
+	
+	<!-- 검색 리스트 페이징 -->
+	<select id="getPagingSearchCnt" parameterType="Paging" resultType="int">
+		select count(*) from recommendboard 
+		<choose>
+			<when test="searchType == 'title'">
+				WHERE title like '%'|| #{keyword} ||'%'
+			</when>
+			<when test="searchType == 'content'">
+				WHERE content like '%'|| #{keyword} ||'%'
+			</when>
+			<when test="searchType == 'writer'">
+				WHERE userid like '%'|| #{keyword} ||'%'
+			</when>
+		</choose>
+	</select>
+	
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="Recommendboard">
+		UPDATE recommendboard
+		SET title = #{title}, content = #{content}, address = #{address}, planame = #{planame}
+		WHERE rno = #{rno}
+	</update>
+
+	
+	<!-- 게시글 수정 시 첨부파일 삭제 -->
+	<delete id="deleteFile" parameterType="Recommendboard">
+		DELETE rboard_file
+		WHERE rno = #{rno}	
+	</delete>
+	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="Recommendboard">
+		delete recommendboard
+		where rno = #{rno}
+	</delete>
 	
 	
 </mapper>

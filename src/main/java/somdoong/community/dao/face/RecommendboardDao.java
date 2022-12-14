@@ -42,4 +42,19 @@ public interface RecommendboardDao {
 	//파일번호를 이용하여 첨부파일 정보 조회
 	public RboardFile selectFileByFileno(RboardFile rboardfile);
 
+	//검색 리스트
+	public List<Recommendboard> selectSearchlist(Paging paging);
+
+	//검색 리스트 페이징
+	public int getPagingSearchCnt(Paging paging);
+
+	//게시글 수정
+	public void updateBoard(Recommendboard rboard);
+
+	//게시물 수정 시 파일 삭제
+	public void deleteFile(Recommendboard rboard);
+
+	//게시글 삭제
+	public void delete(Recommendboard rboard);
+
 }
