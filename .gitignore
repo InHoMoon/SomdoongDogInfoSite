@@ -2,3 +2,7 @@ target
 header.jsp
 footer.jsp
 /src/main/webapp/WEB-INF/views/layout
+servlet-context.xml
+root-context.xml
+web.xml
+pom.xml
