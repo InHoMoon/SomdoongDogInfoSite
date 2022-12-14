@@ -20,12 +20,15 @@ public interface ShowboardDao {
 	//게시글 번호 이용하여 첨부파일 정보 조회
 	public SboardFile selectFile(Showboard viewboard);
 
+	//게시글 입력
 	public void insertBoard(Showboard board);
 
+	//첨부파일 입력
 	public void insertFile(SboardFile sboardFile);
 
 	public void upHit(Showboard viewboard);
 
+	//게시글 상세보기
 	public Showboard selectBySno(Showboard viewboard);
 	
 	//댓글 작성

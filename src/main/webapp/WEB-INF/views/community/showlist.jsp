@@ -43,7 +43,7 @@ $(document).ready(function(){
 	<c:forEach items="${list }" var="list" varStatus="status">
 	<div class="album">
 		<div style = "text-align:center;">
-			<img src="/upload/${list.STORED_NAME }" class="img-circle" style="width: 140px; height: 140px;">
+			<img src="/upload/${list.STORED_NAME }" class="img-thumbnail" style="width: 140px; height: 140px;">
 		</div>
 		<div style = "text-align:center; font-size: 20px;"><a href="./showview?sno=${list.SNO }">${list.TITLE }</a></div>
 		<div style = "text-align:center;">${list.USERID }</div>

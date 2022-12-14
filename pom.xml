@@ -74,6 +74,14 @@
 	    <version>2.11.0</version>
 	</dependency>
 	
+	<!-- Thumbnailator 0.4.18 -->
+	<dependency>
+	    <groupId>net.coobird</groupId>
+    	<artifactId>thumbnailator</artifactId>
+    	<version>0.4.18</version>
+	</dependency>
+	
+	
 	<!-- 마이바티스 -->
 	<dependency>
 		<groupId>org.mybatis</groupId>
