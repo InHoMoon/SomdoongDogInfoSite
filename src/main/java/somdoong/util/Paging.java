@@ -15,15 +15,12 @@ public class Paging {
 	private int startNo; //화면에 보이는 게시글의 시작 번호
 	private int endNo; //화면에 보이는 게시글의 끝 번호
 	
-<<<<<<< HEAD
+
 	private String searchType;
 	private String keyword;
 	
-	
-=======
 	private String iUserid;
->>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
-	//디폴트 생성자 - 페이징 로직이 처리되지 않는다
+
 	public Paging() {}
 	
 	
@@ -110,10 +107,6 @@ public class Paging {
 		
 	}
 
-<<<<<<< HEAD
-	
-=======
-
 	public Paging(int curPage, int totalCount, int listCount, int totalPage, int pageCount, int startPage, int endPage,
 			int startNo, int endNo, String iUserid) {
 		super();
@@ -131,17 +124,12 @@ public class Paging {
 
 	
 
->>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	@Override
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-<<<<<<< HEAD
 				+ ", startNo=" + startNo + ", endNo=" + endNo + ", searchType=" + searchType + ", keyword=" + keyword
-				+ "]";
-=======
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", iUserid=" + iUserid + "]";
->>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
+				+ ", iUserid=" + iUserid + "]";
 	}
 
 
@@ -233,7 +221,6 @@ public class Paging {
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
-<<<<<<< HEAD
 	
 	public String getSearchType() {
 		return searchType;
@@ -250,7 +237,6 @@ public class Paging {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-=======
 
 
 	public String getiUserid() {
@@ -261,12 +247,5 @@ public class Paging {
 	public void setiUserid(String iUserid) {
 		this.iUserid = iUserid;
 	}
-
-
-	
-	
-
-
->>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	
 }
