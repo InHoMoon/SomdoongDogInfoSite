@@ -3,7 +3,9 @@ package somdoong.community.dao.face;
 import java.util.HashMap;
 import java.util.List;
 
+import somdoong.community.dto.SboardComm;
 import somdoong.community.dto.SboardFile;
+import somdoong.community.dto.SboardLike;
 import somdoong.community.dto.Showboard;
 import somdoong.util.Paging;
 
@@ -25,5 +27,21 @@ public interface ShowboardDao {
 	public void upHit(Showboard viewboard);
 
 	public Showboard selectBySno(Showboard viewboard);
+	
+	//댓글 작성
+	public List<SboardComm> commList(int sno) throws Exception;
+
+	public int chkLike(SboardLike sLike);
+
+	public int insertLike(SboardLike sLike);
+
+	public void deleteLike(SboardLike sLike);
+
+	//첨부파일 삭제
+	public void deleteFile(Showboard sboard);
+
+	//게시글 정보 수정
+	public void updateBoard(Showboard sboard);
+
 
 }

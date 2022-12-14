@@ -23,6 +23,11 @@ $(document).ready(function(){
 		//** submit 전에 에디터 내용이 반영되도록 작성할 것
 	})
 	
+	//취소버튼
+	$("#cancle").click(function() {
+		history.go(-1);
+	})
+	
 })
 
 function updateContents() {
@@ -55,7 +60,7 @@ function updateContents() {
 
 <div class="text-center">
 	<button class="btn btn-primary" id="btnWrite">작성</button>
-	<input type="reset" id="cancel" class="btn btn-danger" value="취소">
+	<button type="button" id="cancle" class="btn btn-danger" >취소</button>
 </div>
 </form>
 

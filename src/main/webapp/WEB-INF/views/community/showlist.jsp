@@ -4,18 +4,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="../layout/header.jsp"/>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#btnWrite").click(function(){
+		
+		if(${empty userid}){
+			alert("로그인 후 이용해주세요!");
+			return location.href = "/community/showlist";
+		}
+	});
+});
+</script>
 <style>
+.container {
+	font-family: 'Dongle', sans-serif;
+}
 	.album{
 		float:left; 
 		text-align:center;
 		margin: 15px;
 	}
 		/* clear: both; */
+		
+	.showlogo {
+		margin-left: 350px;
+	}
 </style>
 
 <div class="container">
+<div class="showlogo">
+<img src="../resources/show.PNG" style="width: 350px; float: center;">
+</div>
 
-<hr>
 <div class="row">
 	<div class="col-md-2">
 	</div>
@@ -25,9 +45,8 @@
 		<div style = "text-align:center;">
 			<img src="/upload/${list.STORED_NAME }" class="img-circle" style="width: 140px; height: 140px;">
 		</div>
-		<div style = "text-align:center;"><a href="./showview?sno=${list.SNO }">${list.TITLE }</a></div>
+		<div style = "text-align:center; font-size: 20px;"><a href="./showview?sno=${list.SNO }">${list.TITLE }</a></div>
 		<div style = "text-align:center;">${list.USERID }</div>
-		<div style = "text-align:center;">${list.HIT }</div>
 	</div>
 
 	</c:forEach>

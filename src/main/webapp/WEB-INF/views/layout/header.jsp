@@ -33,7 +33,7 @@ a {
 }
 
 #header_wrap {
-	height: 100vh
+	height: 90vh
 }
 
 header {
@@ -135,24 +135,20 @@ header .menu_wrap {
 
 footer {
 	border-top: 1px solid #d3d3d3;
-	height: 60px;
 	font-family: 'Dongle', sans-serif;
-}
-
-footer #footer_wrap {
+/*	border-top: 1px solid #d3d3d3;
 	width: 90%;
 	min-width: 1000px;
 	max-width: 1200px;
 	height: 50px;
-	margin: 0 auto;
-	text-align: center;
-}
-
-#footer_wrap .span {
-	margin-top: 18px;
-	color:#d3d3d3;
-	font-weight: 100;
+	margin: 0 auto; */
 	font-size: 20px;
+	text-align: center;
+/*	color:#d3d3d3;
+	font-weight: 100;
+	font-size: 20px;*/
+/* 	position:absolute; */
+/*    	bottom:0; */
 }
 
 </style>
@@ -185,7 +181,7 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
-		<li><a href="#">로그인</a></li>
+		<li><a href="/member/login">로그인</a></li>
 		</c:if>
 		<c:if test="${not empty login }">
 		<li><a href="#">마이페이지</a>
