@@ -9,11 +9,20 @@
 	
 <<<<<<< HEAD
 	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
+	<!-- 	-> WEB.xml 파일의 가장 윗줄에 작성! -->
+	<!-- 	-> <web-app>태그의 첫번째 자식으로 작성할 것!! -->
+=======
+<<<<<<< HEAD
+	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
 =======
 	<!-- POST 데이터의 한글 인코딩 (UTF-8) 설정 필터  -->
 	<!--	-> web.xml 파일의 가장 윗줄에 작성할 것  -->
 	<!--	-> <web-app> 태그의 첫번째 자식으로 작성 할 것  -->
 >>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
+=======
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 >>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -27,6 +36,10 @@
 =======
 		</filter-class>		
 >>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
+=======
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 >>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 		<init-param>
 			<param-name>encoding</param-name>
@@ -36,6 +49,13 @@
 	
 <<<<<<< HEAD
 	<filter-mapping>
+=======
+<<<<<<< HEAD
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 =======
 <<<<<<< HEAD
 	<filter-mapping>
@@ -53,8 +73,12 @@
 >>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	</filter-mapping>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
+=======
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 
 	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
 	<filter>
@@ -99,5 +123,9 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 </web-app>

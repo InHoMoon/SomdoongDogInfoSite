@@ -31,15 +31,39 @@
     <artifactId>json</artifactId>
     <version>20220924</version>
 </dependency>
+<<<<<<< HEAD
 
+=======
+	
+<<<<<<< HEAD
+	<!-- JackSon Databind -->
+=======
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 <!--Jackson Databind  -->	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	<dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
     	<version>2.14.0</version>
 	</dependency>
 	
+	<dependency>
+         <groupId>com.fasterxml.jackson.dataformat</groupId>
+         <artifactId>jackson-dataformat-xml</artifactId>
+         <version>2.9.6</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.2</version>
+    </dependency>
+	
+	<!-- log4jdbc -->
 	<dependency>
 	    <groupId>org.lazyluke</groupId>
 	    <artifactId>log4jdbc-remix</artifactId>
@@ -103,6 +127,7 @@
 		<artifactId>ojdbc6</artifactId>
 		<version>12.1.0.2</version>
 	</dependency>
+<<<<<<< HEAD
 	
 	<!-- 마이바티스 로그 라이브러리 -->
 	<dependency>
@@ -118,6 +143,30 @@
 		<version>${org.aspectj-version}</version>
 	</dependency>		
 		
+=======
+		
+	<!-- AspectJ -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>${org.aspectj-version}</version>
+	</dependency>
+	
+	<!-- AspectJ Weaver -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>${org.aspectj-version}</version>
+	</dependency>	
+	
+	<!-- 썸네일 -->
+	<dependency>
+    <groupId>net.coobird</groupId>
+    <artifactId>thumbnailator</artifactId>
+    <version>0.4.17</version>
+	</dependency>
+	
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 		
 		<!-- Spring -->
 		<dependency>
