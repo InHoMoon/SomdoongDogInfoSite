@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.community.dao.face.FboardCommentDao">
+
+	<!-- 댓글 등록 -->
+	<insert id="insertComm" parameterType="FboardComment">
+		INSERT INTO fboard_comment ( cno, bno, userid, comm_content ) 
+		VALUES ( fboard_comment_seq.nextval, #{bno}, #{userid}, #{commContent} )
+	</insert>
+	
+	
+	<!-- 댓글 수 조회 -->
+	<select id="getCntByBno" resultType="int" parameterType="int">
+		select count(*) from fboard_comment
+		where bno = #{bno}
+	</select>
+	
+	
+	 <!-- 댓글 목록 -->
+    <select id="list" resultType="FboardComment" parameterType="int">
+        <include refid="pagingHeader"/>
+            select cno, userid, comm_content, comm_date from fboard_comment
+			where bno = #{bno}
+			order by cno desc
+        <include refid="pagingFooter"/>
+    </select>
+    
+     <!-- 페이징 sql -->
+    <sql id="pagingHeader">
+        SELECT * FROM (
+            SELECT ROWNUM AS rn, A.* FROM (
+    </sql>
+    <sql id="pagingFooter">
+            ) A
+        ) WHERE rn BETWEEN #{start} AND #{end}
+    </sql>
+	
+	
+	<!-- 댓글 상세 -->
+	<select id="detail" resultType="FboardComment" parameterType="int">
+	 	select * from fboard_comment
+		where cno = #{cno}
+    </select>
+    
+    
+    <!-- 댓글 수정 -->
+    <update id="update" parameterType="FboardComment">
+     	UPDATE fboard_comment
+        SET comm_content = #{commContent}
+        WHERE cno = #{cno}
+    </update>
+    
+    
+    <!-- 댓글 삭제 -->
+    <delete id="delete" parameterType="int">
+    	DELETE FROM fboard_comment
+        WHERE cno = #{cno}
+    </delete>
+	
+    
+   
+    
+    
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

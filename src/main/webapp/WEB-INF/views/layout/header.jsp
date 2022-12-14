@@ -164,7 +164,11 @@ footer #footer_wrap {
 <header>
 <div>
 	<h1 class="logo">
+<<<<<<< HEAD
+	<a href="/member/main"><img src="/resources/img/logo.PNG"></a>
+=======
 	<a href="#"><img src="../resources/logo.PNG"></a>
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
 	</h1>
 	<div class="menu_wrap">
 	<nav>
@@ -173,8 +177,13 @@ footer #footer_wrap {
 		<li><a href="#">커뮤니티</a>
 			<ul class="dept2">
 				<li><a href="#">강아지 자랑</a></li>
+<<<<<<< HEAD
+				<li><a href="/community/recommend/list">맛집 추천</a></li>
+				<li><a href="/community/free/list">강아지 Q&A</a></li>
+=======
 				<li><a href="#">맛집 추천</a></li>
 				<li><a href="#">강아지 Q&A</a></li>
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
 				<li><a href="#">강아지 정보</a></li>
 			</ul>
 		</li>
@@ -185,6 +194,7 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<li><a href="#">로그인</a></li>
 		</c:if>
@@ -200,7 +210,11 @@ footer #footer_wrap {
 		</li>
 		<li><a href="#">로그아웃</a></li>
 =======
+		<li><a href="/member/main">로그인</a></li>
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+=======
 		<li><a href="./login">로그인</a></li>
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
 		</c:if>
 		<c:if test="${not empty login }">
 		<li><a href="#">마이페이지</a>
@@ -211,7 +225,14 @@ footer #footer_wrap {
 			<li><a href="#">게시글 수정</a></li>
 		</ul>
 		</li>
+<<<<<<< HEAD
+		<li><a href="#">로그아웃</a></li>
+=======
 		<li><a href="./logout">로그아웃</a></li>
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+=======
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
 >>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
 		</c:if>
 	</ul>
