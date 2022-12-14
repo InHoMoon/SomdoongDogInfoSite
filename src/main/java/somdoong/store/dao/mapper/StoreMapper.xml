@@ -57,5 +57,18 @@
 				#{info }, #{price}, #{stock }, default, 0, 0 )
 	</insert>
 	
+	<insert id="insertImg" parameterType="somdoong.store.dto.ProductImg">
+		INSERT INTO product_img ( img_no, store_no, origin_name, stored_name)
+		VALUES ( product_img_seq.nextval, #{storeNo }, #{originName }, #{storedName } )
+	</insert>
+	
+	<select id="selectProductImgByStoreNo" resultType="somdoong.store.dto.ProductImg" parameterType="somdoong.store.dto.Store">
+		SELECT
+			img_no, store_no, origin_name, stored_name
+		FROM product_img
+		WHERE store_no = #{storeNo }
+	
+	</select>
+	
 	
 </mapper>

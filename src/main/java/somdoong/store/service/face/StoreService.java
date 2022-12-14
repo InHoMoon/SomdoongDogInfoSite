@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
 
 public interface StoreService {
@@ -39,6 +40,14 @@ public interface StoreService {
 	 * @param file - 첨부파일 정보 객체
 	 */
 	public void write(Store store, MultipartFile file);
+
+	/**
+	 * 게시글 번호를 이용하여 업로드된 파일 정보 조회
+	 * 
+	 * @param viewStore - 조회할 게시글 번호 객체
+	 * @return 첨부 파일 정보
+	 */
+	public ProductImg getAttachFile(Store viewStore);
 
 
 

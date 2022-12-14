@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
 import somdoong.store.service.face.StoreService;
 
@@ -29,19 +30,18 @@ public class StoreController {
 	
 	//--------------------------  상품정보 목록  --------------------------
 
-	@RequestMapping("/list")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String listMain() {
+		
+		return "store/list_main";
+	}
+	
+	@RequestMapping("/list/index")
 	public String StoreList(Model model) {
-		logger.info("/store/list");
 
 		return "store/list_index";
 	}
 
-	@RequestMapping(value = "/list/main", method = RequestMethod.GET)
-	public String listMain() {
-		logger.info("/list/main");
-		
-		return "store/list_main";
-	}
 	
 	@RequestMapping("/list/all")
 	public String ListAll(Model model) {
@@ -71,8 +71,6 @@ public class StoreController {
 	@RequestMapping("/list/snack")
 	public String SnackList(@RequestParam("id_check") String category, Model model) {
 
-		logger.info("/store/list/snack");
-
 		List<Store> list = storeService.getList(category);
 
 		model.addAttribute("list", list);
@@ -83,8 +81,6 @@ public class StoreController {
 	@RequestMapping("/list/medical")
 	public String MedicalList(@RequestParam("id_check") String category, Model model) {
 
-		logger.info("/store/list/medical");
-
 		List<Store> list = storeService.getList(category);
 
 		model.addAttribute("list", list);
@@ -94,8 +90,6 @@ public class StoreController {
 
 	@RequestMapping("/list/toy")
 	public String ToyList(@RequestParam("id_check") String category, Model model) {
-
-		logger.info("/store/list/toy");
 
 		List<Store> list = storeService.getList(category);
 
@@ -109,13 +103,16 @@ public class StoreController {
 	@RequestMapping(value = "/list/detail", method = RequestMethod.GET)
 	public String View(Store viewStore, Model model) {
 		
-		logger.info("/store/list/detail");
-		
+		//게시글 조회
 		viewStore = storeService.view(viewStore);
 		
 		logger.info("조회된 게시글 {}", viewStore);
 		
 		model.addAttribute("viewStore", viewStore);
+		
+		//첨부파일 모델값 전달
+		ProductImg productImg = storeService.getAttachFile(viewStore);
+		model.addAttribute("productImg", productImg);
 		
 		return "store/list_detail"; 
 	}
@@ -142,13 +139,9 @@ public class StoreController {
 	@PostMapping("/list/write")
 	public String WriteProcess(Store store, MultipartFile file, HttpSession session) {
 		
-		logger.info("{}", store);
-		
 		storeService.write(store, file);
 		
-		logger.info("{}", store.getStoreNo());
 		logger.info("{}", store);
-		
 		logger.info("{}", file);
 		
 		return "redirect:/store/list/detail?storeNo=" + store.getStoreNo();

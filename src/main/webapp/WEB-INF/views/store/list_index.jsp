@@ -152,7 +152,7 @@ ul > li > img:hover {
 </div>
 
 <div id="list-content">
-	<%@	include file="./list_main.jsp" %>
+	<%@	include file="./list_all.jsp" %>
 </div>
 
 </div>

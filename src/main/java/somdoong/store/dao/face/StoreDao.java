@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
 
 public interface StoreDao {
@@ -43,6 +44,21 @@ public interface StoreDao {
 	 * @param store - 삽입할 게시글 정보
 	 */
 	public void insertStore(Store store);
+
+	/**
+	 * 첨부이미지 정보를 삽입
+	 * 
+	 * @param productImg
+	 */
+	public void insertImg(ProductImg productImg);
+
+	/**
+	 * 게시글 번호를 이용하여 첨부파일 정보를 조회
+	 * 
+	 * @param viewStore - 조회할 게시글 번호
+	 * @return 조회된 첨부파일 정보
+	 */
+	public ProductImg selectProductImgByStoreNo(Store viewStore);
 
 	
 }

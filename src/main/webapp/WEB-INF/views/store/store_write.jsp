@@ -1,16 +1,44 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@	include file="../layout/header.jsp" %>
 <script type="text/javascript">
 $(document).ready(function() {
+
+	$("#productImg").change(function( e ) {
+		
+		var files = e.target.files;
+		
+		// 이미지 처리 검사
+		if( !files[0].type.includes( "image" ) ) {
+			alert("이미지가 아닙니다.")
+			
+			// 선택 파일 해제
+			e.target.value = null;
+			
+			// 이벤트 처리 중단
+			return false;
+		}
+		
+		var reader = new FileReader();
+		
+		reader.onload = function( data ) {
+			
+			$("#write-content").html(
+				$("<img>").attr({
+					"src": data.target.result
+				})
+			)
+		}
+		reader.readAsDataURL( files[0] );
+	})
 	
 	$("#write-btn").click(function() {
 		
 		$("form").submit();
 	})
-	
-})
+});
 </script>
 
 <style type="text/css">
@@ -68,7 +96,16 @@ textarea {
 }
 
 #write-content {
+	margin-top: 30px;
+
+	display: flex;
+	justify-content: center;
+	
 	border-top: 1px solid #d3d3d3;
+}
+
+#write-content > img {
+	margin-top: 30px;
 }
 
 #store-category-productName {
@@ -152,15 +189,12 @@ button {
 					<label style="font-size: 20px; margin-left: 2px;">원</label>
 				</div>
 				<div>
-					<br><input type="file" id="name" name="file">
+					<br><input type="file" id="productImg" name="file">
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="write-content" style="margin-top: 20px;">
-		업로드한 이미지가 들어갈 div공간
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</div>
+	<div id="write-content" style="margin-top: 20px;"></div>
 </form>
 
 </div>

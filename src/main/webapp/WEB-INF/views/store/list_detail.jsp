@@ -7,13 +7,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		$(".heart").click(function() {
-			$(this).toggleClass('change');
-		})
-
 		$(".menu").click(function() {
 			
 			var id_check = $(this).attr("id");
+			
+			console.log(id_check);
 
 			var url = "/store/product/" + id_check
 
@@ -22,7 +20,7 @@
 				url : url,
 				async : true,
 				cache : "false",
-				data : {id_check},
+ 				data : {id_check},
 				dataType : "html",
 				success : function(data) {
 					console.log("ajax 성공")
@@ -36,6 +34,10 @@
 				}
 			})
 		});
+		
+		$(".heart").click(function() {
+			$(this).toggleClass('change');
+		})
 	})
 </script>
 

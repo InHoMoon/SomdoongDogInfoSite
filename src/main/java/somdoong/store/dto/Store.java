@@ -118,5 +118,6 @@ public class Store {
 	public void setLikepost(int likepost) {
 		this.likepost = likepost;
 	}
+	
 
 }

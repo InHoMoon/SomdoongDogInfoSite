@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.store.dao.face.StoreDao;
+import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
 import somdoong.store.service.face.StoreService;
 
@@ -65,9 +66,9 @@ public class StoreServiceImpl implements StoreService {
 		
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
-		File storedFolder = new File( storedPath );
-		if ( !storedFolder.exists() ) {
-			storedFolder.mkdir();
+		File uploadFolder = new File( storedPath );
+		if ( !uploadFolder.exists() ) {
+			uploadFolder.mkdir();
 		}
 		
 		//파일이 저장될 이름
@@ -75,7 +76,7 @@ public class StoreServiceImpl implements StoreService {
 		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
 		
 		//저장할 파일의 정보 객체
-		File dest = new File( storedFolder, storedName );
+		File dest = new File( uploadFolder, storedName );
 		
 		try {
 			file.transferTo(dest);
@@ -85,8 +86,21 @@ public class StoreServiceImpl implements StoreService {
 			e.printStackTrace();
 		}
 		
+		//-------------------------------------
 		
+		//첨부파일 정보 DB 기록
+		ProductImg productImg = new ProductImg();
+		productImg.setStoreNo( store.getStoreNo() );
+		productImg.setOriginName(originName);
+		productImg.setStoredName(storedName);
 		
+		storeDao.insertImg(productImg);
+		
+	}
+
+	@Override
+	public ProductImg getAttachFile(Store viewStore) {
+		return storeDao.selectProductImgByStoreNo(viewStore);
 	}
 
 }

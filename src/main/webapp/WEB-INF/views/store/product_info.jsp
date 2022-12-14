@@ -9,6 +9,7 @@
 </style>
 
 <div id="product-info-img">
-	<img src="/resources/productImg.jpg">
+	<img src="<%=request.getContextPath() %>/upload/${productImg.storedName }">
 </div>
 
+	
