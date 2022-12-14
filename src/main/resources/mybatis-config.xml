@@ -21,7 +21,17 @@
 	</settings>
 	
 	<typeAliases>
+<<<<<<< HEAD
 		<package name="somdoong"/>
+=======
+<<<<<<< HEAD
+		<package name="somdoong.community.dto"/>
+		<package name="somdoong.community.util"/>
+=======
+		<package name="somdoong.member.dto"/>
+		
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	</typeAliases>
 	
 </configuration>
