@@ -31,7 +31,7 @@
 				</c:if>
 				
 				<c:if test="${s.fiName eq null }">
-					<img src="/resources/img/pic.png" style="width: 80px; height: 80px;">
+					<img src="/resources/img/nimg.png" style="width: 80px; height: 80px;">
 				</c:if>
 				<a href="/community/recommend/view?rno=${s.rno }">${s.title }</a>
 			</td>

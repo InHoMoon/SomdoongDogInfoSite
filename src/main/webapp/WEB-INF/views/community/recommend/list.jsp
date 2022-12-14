@@ -43,7 +43,12 @@ td:nth-child(2) {
 .search-btn { height: 40px; width:37px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
 
 
-#title > a{ color: #333; }
+#title > a{ 
+	color: #333;
+    line-height: 5;
+    position: relative;
+    float: left;
+}
 
 .imgBox { 
 	width: 80px;
@@ -81,7 +86,8 @@ td:nth-child(2) {
 	<thead>
 		<tr>
 			<th style="width: 10%;">글번호</th>
-			<th style="width: 45%; text-align: center;">제목</th>
+			<th style="width: 10%;"></th>
+			<th style="width: 30%; text-align: center;">제목</th>
 			<th style="width: 15%;">작성자</th>
 			<th style="width: 10%;">조회수</th>
 			<th style="width: 10%;">좋아요</th>
@@ -93,15 +99,17 @@ td:nth-child(2) {
 		<tr>
 			<td style="text-align: center; line-height: 5;">${rboard.rno }</td>
 <!-- 			<td id="title" style="line-height: 5;"> -->
-			<td id="title">
+			<td>
 				<c:if test="${not empty rboard.fiName }">
 <%-- 					<img src="/upload/${rboard.fiName }" style="width: 80px; height: 80px;"> --%>
 					<div class="imgBox" style="background-image: url('/upload/${rboard.fiName }');"></div>
 				</c:if>
 				
 				<c:if test="${rboard.fiName eq null }">
-					<img src="/resources/img/pic.png" style="width: 80px; height: 80px;">
+					<img src="/resources/img/nimg.png" style="width: 80px; height: 80px;">
 				</c:if>
+			</td>
+			<td id="title">
 				<a href="/community/recommend/view?rno=${rboard.rno }">${rboard.title }</a>
 			</td>
 			<td style="text-align: center; line-height: 5;">${rboard.userid }</td>

@@ -74,6 +74,7 @@ public class RecommendboardController {
 		sePaging.setKeyword(keyword);
 		
 		List<Recommendboard> sList = rboardService.getList(sePaging);
+		logger.info("sList : {}", sList);
 		
 		mav.setViewName("/community/recommend/search");
 		mav.addObject("sePaging", sePaging);
