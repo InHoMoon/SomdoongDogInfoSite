@@ -185,6 +185,7 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
+<<<<<<< HEAD
 		<li><a href="#">로그인</a></li>
 		</c:if>
 		<c:if test="${not empty login }">
@@ -198,6 +199,20 @@ footer #footer_wrap {
 		</ul>
 		</li>
 		<li><a href="#">로그아웃</a></li>
+=======
+		<li><a href="./login">로그인</a></li>
+		</c:if>
+		<c:if test="${not empty login }">
+		<li><a href="#">마이페이지</a>
+		<ul class="dept2">
+			<li><a href="#">정보 수정</a></li>
+			<li><a href="#">장바구니</a></li>
+			<li><a href="#">구매내역</a></li>
+			<li><a href="#">게시글 수정</a></li>
+		</ul>
+		</li>
+		<li><a href="./logout">로그아웃</a></li>
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
 		</c:if>
 	</ul>
 	</nav>
