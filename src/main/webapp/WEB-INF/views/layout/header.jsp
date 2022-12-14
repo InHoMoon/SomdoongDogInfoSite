@@ -165,7 +165,17 @@ footer #footer_wrap {
 <header>
 <div>
 	<h1 class="logo">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	<a href="/member/main"><img src="/resources/img/logo.PNG"></a>
+=======
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	<a href="#"><img src="../resources/logo.PNG"></a>
+<<<<<<< HEAD
+=======
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	</h1>
 	<div class="menu_wrap">
 	<nav>
@@ -174,8 +184,19 @@ footer #footer_wrap {
 		<li><a href="#">커뮤니티</a>
 			<ul class="dept2">
 				<li><a href="#">강아지 자랑</a></li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+				<li><a href="/community/recommend/list">맛집 추천</a></li>
+				<li><a href="/community/free/list">강아지 Q&A</a></li>
+=======
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 				<li><a href="#">맛집 추천</a></li>
 				<li><a href="#">강아지 Q&A</a></li>
+<<<<<<< HEAD
+=======
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 				<li><a href="#">강아지 정보</a></li>
 			</ul>
 		</li>
@@ -186,7 +207,31 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
+<<<<<<< HEAD
 		<li><a href="#">로그인</a></li>
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		<li><a href="#">로그인</a></li>
+		</c:if>
+		<c:if test="${not empty login }">
+		<li><a href="#">마이페이지</a>
+		<ul class="dept2">
+			<li><a href="/mypage/update/memberUpdateView?userid=${userid}">정보 수정</a></li>
+			<li><a href="#">장바구니</a></li>
+			<li><a href="#">구매내역</a></li>
+			<li><a href="/mypage/myboard/list?userid=${userid }">내가 쓴 글 </a></li>
+			
+		</ul>
+		</li>
+		<li><a href="#">로그아웃</a></li>
+=======
+		<li><a href="/member/main">로그인</a></li>
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+=======
+		<li><a href="./login">로그인</a></li>
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 		</c:if>
 		<c:if test="${not empty login }">
 		<li><a href="#">마이페이지</a>
@@ -197,7 +242,21 @@ footer #footer_wrap {
 			<li><a href="#">게시글 수정</a></li>
 		</ul>
 		</li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 		<li><a href="#">로그아웃</a></li>
+<<<<<<< HEAD
+=======
+=======
+		<li><a href="./logout">로그아웃</a></li>
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+=======
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 		</c:if>
 	</ul>
 	</nav>

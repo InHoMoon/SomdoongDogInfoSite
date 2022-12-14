@@ -36,7 +36,7 @@
 	</logger>
 	
 	<logger name="somdoong.mypage">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<logger name="somdoong.store">

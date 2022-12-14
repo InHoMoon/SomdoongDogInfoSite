@@ -52,7 +52,27 @@
 >>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
 >>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	</filter-mapping>
+<<<<<<< HEAD
 	
+=======
+
+	<!-- POST 데이터의 한글 인코딩(UTF-8) 필터 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
