@@ -24,7 +24,18 @@
 	</repositories>
 	
 	<dependencies>
+
+<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20220924</version>
+</dependency>
 	
+<<<<<<< HEAD
+=======
+<!--Jackson Databind  -->	
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	<dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
