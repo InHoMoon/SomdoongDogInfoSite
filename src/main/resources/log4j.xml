@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.somdoong.www">
+	<logger name="somdoong">
 		<level value="info" />
 	</logger>
 	
@@ -62,7 +62,7 @@
 	</logger>
 	
 	<logger name="jdbc.sqltiming">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="jdbc.resultset">
@@ -70,7 +70,7 @@
 	</logger>
 	
 	<logger name="jdbc.resultsettable">
-		<level value="WARN" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="org.mybatis">

@@ -13,11 +13,11 @@ $(document).ready(function() {
 	})
 	
 	$("#btnUpdate").click(function() {
-		location.href = "/notice/update?notino=${notice.notino }"
+		location.href = "/notice/update?notino=${viewNotice.notino }"
 	})
 	
 	$("#btnDelete").click(function() {
-		location.href = "/notice/delete?notino=${notice.notino }"
+		location.href = "/notice/delete?notino=${viewNotice.notino }"
 	})
 })
 </script>
@@ -136,18 +136,18 @@ $(document).ready(function() {
 	<div class="content-header">
 		<div class="content-title">
 			<div class="content-title_area">
-				<div class="content-title_areaText">${notice.title }</div>
+				<div class="content-title_areaText">${viewNotice.title }</div>
 			</div>
 		</div>
 			<div class="content-info">
 				<div class="content-info_area">
-					<div class="content-info_areaId">${notice.adminid }</div>
-					<div class="content-info_areaDate"><fmt:formatDate value="${notice.notidate }" pattern="yy-MM-dd"/></div>
+					<div class="content-info_areaId">${viewNotice.adminid }</div>
+					<div class="content-info_areaDate"><fmt:formatDate value="${viewNotice.notidate }" pattern="yy-MM-dd"/></div>
 				</div>
 			</div>
 	</div>
 	<div class="content-main">
-	${notice.content }
+	${viewNotice.content }
 	</div>
 		
 </div>
@@ -156,10 +156,10 @@ $(document).ready(function() {
 	<div class="text-center">
 			<button id="btnList" class="btn btn-default">목록</button>
 			
-			<c:if test="${adminid eq notice.adminid }">
+<%-- 			<c:if test="${id eq viewNotice.adminid }"> --%>
 				<button id="btnUpdate" class="btn btn-primary">수정</button>
 				<button id="btnDelete" class="btn btn-danger">삭제</button>
-			</c:if>
+<%-- 			</c:if> --%>
 		</div>
 </div>
 		

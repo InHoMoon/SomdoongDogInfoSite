@@ -180,7 +180,7 @@ footer #footer_wrap {
 		</li>
 		<li><a href="#">고객센터</a>
 			<ul class="dept2">
-				<li><a href="#">공지사항</a></li>
+				<li><a href="/notice/list">공지사항</a></li>
 				<li><a href="#">1:1 문의</a></li>
 			</ul>
 		</li>

@@ -14,7 +14,7 @@
 	<select id="selectList" resultType="Notice" parameterType="Paging">
 		SELECT * FROM (
 			SELECT rownum rnum, N.* FROM (
-				SELECT notice.*
+				SELECT notino, adminid, title, content, hit, notidate
 				FROM notice	
 				ORDER BY notino DESC
 			) N
@@ -26,7 +26,7 @@
 	<select id="selectSearchlist" resultType="Notice" parameterType="Paging" >
 		SELECT * FROM (
 		    SELECT rownum rnum, N.* FROM (
-		        SELECT notice.*
+		        SELECT notino, adminid, title, content, hit, notidate
 		        FROM notice
 		        <choose>
 					<when test="searchType == 'title'">
@@ -74,9 +74,28 @@
 			SELECT notice_seq.nextval FROM dual
 		</selectKey>
 	
-		INSERT INTO notice ( notino, adminid, title , content, notidate, hit )
-		VALUES ( #{notino }, #{adminid }, #{title }, #{content }, CURRENT_TIMESTAMP, 0 )
+		INSERT INTO notice ( notino, adminid, title , content)
+		VALUES ( #{notino }, #{adminid }, #{title }, #{content })
 	</insert>
+	
+	<insert id="insertFile" parameterType="NoticeFile">
+		INSERT INTO noticefile ( file_no, notino, origin_name, stored_name)
+		VALUES ( noticefile_seq.nextval, #{notino }, #{originName }, #{storedName } )
+	</insert>
+
+	<select id="selectNoticeFileByNotino" resultType="NoticeFile" parameterType="Notice">
+		SELECT
+			file_no, notino, origin_name, stored_name
+		FROM noticefile
+		WHERE notino = #{notino }
+	</select>
+
+	<select id="selectNoticeFileByFileNo" resultType="NoticeFile" parameterType="NoticeFile">
+		SELECT
+			file_no, notino, origin_name, stored_name
+		FROM noticefile
+		WHERE notino = #{notino }
+	</select>	
 	
 	<update id="updateNotice" parameterType="Notice">
 		UPDATE notice
@@ -84,6 +103,11 @@
 			, content = #{content}
 		WHERE notino = #{notino}
 	</update>
+	
+	<delete id="deleteFile" parameterType="Notice">
+		DELETE noticefile
+		WHERE notino = #{notino}	
+	</delete>	
 	
 	<delete id="delete" parameterType="Notice">
 		DELETE notice

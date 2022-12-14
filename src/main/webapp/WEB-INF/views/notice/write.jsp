@@ -40,10 +40,10 @@ function updateContents() {
 <h1>글쓰기</h1>
 <hr>
 
-<form action="/notice/write" method="post" enctype="multipart/form-data">
+<form action="./write" method="post" enctype="multipart/form-data">
 <div class="form-group">
 	<label for="adminid">작성자</label>
-	<input type="text" id="adminid" value="${adminid}" class="form-control" readonly="readonly">
+	<input type="text" id="adminid" value="${adminid }" class="form-control" readonly="readonly">
 </div>
 
 <div class="form-group">

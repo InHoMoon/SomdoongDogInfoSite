@@ -46,6 +46,7 @@ $(document).ready(function() {
 	margin-left: 80px;
 	margin-bottom: 40px;
 }
+
 table {
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -73,51 +74,9 @@ td:nth-child(2) {
     box-shadow: var(--color-btn-primary-shadow),var(--color-btn-primary-inset-shadow);
 }
 
-#searchForm{
-   text-align : center; 
-   margin-top: 5%;
-   margin-bottom: 2%;
-   margin-left: 50%;
-}
-#search {
-	background-color: #FFCD00;
-	color: #FFFFFF;
-}
-
-.page {
-	padding: 5px 8px;
-	border: 1px solid rgba(0,0,0,0.1);
-	margin: 0;
-	cursor: pointer;
-	display: inline-block;
-	
-}
-
-.curPage {
-	font-weight: bold;
-	color: #89E241;
-	
-}
-
-#page_btn {
-	margin-top: 3%;
-	margin-bottom: 5%;
-	margin-left: 40%;
-	
-}
-
-select {
-  width: 85px;
-  height: 42px;
-  border-radius: 10px;
-  text-align: center;
-  border: 1px solid #ADADB1;
-}
-
-select option {
-  background: #E9F8E0;
-  color: black;
-  padding: 3px 0;
+.search-wrap {
+	margin-top: 10px;
+	margin-left: 380px;
 }
 
 </style>
@@ -158,7 +117,21 @@ select option {
 
 <c:import url="../layout/paging.jsp" />
 
-<input type="button" onclick="getSearchList()" class="btn btn-outline-primary mr-2" value="검색"><input>
+<div class="search-wrap">
+<div id="searchForm">
+   <form>
+      <div class="selectBox">
+   <select name="category">
+       <option  hidden="" disabled="disabled" selected="selected" value="">선택</option>
+       <option value="title">제목</option>
+       <option value="content">내용</option>
+     </select> 
+     <input type="text" size="20" name="search" />&nbsp;
+     <input type="submit" id="search" value="검색"/>
+   </div>
+    </form>
+</div>
+</div>
 </div>
 
 

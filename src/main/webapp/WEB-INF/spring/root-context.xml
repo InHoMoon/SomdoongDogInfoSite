@@ -26,7 +26,6 @@
 				<property name="sqlPrefix" value="SQL:::" />
 			</bean>
 		</property>
-		
 	</bean>
 	
 	<!-- 마이바티스 수행 객체 설정 (SqlSession) -->

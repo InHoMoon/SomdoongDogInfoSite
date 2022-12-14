@@ -2,30 +2,41 @@ package somdoong.notice.dto;
 
 public class NoticeFile {
 
-	private int nFileNo;
+	private int fileNo;
+	private int notino;
 	private String originName;
-	private String StoredName;
+	private String storedName;
 	
 	public NoticeFile() {}
 
-	public NoticeFile(int nFileNo, String originName, String storedName) {
+	public NoticeFile(int fileNo, int notino, String originName, String storedName) {
 		super();
-		this.nFileNo = nFileNo;
+		this.fileNo = fileNo;
+		this.notino = notino;
 		this.originName = originName;
-		this.StoredName = storedName;
+		this.storedName = storedName;
 	}
 
 	@Override
 	public String toString() {
-		return "NoticeFile [nFileNo=" + nFileNo + ", originName=" + originName + ", StoredName=" + StoredName + "]";
+		return "NoticeFile [fileNo=" + fileNo + ", notino=" + notino + ", originName=" + originName + ", storedName="
+				+ storedName + "]";
 	}
 
-	public int getnFileNo() {
-		return nFileNo;
+	public int getFileNo() {
+		return fileNo;
 	}
 
-	public void setnFileNo(int nFileNo) {
-		this.nFileNo = nFileNo;
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
+	public int getNotino() {
+		return notino;
+	}
+
+	public void setNotino(int notino) {
+		this.notino = notino;
 	}
 
 	public String getOriginName() {
@@ -37,11 +48,11 @@ public class NoticeFile {
 	}
 
 	public String getStoredName() {
-		return StoredName;
+		return storedName;
 	}
 
 	public void setStoredName(String storedName) {
-		StoredName = storedName;
+		this.storedName = storedName;
 	}
-
+	
 }

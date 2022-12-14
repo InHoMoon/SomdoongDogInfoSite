@@ -1,6 +1,6 @@
 package somdoong.notice.dto;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Notice {
 
@@ -9,11 +9,11 @@ public class Notice {
 	private String title;
 	private String content;
 	private int hit;
-	private Timestamp notidate;
+	private Date notidate;
 	
 	public Notice () {}
 
-	public Notice(int notino, String adminid, String title, String content, int hit, Timestamp notidate) {
+	public Notice(int notino, String adminid, String title, String content, int hit, Date notidate) {
 		super();
 		this.notino = notino;
 		this.adminid = adminid;
@@ -69,13 +69,14 @@ public class Notice {
 		this.hit = hit;
 	}
 
-	public Timestamp getNotidate() {
+	public Date getNotidate() {
 		return notidate;
 	}
 
-	public void setNotidate(Timestamp notidate) {
+	public void setNotidate(Date notidate) {
 		this.notidate = notidate;
 	}
+
 	
 	
 }

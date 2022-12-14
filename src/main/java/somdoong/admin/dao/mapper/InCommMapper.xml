@@ -9,29 +9,54 @@
 
 	<!-- 댓글 등록 -->
 	<insert id="insertInComm" parameterType="InComm">
-		INSERT INTO fboard_comment ( incno, i_num, adminid, incommcontent ) 
+		INSERT INTO incomm
+		( incno, i_num, adminid, incommContent ) 
 		VALUES ( incomm_seq.nextval, #{inum}, #{adminid}, #{incommContent} )
 	</insert>
 	
-	<!-- 댓글 수 조회 -->
-	<select id="getCntByInum" resultType="int" parameterType="int">
-		select count(*) from incomm
-		where i_num = #{inum}
+	<select id="selectInCommlistByInum" resultType="InComm" parameterType="int">
+		SELECT 
+			i.incno, i.i_num, i.incommContent, i.adminid,
+		 	to_char(i.commdate, 'yy/mm/dd') commdate
+		FROM incomm i
+		join admin a on i.adminid = a.adminid
+		WHERE i.i_num = #{inum}
+		START WITH i.parent_no = 0
+		CONNECT BY prior i.incno = i.parent_no
+		ORDER SIBLINGS BY i.incno ASC
 	</select>
-    
-    <!-- 댓글 수정 -->
-    <update id="update" parameterType="InComm">
-     	UPDATE incomm
-        SET comm_content = #{incommContent}
-        WHERE incno = #{incno}
-    </update>
-    
-    
-    <!-- 댓글 삭제 -->
-    <delete id="delete" parameterType="int">
-    	DELETE FROM incomm
-        WHERE incno = #{incno}
-    </delete>    
+	
+	<update id="updateInComm" parameterType="InComm">
+		UPDATE incomm SET incommContent= #{incommContent}
+		WHERE incno = #{incno}
+	</update>
+
+	<insert id="insertCmt" parameterType="InComm">
+		INSERT INTO incomm  
+		( incno, i_num, adminid, incommContent, parent_no )
+		VALUES 
+		( incomm_seq.nextval, #{inum}, #{adminid}, #{incommContent}, #{parentno} )
+	</insert>
+	
+	<update id="updateCmt" parameterType="InComm">
+		UPDATE incomm SET incommContent= #{incommContent}
+		WHERE incno = #{incno}
+	</update>
+	
+	<delete id="deleteCmt" parameterType="int">
+		DELETE FROM
+			incomm
+		WHERE
+			incno = #{incno}	
+	</delete>
+	
+	<delete id="deleteChildCmt" parameterType="int">
+		DELETE FROM
+			incomm
+		WHERE
+			parent_no = #{parentno}	
+	</delete>
+	
 
 </mapper>
 			

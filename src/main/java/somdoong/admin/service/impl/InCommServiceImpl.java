@@ -1,5 +1,7 @@
 package somdoong.admin.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,31 +16,34 @@ public class InCommServiceImpl implements InCommService{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired InCommDao  inCommDao;
+	@Autowired InCommDao inCommDao;
 	
-	//댓글 등록
 	@Override
-	public void writeIn(InComm incomm) {
-		inCommDao.insertInComm(incomm);
+	public void cmtList(InComm inComm) {
+		inCommDao.insert(inComm);
+		
+	}
+
+	@Override
+	public List<InComm> getList(int inum) {
+		return inCommDao.selectInCommlistByInum(inum);
+	}
+
+	@Override
+	public void insertCmt(InComm inComm) {
+		inCommDao.insertCmt(inComm);
+	}
+
+	@Override
+	public void updateCmt(InComm inComm) {
+		inCommDao.updateCmt(inComm);
+	}
+
+	@Override
+	public void deleteCmt(int incno) {
+		inCommDao.deleteCmt(incno);
+//		inCommDao.deleteChildCmt(inum);
 	}
 	
-	//댓글 수 조회(게시글 번호 기준)
-	@Override
-	public int getTotal(int inum) {
-		return inCommDao.getCntByInum(inum);
-	}
-	
-	//댓글 수정
-	@Override
-	public void update(InComm incomm) {
-		inCommDao.update(incomm);
-	}
-	
-	
-	//댓글 삭제
-	@Override
-	public void delete(int incno) {
-		inCommDao.delete(incno);
-	}	
 
 }
