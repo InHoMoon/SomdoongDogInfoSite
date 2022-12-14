@@ -7,6 +7,7 @@
 	<ul class="pagination pagination-sm">
 
 	<%-- 첫 페이지로 이동 --%>
+<<<<<<< HEAD
 <%-- 	<c:if test="${paging.curPage ne 1 }"> --%>
 <!-- 		<li><a href="./showlist">&larr; 처음</a></li>	 -->
 <%-- 	</c:if> --%>
@@ -24,6 +25,25 @@
 	<%-- 이전 페이지로 가기 --%>
 	<c:if test="${paging.curPage > 1 }">
 		<li><a href="./showlist?curPage=${paging.curPage - 1 }">&lt;</a></li>
+=======
+	<c:if test="${paging.curPage ne 1 }">
+		<li><a href="/mypage/list">&larr; 처음</a></li>	
+	</c:if>
+	
+	<%-- 이전 페이징 리스트로 이동 --%>
+	<c:choose>
+	<c:when test="${paging.startPage ne 1 }">
+		<li><a href="/mypage/list?curPage=${paging.startPage - paging.pageCount }">&laquo;</a></li>
+	</c:when>
+	<c:when test="${paging.startPage eq 1 }">
+		<li class="disabled"><a>&laquo;</a></li>
+	</c:when>
+	</c:choose>
+	
+	<%-- 이전 페이지로 가기 --%>
+	<c:if test="${paging.curPage > 1 }">
+		<li><a href="/mypage/list?curPage=${paging.curPage - 1 }">&lt;</a></li>
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 	</c:if>
 	
 	
@@ -31,10 +51,17 @@
 	<%-- 페이징 리스트 --%>
 	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
 	<c:if test="${paging.curPage eq i }">
+<<<<<<< HEAD
 		<li class="active"><a href="./showlist?curPage=${i }">${i }</a></li>
 	</c:if>
 	<c:if test="${paging.curPage ne i }">
 		<li><a href="./showlist?curPage=${i }">${i }</a></li>
+=======
+		<li class="active"><a href="/mypage/list?curPage=${i }">${i }</a></li>
+	</c:if>
+	<c:if test="${paging.curPage ne i }">
+		<li><a href="/mypage/list?curPage=${i }">${i }</a></li>
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 	</c:if>
 	</c:forEach>
 
@@ -42,6 +69,7 @@
 	
 	<%-- 다음 페이지로 가기 --%>
 	<c:if test="${paging.curPage < paging.totalPage }">
+<<<<<<< HEAD
 		<li><a href="./showlist?curPage=${paging.curPage + 1 }">&gt;</a></li>
 	</c:if>
 	
@@ -59,6 +87,25 @@
 <%-- 	<c:if test="${paging.curPage ne paging.totalPage }"> --%>
 <%-- 		<li><a href="./showlist?curPage=${paging.totalPage }">끝 &rarr;</a></li>	 --%>
 <%-- 	</c:if> --%>
+=======
+		<li><a href="/mypage/list?curPage=${paging.curPage + 1 }">&gt;</a></li>
+	</c:if>
+	
+	<%-- 다음 페이징 리스트로 이동 --%>
+	<c:choose>
+	<c:when test="${paging.endPage ne paging.totalPage }">
+		<li><a href="/mypage/list?curPage=${paging.startPage + paging.pageCount }">&raquo;</a></li>
+	</c:when>
+	<c:when test="${paging.endPage eq paging.totalPage }">
+		<li class="disabled"><a>&raquo;</a></li>
+	</c:when>
+	</c:choose>
+
+	<%-- 끝 페이지로 이동 --%>
+	<c:if test="${paging.curPage ne paging.totalPage }">
+		<li><a href="/mypage/list?curPage=${paging.totalPage }">끝 &rarr;</a></li>	
+	</c:if>
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 	
 	</ul>
 </div>

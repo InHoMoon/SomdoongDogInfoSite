@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="somdoong.mypage.dao.face.UpdateDao">
+
+	<update id="memberUpdate">
+		UPDATE sommember SET 
+		username= #{username},
+		userpw = #{userpw},
+		userphone  = #{userphone },
+		useradd  = #{useradd },
+		useraddd  = #{useraddd },
+		email = #{email}
+		WHERE userid = #{userid}
+	</update>
+
+
+	<delete id="memberDelete">
+		DELETE sommember
+		WHERE userid = #{userid}
+	 	AND userpw = #{userpw}
+	</delete>
+	
+	<select id="memberSelect" parameterType="SomDoongMember" resultType="SomDoongMember">
+		SELECT * FROM sommember
+		WHERE userid = #{userid}
+	</select>
+
+
+	<select id="memberDeleteGetid" parameterType="SomDoongMember" resultType="SomDoongMember">
+		SELECT userid, username,userpw FROM sommember
+		WHERE userid = #{userid}
+	</select>
+</mapper>

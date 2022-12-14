@@ -9,13 +9,38 @@
 	<!-- 마이바티스 동작 설정 -->
 	<settings>
 	
+	
+	
 		<!-- 조회된 컬럼의 Snack Case(_) 를 DTO의 Camel Case로 자동 변환(매핑)해주는 설정 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		
-		<!-- JDBC타입이 명시되지 않은 컬럼의 NULL값을 처리하는 방법을 설정 -->
-		<!-- 	-> value값으로 대체한다  -->
-		<setting name="jdbcTypeForNull" value="NULL" />
+		<!-- JDBC타입이 명시되지 않은 컬럼의 NULL값을 처리하는 방법을 설정한다  -->
+		<!-- -> value 값으로 대체한다  --> 
+		<setting name="jdbcTypeForNull" value="NULL"/> 
 		
 	</settings>
+	
+	<typeAliases>
+<<<<<<< HEAD
+
+		<package name="somdoong.mypage.dto"/>
+		<package name="somdoong.util"/>
+		
+		<package name="somdoong.member.dto"/>
+
+=======
+<<<<<<< HEAD
+		<package name="somdoong.community.dto"/>
+		<package name="somdoong.community.util"/>
+=======
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+		<package name="somdoong.member.dto"/>
+		
+<<<<<<< HEAD
+
+=======
+>>>>>>> 738a5764e1451ea47802886a428edaaf556832cb
+>>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite.git
+	</typeAliases>
 	
 </configuration>

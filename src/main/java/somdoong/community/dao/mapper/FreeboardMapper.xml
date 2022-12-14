@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.community.dao.face.FreeboardDao">
+
+	<!-- 페이징 -->
+	<select id="selectCntAll" resultType="int">
+		select count(*) from freeboard
+	</select>
+
+	<!-- 전체 리스트 조회 -->
+	<select id="selectList" resultType="Freeboard" parameterType="Paging" >
+		SELECT * FROM (
+		    SELECT rownum rnum, F.* FROM (
+		        SELECT
+		            fno, title, content , userid, hit, write_date
+		        FROM freeboard
+		        ORDER BY fno DESC
+		    ) F
+		) freeboard
+		LEFT JOIN (
+		    SELECT fno, count(fno) AS commCnt
+		    FROM freeboard f
+		    JOIN fboard_comment c ON fno = c.bno
+		    GROUP BY fno
+		) c ON freeboard.fno = c.fno
+		LEFT OUTER JOIN (
+		    SELECT f.fno, count(fi.fno) fiCnt
+		    FROM freeboard f 
+		    JOIN fboard_file fi ON f.fno = fi.fno
+		    GROUP BY f.fno
+		)fi ON freeboard.fno = fi.fno
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		ORDER BY freeboard.fno desc
+	</select>
+
+
+	<!-- 조회수 -->
+	<update id="hit" parameterType="Freeboard">
+		update freeboard
+		set hit= hit + 1
+		where fno =  #{fno}
+	</update>
+	
+	
+	<!-- 게시글 상세보기 -->
+	<select id="selectBoard" resultType="Freeboard" parameterType="Freeboard">
+		select
+			fno, title, content, userid, hit, write_date
+		from freeboard
+		where fno = #{fno}
+	</select>
+
+
+	<!-- 게시글 등록 -->
+	<insert id="insertBoard" parameterType="Freeboard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="fno">
+			SELECT fboard_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO freeboard ( fno, title, content , userid )
+		VALUES ( #{fno }, #{title }, #{content }, #{userid })
+	</insert>
+
+	
+	<!-- 첨부파일 등록 -->
+	<insert id="insertFile" parameterType="FboardFile">
+		INSERT INTO fboard_file ( f_fileno, fno, origin_name, stored_name)
+		VALUES ( fboard_file_seq.nextval, #{fno }, #{originName }, #{storedName } )
+	</insert>
+
+
+	<!-- 게시글번호로 파일 조회 -->
+	<select id="selectFileByBoardno" resultType="FboardFile" parameterType="Freeboard">
+		SELECT
+			f_fileno, fno, origin_name, stored_name
+		FROM fboard_file
+		WHERE fno = #{fno }
+	</select>
+	
+	
+	<!-- 파일번호로 게시글 조회 -->
+	<select id="selectFileByFileno" resultType="FboardFile" parameterType="FboardFile">
+		SELECT
+			f_fileno, fno, origin_name, stored_name
+		FROM fboard_file
+		WHERE f_fileno = #{fFileno }
+	</select>
+	
+	
+	<!-- 검색 리스트 조회 -->
+	<select id="selectSearchlist" resultType="Freeboard" parameterType="Paging" >
+		SELECT * FROM (
+		    SELECT rownum rnum, F.* FROM (
+		        SELECT
+		            fno, title, content , userid, hit, write_date
+		        FROM freeboard
+		        <choose>
+					<when test="searchType == 'title'">
+						where title like '%'|| #{keyword} ||'%'
+					</when>
+		
+					<when test="searchType == 'content'">
+						where content like '%'|| #{keyword} ||'%'
+					</when>
+					
+					<when test="searchType == 'writer'">
+						where userid like '%'|| #{keyword} ||'%'
+					</when>
+				</choose>
+		        ORDER BY fno DESC
+		    ) F
+		) freeboard
+		LEFT JOIN (
+		    SELECT fno, count(fno) AS commCnt
+		    FROM freeboard f
+		    JOIN fboard_comment c ON fno = c.bno
+		    GROUP BY fno
+		) c ON freeboard.fno = c.fno
+		LEFT OUTER JOIN (
+		    SELECT f.fno, count(fi.fno) fiCnt
+		    FROM freeboard f 
+		    JOIN fboard_file fi ON f.fno = fi.fno
+		    GROUP BY f.fno
+		)fi ON freeboard.fno = fi.fno
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		ORDER BY freeboard.fno desc
+	</select>
+	
+	
+	<!-- 검색 리스트 페이징 -->
+	<select id="getPagingSearchCnt" parameterType="Paging" resultType="int">
+		select count(*) from freeboard 
+		<choose>
+			<when test="searchType == 'title'">
+				WHERE title like '%'|| #{keyword} ||'%'
+			</when>
+			<when test="searchType == 'content'">
+				WHERE content like '%'|| #{keyword} ||'%'
+			</when>
+			<when test="searchType == 'writer'">
+				WHERE userid like '%'|| #{keyword} ||'%'
+			</when>
+		</choose>
+	</select>
+	
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="Freeboard">
+		UPDATE freeboard
+		SET title = #{title}
+			, content = #{content}
+		WHERE fno = #{fno}
+	</update>
+
+	
+	<!-- 게시글 수정 시 첨부파일 삭제 -->
+	<delete id="deleteFile" parameterType="Freeboard">
+		DELETE fboard_file
+		WHERE fno = #{fno}	
+	</delete>
+	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="Freeboard">
+		delete freeboard
+		where fno = #{fno}
+	</delete>
+
+	
+
+	
+
+
+
+
+
+
+</mapper>

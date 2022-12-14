@@ -26,8 +26,19 @@
 	
 	
 	<dependencies>
+
+<!-- https://mvnrepository.com/artifact/org.json/json -->
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20220924</version>
+</dependency>
 	
+<<<<<<< HEAD
 	<!-- JackSon Databind -->
+=======
+<!--Jackson Databind  -->	
+>>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 	<dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
