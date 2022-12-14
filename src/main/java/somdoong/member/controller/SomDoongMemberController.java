@@ -109,7 +109,7 @@ public class SomDoongMemberController {
 		
 		return "redirect:/member/login";
 	}
-
+ 
 	
 	@RequestMapping("idfind")
 	public void idfind() {
