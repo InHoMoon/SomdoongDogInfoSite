@@ -31,26 +31,19 @@ public class StoreController {
 	//--------------------------  상품정보 목록  --------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String listMain() {
+	public String listMain(Model model) {
 		
-		return "store/list_main";
-	}
-	
-	@RequestMapping("/list/index")
-	public String StoreList(Model model) {
-
-		return "store/list_index";
-	}
-
-	
-	@RequestMapping("/list/all")
-	public String ListAll(Model model) {
-
 		List<Store> list = storeService.getListAll();
 
 		logger.info("{}", list);
 
 		model.addAttribute("list", list);
+
+		return "store/list_main";
+	}
+	
+	@RequestMapping("/list/all")
+	public String ListAll() {
 
 		return "store/list_all";
 	}
