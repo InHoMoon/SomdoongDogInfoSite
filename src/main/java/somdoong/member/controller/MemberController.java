@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import somdoong.member.dto.SomMember;
+import somdoong.member.dto.SomDoongMember;
 import somdoong.member.service.face.MemberService;
 
 @Controller
@@ -27,7 +27,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String loginProc(SomMember member, HttpSession session) {
+	public String loginProc(SomDoongMember member, HttpSession session) {
 		logger.info("/login [POST]");
 		logger.info("{}", member);
 		

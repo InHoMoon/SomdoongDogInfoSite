@@ -86,17 +86,8 @@ window.createSEditor2 = function(elIRField, htParams, elSeAppContainer){
 	oEditor.registerPlugin(new nhn.husky.ActiveLayerManager());
 	oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGStyleGetter());							// 커서 위치 스타일 정보 가져오기
 
-<<<<<<< HEAD
-
 	oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGEnterKey("P"));							// 엔터 시 처리, 현재는 P로 처리
-
-=======
-<<<<<<< HEAD
-	oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGEnterKey("P"));							// 엔터 시 처리, 현재는 P로 처리
-=======
->>>>>>> branch 'master' of https://github.com/InHoMoon/SomdoongDogInfoSite
 	oEditor.registerPlugin(new nhn.husky.SE_WYSIWYGEnterKey("BR"));							// 엔터 시 처리, 현재는 P로 처리
->>>>>>> 43ae123cf658f30f43cef2ea49763570de93d629
 	
 	oEditor.registerPlugin(new nhn.husky.SE2M_ColorPalette(elAppContainer));				// 색상 팔레트
 	oEditor.registerPlugin(new nhn.husky.SE2M_FontColor(elAppContainer));					// 글자색

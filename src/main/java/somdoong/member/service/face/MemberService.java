@@ -1,9 +1,9 @@
 package somdoong.member.service.face;
 
-import somdoong.member.dto.SomMember;
+import somdoong.member.dto.SomDoongMember;
 
 public interface MemberService {
 
-	public boolean login(SomMember member);
+	public boolean login(SomDoongMember member);
 
 }

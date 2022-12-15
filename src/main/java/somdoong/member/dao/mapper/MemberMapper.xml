@@ -7,7 +7,7 @@
 
 <mapper namespace="somdoong.member.dao.face.MemberDao">
 
-	<select id="selectId" resultType="int" parameterType="somdoong.member.dto.SomMember">
+	<select id="selectId" resultType="int" parameterType="somdoong.member.dto.SomDoongMember">
 		SELECT count(*) FROM sommember
 		WHERE userid=#{userid} AND userpw=#{userpw}
 	</select>

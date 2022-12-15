@@ -9,8 +9,6 @@
 	<!-- 마이바티스 동작 설정 -->
 	<settings>
 	
-	
-	
 		<!-- 조회된 컬럼의 Snack Case(_) 를 DTO의 Camel Case로 자동 변환(매핑)해주는 설정 -->
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		
@@ -21,7 +19,14 @@
 	</settings>
 	
 	<typeAliases>
-		<package name="somdoong"/>
+		<package name="somdoong.community.dto"/>
+		<package name="somdoong.community.util"/>
+		<package name="somdoong.admin.dto"/>
+		<package name="somdoong.member.dto"/>
+		<package name="somdoong.mypage.dto"/>
+		<package name="somdoong.notice.dto"/>
+<!-- 		<package name="somdoong"/> -->
 	</typeAliases>
+	
 	
 </configuration>

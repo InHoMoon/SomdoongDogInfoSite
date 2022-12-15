@@ -1,9 +1,9 @@
 package somdoong.member.dao.face;
 
-import somdoong.member.dto.SomMember;
+import somdoong.member.dto.SomDoongMember;
 
 public interface MemberDao {
 
-	public int selectId(SomMember member);
+	public int selectId(SomDoongMember member);
 
 }

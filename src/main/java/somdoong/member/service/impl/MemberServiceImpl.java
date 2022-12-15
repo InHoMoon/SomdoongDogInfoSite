@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import somdoong.member.dao.face.MemberDao;
-import somdoong.member.dto.SomMember;
+import somdoong.member.dto.SomDoongMember;
 import somdoong.member.service.face.MemberService;
 
 @Service
@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired MemberDao memberDao;
 	
 	@Override
-	public boolean login(SomMember member) {
+	public boolean login(SomDoongMember member) {
 		logger.info("login() 실행");
 		
 		if(memberDao.selectId(member) > 0) {
