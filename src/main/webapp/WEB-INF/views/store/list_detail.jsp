@@ -176,7 +176,7 @@
 </section>
 <section id="wrap-info">
 	<div id="store-info">
-		<div style="width: 34%;"><img src="/resources/monster08.gif" width="340px" height="405px"></div>
+		<div style="width: 34%;"><img src="/resources/store_monster08.gif" width="340px" height="405px"></div>
 		<div style="width: 66%; padding-left: 30px;">
 			<div style="font-size: 25px; font-weight: bold; margin-bottom: 10px;">상품 설명</div>
 			<div id="product-info">${viewStore.info }</div>
