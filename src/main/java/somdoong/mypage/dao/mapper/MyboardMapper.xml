@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="somdoong.mypage.dao.face.MyboardDao">
+    
+<!--     	<select id="listF" resultType="somdoong.main.dto.Freeboard"> -->
+<!--    		SELECT -->
+<!--    			fno -->
+<!-- 			title, -->
+<!-- 			write_date, -->
+<!-- 			hit, -->
+<!-- 			userid -->
+<!-- 			,content -->
+<!-- 		FROM  freeboard -->
+<!-- 		WHERE userid =#{userid} -->
+<!--     	</select> -->
+    	
+    	
+<!--     	<select id="listS" resultType="somdoong.main.dto.Showboard" > -->
+<!--    		SELECT -->
+<!--    			sno -->
+<!-- 			title, -->
+<!-- 			write_date, -->
+<!-- 			hit, -->
+<!-- 			userid, -->
+<!-- 			content -->
+<!-- 		FROM  showboard -->
+<!-- 		WHERE userid =#{userid} -->
+<!--     	</select> -->
+    	
+    	
+    	<select id="selectCntAll" resultType="int" parameterType="Myboard">
+			SELECT count(*) FROM freeboard
+		
+			
+		</select>
+    	
+    	
+    	
+    	<select id="listAll" resultType="Myboard" parameterType="Paging">	
+    	SELECT * FROM (
+			SELECT rownum rnum, M.* FROM (
+			
+    				SELECT fno AS num,title ,hit,userid,content,write_date, 'f' type FROM freeboard
+<!--     					WHERE userid = #{mUserid}	 -->
+					union		
+							
+					SELECT sno AS num,title ,hit ,userid,content,write_date ,'s' type FROM showboard
+<!-- 					WHERE userid = #{mUserid} -->
+					union
+					
+					SELECT rno AS num,title,hit,userid,content,write_date , 'r' type FROM recommendboard
+<!-- 					WHERE userid = #{mUserid}    	 -->
+				) M  WHERE userid = #{mUserid}
+			) MYBOARD
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		  
+		
+    	</select>
+    	
+    	
+    </mapper>

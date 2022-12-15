@@ -21,10 +21,12 @@
 	<typeAliases>
 		<package name="somdoong.community.dto"/>
 		<package name="somdoong.community.util"/>
+		<package name="somdoong.customerService.dto"/>
 		<package name="somdoong.admin.dto"/>
 		<package name="somdoong.member.dto"/>
 		<package name="somdoong.mypage.dto"/>
 		<package name="somdoong.notice.dto"/>
+		<package name="somdoong.util"/>
 <!-- 		<package name="somdoong"/> -->
 	</typeAliases>
 	

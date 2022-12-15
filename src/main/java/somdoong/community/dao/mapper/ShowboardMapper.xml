@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="somdoong.community.dao.face.ShowboardDao">
+
+	<!-- 전체 게시글 조회 -->
+	<select id="selectAll" resultType="int">
+		SELECT count(*) FROM showboard
+	</select>
+	
+	<!-- 페이징 처리 리스트 조회 -->
+	<select id="selectList" resultType="hashmap">
+		SELECT * FROM (
+		SELECT rownum rnum, B.* FROM ( SELECT sno, title, content , write_date,
+				 hit, userid 
+			FROM showboard ORDER BY sno DESC) B) showboard
+		INNER JOIN sboard_file F
+		ON showboard.sno = F.sno AND rnum BETWEEN  #{startNo } AND #{endNo }
+	</select>
+	
+	<!-- 선택한 게시글 파일 정보 조회 -->
+	<select id="selectFile" resultType="somdoong.community.dto.SboardFile" parameterType="somdoong.community.dto.Showboard">
+		SELECT s_fileno, origin_name, stored_name, sno FROM sboard_file
+		WHERE sno = #{sno } 	
+	</select>
+	
+	<!-- 게시글 입력 -->
+	<insert id="insertBoard" parameterType="somdoong.community.dto.Showboard">
+		<selectKey order="BEFORE" resultType="int" keyProperty="sno">
+			SELECT seq_showboard.nextval FROM dual
+		</selectKey>
+		INSERT INTO showboard (sno, title, content , userid)
+		VALUES ( #{sno}, #{title}, #{content}, #{userid} )	
+	</insert>
+	
+	<!-- 첨뷰파일 입력 -->
+	<insert id="insertFile" parameterType="somdoong.community.dto.SboardFile">
+		INSERT INTO sboard_file( s_fileno, origin_name, stored_name, sno)
+		VALUES (seq_boardfile.nextval, #{origin_name}, #{stored_name}, #{sno})	
+	</insert>
+	
+	<!-- 조회수 -->
+	<update id="upHit" parameterType="somdoong.community.dto.Showboard">
+		UPDATE showboard SET hit = hit+1
+		WHERE sno = #{sno}
+	</update>
+	
+	<select id="selectBySno" resultType="somdoong.community.dto.Showboard" parameterType="somdoong.community.dto.Showboard">
+		SELECT sno, title, content , write_date, hit, userid  FROM showboard
+		WHERE sno = #{sno}
+	</select>
+	
+	<!-- 좋아요 확인 -->
+	<select id="chkLike" resultType="int" parameterType="somdoong.community.dto.SboardLike">
+		SELECT count(*) FROM sboard_like
+		WHERE sno = #{sno} AND userid = #{userid}
+	</select>
+	
+	<!-- 좋아요 등록 -->
+	<insert id="insertLike" parameterType="somdoong.community.dto.SboardLike">
+		INSERT INTO sboard_like 
+		VALUES (seq_sboard_like.nextval, #{sno}, #{userid} )
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="deleteLike" parameterType="somdoong.community.dto.SboardLike">
+		DELETE FROM sboard_like
+		WHERE sno = #{sno} AND userid = #{userid}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="somdoong.community.dto.Showboard">
+		DELETE sboard_file
+		WHERE sno = #{sno}
+	</delete>
+	
+	<update id="updateBoard" parameterType="somdoong.community.dto.Showboard">
+		UPDATE showboard
+		SET title = #{title}
+			, content = #{content}
+		WHERE sno = ${sno}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
