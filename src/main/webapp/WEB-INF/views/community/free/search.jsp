@@ -24,7 +24,7 @@
 			<td id="title">
 				<a href="/community/free/view?fno=${s.fno }">${s.title }&nbsp;</a>
 				<c:if test="${s.fiCnt > 0 }">
-					<img src="/resources/picture.png" style="width: 15px; height: 17px;">
+					<img src="/resources/img/pic.png" style="width: 17px; height: 17px;">
 				</c:if>
 				<span style="color: tomato;">[${s.commCnt }]</span>
 			</td>

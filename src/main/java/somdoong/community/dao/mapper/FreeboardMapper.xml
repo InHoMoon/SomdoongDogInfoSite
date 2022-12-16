@@ -94,41 +94,58 @@
 	
 	<!-- 검색 리스트 조회 -->
 	<select id="selectSearchlist" resultType="Freeboard" parameterType="Paging_f" >
-		SELECT * FROM (
-		    SELECT rownum rnum, F.* FROM (
-		        SELECT
-		            fno, title, content , userid, hit, write_date
-		        FROM freeboard
-		        <choose>
-					<when test="searchType == 'title'">
-						where title like '%'|| #{keyword} ||'%'
-					</when>
-		
-					<when test="searchType == 'content'">
-						where content like '%'|| #{keyword} ||'%'
-					</when>
-					
-					<when test="searchType == 'writer'">
-						where userid like '%'|| #{keyword} ||'%'
-					</when>
-				</choose>
-		        ORDER BY fno DESC
-		    ) F
-		) freeboard
-		LEFT JOIN (
-		    SELECT fno, count(fno) AS commCnt
-		    FROM freeboard f
-		    JOIN fboard_comment c ON fno = c.bno
-		    GROUP BY fno
-		) c ON freeboard.fno = c.fno
-		LEFT OUTER JOIN (
-		    SELECT f.fno, count(fi.fno) fiCnt
-		    FROM freeboard f 
-		    JOIN fboard_file fi ON f.fno = fi.fno
-		    GROUP BY f.fno
-		)fi ON freeboard.fno = fi.fno
+		SELECT forrow.* FROM (
+			SELECT rownum AS rnum, fTbl_all.* FROM (
+			    SELECT * FROM (
+			            SELECT * FROM (
+			                    SELECT F.* FROM (
+			                        SELECT
+			                            fno, title, content , userid, hit, write_date
+			                        FROM freeboard
+			                         <choose>
+										<when test="searchType == 'title'">
+											where title like '%'|| #{keyword} ||'%'
+										</when>
+							
+										<when test="searchType == 'content'">
+											where content like '%'|| #{keyword} ||'%'
+										</when>
+										
+										<when test="searchType == 'writer'">
+											where userid like '%'|| #{keyword} ||'%'
+										</when>
+									</choose>
+			                    ) F
+			                ) freeboard
+			                LEFT JOIN (
+			                    SELECT fno, count(fno) AS commCnt 
+			                    FROM freeboard f
+			                    JOIN fboard_comment c ON fno = c.bno
+			                    GROUP BY fno
+			                ) c ON freeboard.fno = c.fno
+			                LEFT OUTER JOIN (
+			                    SELECT f.fno, count(fi.fno) fiCnt
+			                    FROM freeboard f 
+			                    JOIN fboard_file fi ON f.fno = fi.fno
+			                    GROUP BY f.fno
+			                )fi ON freeboard.fno = fi.fno
+			        ) fTbl
+			        <choose>
+						<when test="type == 'newest'">
+							ORDER BY fTbl.write_date desc
+						</when>
+				
+						<when test="type == 'comm'">
+							ORDER BY commCnt desc NULLS LAST
+						</when>
+						
+						<when test="type == 'hit'">
+							ORDER BY hit desc
+						</when>
+					</choose>
+			) fTbl_all
+		) forrow	
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
-		ORDER BY freeboard.fno desc
 	</select>
 	
 	
@@ -170,14 +187,7 @@
 		delete freeboard
 		where fno = #{fno}
 	</delete>
-
 	
-
 	
-
-
-
-
-
-
+	
 </mapper>

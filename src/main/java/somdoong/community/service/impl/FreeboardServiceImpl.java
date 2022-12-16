@@ -130,8 +130,8 @@ public class FreeboardServiceImpl implements FreeboardService {
 	public List<Freeboard> getList(Paging_f paging) {
 		
 		List<Freeboard> flist = fboardDao.selectSearchlist(paging);
-		logger.info("paging : {]", paging);
-		logger.info("flist : {]", flist);
+		logger.info("paging : {}", paging);
+		logger.info("flist : {}", flist);
 		
 		return flist;
 	}
@@ -214,7 +214,7 @@ public class FreeboardServiceImpl implements FreeboardService {
 		fboardDao.delete(fboard);
 	}
 
-
+	
 	
 	
 }

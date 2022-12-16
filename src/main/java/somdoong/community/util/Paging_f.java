@@ -17,7 +17,7 @@ public class Paging_f {
 	
 	private String searchType;
 	private String keyword;
-	
+	private String type;
 	
 	//디폴트 생성자 - 페이징 로직이 처리되지 않는다
 	public Paging_f() {}
@@ -109,10 +109,10 @@ public class Paging_f {
 	
 	@Override
 	public String toString() {
-		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
-				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
-				+ ", startNo=" + startNo + ", endNo=" + endNo + ", searchType=" + searchType + ", keyword=" + keyword
-				+ "]";
+		return "Paging_f [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount
+				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchType=" + searchType + ", keyword="
+				+ keyword + ", type=" + type + "]";
 	}
 
 
@@ -185,6 +185,12 @@ public class Paging_f {
 	
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }
