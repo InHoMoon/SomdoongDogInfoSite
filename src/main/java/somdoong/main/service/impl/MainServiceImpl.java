@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import somdoong.admin.dto.DogInfo;
 import somdoong.main.dao.face.MainDao;
 import somdoong.main.service.face.MainService;
+import somdoong.notice.dto.Notice;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -19,4 +21,18 @@ public class MainServiceImpl implements MainService {
 		return mainDao.listTop();
 	}
 
+	//공지사항 리스트
+	@Override
+	public List<Notice> noticeList() {
+		return mainDao.noticeList();
+	}
+
+	@Override
+	public List<DogInfo> doginfoList() {
+		return mainDao.doginfoList();
+	}
+
+
+
+	
 }

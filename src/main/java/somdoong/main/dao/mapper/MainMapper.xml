@@ -5,14 +5,29 @@
 
 <mapper namespace="somdoong.main.dao.face.MainDao">
 
-<select id="listTop" resultType="hashmap">
-	SELECT * FROM (
-			SELECT rownum rnum, B.* FROM ( SELECT sno, title, content , write_date,
-					 hit, userid 
-				FROM showboard ORDER BY hit DESC) B) showboard
-			INNER JOIN sboard_file F
-	ON showboard.sno = F.sno AND rnum BETWEEN 1 AND 4
-</select>
+	<!-- 강아지자랑 조회수 top 4개만 -->
+	<select id="listTop" resultType="hashmap">
+		SELECT * FROM (
+				SELECT rownum rnum, B.* FROM ( SELECT sno, title, content , write_date,
+						 hit, userid 
+					FROM showboard ORDER BY hit DESC) B) showboard
+				INNER JOIN sboard_file F
+		ON showboard.sno = F.sno AND rnum BETWEEN 1 AND 4
+	</select>
+
+	<!-- 공지사항 최신글 10개씩만 -->
+	<select id="noticeList" resultType="Notice">
+		SELECT * FROM 
+		    ( SELECT * FROM notice ORDER BY notino DESC )
+		WHERE <![CDATA[ROWNUM<=10]]>
+	</select>
+	
+	<!-- 강아지상식 테이블 최신글 10개씩만 -->
+	<select id="doginfoList" resultType="DogInfo">
+		SELECT * FROM 
+		    ( SELECT * FROM doginfo ORDER BY dinfono DESC )
+		WHERE <![CDATA[ROWNUM<=10]]>
+	</select>
 
 </mapper>
 

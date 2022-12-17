@@ -2,49 +2,49 @@ package somdoong.community.dto;
 
 public class SboardFile {
 	
-	private int s_fileno;
-	private String origin_name;
-	private String stored_name;
+	private int sFileno;
+	private String originName;
+	private String storedName;
 	private int sno;
 	
 	public SboardFile() {}
 
-	public SboardFile(int s_fileno, String origin_name, String stored_name, int sno) {
+	public SboardFile(int sFileno, String originName, String storedName, int sno) {
 		super();
-		this.s_fileno = s_fileno;
-		this.origin_name = origin_name;
-		this.stored_name = stored_name;
+		this.sFileno = sFileno;
+		this.originName = originName;
+		this.storedName = storedName;
 		this.sno = sno;
 	}
 
 	@Override
 	public String toString() {
-		return "SboardFile [s_fileno=" + s_fileno + ", origin_name=" + origin_name + ", stored_name=" + stored_name
-				+ ", sno=" + sno + "]";
+		return "SboardFile [sFileno=" + sFileno + ", originName=" + originName + ", storedName=" + storedName + ", sno="
+				+ sno + "]";
 	}
 
-	public int getS_fileno() {
-		return s_fileno;
+	public int getsFileno() {
+		return sFileno;
 	}
 
-	public void setS_fileno(int s_fileno) {
-		this.s_fileno = s_fileno;
+	public void setsFileno(int sFileno) {
+		this.sFileno = sFileno;
 	}
 
-	public String getOrigin_name() {
-		return origin_name;
+	public String getOriginName() {
+		return originName;
 	}
 
-	public void setOrigin_name(String origin_name) {
-		this.origin_name = origin_name;
+	public void setOriginName(String originName) {
+		this.originName = originName;
 	}
 
-	public String getStored_name() {
-		return stored_name;
+	public String getStoredName() {
+		return storedName;
 	}
 
-	public void setStored_name(String stored_name) {
-		this.stored_name = stored_name;
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
 	}
 
 	public int getSno() {
@@ -54,6 +54,7 @@ public class SboardFile {
 	public void setSno(int sno) {
 		this.sno = sno;
 	}
+
 	
 	
 

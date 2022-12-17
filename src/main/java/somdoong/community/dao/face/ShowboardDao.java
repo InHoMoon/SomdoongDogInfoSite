@@ -46,5 +46,8 @@ public interface ShowboardDao {
 	//게시글 정보 수정
 	public void updateBoard(Showboard sboard);
 
+	public void delete(Showboard sboard);
+
+
 
 }

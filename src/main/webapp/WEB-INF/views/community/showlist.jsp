@@ -23,27 +23,45 @@ $(document).ready(function(){
 		float:left; 
 		text-align:center;
 		margin: 15px;
+		border: 3px solid #FFDEB4;
+		border-radius: 7px;
 	}
 		/* clear: both; */
 		
+	.col-md-8 {
+		margin-left: 15px;
+	}
+		
 	.showlogo {
-		margin-left: 350px;
+		margin-left: 261px;
+		margin-top: 60px;
+	}
+	
+	.main-text {
+		font-size: 40px;
+		margin-left: 383px;
+		color: #ff8c10;
 	}
 </style>
 
 <div class="container">
 <div class="showlogo">
-<img src="../resources/show.PNG" style="width: 350px; float: center;">
+<img src="../resources/show1.PNG" style="width: 664px; float: center;">
+</div>
+
+<div class="show-title">
+<span class="main-text">솜둥이들의 귀여운 강아지를 자랑해주세요!</span>
 </div>
 
 <div class="row">
 	<div class="col-md-2">
+	<img src="../resources/show123.png" style="width: 190px; padding-top: 57px;">
 	</div>
 	<div class="col-md-8">
 	<c:forEach items="${list }" var="list" varStatus="status">
 	<div class="album">
 		<div style = "text-align:center;">
-			<img src="/upload/${list.STORED_NAME }" class="img-thumbnail" style="width: 140px; height: 140px;">
+			<img src="/upload/${list.STORED_NAME }" class="img-thumbnail" style="width: 150px; height: 150px;">
 		</div>
 		<div style = "text-align:center; font-size: 20px;"><a href="./showview?sno=${list.SNO }">${list.TITLE }</a></div>
 		<div style = "text-align:center;">${list.USERID }</div>
@@ -58,7 +76,7 @@ $(document).ready(function(){
 <button id="btnWrite" class="btn btn-primary pull-left" onclick="location.href='showwrite'">글쓰기</button>
 <span class="pull-right">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
-<div><c:import url="../layout/paging.jsp"/></div>
+<div><c:import url="./paging_s.jsp"/></div>
 
 </div>
 

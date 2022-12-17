@@ -93,13 +93,13 @@ table {
 <div class="title">${view.title }</div>
 <div class="info">${view.userid } 
 / 
-<img src="../resources/time.png" style="width: 18px;"><fmt:formatDate value="${view.write_date }" pattern="yy-MM-dd HH:mm:ss" /> 
+<img src="../resources/time.png" style="width: 18px; padding-right: 3px;"><fmt:formatDate value="${view.writeDate }" pattern="yy-MM-dd HH:mm:ss" /> 
 / 조회수(${view.hit })</div>
 <div style="border-bottom: 4px solid #ccc;"></div>
 
 <div class="content">
 
-<div class="showimg"><img src="/upload/${file.stored_name }" alt="이미지 아님" style="height: 500px;"></div>
+<div class="showimg"><img src="/upload/${file.storedName }" alt="이미지 아님" style="height: 500px;"></div>
 <div class="content-text">${view.content }</div>
 
 </div>
@@ -143,7 +143,7 @@ $(document).ready(function(){
 		$("#like").prop("src", "../resources/like.png");
 	}
 	
-	$("#like").click(function(){
+	$(".like").click(function(){
 		
 		if(${empty userid}){
 			alert("로그인 후 이용해주세요!");
@@ -154,13 +154,14 @@ $(document).ready(function(){
 			url : "/community/sLike"
 			, type : "post"
 			, data : { "sno":'${view.sno}', "userid":'${view.userid}' }
+			, dataType : 'json'
 			, success : function(data){
 				if(data == 1){
-					$(".heart").prop("src", "../resources/chkLike.png");
+					$(".like img").prop("src", "../resources/chkLike.png");
 					console.log("좋아요 완료")
 					alert("좋아요 완료!");
 				} else if(data == 0){
-					$(".heart").prop("src", "../resources/like.png");
+					$(".like img").prop("src", "../resources/like.png");
 					console.log("좋아요 취소")
 					alert("좋아요가 취소되었습니다");
 				}

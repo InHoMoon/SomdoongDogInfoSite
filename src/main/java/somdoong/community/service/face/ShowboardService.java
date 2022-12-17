@@ -40,4 +40,7 @@ public interface ShowboardService {
 	//게시글 정보, 첨부파일 수정
 	public void update(Showboard sboard, MultipartFile file);
 
+	//게시글 + 첨부파일 삭제
+	public void deleteBoard(Showboard sboard);
+
 }

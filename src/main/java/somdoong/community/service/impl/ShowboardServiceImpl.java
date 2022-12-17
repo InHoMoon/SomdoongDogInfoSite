@@ -102,8 +102,8 @@ public class ShowboardServiceImpl implements ShowboardService {
 		//첨부파일 정보 DB 기록
 		SboardFile sboardFile = new SboardFile();
 		sboardFile.setSno(board.getSno());
-		sboardFile.setOrigin_name(origin_name);
-		sboardFile.setStored_name(stored_name);
+		sboardFile.setOriginName(origin_name);
+		sboardFile.setStoredName(stored_name);
 		
 		
 		showboardDao.insertFile(sboardFile);
@@ -191,13 +191,22 @@ public class ShowboardServiceImpl implements ShowboardService {
 		//첨부파일 정보 DB 기록
 		SboardFile sboardFile = new SboardFile();
 		sboardFile.setSno(sboard.getSno());
-		sboardFile.setOrigin_name(origin_name);
-		sboardFile.setStored_name(stored_name);
+		sboardFile.setOriginName(origin_name);
+		sboardFile.setStoredName(stored_name);
 		
 		//기존 게시글 연결된 첨부파일 삭제
 		showboardDao.deleteFile(sboard);
 				
 		showboardDao.insertFile(sboardFile);
+		
+	}
+
+	@Override
+	public void deleteBoard(Showboard sboard) {
+		
+		showboardDao.deleteFile(sboard); 
+		
+		showboardDao.delete(sboard);
 		
 	}
 

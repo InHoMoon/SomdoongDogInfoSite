@@ -130,5 +130,13 @@ public class ShowboardController {
 		
 		return "redirect:/community/showview?sno=" + sboard.getSno();
 	}
+	
+	@RequestMapping("/showdelete")
+	public String delete(Showboard sboard) {
+		
+		showboardService.deleteBoard(sboard);
+		
+		return "redirect:/community/showlist";
+	}
 
 }

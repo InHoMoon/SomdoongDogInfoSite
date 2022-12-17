@@ -1,29 +1,31 @@
 package somdoong.community.dto;
 
+import java.util.Date;
+
 public class Showboard {
 	
 	private int sno;
 	private String title;
 	private String content;
-	private String write_date;
+	private Date writeDate;
 	private int hit;
 	private String userid;
 	
 	public Showboard() {}
 
-	public Showboard(int sno, String title, String content, String write_date, int hit, String userid) {
+	public Showboard(int sno, String title, String content, Date writeDate, int hit, String userid) {
 		super();
 		this.sno = sno;
 		this.title = title;
 		this.content = content;
-		this.write_date = write_date;
+		this.writeDate = writeDate;
 		this.hit = hit;
 		this.userid = userid;
 	}
 
 	@Override
 	public String toString() {
-		return "Showboard [sno=" + sno + ", title=" + title + ", content=" + content + ", write_date=" + write_date
+		return "Showboard [sno=" + sno + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
 				+ ", hit=" + hit + ", userid=" + userid + "]";
 	}
 
@@ -51,12 +53,12 @@ public class Showboard {
 		this.content = content;
 	}
 
-	public String getWrite_date() {
-		return write_date;
+	public Date getWriteDate() {
+		return writeDate;
 	}
 
-	public void setWrite_date(String write_date) {
-		this.write_date = write_date;
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
 	}
 
 	public int getHit() {
@@ -74,10 +76,6 @@ public class Showboard {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-
-	
-
 	
 	
-
 }

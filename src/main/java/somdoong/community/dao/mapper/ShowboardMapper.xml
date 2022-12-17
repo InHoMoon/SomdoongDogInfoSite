@@ -83,6 +83,11 @@
 		WHERE sno = ${sno}
 	</update>
 	
+	<delete id="delete" parameterType="Showboard">
+		DELETE showboard
+		WHERE sno = #{sno}
+	</delete>
+	
 </mapper>
 
 
