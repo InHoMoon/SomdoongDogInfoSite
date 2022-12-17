@@ -42,16 +42,30 @@
 </script>
 
 <style type="text/css">
+div {
+	font-family: 'Dongle', sans-serif;
+}
+
 #wrap-detail {
 	width: 1900px;
 	height: 100%;
-	min-height: 100%;
+}
+
+#store-title {
+ 	width: 1900px;
+    display: flex;
+    justify-content: center;
+ 	
+	font-family: 'Dongle';
+	font-weight: bold;
+ 	font-size: 70px;
 }
 
 #wrap-info {
-	margin-bottom: 40px; display : flex;
+	display : flex;
 	justify-content: center;
-	display: flex;
+	
+	margin-bottom: 40px;
 }
 
 #store-info {
@@ -60,22 +74,29 @@
 	justify-content: center;
 }
 
-#store-info>div>div {
-	margin-bottom: 10px;
+#store-info > div > div {
+/* 	margin-bottom: 10px; */
 }
 
 #product-info {
+	width: 640px;
+	height: 110px;
+
 	word-break: break-all;
-	font-size: 15px;
+	font-size: 25px;
 }
 
 #product-price {
-	font-size: 20px;
+	font-size: 35px;
 	font-weight: bold;
 	color: #701667;
 }
 
-#product-quantity>input {
+#product-quantity {
+	font-size: 20px;
+}
+
+#product-quantity > input {
 	width: 50px;
 	height: 30px;
 	text-align: center;
@@ -88,13 +109,19 @@
 	margin: 5px;
 }
 
-#store-btn>input {
+#product-stock {
+	font-size: 20px;
+}
+
+#store-btn > input {
+	font-size: 25px;
+
 	width: 100px;
 	height: 30px;
 }
 
 .delivery {
-	font-size: 15px;
+	font-size: 25px;
 	
 	margin-right: 5px;
 }
@@ -144,6 +171,8 @@
 }
 
 #store-content {
+	margin-top: -20px;
+
 	width: 1024px;
 }
 
@@ -171,19 +200,21 @@
 <div id="wrap-detail">
 
 <section id="store-title">
-	<h2 style="text-align: center; font-weight: bold;">${viewStore.title }</h2>
-	<hr>
+<div>
+	<div>${viewStore.title }</div>
+</div>
 </section>
 <section id="wrap-info">
 	<div id="store-info">
-		<div style="width: 34%;"><img src="/resources/store_monster08.gif" width="340px" height="405px"></div>
+		<div style="width: 34%;"><img src="<%=request.getContextPath() %>/upload/${productImg.storedName }" width="340px" height="405px"></div>
 		<div style="width: 66%; padding-left: 30px;">
-			<div style="font-size: 25px; font-weight: bold; margin-bottom: 10px;">상품 설명</div>
+			<div style="font-size: 40px; font-weight: bold;">${viewStore.product.productName }</div>
+			<div style="font-size: 30px; font-weight: bold; margin-bottom: 10px;">상품 설명</div>
 			<div id="product-info">${viewStore.info }</div>
-			<div id="product-price"><fmt:formatNumber type="currency" value="${viewStore.price }"/></div>
+			<div id="product-price"><fmt:formatNumber type="currency" value="${viewStore.product.price }"/></div>
 			<div id="product-quantity-stock">
-				<div id="product-quantity"><input type="number" value="1" min=""></div>
-				<div id="product-stock">재고 ${viewStore.stock }개</div>
+				<div id="product-quantity"><input type="number" value="1" min="1"></div>
+				<div id="product-stock">재고 ${viewStore.product.stock }개</div>
 			</div>
 			<div id="store-btn"><input type="button" value="구매하기"></div>
 			<div>

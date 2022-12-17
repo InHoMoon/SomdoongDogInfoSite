@@ -154,6 +154,11 @@ $(document).ready(function(){
 	width: 1500px;
 }
 
+#list-content ul > li {
+	width: 320px;
+	
+	font-family: 'Dongle', sans-serif;
+}
 
 
 </style>

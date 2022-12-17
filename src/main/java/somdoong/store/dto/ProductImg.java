@@ -3,15 +3,17 @@ package somdoong.store.dto;
 public class ProductImg {
 
 	private int imgNo;
+	private int productNo;
 	private int storeNo;
 	private String originName;
 	private String storedName;
 	
 	public ProductImg() { }
 
-	public ProductImg(int imgNo, int storeNo, String originName, String storedName) {
+	public ProductImg(int imgNo, int productNo, int storeNo, String originName, String storedName) {
 		super();
 		this.imgNo = imgNo;
+		this.productNo = productNo;
 		this.storeNo = storeNo;
 		this.originName = originName;
 		this.storedName = storedName;
@@ -19,8 +21,8 @@ public class ProductImg {
 
 	@Override
 	public String toString() {
-		return "ProductImg [imgNo=" + imgNo + ", storeNo=" + storeNo + ", originName=" + originName + ", storedName="
-				+ storedName + "]";
+		return "ProductImg [imgNo=" + imgNo + ", productNo=" + productNo + ", storeNo=" + storeNo + ", originName="
+				+ originName + ", storedName=" + storedName + "]";
 	}
 
 	public int getImgNo() {
@@ -29,6 +31,14 @@ public class ProductImg {
 
 	public void setImgNo(int imgNo) {
 		this.imgNo = imgNo;
+	}
+
+	public int getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
 	public int getStoreNo() {
@@ -54,6 +64,5 @@ public class ProductImg {
 	public void setStoredName(String storedName) {
 		this.storedName = storedName;
 	}
-	
 
 }

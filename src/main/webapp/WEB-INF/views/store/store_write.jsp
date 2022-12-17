@@ -6,7 +6,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	$("#product-content").change(function( e ) {
+	//상품 상세정보 이미지 처리
+	$("#product-img").change(function( e ) {
 		
 		var files = e.target.files;
 		
@@ -34,6 +35,7 @@ $(document).ready(function() {
 		reader.readAsDataURL( files[0] );
 	})
 	
+	//상품 프로필 이미지 처리 
 	$("#imgUpload").change(function( e ) {
 		
 		var files = e.target.files;
@@ -57,9 +59,9 @@ $(document).ready(function() {
 		
 		reader.onload = function( data ) {
 			
-			$("#product-img").children().remove();
+			$("#product-profile-img").children().remove();
 			
-			$("#product-img").html(
+			$("#product-profile-img").html(
 				$("<img>").attr({
 					"src": data.target.result
 				})
@@ -68,6 +70,7 @@ $(document).ready(function() {
 		reader.readAsDataURL( files[0] );
 	})
 	
+	// 버튼 submit 설정
 	$("#write-btn").click(function() {
 		
 		$("form").submit();
@@ -104,7 +107,7 @@ body {
 	width: 66%;
 }
 
-#product-img {
+#product-profile-img {
 	border: 1px solid #d3d3d3;
 
 	width: 34%;
@@ -118,7 +121,7 @@ body {
     overflow: hidden;
 }
 
-#product-img > div > img {
+#product-profile-img > div > img {
 	cursor: pointer;
 }
 
@@ -169,16 +172,12 @@ button {
 	height: 30px;
 }
 
-#write-btn {}
-
 #cancel-btn {
 	margin-left: 5px;
 }
 
 </style>
 
-<h1>게시글 작성</h1>
-<hr>
 <div id="wrap-btn">
 	<div id="wrap-button">
 		<button id="write-btn">등록</button>
@@ -189,14 +188,13 @@ button {
 <div id="wrap-write">
 
 
-<form action="./write" method="post" enctype="multipart/form-data">
+<form action="/store/list/write" method="post" enctype="multipart/form-data">
 	<div id="wrap-form">
-		<div id="product-img">
-			<a href="javascript:void(0);" onclick="$('#imgUpload').trigger('click')" class="imgUploadBtn">
-			<img src="/resources/store_camera.png" width="100px" height="60px" alt="사진 업로드">
-			</a>
-			<input type="file" id="imgUpload" style="display:none">
+		<div id="product-profile-img">
+			<img src="/resources/store_camera.png" style="width: 100px; height: 60px; cursor: pointer;"
+					 alt="사진 업로드" onclick="$('#imgUpload').trigger('click')">
 		</div>
+			<input type="file" id="imgUpload" style="display:none" name="file">
 		<div id="store-info">
 			<div id="store-category-productName">
 				<div>
@@ -208,14 +206,14 @@ button {
 					</select>
 				</div>
 				<div>
-					<input type="text" name="productName" placeholder="상품명을 입력하세요" style="width: 530px; height: 30px; margin-left: 10px;">
+					<input type="text" name="productName" placeholder="상품명을 입력하세요" style="width: 530px; height: 30px; margin-left: 10px;" maxlength="20">
 				</div>
 			</div>
 			<div>
-				<input type="text" name="title"	placeholder="제목을 입력하세요" style="width: 630px; height: 30px;">
+				<input type="text" name="title"	placeholder="제목을 입력하세요" style="width: 630px; height: 30px;" maxlength="30">
 			</div>
 			<div>
-				<textarea name="info" placeholder="내용을 입력하세요"></textarea>
+				<textarea name="info" placeholder="내용을 입력하세요" maxlength="250"></textarea>
 			</div>
 			<div>
 				<div>
@@ -226,7 +224,7 @@ button {
 					<label style="font-size: 20px; margin-left: 2px;">원</label>
 				</div>
 				<div>
-					<br><input type="file" id="product-content" name="file">
+					<br><input type="file" id="product-img" name="file">
 				</div>
 			</div>
 		</div>

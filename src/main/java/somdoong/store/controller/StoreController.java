@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import somdoong.store.dto.Product;
 import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
 import somdoong.store.service.face.StoreService;
@@ -38,8 +39,18 @@ public class StoreController {
 		logger.info("{}", list);
 
 		model.addAttribute("list", list);
-
+		
 		return "store/list_main";
+	}
+	
+	@RequestMapping("/list/product")
+	public String productList(Model model) {
+		
+		List<Product> productList = storeService.getProductList();
+		
+		model.addAttribute("productList", productList);
+		
+		return "store/product";
 	}
 	
 	@RequestMapping("/list/all")
@@ -52,11 +63,13 @@ public class StoreController {
 	@RequestMapping("/list/food")
 	public String FoodList(@RequestParam("id_check") String category, Model model) {
 
-		logger.info("/store/list/food");
-
 		List<Store> list = storeService.getList(category);
-
+		
+		logger.info("{}", list);
+		
 		model.addAttribute("list", list);
+		
+		logger.info("{}", model);
 
 		return "store/list_food";
 	}
@@ -99,15 +112,15 @@ public class StoreController {
 		//게시글 조회
 		viewStore = storeService.view(viewStore);
 		
-		logger.info("조회된 게시글 {}", viewStore);
-		
 		model.addAttribute("viewStore", viewStore);
 		
 		//첨부파일 모델값 전달
 		ProductImg productImg = storeService.getAttachFile(viewStore);
 		model.addAttribute("productImg", productImg);
 		
-		return "store/list_detail"; 
+		logger.info("{}", productImg);
+		
+		return "store/list_detail";
 	}
 	
 	@RequestMapping("/product/info")
@@ -124,6 +137,24 @@ public class StoreController {
 
 	//--------------------------  상품정보 추가  --------------------------
 
+	@GetMapping("/list/product/insert")
+	public String insertProduct() {
+		
+		return "store/product_insert";
+	}
+	
+	@PostMapping("/list/product/insert")
+	public String insertProductProcess(Product product, MultipartFile file) {
+		
+		logger.debug("{}", product);
+		logger.debug("{}", file);
+		
+		storeService.insertProduct(product, file);
+		
+		return "store/product_insert";
+//		return "redirect:/store/list/product";
+	}
+	
 	@GetMapping("/list/write")
 	public String Write() {
 		return "store/store_write";
@@ -132,10 +163,9 @@ public class StoreController {
 	@PostMapping("/list/write")
 	public String WriteProcess(Store store, MultipartFile file, HttpSession session) {
 		
-		storeService.write(store, file);
+		logger.info("{}",file);
 		
-		logger.info("{}", store);
-		logger.info("{}", file);
+		storeService.write(store, file);
 		
 		return "redirect:/store/list/detail?storeNo=" + store.getStoreNo();
 	}

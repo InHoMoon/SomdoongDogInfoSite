@@ -20,8 +20,12 @@ a {
 	float: left;
 }
 
-ul > li > img:hover {
+li > img:hover {
 	box-shadow: 2px 2px 10px #d3d3d3;
+}
+
+
+ul > li > img:hover {
 	cursor: pointer;
 }
 
@@ -42,12 +46,13 @@ ul > li > img:hover {
 
 <div class="wrap-content">
 
-<c:forEach items="${list }" var="list">
+<c:forEach items="${productList }" var="list">
 	<ul id="list-case">
-		<li><img src="/resources/store_monster08.gif" onclick="location.href='/store/list/detail?storeNo=${list.storeNo }'" width="320px" height="200px"></li>
-		<li id="product-title"><a href="/store/list/detail?storeNo=${list.storeNo }">${list.title }</a></li>
+		<li><img src="<%=request.getContextPath() %>/upload/${productImg.storedName }"
+			onclick="location.href='/store/list/product/detail?productNo=${list.productNo }'" width="320px" height="200px"></li>
+		<li id="product-title"><a href="/store/list/product/detail?productNo=${list.productNo }">${list.productName }</a></li>
 		<li style="font-size: 30px; line-height: 10px;">${list.product.productName }</li>
-		<li id="product-price"><fmt:formatNumber value="${list.product.price }"/>원</li>
+		<li id="product-price"><fmt:formatNumber value="${list.price }"/>원</li>
 	</ul>
 </c:forEach>
 

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.store.dao.face.StoreDao;
+import somdoong.store.dto.Product;
 import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
 import somdoong.store.service.face.StoreService;
@@ -22,62 +23,62 @@ import somdoong.store.service.face.StoreService;
 public class StoreServiceImpl implements StoreService {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired StoreDao storeDao;
-	
+
 	@Autowired ServletContext context;
-	
+
 	@Override
 	public List<Store> getListAll() {
-		
+
 		return storeDao.selectAll();
 	}
 	
 	@Override
+	public List<Product> getProductList() {
+		return storeDao.selectAllProduct();
+	}
+
+	@Override
 	public List<Store> getList(String category) {
 		logger.info("{}", category);
-		
+
 		//카테고리별 게시글 조회
 		return storeDao.selectByCategory(category);
 	}
 
+	
 	@Override
 	public Store view(Store viewStore) {
-		
-		//조회수 증가
-		storeDao.updateHit(viewStore);
-		
+
 		//상세보기 조회 결과 리턴
 		return storeDao.selectPostByStoreNo(viewStore);
 	}
 
 	@Override
-	public void write(Store store, MultipartFile file) {
+	public void insertProduct(Product product, MultipartFile file) {
 		
 		//게시글 처리
-		storeDao.insertStore(store);
-		
-		//첨부파일 처리
-		
+		storeDao.insertProduct(product);
+
 		//빈 파일일 경우
 		if( file.getSize() <= 0) {
 			return;
 		}
-		
+
 		//파일이 저장될 경로
 		String storedPath = context.getRealPath("upload");
 		File uploadFolder = new File( storedPath );
 		if ( !uploadFolder.exists() ) {
 			uploadFolder.mkdir();
 		}
-		
-		//파일이 저장될 이름
+
 		String originName = file.getOriginalFilename();
 		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
-		
+
 		//저장할 파일의 정보 객체
 		File dest = new File( uploadFolder, storedName );
-		
+
 		try {
 			file.transferTo(dest);
 		} catch (IllegalStateException e) {
@@ -85,22 +86,71 @@ public class StoreServiceImpl implements StoreService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		//-------------------------------------
-		
+
+		//첨부파일 정보 DB 기록
+		ProductImg productImg = new ProductImg();
+		productImg.setProductNo( product.getProductNo() );
+		productImg.setOriginName(originName);
+		productImg.setStoredName(storedName);
+
+		storeDao.insertImg(productImg);
+	}
+	
+	@Override
+	public void write(Store store, MultipartFile file) {
+
+		//게시글 처리
+		storeDao.insertStore(store);
+
+		//빈 파일일 경우
+		if( file.getSize() <= 0) {
+			return;
+		}
+
+		//파일이 저장될 경로
+		String storedPath = context.getRealPath("upload");
+		File uploadFolder = new File( storedPath );
+		if ( !uploadFolder.exists() ) {
+			uploadFolder.mkdir();
+		}
+
+		//파일이 저장될 이름
+//		for() {
+//			
+//		}
+		String originName = file.getOriginalFilename();
+		String storedName = originName + UUID.randomUUID().toString().split("-")[4];
+
+		//저장할 파일의 정보 객체
+		File dest = new File( uploadFolder, storedName );
+
+		try {
+			file.transferTo(dest);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		//-------------------------------------
+
 		//첨부파일 정보 DB 기록
 		ProductImg productImg = new ProductImg();
 		productImg.setStoreNo( store.getStoreNo() );
 		productImg.setOriginName(originName);
 		productImg.setStoredName(storedName);
-		
+
 		storeDao.insertImg(productImg);
-		
 	}
 
 	@Override
 	public ProductImg getAttachFile(Store viewStore) {
 		return storeDao.selectProductImgByStoreNo(viewStore);
 	}
+
+
+
 
 }
