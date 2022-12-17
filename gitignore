@@ -1,0 +1,7 @@
+target/
+
+root-context.xml
+servlet-context.xml
+
+log4j.xml
+pom.xml
