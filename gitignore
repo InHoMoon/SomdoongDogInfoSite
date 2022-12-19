@@ -1,7 +1,6 @@
-target/
-
-root-context.xml
-servlet-context.xml
-
+target
 log4j.xml
+servlet-context.xml
+root-context.xml
+mybatis-config.xml
 pom.xml
