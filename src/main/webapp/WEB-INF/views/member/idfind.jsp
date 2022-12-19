@@ -29,6 +29,14 @@ $(document).ready(function() {
 			return false;
 		}
 		 
+	      //이름 유효성 검사
+	      if(!getName.test($("#username").val())){
+	        alert("한글로 올바른 이름을 입력해주세요")
+	        $("#username").val("");
+	        $("#username").focus();
+	        return false;
+	      }
+		 
 		 //휴대폰 공백 확인
 		if($("#userphone").val()==""){
 			alert("휴대폰번호를 입력해주세요.");

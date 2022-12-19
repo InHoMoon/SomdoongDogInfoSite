@@ -100,7 +100,7 @@ $(document).ready(function(){
 		
 		  //아이디 유효성검사
 	      if(!getCheck.test($("#userid").val())){
-	        alert("형식에 맞게 입력해주세요");
+	        alert("아이디 형식에 맞게 입력해주세요");
 	        $("#userid").val("");
 	        $("#userid").focus();
 	        return false;
@@ -132,7 +132,7 @@ $(document).ready(function(){
 	      
 	      //비밀번호 유효성검사
 	      if(!getCheck.test($("#userpw").val())){
-	        alert("형식에 맞게 입력해주세요");
+	        alert("비밀번호 형식에 맞게 입력해주세요");
 	        $("#userpw").val("");
 	        $("#userpw").focus();
 	        return false;
@@ -140,7 +140,7 @@ $(document).ready(function(){
 	      
 	      //비밀번호 확인란 공백 확인
 	      if($("#userpwcheck").val() == ""){
-	        alert("비밀번호 확인란을 입력해주세요");
+	        alert("비밀번호 확인을 입력해주세요");
 	        $("#userpwcheck").focus();
 	        return false;
 	      }
@@ -163,7 +163,7 @@ $(document).ready(function(){
 	      
 	      //이름 유효성 검사
 	      if(!getName.test($("#username").val())){
-	        alert("한글로 이름을 입력해주세요")
+	        alert("한글로 올바른 이름을 입력해주세요")
 	        $("#username").val("");
 	        $("#username").focus();
 	        return false;
