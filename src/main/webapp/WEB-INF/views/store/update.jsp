@@ -71,10 +71,24 @@ $(document).ready(function() {
 	})
 	
 	// 버튼 submit 설정
-	$("#write-btn").click(function() {
+	$("#update-btn").click(function() {
 		
-		$("form").submit();
+		if(confirm("수정 하시겠습니까?") == true){
+			alert("수정 되었습니다.");
+			$("form").submit();
+		} else {
+			return false;
+		}
 	})
+	
+	$("#cancel-btn").click(function(){
+		if( confirm("수정을 취소하시겠습니까?") == true ) {
+			alert("수정이 취소되었습니다.");
+			window.location.replace("/store/detail?storeNo=${param.storeNo }");
+		} else {
+			return false;
+		}
+	});
 });
 </script>
 
@@ -89,7 +103,7 @@ body {
 
 #wrap-write {
 	width: 1900px;
-	height: 100%;
+	height: auto;
 	display: flex;
 	justify-content: center;
 }
@@ -184,20 +198,20 @@ button {
 
 <div id="wrap-btn">
 	<div id="wrap-button">
-		<button id="write-btn">등록</button>
-		<button id="cancel-btn">취소</button>
+		<button id="update-btn">수정</button>
+		<button id="cancel-btn" type="button">취소</button>
 	</div>
 </div>
 
 <div id="wrap-write">
 
 
-<form action="/store/write" method="post" enctype="multipart/form-data">
+<form action="/store/update" method="post" enctype="multipart/form-data">
 
-<input type="hidden" id="productNo" name="productNo" value="${viewProduct.productNo }">
+<input type="hidden" id="storeNo" name="storeNo" value="${viewStore.storeNo }">
 	<div id="wrap-form">
 		<div id="product-profile-img">
-			<img src="<%=request.getContextPath() %>/upload/${viewProduct.productImg.storedName }" width="340px" height="405px">
+			<img src="<%=request.getContextPath() %>/upload/${profileImg.storedName }" width="340px" height="405px">
 		</div>
 		<div id="store-info">
 			<div id="store-category-productName">
@@ -210,21 +224,21 @@ button {
 					</select>
 				</div>
 				<div>
-					<input type="text" name="productName" value="${viewProduct.productName }" style="width: 530px; height: 30px; margin-left: 10px;" maxlength="20" readonly/>
+					<input type="text" name="productName" value="${viewStore.product.productName }" style="width: 530px; height: 30px; margin-left: 10px;" maxlength="20" readonly/>
 				</div>
 			</div>
 			<div>
-				<input type="text" name="title"	placeholder="제목을 입력하세요" style="width: 630px; height: 30px;" maxlength="30">
+				<input type="text" name="title"	placeholder="제목을 입력하세요" style="width: 630px; height: 30px;" maxlength="30" value="${viewStore.title }">
 			</div>
 			<div>
-				<textarea name="info" placeholder="내용을 입력하세요" maxlength="250"></textarea>
+				<textarea name="info" placeholder="내용을 입력하세요" maxlength="250">${viewStore.info }</textarea>
 			</div>
 			<div>
 				<div>
-					<input type="text" name="stock" value="${viewProduct.stock }" style="width:100px; height: 30px; margin: -5px 0 8px 0;" readonly />
+					<input type="text" name="stock" value="${viewStore.product.stock }" style="width:100px; height: 30px; margin: -5px 0 8px 0;" readonly />
 				</div>
 				<div>
-					<input type="text" name="price" value="${viewProduct.price }" style="width: 250px; height: 30px;" readonly />
+					<input type="text" name="price" value="${viewStore.product.price }" style="width: 250px; height: 30px;" readonly />
 					<label style="font-size: 20px; margin-left: 2px;">원</label>
 				</div>
 				<div>
@@ -233,7 +247,9 @@ button {
 			</div>
 		</div>
 	</div>
-	<div id="write-content" style="margin-top: 20px;"></div>
+	<div id="write-content" style="margin-top: 20px;">
+		<img src="<%=request.getContextPath() %>/upload/${productImg.storedName }">
+	</div>
 </form>
 
 </div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@	include file="../layout/header.jsp"%>
+<%@	include file="../../layout/header.jsp"%>
 
 <script type="text/javascript">
 //상품 프로필 이미지 처리 
@@ -40,6 +40,25 @@ $(document).ready(function() {
 		}
 		reader.readAsDataURL( files[0] );
 	})
+	
+	$("#insert-btn").click(function(){
+		
+		if( confirm("상품을 등록 하시겠습니까?") == true ) {
+			alert("등록 되었습니다");
+			$("form").submit();
+		} else {
+			return false;
+		}
+	});
+	
+	$("#cancle-btn").click(function(){
+		
+		if( confirm("작업중인 내용을 잃을수도 있습니다. 계속 하시겠습니까?") == true ) {
+			window.location.replace("/store/product");
+		} else {
+			return false;
+		}
+	})
 });
 </script>
 
@@ -61,7 +80,7 @@ input {
 
 #wrap-product-insert {
 	width: 1900px;
-	height: 100%;
+	height: 750px;
 	
 	display: flex;
 	justify-content: center;
@@ -107,6 +126,7 @@ input {
 	height: 40px;
 	
 	font-size: 25px;
+	font-family: 'Dongle', sans-serif;
 }
 
 </style>	
@@ -114,8 +134,8 @@ input {
 <div id="wrap-product-insert">
 
 <div id="wrap-form">
-	<form action="/store/list/product/insert" method="post" enctype="multipart/form-data">
-	<div style="display: flex; margin-top: 50px;">
+	<form action="/store/product/insert" method="post" enctype="multipart/form-data">
+	<div style="display: flex; margin-top: 100px;">
 		<div id="product-profile-img">
 			<img src="/resources/store_camera.png" style="width: 100px; height: 60px; cursor: pointer;"
 					 alt="사진 업로드" onclick="$('#imgUpload').trigger('click')">
@@ -136,8 +156,8 @@ input {
 				<input type="text" name="stock" id="stock" placeholder="재고를 입력하세요">
 			</div>
 			<div id="wrap-btn" style="margin-top: 100px;">
-				<input type="submit" class="btn" value="등록">
-				<input type="reset" class="btn" value="취소">
+				<button class="btn" id="insert-btn">등록</button>
+				<button class="btn" id="cancle-btn" type="button">취소</button>
 			</div>
 		</div>
 	</div>
@@ -147,4 +167,4 @@ input {
 </div>
 
 
-<%@	include file="../layout/footer.jsp"%>
+<%@	include file="../../layout/footer.jsp"%>

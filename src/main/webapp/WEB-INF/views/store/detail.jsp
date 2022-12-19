@@ -5,40 +5,58 @@
 <%@	taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+$(document).ready(function() {
 		
-		$(".menu").click(function() {
+	$(".heart").click(function() {
+		$(this).toggleClass('change');
+		
+		var storeNo = $("#storeNo").val();
 			
-			var id_check = $(this).attr("id");
-			
-			console.log(id_check);
+		console.log(storeNo);
 
-			var url = "/store/product/" + id_check
+		var url = "/store/detail";
 
-			$.ajax({
-				type : "POST",
-				url : url,
-				async : true,
-				cache : "false",
- 				data : {id_check},
-				dataType : "html",
-				success : function(data) {
-					console.log("ajax 성공")
-
-					$("#product-content").children().remove();
-
-					$("#product-content").html(data);
-				},
-				error : function() {
-					console.log("ajax 실패")
+		$.ajax({
+			type : "POST",
+			url : url,
+			data : {storeNo},
+			dataType : "json",
+			success : function(result) {
+				
+				if(result == 1) {
+					alert("관심상품 등록 완료")
+				} else {
+					alert("로그인 후 이용해 주세요")
+					console.log("콘솔 테스트");
+					console.log("result : " + result)
 				}
-			})
-		});
-		
-		$(".heart").click(function() {
-			$(this).toggleClass('change');
+			},
+			error : function() {
+				alert("관심상품 등록 실패")
+			}
 		})
+	});
+	
+	// 수정버튼 클릭 처리
+	$("#update-btn").click(function(){
+		location.href = "/store/update?storeNo=${viewStore.storeNo }"
 	})
+	
+	// 삭제버튼 클릭 처리
+	$("#delete-btn").click(function(){
+		if(confirm("게시글을 삭제 하시겠습니까?") == true) {
+			alert("삭제 되었습니다.");
+			location.href = "/store/delete?storeNo=${viewStore.storeNo }"
+		} else {
+			return false;
+		}
+	})
+	
+	// 목록버튼 클릭 처리
+	$("#list-btn").click(function(){
+		location.href = "/store/main";
+	})
+})
 </script>
 
 <style type="text/css">
@@ -48,7 +66,14 @@ div {
 
 #wrap-detail {
 	width: 1900px;
-	height: 100%;
+	height: auto;
+}
+
+#wrap-title {
+	width: 1024px;
+	text-align: center;
+	
+	border-bottom: 1px soild #d3d3d3;
 }
 
 #store-title {
@@ -74,14 +99,9 @@ div {
 	justify-content: center;
 }
 
-#store-info > div > div {
-/* 	margin-bottom: 10px; */
-}
-
 #product-info {
 	width: 640px;
 	height: 110px;
-
 	word-break: break-all;
 	font-size: 25px;
 }
@@ -115,9 +135,10 @@ div {
 
 #store-btn > input {
 	font-size: 25px;
-
 	width: 100px;
-	height: 30px;
+	height: 35px;
+	
+	background-color: #EBB99D;
 }
 
 .delivery {
@@ -172,19 +193,15 @@ div {
 
 #store-content {
 	margin-top: -20px;
-
 	width: 1024px;
 }
 
-#store-content-menu > li {
+#store-content-menu > div {
 	font-family: 'Dongle';
 	font-size: 25px;
-
 	float: left;
 	
 	margin-right: 10px;
-	
-	cursor: pointer;
 }
 
 #info-menu {
@@ -192,21 +209,40 @@ div {
 	height: 40px;
 }
 
-.menu:hover {
-	box-shadow: 2px 2px 10px #d3d3d3;
+#wrap-btn {
+	width: 200px;
+
+    float: right;
+	display: flex;
+	justify-content: flex-end;
+	
 }
+
+#wrap-btn > button {
+	width: 60px;
+	height: 40px;
+	
+    margin: -10px 1px;
+	
+	font-size: 25px;
+	font-family: 'Dongle', sans-serif;
+	
+	display: flex;
+}
+
 </style>
 
 <div id="wrap-detail">
 
 <section id="store-title">
-<div>
+<div id="wrap-title">
 	<div>${viewStore.title }</div>
 </div>
+<input type="hidden" id="storeNo" name="storeNo" value="${viewStore.storeNo }" />
 </section>
 <section id="wrap-info">
 	<div id="store-info">
-		<div style="width: 34%;"><img src="<%=request.getContextPath() %>/upload/${productImg.storedName }" width="340px" height="405px"></div>
+		<div style="width: 34%;"><img src="<%=request.getContextPath() %>/upload/${profileImg.storedName }" width="340px" height="405px"></div>
 		<div style="width: 66%; padding-left: 30px;">
 			<div style="font-size: 40px; font-weight: bold;">${viewStore.product.productName }</div>
 			<div style="font-size: 30px; font-weight: bold; margin-bottom: 10px;">상품 설명</div>
@@ -216,7 +252,7 @@ div {
 				<div id="product-quantity"><input type="number" value="1" min="1"></div>
 				<div id="product-stock">재고 ${viewStore.product.stock }개</div>
 			</div>
-			<div id="store-btn"><input type="button" value="구매하기"></div>
+			<div id="store-btn"><input type="button" class="btn" value="구매하기"></div>
 			<div>
 				<div class="delivery">배송비: 3,000원</div>
 				<div class="delivery">
@@ -230,13 +266,17 @@ div {
 <section id="wrap-content">
 <div id="store-content">
 	<div id="info-menu">
-		<ul id="store-content-menu">
-			<li class="menu" id="info" style="margin-left: 10px;">상세정보</li>
-			<li class="menu" id="review">상품후기</li>
-		</ul>
+		<div id="wrap-btn">
+			<button type="button" id="list-btn" class="btn">목록</button>
+			<button type="button" id="update-btn" class="btn">수정</button>
+			<button type="button" id="delete-btn" class="btn">삭제</button>
+		</div>
+		<div id="store-content-menu">
+			<div id="info" style="margin-left: 10px;">상세정보</div>
+		</div>
 	</div>
 	<div id="product-content" style="text-align: center;">
-		<%@	include file="./product_info.jsp" %>
+		<%@	include file="./info.jsp" %>
 	</div>
 </div>
 </section>

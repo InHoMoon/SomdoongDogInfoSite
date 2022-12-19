@@ -12,11 +12,12 @@ public class Store {
 	private Date reportingDate;
 	
 	private Product product;
+	private ProductImg productImg;
 	
 	public Store() { }
 
 	public Store(int storeNo, int productNo, String category, String title, String info, Date reportingDate,
-			Product product) {
+			Product product, ProductImg productImg) {
 		super();
 		this.storeNo = storeNo;
 		this.productNo = productNo;
@@ -25,12 +26,14 @@ public class Store {
 		this.info = info;
 		this.reportingDate = reportingDate;
 		this.product = product;
+		this.productImg = productImg;
 	}
 
 	@Override
 	public String toString() {
 		return "Store [storeNo=" + storeNo + ", productNo=" + productNo + ", category=" + category + ", title=" + title
-				+ ", info=" + info + ", reportingDate=" + reportingDate + ", product=" + product + "]";
+				+ ", info=" + info + ", reportingDate=" + reportingDate + ", product=" + product + ", productImg="
+				+ productImg + "]";
 	}
 
 	public int getStoreNo() {
@@ -89,5 +92,13 @@ public class Store {
 		this.product = product;
 	}
 
+	public ProductImg getProductImg() {
+		return productImg;
+	}
+
+	public void setProductImg(ProductImg productImg) {
+		this.productImg = productImg;
+	}
+	
 	
 }

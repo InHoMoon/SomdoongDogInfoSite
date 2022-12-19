@@ -48,7 +48,7 @@ ul > li > img:hover {
 
 <c:forEach items="${list }" var="list">
 	<ul id="list-case">
-		<li><img src="/resources/store_monster08.gif" onclick="location.href='/store/list/detail?storeNo=${list.storeNo }'" width="320px" height="200px"></li>
+		<li><img src="<%=request.getContextPath() %>/upload/${list.productImg.storedName }" onclick="location.href='/store/detail?storeNo=${list.storeNo }'" width="320px" height="320px"></li>
 		<li id="product-title"><a href="/store/list/detail?storeNo=${list.storeNo }">${list.title }</a></li>
 		<li style="font-size: 30px; line-height: 10px;">${list.product.productName }</li>
 		<li id="product-price"><fmt:formatNumber value="${list.product.price }"/>원</li>
