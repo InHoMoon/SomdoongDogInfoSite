@@ -185,7 +185,7 @@ footer #footer_wrap {
 			</ul>
 		</li>
 		<c:if test="${empty login }">
-		<li><a href="./login">로그인</a></li>
+		<li><a href="/member/login">로그인</a></li>
 		</c:if>
 		<c:if test="${not empty login }">
 		<li><a href="#">마이페이지</a>
@@ -196,7 +196,7 @@ footer #footer_wrap {
 			<li><a href="/mypage/myboard/list?userid=${userid }">내가 쓴 글 </a></li>
 		</ul>
 		</li>
-		<li><a href="./logout">로그아웃</a></li>
+		<li><a href="/member/logout">로그아웃</a></li>
 		</c:if>
 	</ul>
 	</nav>

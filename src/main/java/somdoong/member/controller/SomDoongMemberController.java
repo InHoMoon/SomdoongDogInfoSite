@@ -76,7 +76,7 @@ public class SomDoongMemberController {
 			session.setAttribute("userid", member.getUserid());
 			session.setAttribute("username",somDoongMemberService.getUsername(member));
 			
-			return "redirect:/member/loginsuc";
+			return "redirect:/main/main";
 			
 		}else {
 			logger.info("로그인 실패");

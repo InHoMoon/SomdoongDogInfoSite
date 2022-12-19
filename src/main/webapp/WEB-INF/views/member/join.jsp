@@ -162,8 +162,8 @@ $(document).ready(function(){
 	      }
 	      
 	      //이름 유효성 검사
-	      if(!getCheck.test($("#username").val())){
-	        alert("올바른 이름을 입력해주세요")
+	      if(!getName.test($("#username").val())){
+	        alert("한글로 이름을 입력해주세요")
 	        $("#username").val("");
 	        $("#username").focus();
 	        return false;
