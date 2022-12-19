@@ -1,0 +1,6 @@
+target
+pom.xml
+mybatis-config.xml
+src/main/resources/log4j.xml
+src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+src/main/webapp/WEB-INF/spring/root-context.xml
