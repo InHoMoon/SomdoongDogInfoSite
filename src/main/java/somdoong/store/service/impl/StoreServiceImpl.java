@@ -3,6 +3,7 @@ package somdoong.store.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.store.dao.face.StoreDao;
+import somdoong.store.dto.OrderProduct;
 import somdoong.store.dto.Product;
 import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
@@ -282,5 +284,15 @@ public class StoreServiceImpl implements StoreService {
 
 		//게시글 삭제
 		storeDao.deleteStore(store);
+	}
+
+	@Override
+	public void order(OrderProduct orderProduct) {
+		storeDao.insertOrder(orderProduct);
+	}
+
+	@Override
+	public void updateStock(Map map) {
+		storeDao.updateStockByProductNo(map);
 	}
 }

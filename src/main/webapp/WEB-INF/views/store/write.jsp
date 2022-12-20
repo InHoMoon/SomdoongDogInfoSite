@@ -71,10 +71,14 @@ $(document).ready(function() {
 	})
 	
 	// 버튼 submit 설정
-	$("#write-btn").click(function() {
-		
-		$("form").submit();
-	})
+	$("#write-btn").click(function(){
+		if( confirm("게시글을 등록 하시겠습니까?") == true ) {
+			alert("등록 되었습니다.");
+			$("form").submit();
+		} else {
+			return false;
+		}
+	});
 });
 </script>
 
@@ -89,7 +93,7 @@ body {
 
 #wrap-write {
 	width: 1900px;
-	height: 100%;
+	height: auto;
 	display: flex;
 	justify-content: center;
 }
@@ -197,7 +201,7 @@ button {
 <input type="hidden" id="productNo" name="productNo" value="${viewProduct.productNo }">
 	<div id="wrap-form">
 		<div id="product-profile-img">
-			<img src="<%=request.getContextPath() %>/upload/${viewProduct.productImg.storedName }" width="340px" height="405px">
+			<img src="<%=request.getContextPath() %>/upload/${viewProduct.productImg.storedName }" class="img-rounded" width="340px" height="405px">
 		</div>
 		<div id="store-info">
 			<div id="store-category-productName">

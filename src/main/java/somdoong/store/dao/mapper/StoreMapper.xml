@@ -186,4 +186,19 @@
 		WHERE store_no = #{storeNo }
 	</delete>
 	
+	<!-- 상품 주문 -->
+	<insert id="insertOrder" parameterType="somdoong.store.dto.OrderProduct">
+		INSERT INTO order_product ( order_no, order_date, order_quantity, userid, product_no, 
+									total_price, total_order_sum, payment_cla, memo)
+		VALUES ( order_product_seq.nextval, default, #{orderQuantity }, #{userid }, #{productNo },
+				#{totalPrice }, #{totalOrderSum }, #{paymentCla }, #{memo })
+	</insert>
+	
+	<!-- 재고 수량 감소 -->
+	<update id="updateStockByProductNo" parameterType="Map">
+		UPDATE product
+		SET stock = stock - #{orderQuantity }
+		WHERE product_no = #{productNo }
+	</update>
+	
 </mapper>

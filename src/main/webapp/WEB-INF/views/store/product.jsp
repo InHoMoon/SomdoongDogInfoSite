@@ -87,7 +87,7 @@ ul > li > img:hover {
 <div><button type="button" id="add-btn" class="btn">상품 추가</button></div>
 	<c:forEach items="${productList }" var="list">
 		<ul id="list-case">
-			<li><img src="<%=request.getContextPath() %>/upload/${list.productImg.storedName }"
+			<li><img src="<%=request.getContextPath() %>/upload/${list.productImg.storedName }" class="img-rounded"
 				onclick="location.href='/store/product/detail?productNo=${list.productNo }'" width="320px" height="320px"></li>
 			<li id="product-title"><a href="/store/list/product/detail?productNo=${list.productNo }">${list.productName }</a></li>
 			<li id="product-price"><fmt:formatNumber value="${list.price }"/>원</li>

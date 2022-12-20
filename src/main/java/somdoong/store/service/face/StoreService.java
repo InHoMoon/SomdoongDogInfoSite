@@ -1,9 +1,11 @@
 package somdoong.store.service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import somdoong.store.dto.OrderProduct;
 import somdoong.store.dto.Product;
 import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
@@ -116,5 +118,21 @@ public interface StoreService {
 	 * @param store - 삭제할 상품 게시글 정보
 	 */
 	public void deleteStore(Store store);
+
+	/**
+	 * 주문 정보를 추가한다
+	 * 
+	 * @param orderProduct - 추가할 주문정보
+	 * @return 
+	 */
+	public void order(OrderProduct orderProduct);
+
+	/**
+	 * 주문 수량만큼 재고를 감소
+	 * 
+	 * @param orderProduct - 주문 수량 정보
+	 * @param product - 상품 정보 
+	 */
+	public void updateStock(Map map);
 
 }

@@ -1,7 +1,9 @@
 package somdoong.store.dao.face;
 
 import java.util.List;
+import java.util.Map;
 
+import somdoong.store.dto.OrderProduct;
 import somdoong.store.dto.Product;
 import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
@@ -129,6 +131,21 @@ public interface StoreDao {
 	 * 
 	 * @param store - 삭제할 상품 정보
 	 */
-	public void deleteStore(Store store);	
+	public void deleteStore(Store store);
+
+	/**
+	 * 주문 정보 추가
+	 * 
+	 * @param orderProduct - 추가할 주문 정보
+	 */
+	public void insertOrder(OrderProduct orderProduct);
+
+	/**
+	 * 주문 수량만큼 해당하는 상품 번호의 재고를 감소한다
+	 * 
+	 * @param orderProduct - 주문 수량 정보
+	 * @param product - 상품 정보
+	 */
+	public void updateStockByProductNo(Map map);	
 
 }

@@ -1,6 +1,8 @@
 package somdoong.store.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import somdoong.member.dto.SomDoongMember;
+import somdoong.store.dto.OrderProduct;
 import somdoong.store.dto.Product;
 import somdoong.store.dto.ProductImg;
 import somdoong.store.dto.Store;
@@ -122,6 +126,8 @@ public class StoreController {
 		
 		ProductImg profileImg = storeService.getAttachFileByProduct(viewStore);
 		model.addAttribute("profileImg", profileImg);
+		
+		logger.debug("{}", viewStore);
 	}
 	
 	@ResponseBody
@@ -269,8 +275,43 @@ public class StoreController {
 	
 	//--------------------------  상품구매, 결제  --------------------------
 
-	@RequestMapping("/buy/item")
-	public void buyItem() {
+	@GetMapping("/order/item")
+	public void order(	SomDoongMember userid,
+						OrderProduct orderQuantity,
+						Store store,
+						Product viewProduct,
+						Model model
+					)
+	{
+		store = storeService.view(store);
+		viewProduct = storeService.viewProduct(viewProduct);
 		
+		model.addAttribute("store", store);
+		model.addAttribute("userid", userid);
+		model.addAttribute("viewProduct", viewProduct);
+		model.addAttribute("orderProduct", orderQuantity);
+		
+//		logger.info("전달받은 storeNo : {}", store);
+//		logger.info("전달받은 userid :{}", userid);
+//		logger.info("전달받은 productNo : {}", viewProduct);
+//		logger.info("전달받은 orderQuantity {}", orderQuantity);
+	}
+	
+	@PostMapping("/order/item")
+	public String orderSuccess(OrderProduct orderProduct, SomDoongMember member, Product product) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+
+		map.put("orderQuantity", orderProduct.getOrderQuantity());
+		map.put("productNo", product.getProductNo());
+		
+		storeService.order(orderProduct);
+		
+		logger.info("{}", orderProduct.getOrderQuantity());
+		logger.info("{}", product.getProductNo());
+		
+		storeService.updateStock(map);
+		
+		return "redirect:/store/main";
 	}
 }

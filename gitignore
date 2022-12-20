@@ -1,6 +1,0 @@
-target
-log4j.xml
-servlet-context.xml
-root-context.xml
-mybatis-config.xml
-pom.xml

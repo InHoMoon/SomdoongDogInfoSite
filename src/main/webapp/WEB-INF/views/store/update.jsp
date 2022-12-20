@@ -211,7 +211,7 @@ button {
 <input type="hidden" id="storeNo" name="storeNo" value="${viewStore.storeNo }">
 	<div id="wrap-form">
 		<div id="product-profile-img">
-			<img src="<%=request.getContextPath() %>/upload/${profileImg.storedName }" width="340px" height="405px">
+			<img src="<%=request.getContextPath() %>/upload/${profileImg.storedName }" class="img-rounded" width="340px" height="405px">
 		</div>
 		<div id="store-info">
 			<div id="store-category-productName">

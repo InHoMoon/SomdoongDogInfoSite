@@ -138,7 +138,9 @@ div {
 <section id="wrap-info">
 	<div id="product-info-img">
 		<div>
-			<div><img src="<%=request.getContextPath() %>/upload/${viewProduct.productImg.storedName }" width="340px" height="405px"></div>
+			<div>
+				<img src="<%=request.getContextPath() %>/upload/${viewProduct.productImg.storedName }" class="img-rounded" width="340px" height="405px">
+			</div>
 		</div>
 	</div>
 	<div id="product-info">

@@ -37,6 +37,11 @@ $(document).ready(function() {
 		})
 	});
 	
+	// 구매버튼 클릭 처리
+	$("#buy-btn").click(function(){
+		$("form").submit();
+	})
+	
 	// 수정버튼 클릭 처리
 	$("#update-btn").click(function(){
 		location.href = "/store/update?storeNo=${viewStore.storeNo }"
@@ -231,6 +236,7 @@ div {
 }
 
 </style>
+<form action="/store/order/item" method="get">
 
 <div id="wrap-detail">
 
@@ -238,21 +244,25 @@ div {
 <div id="wrap-title">
 	<div>${viewStore.title }</div>
 </div>
-<input type="hidden" id="storeNo" name="storeNo" value="${viewStore.storeNo }" />
+	<input type="hidden" id="storeNo" name="storeNo" value="${viewStore.storeNo }" />
+	<input type="hidden" id="productNo" name="productNo" value="${viewStore.product.productNo }" />
+	<input type="hidden" id="userid" name="userid" value="${sessionScope.userid }" />
 </section>
 <section id="wrap-info">
 	<div id="store-info">
-		<div style="width: 34%;"><img src="<%=request.getContextPath() %>/upload/${profileImg.storedName }" width="340px" height="405px"></div>
+		<div style="width: 34%;"><img src="<%=request.getContextPath() %>/upload/${profileImg.storedName }" class="img-rounded" width="340px" height="405px"></div>
 		<div style="width: 66%; padding-left: 30px;">
 			<div style="font-size: 40px; font-weight: bold;">${viewStore.product.productName }</div>
 			<div style="font-size: 30px; font-weight: bold; margin-bottom: 10px;">상품 설명</div>
 			<div id="product-info">${viewStore.info }</div>
 			<div id="product-price"><fmt:formatNumber type="currency" value="${viewStore.product.price }"/></div>
 			<div id="product-quantity-stock">
-				<div id="product-quantity"><input type="number" value="1" min="1"></div>
+				<div id="product-quantity">
+					<input type="number" id="orderQuantity" name="orderQuantity" value="1" min="1" max="${viewStore.product.stock }">
+				</div>
 				<div id="product-stock">재고 ${viewStore.product.stock }개</div>
 			</div>
-			<div id="store-btn"><input type="button" class="btn" value="구매하기"></div>
+			<div id="store-btn"><input type="button" id="buy-btn" class="btn" value="구매하기"></div>
 			<div>
 				<div class="delivery">배송비: 3,000원</div>
 				<div class="delivery">
@@ -280,8 +290,8 @@ div {
 	</div>
 </div>
 </section>
-<section></section>
 
 </div>
 
+</form>
 <%@	include file="../layout/footer.jsp" %>

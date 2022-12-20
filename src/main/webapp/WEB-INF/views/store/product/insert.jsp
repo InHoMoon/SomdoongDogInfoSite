@@ -138,7 +138,7 @@ input {
 	<div style="display: flex; margin-top: 100px;">
 		<div id="product-profile-img">
 			<img src="/resources/store_camera.png" style="width: 100px; height: 60px; cursor: pointer;"
-					 alt="사진 업로드" onclick="$('#imgUpload').trigger('click')">
+					 class="img-rounded" alt="사진 업로드" onclick="$('#imgUpload').trigger('click')">
 		</div>
 		<input type="file" id="imgUpload" style="display:none" name="file">
 		<div id="product-profile-info">
