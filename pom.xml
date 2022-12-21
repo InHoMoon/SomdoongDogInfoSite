@@ -40,7 +40,10 @@
     	<version>2.14.0</version>
 	</dependency>
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7bebdbf0c39223ab4d14f35d6251a503a930afe2
 
     <dependency>
         <groupId>com.google.code.gson</groupId>
@@ -258,7 +261,7 @@
                 <version>2.9</version>
                 <configuration>
                     <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                        <projectnature>org.springframework.ide.eclipse.fcore.springnature</projectnature>
                     </additionalProjectnatures>
                     <additionalBuildcommands>
                         <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
