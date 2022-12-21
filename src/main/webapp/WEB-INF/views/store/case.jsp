@@ -20,23 +20,19 @@ a {
 	float: left;
 }
 
-li > img:hover {
-	box-shadow: 2px 2px 10px #d3d3d3;
-}
-
-
 ul > li > img:hover {
+	box-shadow: 2px 2px 10px #d3d3d3;
 	cursor: pointer;
 }
 
 #product-title {
-	font-size: 20px;
+	font-size: 40px;
 	
 	margin-bottom: 5px;
 }
 
 #product-price {
-	font-size: 22px;
+	font-size: 40px;
 	font-weight: bold;
 }
 
@@ -48,10 +44,10 @@ ul > li > img:hover {
 
 <c:forEach items="${list }" var="list">
 	<ul id="list-case">
-		<li><img src="/resources/store_monster08.gif" onclick="location.href='/store/list/detail?storeNo=${list.storeNo }'" width="320px" height="200px"></li>
+		<li><img src="<%=request.getContextPath() %>/upload/${list.productImg.storedName }" onclick="location.href='/store/detail?storeNo=${list.storeNo }'" class="img-rounded" width="320px" height="320px"></li>
 		<li id="product-title"><a href="/store/list/detail?storeNo=${list.storeNo }">${list.title }</a></li>
-		<li>${list.productName }</li>
-		<li id="product-price"><fmt:formatNumber value="${list.price }"/>원</li>
+		<li style="font-size: 30px; line-height: 10px;">${list.product.productName }</li>
+		<li id="product-price"><fmt:formatNumber value="${list.product.price }"/>원</li>
 	</ul>
 </c:forEach>
 
