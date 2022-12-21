@@ -48,7 +48,7 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/all")
-	public void listAll(Model model) {}
+	public void listAll() {}
 	
 	
 	@RequestMapping("/product")
@@ -75,7 +75,7 @@ public class StoreController {
 
 	
 	@RequestMapping("/snack")
-	public void SnackList(@RequestParam("id_check") String category, Model model) {
+	public void snackList(@RequestParam("id_check") String category, Model model) {
 
 		List<Store> list = storeService.getList(category);
 
@@ -84,7 +84,7 @@ public class StoreController {
 
 	
 	@RequestMapping("/medical")
-	public void MedicalList(@RequestParam("id_check") String category, Model model) {
+	public void medicalList(@RequestParam("id_check") String category, Model model) {
 
 		List<Store> list = storeService.getList(category);
 
@@ -93,7 +93,7 @@ public class StoreController {
 
 	
 	@RequestMapping("/toy")
-	public void ToyList(@RequestParam("id_check") String category, Model model) {
+	public void toyList(@RequestParam("id_check") String category, Model model) {
 
 		List<Store> list = storeService.getList(category);
 
@@ -103,7 +103,7 @@ public class StoreController {
 	//--------------------------  상품정보 상세보기  --------------------------
 	
 	@GetMapping("/product/detail")
-	public void ViewProductDetail(Product viewProduct, Model model) {
+	public void viewProduct(Product viewProduct, Model model) {
 		
 		viewProduct = storeService.viewProduct(viewProduct);
 		
@@ -113,7 +113,7 @@ public class StoreController {
 	}
 	
 	@GetMapping("/detail")
-	public void View(Store viewStore, Model model) {
+	public void view(Store viewStore, Model model) {
 		
 		//게시글 조회
 		viewStore = storeService.view(viewStore);
