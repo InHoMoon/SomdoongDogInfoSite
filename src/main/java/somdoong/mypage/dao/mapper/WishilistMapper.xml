@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.mypage.dao.face.WishlistDao">
+	<select id="selectCntAll" resultType="int" parameterType="Wishlist">
+	
+		SELECT count(*)  FROM wishlist
+	
+	</select>
+
+<!-- 		<select id="selectList" resultType="Wishlist"  parameterType="WishlistPaging"> -->
+<!-- 			SELECT * FROM ( -->
+<!-- 				SELECT rownum rnum, W.* FROM ( -->
+<!-- 					SELECT s.store_no, s.product_no, p.product_name, w.wishList_no, w.addDate FROM store s, product p, wishList w -->
+<!-- 					WHERE  -->
+<!-- 					userid = #{iUserid} -->
+<!-- 					) W  -->
+<!-- 				)WISHLIST  -->
+<!-- 			WHERE rnum BETWEEN #{startNo } AND #{endNo } -->
+
+				
+<!-- 	</select> -->
+	
+	<delete id="delete" parameterType="Wishlist">
+		DELETE wishList
+		WHERE wishList_no =#{wishListNo}
+	</delete>
+	
+
+	<select id="selectLists" resultType="Wishlist"  parameterType="WishlistPaging">
+			SELECT * FROM (
+				SELECT rownum rnum, W.* FROM (
+					SELECT s.store_no, s.product_no, p.product_name, w.wishList_no, w.addDate FROM store s, product p, wishList w
+					WHERE 
+					userid = #{iUserid}
+					) W 
+				)WISHLIST 
+			INNER JOIN product_img i ON wishlist.store_no =i.img_no AND  rnum BETWEEN #{startNo } AND #{endNo }	
+	</select>
+	
+</mapper>

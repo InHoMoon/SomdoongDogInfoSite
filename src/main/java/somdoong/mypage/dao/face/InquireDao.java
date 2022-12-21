@@ -4,13 +4,15 @@ import java.util.List;
 
 import somdoong.mypage.dto.IBoardFile;
 import somdoong.mypage.dto.Inquire;
+import somdoong.util.InquirePaging;
 import somdoong.util.Paging;
+import somdoong.util.myinquirePaging;
 
 public interface InquireDao {
 
-	public int selectCntAll();
+	public int selectCntAll(Inquire inquire);
 
-	public List<Inquire> selectList(Paging paging);
+	public List<Inquire> selectList(InquirePaging paging);
 
 	public void hit(Inquire viewInquire);
 
@@ -29,5 +31,9 @@ public interface InquireDao {
 	public void deleteFile(Inquire inquire);
 
 	public void delete(Inquire inquire);
+
+	public int selectCntMyCount(Inquire inquire);
+
+	public List<Inquire> selectListMyname(myinquirePaging paging);
 
 }

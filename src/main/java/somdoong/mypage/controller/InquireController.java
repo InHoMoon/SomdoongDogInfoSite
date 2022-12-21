@@ -18,7 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import somdoong.mypage.dto.IBoardFile;
 import somdoong.mypage.dto.Inquire;
 import somdoong.mypage.service.face.InquireService;
-import somdoong.util.Paging;
+import somdoong.util.InquirePaging;
+import somdoong.util.myinquirePaging;
 
 @Controller
 @RequestMapping("/mypage")
@@ -31,9 +32,11 @@ public class InquireController {
 	@RequestMapping("/list")
 	public void inquireList(
 			@RequestParam(defaultValue="0") int curPage
-			,Model model , HttpSession session) {
+			,Model model , HttpSession session,Inquire inquire) {
 		
-		Paging paging = inquireService.getPaging(curPage);
+		inquire.setiUserid((String) session.getAttribute("userid"));
+		
+		InquirePaging paging = inquireService.getPaging(curPage, inquire);
 		logger.debug("{}" , paging);
 		model.addAttribute("paging", paging);
 		
@@ -44,6 +47,26 @@ public class InquireController {
 		model.addAttribute("list", list);
 	}
 	
+	
+	
+	
+	@RequestMapping("/inquire/list")
+	public void inquireMynameList(
+			@RequestParam(defaultValue="0") int curPage
+			,Model model , HttpSession session,Inquire inquire) {
+		
+		inquire.setiUserid((String) session.getAttribute("userid"));
+		
+		myinquirePaging paging = inquireService.getPagingmyname(curPage, inquire);
+		logger.debug("{}" , paging);
+		model.addAttribute("paging", paging);
+		
+		paging.setiUserid((String) session.getAttribute("userid"));
+
+		List<Inquire> list = inquireService.listmyname(paging);
+		for( Inquire I : list )	logger.debug("{}", I);
+		model.addAttribute("list", list);
+	}
 	
 	
 	@RequestMapping("/view")
@@ -142,5 +165,11 @@ public class InquireController {
 		
 		return "redirect:/mypage/list";
 	}
+	
+	@RequestMapping("/mypage")
+	public void main() {}
+	
+	
+	
 	
 }
