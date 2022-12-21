@@ -39,6 +39,8 @@ public class SomDoongMemberServiceImpl implements SomDoongMemberService{
 		
 		return somDoongMemberDao.selectName(member) ;
 	}
+	
+
 
 	
 	@Override

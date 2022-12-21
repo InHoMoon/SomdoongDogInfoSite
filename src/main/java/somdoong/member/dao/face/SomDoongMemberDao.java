@@ -16,6 +16,8 @@ public interface SomDoongMemberDao {
 
 	public SomDoongMember memberPwSearch(SomDoongMember searchMember);
 
+
+
 	
 
 	

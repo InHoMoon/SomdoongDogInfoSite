@@ -76,6 +76,7 @@ public class SomDoongMemberController {
 			session.setAttribute("userid", member.getUserid());
 			session.setAttribute("username",somDoongMemberService.getUsername(member));
 			
+			
 			return "redirect:/main/main";
 			
 		}else {

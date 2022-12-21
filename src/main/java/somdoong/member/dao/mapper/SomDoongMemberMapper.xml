@@ -24,6 +24,8 @@
 		WHERE userid = #{userid}
 	</select>
 	
+
+	
 	 <select id="idcheck" parameterType="SomDoongMember" resultType="int">
 		SELECT count(userid) FROM sommember WHERE userid=#{userid}
 	</select>

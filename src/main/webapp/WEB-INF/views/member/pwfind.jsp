@@ -23,7 +23,7 @@ $(document).ready(function() {
 		
 
 		 //아이디 공백 확인
-		if($("#userid").val()==""){
+		if($("#userid").val()==""){ 
 			alert("아이디를 입력해주세요.");
 			$("#userid").focus();
 			return false;

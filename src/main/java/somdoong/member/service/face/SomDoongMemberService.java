@@ -16,6 +16,8 @@ public interface SomDoongMemberService {
 
 	public SomDoongMember memberPwdCheck(SomDoongMember searchMember);
 
+
+
 	
 
 	
