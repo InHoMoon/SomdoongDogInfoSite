@@ -98,18 +98,56 @@ $(document).ready(function() {
     float: right;
 }
 
+/* 첨부파일 영역 */
+.file-area{
+	display: inline-block;
+    float: right;
+    font-size: 13px;
+}
+
+/* 글 내용 */
+.view_area{
+	color: #5c5c5c;
+    word-wrap: break-word;
+    margin-top: 30px;
+}
+
 .content-main {
 	display: block;
 	margin-bottom:10px;
 }
 
-#btn {
-	width: 80px; height: 35px; color: #fff; 
-  	background-color: #68ae6d;
-  	color: #FFFFFF;
-   	border:none; 
-   	border-radius: 5px;
+.btn-list {
+	display: inline-block;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: top;
+    background: #80ff00;
 }
+
+.btn-update {
+	display: inline-block;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: top;
+    background: #00994c;
+}
+
+.btn-delete {
+	display: inline-block;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: top;
+    background: #ff0000;
+}
+
+
 
 #btn:hover { 
    background: #3A7F03; 
@@ -136,7 +174,7 @@ $(document).ready(function() {
 	<div class="content-header">
 		<div class="content-title">
 			<div class="content-title_area">
-				<div class="content-title_areaText">${viewNotice.title }</div>
+				<div class="content-title_areaText">${viewNotice.ntitle }</div>
 			</div>
 		</div>
 			<div class="content-info">
@@ -146,20 +184,36 @@ $(document).ready(function() {
 				</div>
 			</div>
 	</div>
-	<div class="content-main">
-	${viewNotice.content }
-	</div>
-		
+			<div class="file-area">
+				<c:if test="${not empty noticeFile }">
+					<span><img src="/resources/img/download.png" style="width: 15px; height: 17px;"></span>
+					<a href="/notice/download?fileNo=${noticeFile.fileNo }">${noticeFile.originName }</a>
+				</c:if>
+			</div> <!-- file=area -->
+	
+	<div style="padding-bottom: 30px;"></div>
+	
+	<div class="view_area">
+		<div class="view">
+				<c:if test="${not empty noticeFile }">
+				<img src="/upload/${noticeFile.storedName }" style="width: 40%; height: auto;">
+				</c:if>
+		</div>
+	</div> <!-- view_area -->
+	
+	
+			<div class="content-main">${viewNotice.ncontent }</div>
+	
 </div>
 
 <div class="btn-wrap">
 	<div class="text-center">
-			<button id="btnList" class="btn btn-default">목록</button>
-			
-<%-- 			<c:if test="${id eq viewNotice.adminid }"> --%>
-				<button id="btnUpdate" class="btn btn-primary">수정</button>
-				<button id="btnDelete" class="btn btn-danger">삭제</button>
-<%-- 			</c:if> --%>
+			<button id="btnList" class="btn btn-default btn-list">목록</button>
+
+			<c:if test="${adminid eq viewNotice.adminid }">
+				<button id="btnUpdate" class="btn btn-primary btn-update">수정</button>
+				<button id="btnDelete" class="btn btn-danger btn-delete">삭제</button>
+			</c:if>
 		</div>
 </div>
 		

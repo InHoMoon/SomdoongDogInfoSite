@@ -50,11 +50,11 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public List<Notice> getList(Paging paging) {
 		
-		List<Notice> list = noticeDao.selectSearchlist(paging);
+		List<Notice> nlist = noticeDao.selectSearchlist(paging);
 		logger.info("paging : {}", paging);
-		logger.info("list : {}", list);
+		logger.info("nlist : {}", nlist);
 		
-		return list;
+		return nlist;
 	}
 	
 	
@@ -79,8 +79,8 @@ public class NoticeServiceImpl implements NoticeService {
 	public void write(Notice notice, MultipartFile file) {
 		
 		//게시글 처리
-		if( "".equals( notice.getTitle() ) ) {
-			notice.setTitle("(제목없음)");
+		if( "".equals( notice.getNtitle() ) ) {
+			notice.setNtitle("(제목없음)");
 		}
 		
 		noticeDao.insertNotice(notice);	
@@ -141,8 +141,8 @@ public class NoticeServiceImpl implements NoticeService {
 	public void update(Notice notice, MultipartFile file) {
 		
 		//게시글 처리
-		if( "".equals( notice.getTitle() ) ) {
-			notice.setTitle("(제목없음)");
+		if( "".equals( notice.getNtitle() ) ) {
+			notice.setNtitle("(제목없음)");
 		}
 		
 		noticeDao.updateNotice(notice);

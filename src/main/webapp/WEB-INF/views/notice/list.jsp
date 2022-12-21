@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.sql.Timestamp" %>
 
 <!-- jQuery 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -14,14 +13,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <c:import url="../layout/header.jsp" />
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#btnWrite").click(function() {
-		location.href = "/notice/write"
-	})
-})
-</script>
 
 <style type="text/css">
 * {
@@ -64,20 +55,25 @@ td:nth-child(2) {
 	text-align: left;
 	text-align: justify;
 }
-#btnWrite {
-	padding: 3px 12px;
-    font-size: 12px;
-    line-height: 20px;
-    color: #fff;
-    background-color: #FFCD00;
-    border-color: #ccc;
-    box-shadow: var(--color-btn-primary-shadow),var(--color-btn-primary-inset-shadow);
+#btn-write {
+	display: inline-block;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: top;
+    background: #80ff00;
 }
 
 .search-wrap {
 	margin-top: 10px;
-	margin-left: 380px;
+	margin-left: 350px;
 }
+
+.search { font-size: 12px;}
+.search-op { height: 40px; width: 100px; border: 1px solid #e8e8e8; }
+.search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
+.search-btn { height: 40px; width:37px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
 
 </style>
 
@@ -102,7 +98,7 @@ td:nth-child(2) {
 <c:forEach items="${list }" var="notice">
 	<tr>
 		<td>${notice.notino}</td>
-		<td><a href="/notice/view?notino=${notice.notino }">${notice.title }</a></td>
+		<td><a href="/notice/view?notino=${notice.notino }">${notice.ntitle }</a></td>
 		<td>${notice.adminid }</td>
 		<td><fmt:formatDate value="${notice.notidate }" pattern="yy-MM-dd"/></td>
 		<td>${notice.hit }</td>
@@ -111,30 +107,75 @@ td:nth-child(2) {
 </tbody>
 </table>
 
-<button id="btnWrite" class=" pull-right">글쓰기</button>
+<c:if test="${adminlogin eq true }">
+<button id="btnWrite" class="btn pull-right btn-write">글쓰기</button>
+</c:if>
 <span class="pull-left">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
 
-<c:import url="../layout/paging.jsp" />
+<c:import url="/WEB-INF/views/notice/paging_n.jsp" />
 
 <div class="search-wrap">
-<div id="searchForm">
-   <form>
-      <div class="selectBox">
-   <select name="category">
-       <option  hidden="" disabled="disabled" selected="selected" value="">선택</option>
-       <option value="title">제목</option>
-       <option value="content">내용</option>
-     </select> 
-     <input type="text" size="20" name="search" />&nbsp;
-     <input type="submit" id="search" value="검색"/>
-   </div>
-    </form>
+<div class="search">
+	<form id="form" id="searForm" style="display: inline-block;">
+		<select class="search-op" id="searchType">
+			<option value="ntitle">제목</option>
+			<option value="ncontent">내용</option>
+		</select>
+		<input type="text" class="search-text" placeholder="🔍 검색어를 입력하세요" id="keyword">
+	</form>
+		<button class="search-btn" id="searBtn">찾기</button>
+</div> 
 </div>
-</div>
+
 </div>
 
 
 </div><!-- .container -->
 
+<div class="searchList"></div>
+
 <c:import url="../layout/footer.jsp" />
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btnWrite").click(function() {
+		location.href = "/notice/write"
+	})
+	
+	$("#searBtn").click(function() {
+		search(0);
+	});
+	
+	$("#keyword").on("keydown",function(e){
+        if(e.keyCode == 13) {
+        	e.preventDefault();
+        	search(0);
+        }
+    });
+	
+	$(document).on("click","[data-curpage]", function(e) {
+		search($(this).data("curpage")); 
+	});
+	
+});
+
+function search(curPage){
+	var searchType = $("#searchType option:selected").val();
+	var keyword = $("#keyword").val();
+	
+	if(keyword == ''){
+		alert("검색어를 입력하세요");
+		return false;
+	}
+	$.ajax({
+		url : "/notice/listS"
+		, type : "post"
+		, data : { "searchType" : searchType, "keyword" : keyword, curPage : curPage }
+		, dataType: "html"
+		, success : function(result){
+			$(".table-wrap").html(result);
+			$("#totalCnt").text($("#iptsTotal").val());
+		}
+	});// ajax end
+};//search function
+</script>

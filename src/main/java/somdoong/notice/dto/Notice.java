@@ -6,26 +6,26 @@ public class Notice {
 
 	private int notino;
 	private String adminid;
-	private String title;
-	private String content;
+	private String ntitle;
+	private String ncontent;
 	private int hit;
 	private Date notidate;
 	
 	public Notice () {}
 
-	public Notice(int notino, String adminid, String title, String content, int hit, Date notidate) {
+	public Notice(int notino, String adminid, String ntitle, String ncontent, int hit, Date notidate) {
 		super();
 		this.notino = notino;
 		this.adminid = adminid;
-		this.title = title;
-		this.content = content;
+		this.ntitle = ntitle;
+		this.ncontent = ncontent;
 		this.hit = hit;
 		this.notidate = notidate;
 	}
 
 	@Override
 	public String toString() {
-		return "Notice [notino=" + notino + ", adminid=" + adminid + ", title=" + title + ", content=" + content
+		return "Notice [notino=" + notino + ", adminid=" + adminid + ", ntitle=" + ntitle + ", ncontent=" + ncontent
 				+ ", hit=" + hit + ", notidate=" + notidate + "]";
 	}
 
@@ -45,20 +45,20 @@ public class Notice {
 		this.adminid = adminid;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getNtitle() {
+		return ntitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setNtitle(String ntitle) {
+		this.ntitle = ntitle;
 	}
 
-	public String getContent() {
-		return content;
+	public String getNcontent() {
+		return ncontent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setNcontent(String ncontent) {
+		this.ncontent = ncontent;
 	}
 
 	public int getHit() {
@@ -77,6 +77,6 @@ public class Notice {
 		this.notidate = notidate;
 	}
 
-	
+
 	
 }

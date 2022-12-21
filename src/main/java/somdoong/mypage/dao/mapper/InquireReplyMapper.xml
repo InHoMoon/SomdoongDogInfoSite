@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.mypage.dao.face.InquireReplyDao">
+
+
+	<!-- 댓글 등록 -->
+	<insert id="insertReply" parameterType="InquireReply">
+		INSERT INTO inquire_reply ( incno, i_num, adminid, userid, reply_content ) 
+		VALUES ( inquire_reply_seq.nextval, #{iNum}, #{adminid}, #{userid}, #{replyContent} )
+	</insert>
+	
+	<!-- 댓글 수 조회 -->
+	<select id="getCntByINum" resultType="int" parameterType="int">
+		select count(*) from inquire_reply
+		where i_num = #{iNum}
+	</select>
+
+	<!-- 댓글 목록 -->
+    <select id="list" resultType="InquireReply" parameterType="int">
+        <include refid="pagingHeader"/>
+            select incno, adminid, userid, reply_content, reply_date
+            from inquire_reply
+			where i_num = #{iNum}
+			order by incno desc
+        <include refid="pagingFooter"/>
+    </select>
+    
+    <!-- 페이징 sql -->
+    <sql id="pagingHeader">
+        SELECT * FROM (
+            SELECT ROWNUM AS rn, A.* FROM (
+    </sql>
+    <sql id="pagingFooter">
+            ) A
+        ) WHERE rn BETWEEN #{start} AND #{end}
+    </sql>
+    
+    <!-- 댓글 상세 -->
+	<select id="detail" resultType="InquireReply" parameterType="int">
+	 	select * from inquire_reply
+		where incno = #{incno}
+    </select>
+    
+    <!-- 댓글 수정 -->
+    <update id="update" parameterType="InquireReply">
+     	UPDATE inquire_reply
+        SET reply_content = #{replyContent}
+        WHERE incno = #{incno}
+    </update>
+    
+    <!-- 댓글 삭제 -->
+    <delete id="delete" parameterType="int">
+    	DELETE FROM inquire_reply
+        WHERE incno = #{incno}
+    </delete>
+
+
+</mapper>

@@ -56,7 +56,7 @@ public interface NoticeDao {
 	/**
 	 * 첨부파일 정보를 삽입한다
 	 * 
-	 * @param boardFile
+	 * @param noticeFile
 	 */
 	public void insertFile(NoticeFile noticeFile);
 	
@@ -71,7 +71,7 @@ public interface NoticeDao {
 	/**
 	 * 파일 번호를 이용하여 첨부파일 정보를 조회한다
 	 * 
-	 * @param boardFile - 조회할 첨부파일 객체
+	 * @param noticeFile - 조회할 첨부파일 객체
 	 * @return 조회된 첨부파일 정보
 	 */
 	public NoticeFile selectNoticeFileByFileNo(NoticeFile noticeFile);
@@ -86,7 +86,7 @@ public interface NoticeDao {
 	/**
 	 * 게시글을 참조하고 있는 모든 첨부파일 삭제
 	 * 
-	 * @param board - 첨부파일을 삭제할 게시글 번호
+	 * @param notice - 첨부파일을 삭제할 게시글 번호
 	 */
 	public void deleteFile(Notice notice);
 	
