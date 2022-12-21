@@ -111,36 +111,52 @@
 	
 	<!-- 검색 리스트 조회 -->
 	<select id="selectSearchlist" resultType="Recommendboard" parameterType="Paging_f" >
-		SELECT recommendboard.rno, title,content, userid, hit, write_date, likecnt, stored_name AS finame 
-	    FROM (
-			    SELECT rownum rnum, R.* FROM (
-			        SELECT
-			            rno, title, content , userid, hit, write_date
-			        FROM recommendboard
-			        <choose>
-						<when test="searchType == 'title'">
-							where title like '%'|| #{keyword} ||'%'
-						</when>
+		select * from (
+		    select rownum as rnum, rTbl_all.* from( 
+		        select * from (
+		            SELECT recommendboard.rno, title,content, userid, hit, write_date, likecnt, stored_name AS finame FROM (
+		                SELECT R.* FROM (
+		                    SELECT
+		                        rno, title, content , userid, hit, write_date
+		                    FROM recommendboard
+		                    <choose>
+								<when test="searchType == 'title'">
+									where title like '%'|| #{keyword} ||'%'
+								</when>
+					
+								<when test="searchType == 'content'">
+									where content like '%'|| #{keyword} ||'%'
+								</when>
+								
+								<when test="searchType == 'writer'">
+									where userid like '%'|| #{keyword} ||'%'
+								</when>
+							</choose>
+		                ) R
+		            ) recommendboard
+		            LEFT JOIN (
+		                SELECT rno, count(rno) AS likeCnt
+		                from rboard_like
+		                GROUP BY rno
+		            ) l ON recommendboard.rno = l.rno
+		            LEFT OUTER JOIN rboard_file fi on recommendboard.rno = fi.rno 
+		        ) rTbl
+		        <choose>
+					<when test="type == 'newest'">
+						ORDER BY rTbl.write_date desc
+					</when>
 			
-						<when test="searchType == 'content'">
-							where content like '%'|| #{keyword} ||'%'
-						</when>
-						
-						<when test="searchType == 'writer'">
-							where userid like '%'|| #{keyword} ||'%'
-						</when>
-					</choose>
-			        ORDER BY rno DESC
-			    ) R
-			) recommendboard
-			LEFT JOIN (
-			    SELECT rno, count(rno) AS likeCnt
-			    from rboard_like
-			    GROUP BY rno
-			) l ON recommendboard.rno = l.rno
-	        LEFT OUTER JOIN rboard_file fi on recommendboard.rno = fi.rno 
-			WHERE rnum BETWEEN #{startNo } AND #{endNo }
-			ORDER BY recommendboard.rno desc
+					<when test="type == 'like'">
+						ORDER BY likeCnt desc NULLS LAST
+					</when>
+					
+					<when test="type == 'hit'">
+						ORDER BY hit desc
+					</when>
+				</choose>
+		    ) rTbl_all  
+		) forrow
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 	</select>
 	
 	

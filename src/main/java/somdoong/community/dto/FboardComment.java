@@ -8,7 +8,6 @@ public class FboardComment {
 	
 	private int cno;
 	private int bno;
-	private int userno;
 	private String userid;
 	private String commContent;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd HH:mm")
@@ -16,11 +15,10 @@ public class FboardComment {
 	
 	public FboardComment() {}
 
-	public FboardComment(int cno, int bno, int userno, String userid, String commContent, Date commDate) {
+	public FboardComment(int cno, int bno, String userid, String commContent, Date commDate) {
 		super();
 		this.cno = cno;
 		this.bno = bno;
-		this.userno = userno;
 		this.userid = userid;
 		this.commContent = commContent;
 		this.commDate = commDate;
@@ -28,8 +26,8 @@ public class FboardComment {
 
 	@Override
 	public String toString() {
-		return "FboardComment [cno=" + cno + ", bno=" + bno + ", userno=" + userno + ", userid=" + userid
-				+ ", commContent=" + commContent + ", commDate=" + commDate + "]";
+		return "FboardComment [cno=" + cno + ", bno=" + bno + ", userid=" + userid + ", commContent=" + commContent
+				+ ", commDate=" + commDate + "]";
 	}
 
 	public int getCno() {
@@ -46,14 +44,6 @@ public class FboardComment {
 
 	public void setBno(int bno) {
 		this.bno = bno;
-	}
-
-	public int getUserno() {
-		return userno;
-	}
-
-	public void setUserno(int userno) {
-		this.userno = userno;
 	}
 
 	public String getUserid() {
@@ -79,6 +69,7 @@ public class FboardComment {
 	public void setCommDate(Date commDate) {
 		this.commDate = commDate;
 	}
+
 	
 	
 	

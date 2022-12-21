@@ -5,7 +5,6 @@ import java.util.Date;
 public class Freeboard {
 	
 	private int fno;
-	private int userno;
 	private String title;
 	private String content;
 	private String userid;
@@ -17,11 +16,10 @@ public class Freeboard {
 	
 	public Freeboard() {}
 
-	public Freeboard(int fno, int userno, String title, String content, String userid, int hit, Date writeDate,
-			int commCnt, int fiCnt) {
+	public Freeboard(int fno, String title, String content, String userid, int hit, Date writeDate, int commCnt,
+			int fiCnt) {
 		super();
 		this.fno = fno;
-		this.userno = userno;
 		this.title = title;
 		this.content = content;
 		this.userid = userid;
@@ -33,9 +31,8 @@ public class Freeboard {
 
 	@Override
 	public String toString() {
-		return "Freeboard [fno=" + fno + ", userno=" + userno + ", title=" + title + ", content=" + content
-				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", commCnt=" + commCnt
-				+ ", fiCnt=" + fiCnt + "]";
+		return "Freeboard [fno=" + fno + ", title=" + title + ", content=" + content + ", userid=" + userid + ", hit="
+				+ hit + ", writeDate=" + writeDate + ", commCnt=" + commCnt + ", fiCnt=" + fiCnt + "]";
 	}
 
 	public int getFno() {
@@ -44,14 +41,6 @@ public class Freeboard {
 
 	public void setFno(int fno) {
 		this.fno = fno;
-	}
-
-	public int getUserno() {
-		return userno;
-	}
-
-	public void setUserno(int userno) {
-		this.userno = userno;
 	}
 
 	public String getTitle() {
@@ -110,6 +99,7 @@ public class Freeboard {
 		this.fiCnt = fiCnt;
 	}
 
+	
 	
 	
 	

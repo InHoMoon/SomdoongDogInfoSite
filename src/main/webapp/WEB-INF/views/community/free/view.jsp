@@ -158,6 +158,21 @@
     border: 1px solid #e8e8e8;
     resize: none;
 }
+
+
+#btnList{
+    width: 75px;
+    height: 34px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.lbtn_wrap { margin-bottom: 30px; text-align: center; }
+
+
 </style>
 
 
@@ -166,6 +181,12 @@ $(document).ready(function() {
 
 	cCount();
     listReplyRest("1");
+    
+    
+    $("#btnList").click(function() {
+		location.href = "/community/free/list"
+	});
+    
 	
 
 	//댓글등록
@@ -341,6 +362,10 @@ function showReplyModify(cno,comment,target){
 	
 </form>
 </div> <!-- comm_area -->
+
+<div class="lbtn_wrap">
+	<button id="btnList">목록으로</button>
+</div>
 
 
 

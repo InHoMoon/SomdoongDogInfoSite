@@ -80,7 +80,7 @@
 /* 컨텐츠 아래로 여백주기 */
 .clear{ 
 	margin-top: 30px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
     border-bottom: 1px solid #efefef;
 }
 
@@ -98,6 +98,17 @@
     top: 2px;
 }
 
+#btnList{
+    width: 75px;
+    height: 34px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.lbtn_wrap { margin-bottom: 30px; text-align: center; }
 </style>
 
 
@@ -154,6 +165,10 @@
 	
 <div class="clear"></div>
 
+<div class="lbtn_wrap">
+	<button id="btnList">목록으로</button>
+</div>
+
 
 </div> <!-- all -->
 
@@ -163,6 +178,9 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$("#btnList").click(function() {
+		location.href = "/community/recommend/list"
+	});
 	
 	
 	//변수선언
@@ -188,12 +206,15 @@ $(document).ready(function(){
 			, type : "post"
 // 			, data : { "rno" : ${rboard.rno}, "userid" : `${rboard.userid}` }
 			, data : { "rno" : ${rboard.rno}, "userid" : `${userid}` }
+			, dataType : "json"
 			, success : function(data){
 				if(data == 1){
 					$(".heart").prop("src", "/resources/img/heart.png");
+					console.log("하트 클릭");
 				} else if(data == 0){
 					$(".heart").prop("src", "/resources/img/empty_heart.png");
 					alert("좋아요가 취소되었습니다");
+					console.log("하트 취소");
 				}
 			}
 		});//ajax end
@@ -205,43 +226,45 @@ $(document).ready(function(){
 
 
 <script type="text/javascript">
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-mapOption = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    level: 3 // 지도의 확대 레벨
-};  
-
-//지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-//주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-
-//주소로 좌표를 검색합니다
-// geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-geocoder.addressSearch('${rboard.address}', function(result, status) {
-
-// 정상적으로 검색이 완료됐으면 
- if (status === kakao.maps.services.Status.OK) {
-
-    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-    // 결과값으로 받은 위치를 마커로 표시합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: coords
-    });
-
-    // 인포윈도우로 장소에 대한 설명을 표시합니다
-     var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + `${rboard.planame}` + '</div>'
-    });
-    
-    infowindow.open(map, marker); 
-
-    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-    map.setCenter(coords);
-} 
-});    
+if(${not empty rboard.address}){
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	};  
+	
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	//주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	
+	//주소로 좌표를 검색합니다
+	// geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+	geocoder.addressSearch('${rboard.address}', function(result, status) {
+	
+		// 정상적으로 검색이 완료됐으면 
+		 if (status === kakao.maps.services.Status.OK) {
+		
+		    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		    // 결과값으로 받은 위치를 마커로 표시합니다
+		    var marker = new kakao.maps.Marker({
+		        map: map,
+		        position: coords
+		    });
+		
+		    // 인포윈도우로 장소에 대한 설명을 표시합니다
+		     var infowindow = new kakao.maps.InfoWindow({
+		        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + `${rboard.planame}` + '</div>'
+		    });
+		    
+		    infowindow.open(map, marker); 
+		
+		    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		    map.setCenter(coords);
+		} 
+	});    
+}
 </script>

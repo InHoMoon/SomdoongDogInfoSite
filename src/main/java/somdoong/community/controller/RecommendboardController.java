@@ -59,7 +59,9 @@ public class RecommendboardController {
 	@ResponseBody
 	public ModelAndView search(@RequestParam(defaultValue = "title") String searchType, 
 			@RequestParam(defaultValue = "") String keyword, 
-			@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
+			@RequestParam(defaultValue = "0")int curPage, 
+			@RequestParam(defaultValue = "newest") String type, 
+			ModelAndView mav) {
 		
 		logger.info("/community/recommend/search");
 		//- 검색된 전체 게시물 수 조회
@@ -68,18 +70,20 @@ public class RecommendboardController {
 		paging.setSearchType(searchType);
 		paging.setKeyword(keyword);
 		paging.setCurPage(curPage);
+		paging.setType(type);
 		
 		Paging_f sePaging = rboardService.getPagingSearchCnt(paging);
 		sePaging.setSearchType(searchType);
 		sePaging.setKeyword(keyword);
+		sePaging.setType(type);
 		
 		List<Recommendboard> sList = rboardService.getList(sePaging);
-		logger.info("sList : {}", sList);
+//		logger.info("sList : {}", sList);
 		
 		mav.setViewName("/community/recommend/search");
 		mav.addObject("sePaging", sePaging);
 		mav.addObject("sList", sList);
-		mav.addObject("totalCnt",sePaging.getTotalCount());
+		mav.addObject("totalCnt", sePaging.getTotalCount());
 		return mav;
 	} 
 	
@@ -200,7 +204,7 @@ public class RecommendboardController {
 	
 	//게시글 수정 처리
 	@PostMapping("/updateConn")
-	public String updateProcess(Recommendboard rboard, MultipartFile file) {
+	public String updateProc(Recommendboard rboard, MultipartFile file) {
 		logger.info("update post");
 		logger.info("{}", rboard);
 		

@@ -5,7 +5,6 @@ import java.util.Date;
 public class Recommendboard {
 	
 	private int rno;
-	private int userno;
 	private String title;
 	private String content;
 	private String userid;
@@ -19,11 +18,10 @@ public class Recommendboard {
 	
 	public Recommendboard() {}
 
-	public Recommendboard(int rno, int userno, String title, String content, String userid, int hit, Date writeDate,
-			String address, String planame, int likeCnt, String fiName) {
+	public Recommendboard(int rno, String title, String content, String userid, int hit, Date writeDate, String address,
+			String planame, int likeCnt, String fiName) {
 		super();
 		this.rno = rno;
-		this.userno = userno;
 		this.title = title;
 		this.content = content;
 		this.userid = userid;
@@ -37,9 +35,9 @@ public class Recommendboard {
 
 	@Override
 	public String toString() {
-		return "Recommendboard [rno=" + rno + ", userno=" + userno + ", title=" + title + ", content=" + content
-				+ ", userid=" + userid + ", hit=" + hit + ", writeDate=" + writeDate + ", address=" + address
-				+ ", planame=" + planame + ", likeCnt=" + likeCnt + ", fiName=" + fiName + "]";
+		return "Recommendboard [rno=" + rno + ", title=" + title + ", content=" + content + ", userid=" + userid
+				+ ", hit=" + hit + ", writeDate=" + writeDate + ", address=" + address + ", planame=" + planame
+				+ ", likeCnt=" + likeCnt + ", fiName=" + fiName + "]";
 	}
 
 	public int getRno() {
@@ -48,14 +46,6 @@ public class Recommendboard {
 
 	public void setRno(int rno) {
 		this.rno = rno;
-	}
-
-	public int getUserno() {
-		return userno;
-	}
-
-	public void setUserno(int userno) {
-		this.userno = userno;
 	}
 
 	public String getTitle() {
@@ -129,6 +119,7 @@ public class Recommendboard {
 	public void setFiName(String fiName) {
 		this.fiName = fiName;
 	}
+
 	
 	
 

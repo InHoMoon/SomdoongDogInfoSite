@@ -10,20 +10,15 @@
 	width: auto;
     padding: 57px 175px 0px;
 }
-
 table {
 	table-layout: fixed;
 }
-
 table, th {
 	text-align: center;
 }
-
 td:nth-child(2) {
 	text-align: left;
 }
-
-
 #btnWrite{
 	float: right;
     width: 54px;
@@ -34,14 +29,31 @@ td:nth-child(2) {
     color: #555;
     border: 1px solid #ccc;
 }
-
 .search { text-align: right; font-size: 12px;}
 .search-op { height: 40px; width: 100px; border: 1px solid #e8e8e8; }
 .search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
 .search-btn { height: 40px; width:37px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
-
-
 #title > a{ color: #333; }
+
+
+.order_wrap{
+	display: inline-block;
+    position: relative;
+    top: -40px;
+}
+
+#orderType { 
+	height: 40px; 
+	width: 100px; 
+	border: 1px solid #e8e8e8; 
+	
+}
+
+.pull-left {
+	position: relative;
+    left: 109px;
+    top: 10px;
+}
 </style>
 
 <div class="container">
@@ -62,6 +74,16 @@ td:nth-child(2) {
 	</form>
 		<button class="search-btn" id="searBtn">찾기</button	>
 </div> 
+
+
+<div class="order_wrap">	
+	<select id="orderType">
+		<option value="newest">최신순</option>
+		<option value="comm">댓글순</option>
+		<option value="hit">조회순</option>
+	</select>
+</div>
+
 
 <div class="clearfix" style="padding-bottom: 30px;"></div>
 
@@ -99,21 +121,20 @@ td:nth-child(2) {
 	</c:if>
 	<div class="clearfix"></div>
 	
+<%-- 	<span class="pull-left">total : <span id="totalCnt">${paging.totalCount }</span></span> --%>
 	
 	<div id="paging">
 		<c:import url="/WEB-INF/views/community/free/paging_f.jsp" />
 	</div>
 </div>
-
-
-
-
 </div> <!-- container -->
 
 
-<div class="searchList"></div>
 
 <c:import url="../../layout/footer.jsp" />
+
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#btnWrite").click(function() {
@@ -121,33 +142,37 @@ $(document).ready(function() {
 	});
 	
 	$("#searBtn").click(function() {
-		search(0);
+		search(0,true);
 	});
 	
 	$("#keyword").on("keydown",function(e){
         if(e.keyCode == 13) {
         	e.preventDefault();
-        	search(0);
+        	search(0,true);
         }
     });
 	
 	$(document).on("click","[data-curpage]", function(e) {
-		search($(this).data("curpage")); 
+		search($(this).data("curpage"),false); 
 	});
+	
+	$("#orderType").change(function() {
+		search(1,false);
+	})
 });
-
-function search(curPage){
+function search(curPage, btn){
 	var searchType = $("#searchType option:selected").val();
 	var keyword = $("#keyword").val();
+	var type = $("#orderType").val();
 	
-	if(keyword == ''){
+	if(btn && keyword == ''){
 		alert("검색어를 입력하세요");
 		return false;
 	}
 	$.ajax({
 		url : "/community/free/listS"
 		, type : "post"
-		, data : { "searchType" : searchType, "keyword" : keyword, curPage : curPage }
+		, data : { "searchType" : searchType, "keyword" : keyword, curPage : curPage, type: type }
 		, dataType: "html"
 		, success : function(result){
 			$("#apeend_wrap").html(result);

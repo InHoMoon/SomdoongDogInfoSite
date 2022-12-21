@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import somdoong.community.dao.face.FreeboardDao;
 import somdoong.community.dto.FboardFile;
@@ -130,8 +131,8 @@ public class FreeboardServiceImpl implements FreeboardService {
 	public List<Freeboard> getList(Paging_f paging) {
 		
 		List<Freeboard> flist = fboardDao.selectSearchlist(paging);
-		logger.info("paging : {]", paging);
-		logger.info("flist : {]", flist);
+		logger.info("paging : {}", paging);
+		logger.info("flist : {}", flist);
 		
 		return flist;
 	}
@@ -204,6 +205,7 @@ public class FreeboardServiceImpl implements FreeboardService {
 	}
 	
 	
+	
 	//게시글 삭제
 	@Override
 	public void delete(Freeboard fboard) {
@@ -214,7 +216,7 @@ public class FreeboardServiceImpl implements FreeboardService {
 		fboardDao.delete(fboard);
 	}
 
-
+	
 	
 	
 }

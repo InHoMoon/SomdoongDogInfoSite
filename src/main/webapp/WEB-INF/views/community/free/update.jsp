@@ -9,6 +9,33 @@
 <!-- 스마트 에디터 2 로드 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
+
+<style>
+
+.btn_wrap { margin-bottom: 30px; }
+
+#btnUpdate{
+	width: 57px;
+    height: 37px;
+    border-radius: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: #6bacce;
+    color: #fff;
+}
+
+#cancel{
+	width: 57px;
+    height: 37px;
+    border-radius: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: #f84720;
+    color: #fff;
+}
+</style>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -69,6 +96,7 @@ function updateContents() {
 <h1>글수정</h1>
 <hr>
 
+
 <form action="/community/free/updateConn" id="uptForms" method="post" enctype="multipart/form-data">
 
 <%-- <input type="hidden" name="boardNo" value="${updateBoard.boardNo }"> --%>
@@ -108,9 +136,9 @@ function updateContents() {
 
 </div>
 
-<div class="text-center">
-	<button class="btn btn-primary" id="btnUpdate">수정</button>
-	<input type="reset" id="cancel" class="btn btn-danger" value="취소">
+<div class="text-center btn_wrap">
+	<button id="btnUpdate">수정</button>
+	<input type="reset" id="cancel" value="취소">
 </div>
 </form>
 

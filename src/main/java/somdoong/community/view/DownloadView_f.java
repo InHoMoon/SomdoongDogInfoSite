@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.AbstractView;
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.RboardFile;
 
-public class DownloadView extends AbstractView {
+public class DownloadView_f extends AbstractView {
 	
 	@Autowired private ServletContext context;
 	
