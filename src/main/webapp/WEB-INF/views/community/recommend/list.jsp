@@ -58,6 +58,25 @@ td:nth-child(2) {
     background-size: cover;
     display: inline-block;
 }
+
+.order_wrap{
+	display: inline-block;
+    position: relative;
+    top: -40px;
+}
+
+#orderType { 
+	height: 40px; 
+	width: 100px; 
+	border: 1px solid #e8e8e8; 
+	
+}
+
+.pull-left {
+	position: relative;
+    left: 109px;
+    top: 10px;
+}
 </style>
 
 <div class="container">
@@ -79,6 +98,16 @@ td:nth-child(2) {
 		<button class="search-btn" id="searBtn">찾기</button	>
 </div> 
 
+
+<div class="order_wrap">	
+	<select id="orderType">
+		<option value="newest">최신순</option>
+		<option value="like">좋아요순</option>
+		<option value="hit">조회순</option>
+	</select>
+</div>
+
+
 <div class="clearfix" style="padding-bottom: 30px;"></div>
 
 <div id="apeend_wrap">
@@ -98,10 +127,8 @@ td:nth-child(2) {
 	<c:forEach items="${list }" var="rboard">
 		<tr>
 			<td style="text-align: center; line-height: 5;">${rboard.rno }</td>
-<!-- 			<td id="title" style="line-height: 5;"> -->
 			<td>
 				<c:if test="${not empty rboard.fiName }">
-<%-- 					<img src="/upload/${rboard.fiName }" style="width: 80px; height: 80px;"> --%>
 					<div class="imgBox" style="background-image: url('/upload/${rboard.fiName }');"></div>
 				</c:if>
 				
@@ -154,34 +181,39 @@ $(document).ready(function() {
 	});
 	
 	$("#searBtn").click(function() {
-		search(0);
+		search(0, true);
 	});
 	
 	$("#keyword").on("keydown",function(e){
         if(e.keyCode == 13) {
         	e.preventDefault();
-        	search(0);
+        	search(0, true);
         }
     });
 	
 	$(document).on("click","[data-curpage]", function(e) {
 		search($(this).data("curpage")); 
 	});
+	
+	$("#orderType").change(function() {
+		search(1,false);
+	})
 });
 	
 	
-function search(curPage){
+function search(curPage, btn){
 	var searchType = $("#searchType option:selected").val();
 	var keyword = $("#keyword").val();
+	var type = $("#orderType").val();
 	
-	if(keyword == ''){
+	if(btn && keyword == ''){
 		alert("검색어를 입력하세요");
 		return false;
 	}
 	$.ajax({
 		url : "/community/recommend/listS"
 		, type : "post"
-		, data : { "searchType" : searchType, "keyword" : keyword, curPage : curPage }
+		, data : { "searchType" : searchType, "keyword" : keyword, curPage : curPage, type : type }
 		, dataType: "html"
 		, success : function(result){
 			$("#apeend_wrap").html(result);

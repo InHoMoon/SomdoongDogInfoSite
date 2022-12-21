@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import somdoong.community.dto.FboardFile;
@@ -128,6 +129,8 @@ public class FreeboardController {
 	}
 	
 	
+	
+	
 	//첨부파일 다운로드
 	@RequestMapping("/download")
 	public String download(FboardFile fboardfile, Model model) {
@@ -163,6 +166,8 @@ public class FreeboardController {
 		
 		//첨부파일 모델값 전달
 		FboardFile fboardfile = fboardService.getAttachFile(fboard);
+		logger.info("업데이트 파일 리스트 : {}", fboardfile);
+		
 		model.addAttribute("fboardfile", fboardfile);
 		
 		return "community/free/update";
@@ -171,7 +176,7 @@ public class FreeboardController {
 
 	//게시글 수정 처리
 	@PostMapping("/updateConn")
-	public String updateProcess(Freeboard fboard, MultipartFile file) {
+	public String updateProc(Freeboard fboard, MultipartFile file) {
 		logger.info("update post");
 		logger.info("{}", fboard);
 		
@@ -179,6 +184,8 @@ public class FreeboardController {
 		
 		return "redirect:/community/free/view?fno=" + fboard.getFno();
 	}
+	
+	
 	
 	
 	//게시글 삭제

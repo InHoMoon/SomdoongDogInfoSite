@@ -60,11 +60,6 @@ public interface FreeboardDao {
 	public void delete(Freeboard fboard);
 
 
-	public int getOrderPaging(Paging_f paging);
-
-
-	public List<Freeboard> getOrderList(Paging_f oPaging);
-
 
 
 

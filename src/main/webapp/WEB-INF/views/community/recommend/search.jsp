@@ -11,7 +11,8 @@
 	<thead>
 		<tr>
 			<th style="width: 10%;">글번호</th>
-			<th style="width: 45%; text-align: center;">제목</th>
+			<th style="width: 10%;"></th>
+			<th style="width: 30%; text-align: center;">제목</th>
 			<th style="width: 15%;">작성자</th>
 			<th style="width: 10%;">조회수</th>
 			<th style="width: 10%;">좋아요</th>
@@ -23,16 +24,16 @@
 	<c:forEach items="${sList }" var="s">
 		<tr>
 			<td style="text-align: center; line-height: 5;">${s.rno }</td>
-<!-- 			<td id="title" style="line-height: 5;"> -->
-			<td id="title">
+			<td>
 				<c:if test="${not empty s.fiName }">
-<%-- 					<img src="/upload/${rboard.fiName }" style="width: 80px; height: 80px;"> --%>
 					<div class="imgBox" style="background-image: url('/upload/${s.fiName }');"></div>
 				</c:if>
 				
 				<c:if test="${s.fiName eq null }">
 					<img src="/resources/img/nimg.png" style="width: 80px; height: 80px;">
 				</c:if>
+			</td>
+			<td id="title">
 				<a href="/community/recommend/view?rno=${s.rno }">${s.title }</a>
 			</td>
 			<td style="text-align: center; line-height: 5;">${s.userid }</td>

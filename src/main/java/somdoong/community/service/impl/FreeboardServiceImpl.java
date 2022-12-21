@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import somdoong.community.dao.face.FreeboardDao;
 import somdoong.community.dto.FboardFile;
@@ -202,6 +203,7 @@ public class FreeboardServiceImpl implements FreeboardService {
 		
 		fboardDao.insertFile(fboardFile);		
 	}
+	
 	
 	
 	//게시글 삭제

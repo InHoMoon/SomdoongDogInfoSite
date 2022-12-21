@@ -3,6 +3,7 @@ package somdoong.community.service.face;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import somdoong.community.dto.FboardFile;
 import somdoong.community.dto.Freeboard;
@@ -24,11 +25,11 @@ public interface FreeboardService {
 
 	//게시글, 첨부파일 작성
 	public void write(Freeboard fboard, MultipartFile file);
-
+	
 
 	//게시글 번호를 이용하여 업로드된 파일 정보 조회
 	public FboardFile getAttachFile(Freeboard fboard);
-
+	
 
 	//파일 번호를 이용하여 업로드된 파일 정보 조회
 	public FboardFile getFile(FboardFile fboardfile);
@@ -48,6 +49,8 @@ public interface FreeboardService {
 
 	//게시글 삭제
 	public void delete(Freeboard fboard);
+
+
 
 
 

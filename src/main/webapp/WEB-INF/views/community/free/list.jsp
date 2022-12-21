@@ -34,6 +34,26 @@ td:nth-child(2) {
 .search-text { height: 40px; width: 240px; border: 1px solid #e8e8e8; }
 .search-btn { height: 40px; width:37px; border: 1px solid #6bacce; background-color: #6bacce; color: #fff; }
 #title > a{ color: #333; }
+
+
+.order_wrap{
+	display: inline-block;
+    position: relative;
+    top: -40px;
+}
+
+#orderType { 
+	height: 40px; 
+	width: 100px; 
+	border: 1px solid #e8e8e8; 
+	
+}
+
+.pull-left {
+	position: relative;
+    left: 109px;
+    top: 10px;
+}
 </style>
 
 <div class="container">

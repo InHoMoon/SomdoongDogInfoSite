@@ -1,41 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="../../layout/header.jsp" />
 
-
 <!-- 스마트 에디터 2 로드 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
-
-
-<style>
-
-.btn_wrap { margin-bottom: 30px; }
-
-#btnWrite{
-	width: 57px;
-    height: 37px;
-    border-radius: 10px;
-    font-size: 17px;
-    border: none;
-    background-color: #6bacce;
-    color: #fff;
-}
-
-#cancel{
-	width: 57px;
-    height: 37px;
-    border-radius: 10px;
-    font-size: 17px;
-    border: none;
-    background-color: #f84720;
-    color: #fff;
-}
-</style>
-
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -44,7 +15,7 @@ $(document).ready(function() {
 		
 		//스마트에디터에 작성된 내용을 #content에 반영
 		updateContents();
-		
+		                                                                                                
 		$("form").submit();
 	})
 	
@@ -52,29 +23,29 @@ $(document).ready(function() {
 
 function updateContents() {
 	//스마트 에디터에 작성된 내용을 #content에 반영한다
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
+	oEditors.getById["dcontent"].exec("UPDATE_CONTENTS_FIELD", [])
 }
 </script>
 
 <div class="container">
 
-<h1>글쓰기</h1>
+<h1>강아지 연구소 글 작성</h1>
 <hr>
 
-<form action="/community/free/write" method="post" enctype="multipart/form-data">
+<form action="./write" method="post" enctype="multipart/form-data">
 <div class="form-group">
-	<label for="userid">작성자</label>
-	<input type="text" id="userid" value="${userid }" class="form-control" readonly="readonly">
+	<label for="adminid">작성자</label>
+	<input type="text" id="adminid" value="${adminid }" class="form-control" readonly="readonly">
 </div>
 
 <div class="form-group">
-	<label for="title">제목</label>
-	<input type="text" id="title" name="title" class="form-control">
+	<label for="dtitle">제목</label>
+	<input type="text" id="dtitle" name="dtitle" class="form-control">
 </div>
 
 <div class="form-group">
-	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="content"></textarea>
+	<label for="dcontent">본문</label>
+	<textarea rows="10" style="width: 100%;" id="dcontent" name="dcontent"></textarea>
 </div>
 
 <div class="form-group">
@@ -82,9 +53,9 @@ function updateContents() {
 	<input type="file" id="file" name="file">
 </div>
 
-<div class="text-center btn_wrap">
-	<button id="btnWrite">작성</button>
-	<input type="reset" id="cancel" value="취소">
+<div class="text-center">
+	<button class="btn btn-primary" id="btnWrite">작성</button>
+	<input type="reset" id="cancel" class="btn btn-danger" value="취소">
 </div>
 </form>
 
@@ -104,4 +75,15 @@ nhn.husky.EZCreator.createInIFrame({
 <c:import url="../../layout/footer.jsp" />
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
