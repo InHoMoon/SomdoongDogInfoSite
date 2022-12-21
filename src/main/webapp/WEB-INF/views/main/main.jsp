@@ -180,10 +180,10 @@
 	</tr>
 	<c:forEach items="${dList }" var="dList" >
 	<tr>
-		<td class="col-md-2" style="text-align: center;">${dList.dinfono }</td>
-		<td><a href="/강아지정보 상세글 경로?dinfono=${dList.dinfono }">${dList.dinfotitle }</a></td>
-		<td class="col-md-2" style="text-align: center;"><fmt:formatDate value="${dList.dinfodate }" pattern="yy-MM-dd" /></td>
-		<td class="col-md-2" style="text-align: center;">${dList.dinfohit }</td>
+		<td class="col-md-2" style="text-align: center;">${dList.dno }</td>
+		<td><a href="/강아지정보 상세글 경로?dinfono=${dList.dno }">${dList.dtitle }</a></td>
+		<td class="col-md-2" style="text-align: center;"><fmt:formatDate value="${dList.dwritedate }" pattern="yy-MM-dd" /></td>
+		<td class="col-md-2" style="text-align: center;">${dList.dhit }</td>
 	</tr>
 	</c:forEach>
 	</table>

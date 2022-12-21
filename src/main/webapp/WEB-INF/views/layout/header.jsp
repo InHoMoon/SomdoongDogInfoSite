@@ -187,12 +187,21 @@ footer #footer_wrap {
 				<li><a href="#">1:1 문의</a></li>
 			</ul>
 		</li>
+		
+		
 		<c:if test="${empty login }">
 		<li><a href="/member/login">LOGIN</a></li>
 		</c:if>
+<<<<<<< HEAD
 		<c:choose>
       	<c:when test="${not empty login }">
 		<li><a href="#">MYPAGE</a>
+=======
+		
+		<c:choose>
+		<c:when test="${not empty login }">
+		<li><a href="#">마이페이지</a>
+>>>>>>> 7bebdbf0c39223ab4d14f35d6251a503a930afe2
 		<ul class="dept2">
 			<li><a href="#">정보 수정</a></li>
 			<li><a href="#">관심상품</a></li>
@@ -201,6 +210,7 @@ footer #footer_wrap {
 			<li><a href="#">1:1 문의 내역</a></li>
 		</ul>
 		</li>
+<<<<<<< HEAD
 		<li><a href="#">LOGOUT</a></li>
 		</c:when>
 		<c:when test="${not empty adminlogin }">
@@ -215,6 +225,23 @@ footer #footer_wrap {
 	      <li><a href="/admin/logout">LOGOUT</a></li>
 	      </c:when>
 	      </c:choose>
+=======
+		<li><a href="./logout">로그아웃</a></li>
+		</c:when>
+				
+		<c:when test="${not empty adminlogin }">
+		<li><a href="/admin/adminpage">AdminPage</a>
+		<ul class="dept2">
+			<li><a href="/admin/doginfo/list">강아지연구소</a></li>
+			<li><a href="#">공지사항</a></li>
+			<li><a href="#">1대1문의</a></li>
+			<li><a href="#">상품관리</a></li>
+		</ul>
+		</li>
+		<li><a href="/admin/logout">로그아웃</a></li>
+		</c:when>
+		</c:choose>
+>>>>>>> 7bebdbf0c39223ab4d14f35d6251a503a930afe2
 	</ul>
 	</nav>
 	</div>

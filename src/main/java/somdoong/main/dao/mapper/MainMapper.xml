@@ -35,7 +35,7 @@
 	<!-- 강아지상식 테이블 최신글 10개씩만 -->
 	<select id="doginfoList" resultType="DogInfo">
 		SELECT * FROM 
-		    ( SELECT * FROM doginfo ORDER BY dinfono DESC )
+		    ( SELECT * FROM doginfo ORDER BY dno DESC )
 		WHERE <![CDATA[ROWNUM<=10]]>
 	</select>
 

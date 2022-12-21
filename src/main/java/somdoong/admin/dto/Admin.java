@@ -7,6 +7,17 @@ public class Admin {
 	
 	public Admin() {}
 
+	public Admin(String adminid, String adminpw) {
+		super();
+		this.adminid = adminid;
+		this.adminpw = adminpw;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [adminid=" + adminid + ", adminpw=" + adminpw + "]";
+	}
+
 	public String getAdminid() {
 		return adminid;
 	}
@@ -23,17 +34,6 @@ public class Admin {
 		this.adminpw = adminpw;
 	}
 
-	public Admin(String adminid, String adminpw) {
-		super();
-		this.adminid = adminid;
-		this.adminpw = adminpw;
-	}
-
-	@Override
-	public String toString() {
-		return "Admin [adminid=" + adminid + ", adminpw=" + adminpw + "]";
-	}
-	
 	
 	
 }

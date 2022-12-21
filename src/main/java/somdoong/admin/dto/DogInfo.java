@@ -4,41 +4,44 @@ import java.util.Date;
 
 public class DogInfo {
 	
-	private int dinfono;
+	private int dno;
 	private String adminid;
-	private String dinfotitle;
-	private String dinfocontent;
-	private int dinfohit;
-	private Date dinfodate;
-	private int dinfolike;
+	private String dtitle;
+	private String dcontent;
+	private int dhit;
+	private Date dwritedate;
+	private int dlike;
+	
+	private String userid;
 	
 	public DogInfo() {}
 
-	public DogInfo(int dinfono, String adminid, String dinfotitle, String dinfocontent, int dinfohit, Date dinfodate,
-			int dinfolike) {
+	public DogInfo(int dno, String adminid, String dtitle, String dcontent, int dhit, Date dwritedate, int dlike,
+			String userid) {
 		super();
-		this.dinfono = dinfono;
+		this.dno = dno;
 		this.adminid = adminid;
-		this.dinfotitle = dinfotitle;
-		this.dinfocontent = dinfocontent;
-		this.dinfohit = dinfohit;
-		this.dinfodate = dinfodate;
-		this.dinfolike = dinfolike;
+		this.dtitle = dtitle;
+		this.dcontent = dcontent;
+		this.dhit = dhit;
+		this.dwritedate = dwritedate;
+		this.dlike = dlike;
+		this.userid = userid;
 	}
 
 	@Override
 	public String toString() {
-		return "DogInfo [dinfono=" + dinfono + ", adminid=" + adminid + ", dinfotitle=" + dinfotitle + ", dinfocontent="
-				+ dinfocontent + ", dinfohit=" + dinfohit + ", dinfodate=" + dinfodate + ", dinfolike=" + dinfolike
-				+ "]";
+
+		return "DogInfo [dno=" + dno + ", adminid=" + adminid + ", dtitle=" + dtitle + ", dcontent=" + dcontent
+				+ ", dhit=" + dhit + ", dwritedate=" + dwritedate + ", dlike=" + dlike + ", userid=" + userid + "]";
 	}
 
-	public int getDinfono() {
-		return dinfono;
+	public int getDno() {
+		return dno;
 	}
 
-	public void setDinfono(int dinfono) {
-		this.dinfono = dinfono;
+	public void setDno(int dno) {
+		this.dno = dno;
 	}
 
 	public String getAdminid() {
@@ -49,46 +52,55 @@ public class DogInfo {
 		this.adminid = adminid;
 	}
 
-	public String getDinfotitle() {
-		return dinfotitle;
+	public String getDtitle() {
+		return dtitle;
 	}
 
-	public void setDinfotitle(String dinfotitle) {
-		this.dinfotitle = dinfotitle;
+	public void setDtitle(String dtitle) {
+		this.dtitle = dtitle;
 	}
 
-	public String getDinfocontent() {
-		return dinfocontent;
+	public String getDcontent() {
+		return dcontent;
 	}
 
-	public void setDinfocontent(String dinfocontent) {
-		this.dinfocontent = dinfocontent;
+	public void setDcontent(String dcontent) {
+		this.dcontent = dcontent;
 	}
 
-	public int getDinfohit() {
-		return dinfohit;
+	public int getDhit() {
+		return dhit;
 	}
 
-	public void setDinfohit(int dinfohit) {
-		this.dinfohit = dinfohit;
+	public void setDhit(int dhit) {
+		this.dhit = dhit;
 	}
 
-	public Date getDinfodate() {
-		return dinfodate;
+	public Date getDwritedate() {
+		return dwritedate;
 	}
 
-	public void setDinfodate(Date dinfodate) {
-		this.dinfodate = dinfodate;
+	public void setDwritedate(Date dwritedate) {
+		this.dwritedate = dwritedate;
 	}
 
-	public int getDinfolike() {
-		return dinfolike;
+	public int getDlike() {
+		return dlike;
 	}
 
-	public void setDinfolike(int dinfolike) {
-		this.dinfolike = dinfolike;
+	public void setDlike(int dlike) {
+		this.dlike = dlike;
 	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
 	
 	
-
-}
+	
+}	

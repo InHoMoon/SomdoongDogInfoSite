@@ -40,11 +40,6 @@
     	<version>2.14.0</version>
 	</dependency>
 	
-	<dependency>
-         <groupId>com.fasterxml.jackson.dataformat</groupId>
-         <artifactId>jackson-dataformat-xml</artifactId>
-         <version>2.9.6</version>
-    </dependency>
 
     <dependency>
         <groupId>com.google.code.gson</groupId>
@@ -262,7 +257,7 @@
                 <version>2.9</version>
                 <configuration>
                     <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                        <projectnature>org.springframework.ide.eclipse.fcore.springnature</projectnature>
                     </additionalProjectnatures>
                     <additionalBuildcommands>
                         <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
