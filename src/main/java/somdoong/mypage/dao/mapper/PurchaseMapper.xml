@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    
+<mapper namespace="somdoong.mypage.dao.face.PurchaseDao">
+	
+	<select id="selectCntAll" resultType="int" parameterType="PurchasePaging">
+		SELECT count(*) FROM purchase
+	</select>
+
+
+	<select id="list" resultType="Purchase" parameterType="PurchasePaging">
+	SELECT * FROM (
+			SELECT rownum rnum, P.* FROM (
+				
+					select p_num , userid, p_amount,price
+					FROM purchase
+					ORDER BY p_num DESC		
+    		
+				) P 
+			) PURCHASE
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		 		
+	
+	</select>
+
+
+	<delete id="delete" parameterType="Purchase">
+		DELETE purchase
+		WHERE p_num =#{pNum}
+	</delete>
+	
+	
+<!-- 	<select id="selectPurchase" resultType="Purchase" parameterType="Purchase"> -->
+<!-- 		SELECT p_num,userid,p_amount,store_no,price -->
+<!-- 		WHERE userid=#{userid} -->
+<!-- 	</select>	 -->
+</mapper>

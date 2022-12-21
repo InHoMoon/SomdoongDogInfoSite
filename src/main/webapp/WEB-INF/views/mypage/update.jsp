@@ -59,10 +59,10 @@ function updateContents() {
 
 <div class="form-group">
 	<select name="iCategory" id="iCategory" value="${updateInquire.iCategory }">
-		<option value=""> </option>
-		<option value="1번">1번 </option>
-		<option value="2번">2번 </option>
-		<option value="3번">3번 </option>
+		<option value="배송">배송 </option>
+		<option value="반품/환불">반품/환불</option>
+		<option value="결제">결제 </option>
+		<option value="탈퇴">탈퇴 </option>
 	</select>
 <!-- 	<input type="text" id="iCategory" name="iCategory" class="form-control"> -->
 </div>

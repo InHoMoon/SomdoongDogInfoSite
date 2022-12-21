@@ -10,7 +10,7 @@
 			// 취소
 			$(".cancle").on("click", function(){
 				
-				location.href = "/";
+				location.href = "/mypage/update/memberUpdateView";
 						    
 			})
 		
@@ -19,18 +19,26 @@
 					alert("비밀번호를 입력해주세요.");
 					$("#userpw").focus();
 					return false;
-				}	
+				}
+				
+				else{
+					alert("탈퇴가 완료되었습니다")
+					
+				}
 			});
+			
 			
 				
 			
 		})
 	</script>
 	
+
+
+
+<div class="container">
 <h1>회원 탈퇴</h1>
 <hr>
-
-
 <form action="/mypage/update/memberDelete" method="post">
 
 		<div class="form-group has-feedback">
@@ -53,5 +61,5 @@
 			<button class="cancle btn btn-danger" type="button">취소</button>
 		</div>
 </form>
-
+</div>
 <c:import url="../../layout/footer.jsp" />

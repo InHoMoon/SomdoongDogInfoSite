@@ -6,23 +6,42 @@
     
 
 <mapper namespace="somdoong.mypage.dao.face.InquireDao">   	
- <select id="selectCntAll" resultType="int">
+	 <select id="selectCntAll" resultType="int" parameterType="Inquire">
 		SELECT count(*) FROM inquire
 	</select>
     
-    <select id="selectList" resultType="Inquire"  parameterType="Paging">
+    
+     <select id="selectCntMyCount" resultType="int" parameterType="Inquire">
+		SELECT count(*) FROM inquire where i_userid=#{iUserid}
+	</select>
+	
+	
+    <select id="selectList" resultType="Inquire"  parameterType="InquirePaging">
 		SELECT * FROM (
 			SELECT rownum rnum, I.* FROM (
 				SELECT
 					i_num, i_title, i_content , i_category,i_writedate,i_hit,i_username,i_userid
 				FROM inquire  
 				ORDER BY i_num DESC 
-			) I WHERE i_userid =#{iUserid}
+			) I
 		) INQUIRE 
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 
 	</select>
-	
+
+
+    <select id="selectListMyname" resultType="Inquire"  parameterType="Paging">
+		SELECT * FROM (
+			SELECT rownum rnum, I.* FROM (
+				SELECT
+					i_num, i_title, i_content , i_category,i_writedate,i_hit,i_username,i_userid
+				FROM inquire  where i_userid= #{iUserid}
+				ORDER BY i_num DESC 
+			) I
+		) INQUIRE 
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+
+	</select>
 	
 	<update id="hit" parameterType="Inquire">
 		UPDATE inquire

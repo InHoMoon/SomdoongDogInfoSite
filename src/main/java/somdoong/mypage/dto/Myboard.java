@@ -10,14 +10,17 @@ public class Myboard {
 	   private Date writedate;
 	   private int hit;
 	   private String userid;
-	   
+	   private int rno;
+	   private int sno;
+	   private int fno;
 	   private String type;
 	   
 	public Myboard() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Myboard(int num, String title, String content, Date writedate, int hit, String userid, String type) {
+	public Myboard(int num, String title, String content, Date writedate, int hit, String userid, int rno, int sno,
+			int fno, String type) {
 		super();
 		this.num = num;
 		this.title = title;
@@ -25,7 +28,17 @@ public class Myboard {
 		this.writedate = writedate;
 		this.hit = hit;
 		this.userid = userid;
+		this.rno = rno;
+		this.sno = sno;
+		this.fno = fno;
 		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Myboard [num=" + num + ", title=" + title + ", content=" + content + ", writedate=" + writedate
+				+ ", hit=" + hit + ", userid=" + userid + ", rno=" + rno + ", sno=" + sno + ", fno=" + fno + ", type="
+				+ type + "]";
 	}
 
 	public int getNum() {
@@ -76,6 +89,30 @@ public class Myboard {
 		this.userid = userid;
 	}
 
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int getFno() {
+		return fno;
+	}
+
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -83,12 +120,8 @@ public class Myboard {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	@Override
-	public String toString() {
-		return "Myboard [num=" + num + ", title=" + title + ", content=" + content + ", writedate=" + writedate
-				+ ", hit=" + hit + ", userid=" + userid + ", type=" + type + "]";
-	}
+	
+	
 	
 	
 	

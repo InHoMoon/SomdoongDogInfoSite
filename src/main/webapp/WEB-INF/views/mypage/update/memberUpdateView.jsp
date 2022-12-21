@@ -2,34 +2,58 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:import url="../../layout/header.jsp" />
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		// 취소
 		$(".cancle").on("click", function(){
-				location.href = "/";
+				location.href = "/main";
 		})
 		
+		
 		$("#submit").on("click", function(){
-			if($("#userpass").val()==""){
+			if($("#userpw").val()==""){
 				alert("비밀번호를 입력해주세요.");
-				$("#userPass").focus();
+				$("#userpw").focus();
 				return false;
 			}
 			if($("#username").val()==""){
 				alert("성명을 입력해주세요.");
-				$("#userName").focus();
+				$("#username").focus();
 				return false;
 			}
+			alert("수정되었습니다");
 		});
 	})
 </script>
+
+<style type="text/css">
+	.delete{  
+      text-decoration: none;
+     
+      color:white;
+      padding:10px 20px 5px 20px;
+      margin:20px;
+      display:inline-block;
+      border-radius: 10px;
+      transition:all 0.1s;
+      text-shadow: 0px -2px rgba(0, 0, 0, 0.44);
+    }
+   .delete{
+      transform: translateY(3px);
+    }
+   .delete{
+      background-color: #1f75d9;
+      border-bottom:5px solid #165195;
+}
+</style>
+
 	
-	
-<div>	
+<div class="container">	
 <h1>회원 정보 수정</h1>
 <hr>
-
 
 	<form action="/mypage/update/memberUpdate" method="post">
 	
@@ -68,9 +92,11 @@
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">회원정보수정</button>
 					<button class="cancle btn btn-danger" type="button">취소</button>
+					<a class="delete" href="/mypage/update/memberDeleteView?userid=${userid}">회원 탈퇴 </a>
 				</div>
 				
 			</form>
-			<a href="/mypage/update/memberDeleteView?userid=${userid}">회원 탈퇴 </a>
+			
 </div>
+
 <c:import url="../../layout/footer.jsp" />
