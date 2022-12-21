@@ -40,7 +40,7 @@ public class UpdateController {
 		
 		session.invalidate();
 		
-		return "redirect:/mypage/list";
+		return "redirect:/main";
 	}
 	
 	
@@ -64,7 +64,7 @@ public class UpdateController {
 		updateService.memberDelete(member);
 	
 		session.invalidate();
-		return "redirect:/mypage/list";
+		return "redirect:/main";
 	}
 	
 	

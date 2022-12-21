@@ -31,17 +31,17 @@ function updateContents() {
 
 <div class="container">
 
-<h1>글쓰기</h1>
 <hr>
 
 <form action="./write" method="post" enctype="multipart/form-data">
 
 <div class="form-group">
+	<label>카테고리</label>
 	<select name="iCategory" id="iCategory">
-		<option value=""> </option>
-		<option value="1번">1번 </option>
-		<option value="2번">2번 </option>
-		<option value="3번">3번 </option>
+		<option value="배송">배송 </option>
+		<option value="반품/환불">반품/환불</option>
+		<option value="결제">결제 </option>
+		<option value="탈퇴">탈퇴 </option>
 	</select>
 <!-- 	<input type="text" id="iCategory" name="iCategory" class="form-control"> -->
 </div>
@@ -72,6 +72,7 @@ function updateContents() {
 	<input type="reset" id="cancel" class="btn btn-danger" value="취소">
 </div>
 </form>
+
 
 <!-- 스마트 에디터 스킨 적용 -->
 <script type="text/javascript">

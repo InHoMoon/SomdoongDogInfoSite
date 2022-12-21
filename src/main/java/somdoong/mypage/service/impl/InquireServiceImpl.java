@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.mypage.dao.face.InquireDao;
-import somdoong.mypage.dto.Inquire;
 import somdoong.mypage.dto.IBoardFile;
+import somdoong.mypage.dto.Inquire;
 import somdoong.mypage.service.face.InquireService;
+import somdoong.util.InquirePaging;
 import somdoong.util.Paging;
+import somdoong.util.myinquirePaging;
 
 @Service
 public class InquireServiceImpl implements InquireService {
@@ -29,20 +31,39 @@ public class InquireServiceImpl implements InquireService {
 	@Autowired ServletContext context;
 
 	@Override
-	public Paging getPaging(int curPage) {
+	public InquirePaging getPaging(int curPage, Inquire inquire) {
 
-		int totalCount = inquireDao.selectCntAll();
+		int totalCount = inquireDao.selectCntAll(inquire);
 		
-		Paging paging = new Paging(totalCount, curPage);
+		InquirePaging paging = new InquirePaging(totalCount, curPage);
 		
 		return paging;
 	}
 	
+	
+	
 	@Override
-	public List<Inquire> list(Paging paging) {
+	public List<Inquire> list(InquirePaging paging) {
 		return inquireDao.selectList(paging);
 	}
 	
+	
+	
+	@Override
+	public myinquirePaging getPagingmyname(int curPage, Inquire inquire) {
+		
+		int totalCount = inquireDao.selectCntMyCount(inquire);
+		
+		myinquirePaging paging = new myinquirePaging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	
+	@Override
+	public List<Inquire> listmyname(myinquirePaging paging) {
+		return inquireDao.selectListMyname(paging);
+	}
 	@Override
 	public Inquire view(Inquire viewInquire) {
 		
@@ -178,4 +199,6 @@ public class InquireServiceImpl implements InquireService {
 		
 		
 	}
+	
+
 }
