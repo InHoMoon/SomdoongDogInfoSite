@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 target
+=======
+target
+pom.xml
+mybatis-config.xml
+src/main/resources/log4j.xml
+src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+src/main/webapp/WEB-INF/spring/root-context.xml
+>>>>>>> 5db028120d1b5e3813c2b84add8dd770c474768d

@@ -5,38 +5,35 @@ import java.util.Date;
 public class Store {
 
 	private int storeNo;
-	private String productName;
+	private int productNo;
 	private String category;
 	private String title;
 	private String info;
-	private int price;
-	private int stock;
 	private Date reportingDate;
-	private int hit;
-	private int likepost;
+	
+	private Product product;
+	private ProductImg productImg;
 	
 	public Store() { }
 
-	public Store(int storeNo, String productName, String category, String title, String info, int price, int stock,
-			Date reportingDate, int hit, int likepost) {
+	public Store(int storeNo, int productNo, String category, String title, String info, Date reportingDate,
+			Product product, ProductImg productImg) {
 		super();
 		this.storeNo = storeNo;
-		this.productName = productName;
+		this.productNo = productNo;
 		this.category = category;
 		this.title = title;
 		this.info = info;
-		this.price = price;
-		this.stock = stock;
 		this.reportingDate = reportingDate;
-		this.hit = hit;
-		this.likepost = likepost;
+		this.product = product;
+		this.productImg = productImg;
 	}
 
 	@Override
 	public String toString() {
-		return "Store [storeNo=" + storeNo + ", productName=" + productName + ", category=" + category + ", title="
-				+ title + ", info=" + info + ", price=" + price + ", stock=" + stock + ", reportingDate="
-				+ reportingDate + ", hit=" + hit + ", likepost=" + likepost + "]";
+		return "Store [storeNo=" + storeNo + ", productNo=" + productNo + ", category=" + category + ", title=" + title
+				+ ", info=" + info + ", reportingDate=" + reportingDate + ", product=" + product + ", productImg="
+				+ productImg + "]";
 	}
 
 	public int getStoreNo() {
@@ -47,12 +44,12 @@ public class Store {
 		this.storeNo = storeNo;
 	}
 
-	public String getProductName() {
-		return productName;
+	public int getProductNo() {
+		return productNo;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
 	public String getCategory() {
@@ -79,22 +76,6 @@ public class Store {
 		this.info = info;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
 	public Date getReportingDate() {
 		return reportingDate;
 	}
@@ -103,21 +84,21 @@ public class Store {
 		this.reportingDate = reportingDate;
 	}
 
-	public int getHit() {
-		return hit;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public int getLikepost() {
-		return likepost;
+	public ProductImg getProductImg() {
+		return productImg;
 	}
 
-	public void setLikepost(int likepost) {
-		this.likepost = likepost;
+	public void setProductImg(ProductImg productImg) {
+		this.productImg = productImg;
 	}
 	
-
+	
 }

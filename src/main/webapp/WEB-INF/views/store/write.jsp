@@ -6,7 +6,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	$("#product-content").change(function( e ) {
+	//상품 상세정보 이미지 처리
+	$("#product-img").change(function( e ) {
 		
 		var files = e.target.files;
 		
@@ -34,6 +35,7 @@ $(document).ready(function() {
 		reader.readAsDataURL( files[0] );
 	})
 	
+	//상품 프로필 이미지 처리 
 	$("#imgUpload").change(function( e ) {
 		
 		var files = e.target.files;
@@ -57,9 +59,9 @@ $(document).ready(function() {
 		
 		reader.onload = function( data ) {
 			
-			$("#product-img").children().remove();
+			$("#product-profile-img").children().remove();
 			
-			$("#product-img").html(
+			$("#product-profile-img").html(
 				$("<img>").attr({
 					"src": data.target.result
 				})
@@ -68,10 +70,15 @@ $(document).ready(function() {
 		reader.readAsDataURL( files[0] );
 	})
 	
-	$("#write-btn").click(function() {
-		
-		$("form").submit();
-	})
+	// 버튼 submit 설정
+	$("#write-btn").click(function(){
+		if( confirm("게시글을 등록 하시겠습니까?") == true ) {
+			alert("등록 되었습니다.");
+			$("form").submit();
+		} else {
+			return false;
+		}
+	});
 });
 </script>
 
@@ -80,9 +87,13 @@ body {
 	height: 100%;
 }
 
+#wrap-btn {
+	margin-top: 30px;
+}
+
 #wrap-write {
 	width: 1900px;
-	height: 100%;
+	height: auto;
 	display: flex;
 	justify-content: center;
 }
@@ -104,7 +115,7 @@ body {
 	width: 66%;
 }
 
-#product-img {
+#product-profile-img {
 	border: 1px solid #d3d3d3;
 
 	width: 34%;
@@ -118,7 +129,7 @@ body {
     overflow: hidden;
 }
 
-#product-img > div > img {
+#product-profile-img > div > img {
 	cursor: pointer;
 }
 
@@ -169,16 +180,12 @@ button {
 	height: 30px;
 }
 
-#write-btn {}
-
 #cancel-btn {
 	margin-left: 5px;
 }
 
 </style>
 
-<h1>게시글 작성</h1>
-<hr>
 <div id="wrap-btn">
 	<div id="wrap-button">
 		<button id="write-btn">등록</button>
@@ -189,13 +196,12 @@ button {
 <div id="wrap-write">
 
 
-<form action="./write" method="post" enctype="multipart/form-data">
+<form action="/store/write" method="post" enctype="multipart/form-data">
+
+<input type="hidden" id="productNo" name="productNo" value="${viewProduct.productNo }">
 	<div id="wrap-form">
-		<div id="product-img">
-			<a href="javascript:void(0);" onclick="$('#imgUpload').trigger('click')" class="imgUploadBtn">
-			<img src="/resources/store_camera.png" width="100px" height="60px" alt="사진 업로드">
-			</a>
-			<input type="file" id="imgUpload" style="display:none">
+		<div id="product-profile-img">
+			<img src="<%=request.getContextPath() %>/upload/${viewProduct.productImg.storedName }" class="img-rounded" width="340px" height="405px">
 		</div>
 		<div id="store-info">
 			<div id="store-category-productName">
@@ -208,25 +214,25 @@ button {
 					</select>
 				</div>
 				<div>
-					<input type="text" name="productName" placeholder="상품명을 입력하세요" style="width: 530px; height: 30px; margin-left: 10px;">
+					<input type="text" name="productName" value="${viewProduct.productName }" style="width: 530px; height: 30px; margin-left: 10px;" maxlength="20" readonly/>
 				</div>
 			</div>
 			<div>
-				<input type="text" name="title"	placeholder="제목을 입력하세요" style="width: 630px; height: 30px;">
+				<input type="text" name="title"	placeholder="제목을 입력하세요" style="width: 630px; height: 30px;" maxlength="30">
 			</div>
 			<div>
-				<textarea name="info" placeholder="내용을 입력하세요"></textarea>
+				<textarea name="info" placeholder="내용을 입력하세요" maxlength="250"></textarea>
 			</div>
 			<div>
 				<div>
-					<input type="text" name="stock" placeholder="재고 입력" style="width:100px; height: 30px; margin: -5px 0 8px 0;">
+					<input type="text" name="stock" value="${viewProduct.stock }" style="width:100px; height: 30px; margin: -5px 0 8px 0;" readonly />
 				</div>
 				<div>
-					<input type="text" name="price" placeholder="가격을 입력하세요" style="width: 250px; height: 30px;">
+					<input type="text" name="price" value="${viewProduct.price }" style="width: 250px; height: 30px;" readonly />
 					<label style="font-size: 20px; margin-left: 2px;">원</label>
 				</div>
 				<div>
-					<br><input type="file" id="product-content" name="file">
+					<br><input type="file" id="product-img" name="file">
 				</div>
 			</div>
 		</div>

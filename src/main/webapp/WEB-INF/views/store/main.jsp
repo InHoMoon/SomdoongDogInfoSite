@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 		console.log(id_check);
 
-		var url = "/store/list/" + id_check
+		var url = "/store/" + id_check
 
 		$.ajax({
 			type : "POST",
@@ -154,6 +154,11 @@ $(document).ready(function(){
 	width: 1500px;
 }
 
+#list-content ul > li {
+	width: 320px;
+	
+	font-family: 'Dongle', sans-serif;
+}
 
 
 </style>
@@ -191,7 +196,7 @@ $(document).ready(function(){
 	<section>
 		<div id="wrap-list-content">
 			<div id="list-content">
-				<%@ include file="./list_all.jsp" %>
+				<%@ include file="./all.jsp" %>
 			</div>
 		</div>
 	</section>

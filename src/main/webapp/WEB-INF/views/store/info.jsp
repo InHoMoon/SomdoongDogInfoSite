@@ -3,6 +3,7 @@
 
 <style type="text/css">
 #product-info-img {
+	height: auto;
 	margin-top: 15px;
 	text-align: center;
 }
