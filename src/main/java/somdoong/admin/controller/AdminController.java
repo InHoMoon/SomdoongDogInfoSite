@@ -37,7 +37,6 @@ public class AdminController {
 			logger.info("로그인 성공");
 			
 			session.setAttribute("adminlogin", loginResult);
-			session.setAttribute("adminnm", admin.getAdminnm());
 			session.setAttribute("adminid", admin.getAdminid());
 
 			return "redirect:/admin/adminpage";
