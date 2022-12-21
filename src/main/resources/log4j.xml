@@ -36,6 +36,10 @@
 	</logger>
 	
 	<logger name="somdoong.mypage">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="somdoong.mypage">
 		<level value="info" />
 	</logger>
 	
