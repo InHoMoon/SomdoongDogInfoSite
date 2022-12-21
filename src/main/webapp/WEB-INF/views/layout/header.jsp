@@ -184,10 +184,14 @@ footer #footer_wrap {
 				<li><a href="#">1:1 문의</a></li>
 			</ul>
 		</li>
+		
+		
 		<c:if test="${empty login }">
 		<li><a href="./login">로그인</a></li>
 		</c:if>
-		<c:if test="${not empty login }">
+		
+		<c:choose>
+		<c:when test="${not empty login }">
 		<li><a href="#">마이페이지</a>
 		<ul class="dept2">
 			<li><a href="/mypage/update/memberUpdateView?userid=${userid}">정보 수정</a></li>
@@ -197,7 +201,20 @@ footer #footer_wrap {
 		</ul>
 		</li>
 		<li><a href="./logout">로그아웃</a></li>
-		</c:if>
+		</c:when>
+				
+		<c:when test="${not empty adminlogin }">
+		<li><a href="/admin/adminpage">AdminPage</a>
+		<ul class="dept2">
+			<li><a href="/admin/doginfo/list">강아지연구소</a></li>
+			<li><a href="#">공지사항</a></li>
+			<li><a href="#">1대1문의</a></li>
+			<li><a href="#">상품관리</a></li>
+		</ul>
+		</li>
+		<li><a href="/admin/logout">로그아웃</a></li>
+		</c:when>
+		</c:choose>
 	</ul>
 	</nav>
 	</div>
