@@ -58,11 +58,18 @@ function updateContents() {
 	cursor: pointer;
 }
 
+.showTitle {
+	font-size: 35px;
+	margin-top: 30px;
+	color: #ff8c10;
+	font-family: 'Dongle', sans-serif;
+}
+
+
 </style>
 
 <div class="container">
-
-<h1>글수정</h1>
+<div class="showTitle">강아지 자랑</div>
 <hr>
 
 <form action="./showupdate" method="post" enctype="multipart/form-data">
@@ -88,8 +95,9 @@ function updateContents() {
 
 	<div id="fileBox">
 
+		<div></div>
 		<div id="originFile">
-			${boardFile.origin_name }
+			${boardFile.originName }
 			<span id="deleteFile">X</span>
 		</div>
 

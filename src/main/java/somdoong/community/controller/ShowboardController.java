@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import somdoong.community.dto.SboardComm;
 import somdoong.community.dto.SboardFile;
 import somdoong.community.dto.SboardLike;
 import somdoong.community.dto.Showboard;
-import somdoong.community.service.face.ScommService;
 import somdoong.community.service.face.ShowboardService;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging_s;
 
 @RequestMapping("/community")
 @Controller
@@ -33,13 +31,12 @@ public class ShowboardController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ShowboardService showboardService;
-	@Autowired ScommService scommService;
 	
 	@RequestMapping("/showlist")
 	public String showlist(@RequestParam(defaultValue = "0") int curPage, Showboard viewboard, Model model) {
 		logger.info("showlist 요청!");
 		
-		Paging paging = showboardService.getPaging(curPage);
+		Paging_s paging = showboardService.getPaging(curPage);
 		model.addAttribute("paging", paging);
 		
 		List<HashMap<String, Object>> list = (List<HashMap<String, Object>>) showboardService.list(paging);
@@ -83,7 +80,7 @@ public class ShowboardController {
 		//첨부파일 모델값 전달
 		SboardFile file = showboardService.getFile(viewboard);
 		model.addAttribute("file", file);
-		
+				
 		//로그인 정보 저장
 		sLike.setUserid((String)session.getAttribute("userid"));
 		sLike.setSno((int)viewboard.getSno());

@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.community.dao.face.ShowboardDao;
-import somdoong.community.dto.SboardComm;
 import somdoong.community.dto.SboardFile;
 import somdoong.community.dto.SboardLike;
 import somdoong.community.dto.Showboard;
 import somdoong.community.service.face.ShowboardService;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging_s;
 
 @Service
 public class ShowboardServiceImpl implements ShowboardService {
@@ -31,18 +30,18 @@ public class ShowboardServiceImpl implements ShowboardService {
 	@Autowired ServletContext context;
 
 	@Override
-	public Paging getPaging(int curPage) {
+	public Paging_s getPaging(int curPage) {
 		//총 게시글 수 조회
 		int totalCount = showboardDao.selectAll();
 		
 		//페이징 계산
-		Paging paging = new Paging(totalCount, curPage);
+		Paging_s paging = new Paging_s(totalCount, curPage);
 
 		return paging;
 	}
 
 	@Override
-	public List<HashMap<String, Object>> list(Paging paging) {
+	public List<HashMap<String, Object>> list(Paging_s paging) {
 		logger.info("리스트...............");
 		return showboardDao.selectList(paging);
 	}
@@ -115,11 +114,6 @@ public class ShowboardServiceImpl implements ShowboardService {
 		showboardDao.upHit(viewboard);
 		
 		return showboardDao.selectBySno(viewboard);
-	}
-
-	@Override
-	public List<SboardComm> commList(int sno) throws Exception {
-		return showboardDao.commList(sno);
 	}
 
 	
@@ -204,7 +198,7 @@ public class ShowboardServiceImpl implements ShowboardService {
 	@Override
 	public void deleteBoard(Showboard sboard) {
 		
-		showboardDao.deleteFile(sboard); 
+		showboardDao.deleteFile(sboard);
 		
 		showboardDao.delete(sboard);
 		

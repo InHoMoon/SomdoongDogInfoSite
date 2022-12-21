@@ -37,8 +37,20 @@ function updateContents() {
 
 </script>
 
+<style type="text/css">
+
+.showTitle {
+	font-size: 35px;
+	margin-top: 30px;
+	color: #ff8c10;
+	font-family: 'Dongle', sans-serif;
+}
+
+</style>
+
 <div class="container">
-<h3>강아지 자랑 글쓰기</h3>
+<div class="showTitle">강아지 자랑</div>
+<hr>
 
 <form action="./showwrite" method="post" enctype="multipart/form-data">
 <div class="form-group">

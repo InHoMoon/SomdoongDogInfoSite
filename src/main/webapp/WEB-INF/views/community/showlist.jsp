@@ -61,9 +61,9 @@ $(document).ready(function(){
 	<c:forEach items="${list }" var="list" varStatus="status">
 	<div class="album">
 		<div style = "text-align:center;">
-			<img src="/upload/${list.STORED_NAME }" class="img-thumbnail" style="width: 150px; height: 150px;">
+			<a href="./showview?sno=${list.SNO }"><img src="/upload/${list.STORED_NAME }" class="img-thumbnail" style="width: 150px; height: 150px;"></a>
 		</div>
-		<div style = "text-align:center; font-size: 20px;"><a href="./showview?sno=${list.SNO }">${list.TITLE }</a></div>
+		<div style = "text-align:center; font-size: 23px;">${list.TITLE }</div>
 		<div style = "text-align:center;">${list.USERID }</div>
 	</div>
 
@@ -73,9 +73,9 @@ $(document).ready(function(){
 </div>
 </div>
 
-<button id="btnWrite" class="btn btn-primary pull-left" onclick="location.href='showwrite'">글쓰기</button>
-<span class="pull-right">total : ${paging.totalCount }</span>
-<div class="clearfix"></div>
+<div style="text-align: center;">
+<button id="btnWrite" class="btn btn-warning" onclick="location.href='showwrite'">글쓰기</button>
+</div>
 <div><c:import url="./paging_s.jsp"/></div>
 
 </div>

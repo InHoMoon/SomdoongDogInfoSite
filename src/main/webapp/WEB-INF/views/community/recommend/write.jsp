@@ -42,6 +42,14 @@
     float: right;
     top: -34px; 
 }
+
+.showTitle {
+	font-size: 35px;
+	margin-top: 30px;
+	color: #ff8c10;
+	
+}
+
 </style>
 
 
@@ -72,6 +80,8 @@ function updateContents() {
 </script>
 
 <div class="container">
+
+<div class="showTitle">강아지 자랑</div>
 
 <h1>글쓰기</h1>
 <hr>

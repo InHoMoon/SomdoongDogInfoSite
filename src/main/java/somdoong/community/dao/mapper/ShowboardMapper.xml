@@ -39,7 +39,7 @@
 	<!-- 첨뷰파일 입력 -->
 	<insert id="insertFile" parameterType="somdoong.community.dto.SboardFile">
 		INSERT INTO sboard_file( s_fileno, origin_name, stored_name, sno)
-		VALUES (seq_boardfile.nextval, #{origin_name}, #{stored_name}, #{sno})	
+		VALUES (seq_boardfile.nextval, #{originName}, #{storedName}, #{sno})	
 	</insert>
 	
 	<!-- 조회수 -->

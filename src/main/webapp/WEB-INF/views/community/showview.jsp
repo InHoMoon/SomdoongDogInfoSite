@@ -20,7 +20,15 @@ $(document).ready(function(){
 	})
 	
 	$("#btnDelete").click(function(){
+		alert("정말 삭제하시겠습니까?!");
 		location.href = "./showdelete?sno=${view.sno}"
+	})
+	
+	$("#commBtn").click(function(){
+		if(${empty userid}){
+			alert("로그인 후 이용해주세요!");
+			return;
+		}
 	})
 	
 })
@@ -50,19 +58,17 @@ table {
 	font-size: 35px;
 	margin-top: 30px;
 	color: #ff8c10;
-	border: 1px solid #ccc;
 	
 }
 .title {
 	font-size: 40px;
 	font-weight: bold;
-	border: 1px solid #ccc;
 	margin-left: 35px;
+	height: 32px;
 }
 .info {
 	font-size: 25px;
 	text-align: right;
-	border: 1px solid #ccc;
 }
 
 .content {
@@ -80,9 +86,12 @@ table {
 
 .btnwrap {
 	margin: 35px;
-    border-top: 1px solid #ccc;
     padding: 30px;
 	
+}
+
+.commContent {
+	margin-left: 215px;
 }
 </style>
 
@@ -93,7 +102,7 @@ table {
 <div class="title">${view.title }</div>
 <div class="info">${view.userid } 
 / 
-<img src="../resources/time.png" style="width: 18px; padding-right: 3px;"><fmt:formatDate value="${view.writeDate }" pattern="yy-MM-dd HH:mm:ss" /> 
+<img src="../resources/time.png" style="width: 18px; padding-right: 3px;"><fmt:formatDate value="${view.writeDate }" pattern="yy-MM-dd" /> 
 / 조회수(${view.hit })</div>
 <div style="border-bottom: 4px solid #ccc;"></div>
 
@@ -159,15 +168,15 @@ $(document).ready(function(){
 				if(data == 1){
 					$(".like img").prop("src", "../resources/chkLike.png");
 					console.log("좋아요 완료")
-					alert("좋아요 완료!");
 				} else if(data == 0){
 					$(".like img").prop("src", "../resources/like.png");
 					console.log("좋아요 취소")
 					alert("좋아요가 취소되었습니다");
 				}
 			}
-		});
 	});
+		
+	})
 	
 });
 </script>

@@ -16,9 +16,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dongle:wght@300;400&display=swap" rel="stylesheet">
 
 <style type="text/css">
+
 * {
 	margin: 0;
 	padding: 0; /* 모든 마진과 패딩 값 초기화*/
@@ -39,14 +40,14 @@ a {
 header {
 	box-shadow: 0 1px 6px 0 #d3d3d3;
 	background: white;
-	position: sticky;
+ 	position: sticky;
   	top: 0;
   	font-family: 'Dongle', sans-serif;
 }
 
 header > div {
 	width: 90%;
- 	min-width: 1000px;
+ 	min-width: 1010px;
 	max-width: 1200px;
  	height: 100px;
 	margin: 0 auto;
@@ -68,12 +69,13 @@ header .menu_wrap {
 
 .dept1 {
 	font-size: 0;
+	position: relative;
 }
 
 .dept2 {
  	display: none; 
 /* 	background: yellow; */
-	position: absolute;
+ 	position: absolute;
 	width: 100px;
 }
 
@@ -84,7 +86,7 @@ header .menu_wrap {
 	font-size: 35px;
 	font-weight: 100;
 	vertical-align: top;
-	margin-left: 40px; 
+	margin-left: 20px; 
   	margin-top: 32px; 
   	margin-bottom: 10px;
   /*	border-radius: 20px;
@@ -101,7 +103,7 @@ header .menu_wrap {
 }
 
 .dept1>li:hover>.dept2 {
- 	display: block;
+	display: block;
 /* 	border-left: 2px solid #ccc; */
 	box-shadow:  1px 3px 3px #d3d3d3;
 }
@@ -169,35 +171,50 @@ footer #footer_wrap {
 	<div class="menu_wrap">
 	<nav>
 	<ul class="dept1">
-		<li><a href="#">홈</a></li>
-		<li><a href="#">커뮤니티</a>
+		<li><a href="#">HOME</a></li>
+		<li><a href="#">COMMUNITY</a>
 			<ul class="dept2">
 				<li><a href="#">강아지 자랑</a></li>
-				<li><a href="/community/recommend/list">맛집 추천</a></li>
-				<li><a href="/community/free/list">강아지 Q&A</a></li>
-				<li><a href="#">강아지 정보</a></li>
+				<li><a href="#">맛집 추천</a></li>
+				<li><a href="#">강아지 Q&A</a></li>
+				<li><a href="#">강아지 연구소</a></li>
 			</ul>
 		</li>
-		<li><a href="#">고객센터</a>
+		<li><a href="#" style="margin-left: 16px;">STORE</a></li>
+		<li><a href="#">CUSTOMER</a>
 			<ul class="dept2">
 				<li><a href="#">공지사항</a></li>
 				<li><a href="#">1:1 문의</a></li>
 			</ul>
 		</li>
 		<c:if test="${empty login }">
-		<li><a href="./login">로그인</a></li>
+		<li><a href="/member/login">LOGIN</a></li>
 		</c:if>
-		<c:if test="${not empty login }">
-		<li><a href="#">마이페이지</a>
+		<c:choose>
+      	<c:when test="${not empty login }">
+		<li><a href="#">MYPAGE</a>
 		<ul class="dept2">
-			<li><a href="/mypage/update/memberUpdateView?userid=${userid}">정보 수정</a></li>
-			<li><a href="#">장바구니</a></li>
+			<li><a href="#">정보 수정</a></li>
+			<li><a href="#">관심상품</a></li>
 			<li><a href="#">구매내역</a></li>
-			<li><a href="/mypage/myboard/list?userid=${userid }">내가 쓴 글 </a></li>
+			<li><a href="#">게시글 수정</a></li>
+			<li><a href="#">1:1 문의 내역</a></li>
 		</ul>
 		</li>
-		<li><a href="./logout">로그아웃</a></li>
-		</c:if>
+		<li><a href="#">LOGOUT</a></li>
+		</c:when>
+		<c:when test="${not empty adminlogin }">
+	      <li><a href="/admin/adminpage">ADMIN</a>
+	      <ul class="dept2">
+	         <li><a href="/admin/doginfo/list">강아지연구소</a></li>
+	         <li><a href="#">공지사항</a></li>
+	         <li><a href="#">1대1문의</a></li>
+	         <li><a href="#">상품관리</a></li>
+	      </ul>
+	      </li>
+	      <li><a href="/admin/logout">LOGOUT</a></li>
+	      </c:when>
+	      </c:choose>
 	</ul>
 	</nav>
 	</div>

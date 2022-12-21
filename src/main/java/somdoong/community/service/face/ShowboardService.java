@@ -5,19 +5,18 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import somdoong.community.dto.SboardComm;
 import somdoong.community.dto.SboardFile;
 import somdoong.community.dto.SboardLike;
 import somdoong.community.dto.Showboard;
-import somdoong.util.Paging;
+import somdoong.community.util.Paging_s;
 
 public interface ShowboardService {
 
 	//페이징 생성
-	public Paging getPaging(int curPage);
+	public Paging_s getPaging(int curPage);
 
 	//페이징 적용된 게시글 조회(첨부파일이랑 같이)
-	public List<HashMap<String, Object>> list(Paging paging);
+	public List<HashMap<String, Object>> list(Paging_s paging);
 
 	//게시글번호 이용하여 업로드된 파일정보 조회
 	public SboardFile getFile(Showboard viewboard);
@@ -27,9 +26,6 @@ public interface ShowboardService {
 
 	//게시글 상세 조기
 	public Showboard view(Showboard viewboard);
-
-	//댓글 작성
-	public List<SboardComm> commList(int sno) throws Exception;
 
 	//좋아요 확인
 	public int chkLike(SboardLike sLike);
