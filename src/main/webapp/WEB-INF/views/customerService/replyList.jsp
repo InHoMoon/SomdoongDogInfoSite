@@ -1,0 +1,200 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+		
+<style>
+#listContent{
+ 	border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+    width: 1018px;
+    display: inline-block;
+}
+
+#btnModify{ 
+	float: right; 
+	border: none; 
+	background: none; 
+	color: #337ab7;
+}
+
+.text_bar2{
+	margin: 0px 9px 0 9px;
+    display: inline-block;
+    float: right;
+    width: 1px;
+    height: 18px;
+    background-color: #ebebeb;
+}
+
+.btnReplyDelete{
+	float: right;
+    border: none;
+    background: none;
+    color: #f84720;
+}
+
+.pagingC { text-align: center; font-size: 18px; padding-bottom: 10px;}
+.pagingC > li{ display: inline-block; }
+/* .num:hover { color: #2e9cdf; } */
+.pagingC a { text-decoration: none; color: #96a0ad;}
+.num{
+	background: #6bacce;
+    text-align: center;
+    color: #fff;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.listnum{ padding: 10px; }
+.listnum a:hover { color: #ccc; }
+.next { padding: 10px; }
+.next a:hover { color: #ccc; }
+  
+
+.btnReplyClose{ 
+	float: right;
+    font-size: 13px;
+    border: none;
+    background-color: #5c5c5c;
+    color: #fff;
+    width: 38px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.btnReplyUpdate{ 
+	float: right;
+    font-size: 13px;
+    border: none;
+    background-color: #6bacce;
+    color: #fff;
+    width: 38px;
+    height: 30px;
+}
+</style>
+
+
+
+<!-- 댓글 목록 -->
+<c:forEach var="row" items="${list}">
+<span id="listAdminid"><strong>${row.adminid }</strong>(<fmt:formatDate value="${row.replyDate}" pattern="yyyy.MM.dd HH:mm"/>)</span><br>
+
+<div id="listContent">
+	<span class="comm_txt" id="comm_txt${row.incno}">${row.replyContent }</span>
+	
+	<c:if test="${sessionScope.adminid == row.adminid}">
+		<button type="button" class="btnReplyDelete" id="rplyDelete_${row.incno}">삭제</button>
+		<span class="text_bar2" id="text_bar2_${row.incno}"></span>
+		<input type="button" id="btnModify" class="bm_btn_${row.incno}" value="수정" onclick="showReplyModify('${row.incno}','${row.replyContent}',this)">
+		
+		<div class="modi_wrap" id="mw_${row.incno}" style="display:none;">
+			<div class="textarea_wrap"></div> <!-- 댓 수정 입력창 영역 -->
+			
+			<button type="button" class="btnReplyUpdate" id="rplyUpdate_${row.incno}">완료</button>
+			<button type="button" class="btnReplyClose" id="rplyClose_${row.incno}" >취소</button>
+		</div>
+	</c:if>
+	
+</div><br>
+</c:forEach>
+
+<br>
+
+<div>
+	<ul class="pagingC">
+	
+		<%-- 현재 페이지 블럭이 1보다 크면 이전 페이지 블럭으로 이동 --%>
+		<c:if test="${replyPaging.curBlock > 1}">
+			<li class="next"><a href="javascript:listReplyRest('${replyPaging.prevPage}')"> « </a></li>
+		</c:if>
+		
+		<%-- 페이지 블럭 처음부터 마지막 블럭까지 --%>
+		<c:forEach var="num" begin="${replyPaging.blockBegin}" end="${replyPaging.blockEnd}">
+			<c:choose>
+				<c:when test="${num == replyPaging.curPage}">
+					<li class="num">${num}</li>
+				</c:when>
+				
+				<c:otherwise>
+					<li class="listnum"><a href="javascript:listReplyRest('${num}')">${num}</a>&nbsp;</li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		
+		<%-- 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 다음페이지로 이동 --%>
+		<c:if test="${replyPaging.curBlock <= replyPaging.totBlock}">
+			<li class="next"><a href="javascript:listReplyRest('${replyPaging.nextPage}')"> » </a><li>
+		</c:if>
+		
+	</ul>
+</div>
+
+<script>
+$(document).ready(function() {
+	
+	$(".btnReplyClose").click(function(){
+		var cno = $(this).attr("id").replace("rplyClose_","");
+		
+		console.log(cno)
+		
+		$("#mw_"+ incno).hide(); //댓글 수정 입력칸
+		$("#comm_txt" + incno).show(); //댓글
+		$("#rplyDelete_" + incno).show(); //삭제버튼
+        $("#text_bar2_" + incno).show(); // |
+		$(".bm_btn_" + incno).show(); // 수정버튼
+	});
+	
+	
+	
+	$(".btnReplyUpdate").click(function(){
+	    var detailCommContent = $("#detailCommContent").val().replace("\n", "<br>");
+       	var cno = $(this).attr("id").replace("rplyUpdate_","");
+	    console.log("e")
+	    
+	    $.ajax({
+	        url: "/customerService/Cupdate/" + incno
+	        , type: "put"
+	        , headers: { "Content-Type":"application/json" }
+	        , data: JSON.stringify({ replyContent : detailCommContent })
+	        , dataType: "text"
+	        , success: function(result){
+	        	
+	            if(result == "success"){
+	            	$("#mw_" + incno).hide();
+	            	$("#comm_txt" + incno).show();
+	                listReplyRest("1");
+	            }
+	            
+	        } // success
+	    }); // ajax
+	}); //updateBtn click
+	
+	
+	$(".btnReplyDelete").click(function(){
+		var cno = $(this).attr("id").replace("rplyDelete_","");
+		
+	    if(confirm("삭제하시겠습니까?")){
+	        $.ajax({
+	            url: "/customerService/Cdelete/" + incno
+	            , type: "delete"
+	            , success : function(result){
+	                if(result == "success"){
+	                    alert("삭제되었습니다.");
+	                    cCount();
+	                    listReplyRest("1");
+	                }
+	            } // success
+	        }); //ajax
+	    } // if
+	}); //deleteBtn click
+	
+}); //document end
+</script>

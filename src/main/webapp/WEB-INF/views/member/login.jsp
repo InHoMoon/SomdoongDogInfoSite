@@ -71,6 +71,7 @@
     	 <a href="./idfind" >아이디 찾기</a> 
    		 <a href="./pwfind" >비밀번호 찾기</a> 
    		 <a href="./agree" >회원가입</a> 
+   		 <a href="/admin/login" >관리자 로그인</a> 
     </div>
    </div>
  </div>   

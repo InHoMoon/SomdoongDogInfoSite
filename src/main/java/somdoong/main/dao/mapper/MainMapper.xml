@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="somdoong.main.dao.face.MainDao">
+
+<select id="listTop" resultType="hashmap">
+	SELECT * FROM (
+			SELECT rownum rnum, B.* FROM ( SELECT sno, title, content , write_date,
+					 hit, userid 
+				FROM showboard ORDER BY hit DESC) B) showboard
+			INNER JOIN sboard_file F
+	ON showboard.sno = F.sno AND rnum BETWEEN 1 AND 4
+</select>
+
+</mapper>
+
+
+
+
+
+

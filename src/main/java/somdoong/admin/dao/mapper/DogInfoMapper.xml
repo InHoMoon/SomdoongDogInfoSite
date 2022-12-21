@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="somdoong.admin.dao.face.DogInfoDao">
+
+    <select id="selectCntAll" resultType="int" >
+    	SELECT count(*) FROM doginfo
+    </select>
+    
+    <select id="selectList" resultType="Doginfo" parameterType="AdminPaging">
+		SELECT * FROM (
+			SELECT rownum rnum, D.* FROM (
+				SELECT
+					dno, adminid, dtitle, dcontent
+					, dhit, dwritedate, dlike
+				FROM doginfo
+				ORDER BY dno DESC
+			) D
+		) DOGINFO
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }    
+    </select>
+    
+    <update id="updateHit" parameterType="DogInfo">
+		UPDATE doginfo
+		SET dhit = dhit + 1
+		WHERE dno = #{dno}
+	</update>
+
+	<select id="selectDogInfo" resultType="DogInfo" parameterType="DogInfo">
+		SELECT
+			dno, adminid, dtitle, dcontent
+			, dhit, dwritedate, dlike
+		FROM doginfo
+		WHERE dno = #{dno}
+	</select>
+
+	<insert id="insertDogInfo" parameterType="DogInfo">
+		<selectKey order="BEFORE" resultType="int" keyProperty="dno">
+			SELECT doginfo_seq.nextval FROM dual
+		</selectKey>
+	
+		INSERT INTO doginfo ( dno, dtitle, dcontent, adminid )
+		VALUES ( #{dno }, #{dtitle }, #{dcontent }, #{adminid } )
+	</insert>
+
+	<insert id="insertFile" parameterType="DogInfoFile">
+		INSERT INTO d_file ( d_fileno, dno, origin_name, stored_name)
+		VALUES ( seq_d_file.nextval, #{dno }, #{originName }, #{storedName } )
+	</insert>
+
+	<select id="selectDogInfoFileByDno" resultType="DogInfoFile" parameterType="DogInfo">
+		SELECT
+			d_fileno, dno, origin_name, stored_name
+		FROM d_file
+		WHERE dno = #{dno }
+	</select>
+
+	<select id="selectDogInfoFileByFileNo" resultType="DogInfoFile" parameterType="DogInfoFile">
+		SELECT
+			d_fileno, dno, origin_name, stored_name
+		FROM d_file
+		WHERE d_fileno = #{d_fileno }
+	</select>
+
+	<update id="updateDogInfo" parameterType="DogInfo">
+		UPDATE doginfo
+		SET dtitle = #{dtitle}
+			, dcontent = #{dcontent}
+		WHERE dno = #{dno }
+	</update>
+
+	<delete id="deleteFile" parameterType="DogInfoFile">
+		DELETE d_file
+		WHERE dno = #{dno}	
+	</delete>
+	
+	<delete id="delete" parameterType="DogInfo">
+		DELETE doginfo
+		WHERE dno = #{dno }	
+	</delete>
+
+</mapper>
+
+
+

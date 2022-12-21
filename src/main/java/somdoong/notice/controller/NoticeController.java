@@ -48,9 +48,9 @@ public class NoticeController {
 	}
 	
 	// 게시글 검색 목록
-	@PostMapping ("/notice/slist")
+	@PostMapping ("/listS")
 	@ResponseBody
-	public ModelAndView search(@RequestParam(defaultValue = "title") String searchType, 
+	public ModelAndView search(@RequestParam(defaultValue = "ntitle") String searchType, 
 			@RequestParam(defaultValue = "") String keyword, 
 			@RequestParam(defaultValue = "0")int curPage, ModelAndView mav) {
 		
@@ -93,6 +93,9 @@ public class NoticeController {
 		//모델값 전달
 		model.addAttribute("viewNotice", viewNotice);
 		
+		NoticeFile noticeFile = noticeService.getAttachFile(viewNotice);
+		model.addAttribute("noticeFile",noticeFile);
+		
 		return "/notice/view";
 	}
 	
@@ -107,6 +110,8 @@ public class NoticeController {
 		//작성자 정보 추가
 		notice.setAdminid( (String) session.getAttribute("adminid") );
 		logger.info("{}", notice);
+		
+		noticeService.write(notice,file);
 		
 		return "redirect:/notice/list";
 	}
@@ -126,6 +131,7 @@ public class NoticeController {
 	
 	@GetMapping("/update")
 	public String update(Notice notice, Model model) {
+		logger.info("/update get;");
 		logger.info("{}", notice);
 		
 		//잘못된 게시글 번호 처리
@@ -153,7 +159,7 @@ public class NoticeController {
 		
 		noticeService.update(notice, file);
 		
-		return "redirect:/notice/view?notiNo=" + notice.getNotino();
+		return "redirect:/notice/view?notino=" + notice.getNotino();
 	}
 	
 	@RequestMapping("/delete")

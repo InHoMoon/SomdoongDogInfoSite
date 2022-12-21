@@ -15,11 +15,13 @@ public class Paging {
 	private int startNo; //화면에 보이는 게시글의 시작 번호
 	private int endNo; //화면에 보이는 게시글의 끝 번호
 	
+
 	private String searchType;
 	private String keyword;
 	
-	
-	//디폴트 생성자 - 페이징 로직이 처리되지 않는다
+	private String iUserid;
+	private String mUserid;
+
 	public Paging() {}
 	
 	
@@ -65,8 +67,7 @@ public class Paging {
 	}
 	//-------
 	
-	
-	
+
 	
 	//페이지 정보를 생성(계산)하는 메소드
 	private void makePaging() {
@@ -106,85 +107,162 @@ public class Paging {
 		
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Paging [curPage=" + curPage + ", totalCount=" + totalCount + ", listCount=" + listCount + ", totalPage="
 				+ totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startNo=" + startNo + ", endNo=" + endNo + ", searchType=" + searchType + ", keyword=" + keyword
-				+ "]";
+				+ ", iUserid=" + iUserid + ", mUserid=" + mUserid + "]";
+	}
+
+	public Paging(int curPage, int totalCount, int listCount, int totalPage, int pageCount, int startPage, int endPage,
+			int startNo, int endNo, String searchType, String keyword, String iUserid, String mUserid) {
+		super();
+		this.curPage = curPage;
+		this.totalCount = totalCount;
+		this.listCount = listCount;
+		this.totalPage = totalPage;
+		this.pageCount = pageCount;
+		this.startPage = startPage;
+		this.endPage = endPage;
+		this.startNo = startNo;
+		this.endNo = endNo;
+		this.searchType = searchType;
+		this.keyword = keyword;
+		this.iUserid = iUserid;
+		this.mUserid = mUserid;
 	}
 
 
 	public int getCurPage() {
 		return curPage;
 	}
+
+
 	public void setCurPage(int curPage) {
 		this.curPage = curPage;
 	}
+
+
 	public int getTotalCount() {
 		return totalCount;
 	}
+
+
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
+
+
 	public int getListCount() {
 		return listCount;
 	}
+
+
 	public void setListCount(int listCount) {
 		this.listCount = listCount;
 	}
+
+
 	public int getTotalPage() {
 		return totalPage;
 	}
+
+
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
+
+
 	public int getPageCount() {
 		return pageCount;
 	}
+
+
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+
+
 	public int getStartPage() {
 		return startPage;
 	}
+
+
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
+
+
 	public int getEndPage() {
 		return endPage;
 	}
+
+
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
+
+
 	public int getStartNo() {
 		return startNo;
 	}
+
+
 	public void setStartNo(int startNo) {
 		this.startNo = startNo;
 	}
+
+
 	public int getEndNo() {
 		return endNo;
 	}
+
+
 	public void setEndNo(int endNo) {
 		this.endNo = endNo;
 	}
-	
+
+
 	public String getSearchType() {
 		return searchType;
 	}
-	
+
+
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
 	}
-	
+
+
 	public String getKeyword() {
 		return keyword;
 	}
-	
+
+
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
+
+	public String getiUserid() {
+		return iUserid;
+	}
+
+
+	public void setiUserid(String iUserid) {
+		this.iUserid = iUserid;
+	}
+
+
+	public String getmUserid() {
+		return mUserid;
+	}
+
+
+	public void setmUserid(String mUserid) {
+		this.mUserid = mUserid;
+	}
+
+
+
 }

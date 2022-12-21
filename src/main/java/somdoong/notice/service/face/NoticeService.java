@@ -48,7 +48,7 @@ public interface NoticeService {
 	 * @param notice - 게시글 정보 객체
 	 * @param file
 	 */
-	public void write(Notice notice, MultipartFile file );
+	public void write(Notice notice, MultipartFile file);
 	
 	/**
 	 * 게시글 번호를 이용하여 업로드된 파일 정보를 조회한다

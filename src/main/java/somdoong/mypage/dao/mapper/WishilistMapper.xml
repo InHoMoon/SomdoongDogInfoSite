@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="somdoong.mypage.dao.face.WishlistDao">
+	<select id="selectCntAll" resultType="int" parameterType="Wishlist">
+	
+		SELECT count(*) FROM wishList
+	
+	</select>
+
+	<select id="selectList" resultType="Wishlist"  parameterType="WishlistPaging">
+		SELECT * FROM (
+			SELECT rownum rnum, W.* FROM (
+				SELECT
+					 wishList_no,store_no,userid,addDate   
+				FROM wishList  
+				ORDER BY wishList_no DESC 
+			) W 
+		)WISHLIST 
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+
+	</select>
+	
+	
+
+</mapper>

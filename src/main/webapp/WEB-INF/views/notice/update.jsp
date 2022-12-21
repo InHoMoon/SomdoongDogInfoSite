@@ -3,10 +3,13 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="../layout/header.jsp" />
+<!-- jQuery 2.2.4 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 스마트 에디터 2 로드 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
+
+<c:import url="../layout/header.jsp" />
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -22,7 +25,7 @@ $(document).ready(function() {
 
 function updateContents() {
 	//스마트 에디터에 작성된 내용을 #content에 반영한다
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
+	oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", [])
 }
 </script>
 
@@ -49,9 +52,9 @@ function updateContents() {
 <h1>글수정</h1>
 <hr>
 
-<form action="./update" method="post" enctype="multipart/form-data">
+<form action="/notice/update" method="post" enctype="multipart/form-data">
 
-<input type="hidden" name="notiNo" value="${param.notino }">
+<input type="hidden" name="notino" value="${param.notino }">
 
 <div class="form-group">
 	<label for="writer">작성자</label>
@@ -59,13 +62,18 @@ function updateContents() {
 </div>
 
 <div class="form-group">
-	<label for="title">제목</label>
-	<input type="text" id="title" name="title" class="form-control" value="${updateNotice.title }">
+	<label for="ntitle">제목</label>
+	<input type="text" id="ntitle" name="ntitle" class="form-control" value="${updateNotice.ntitle }">
 </div>
 
 <div class="form-group">
-	<label for="content">본문</label>
-	<textarea rows="10" style="width: 100%;" id="content" name="content">${updateNotice.content }</textarea>
+	<label for="ncontent">본문</label>
+	<textarea rows="10" style="width: 100%;" id="ncontent" name="ncontent">${updateNotice.ncontent }</textarea>
+</div>
+
+<div class="form-group">
+	<label for="file">첨부파일</label>
+	<input type="file" id="file" name="file">
 </div>
 
 <div class="text-center">

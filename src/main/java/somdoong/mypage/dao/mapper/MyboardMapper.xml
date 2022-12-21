@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 마이바티스 3 Mapper DTD -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="somdoong.mypage.dao.face.MyboardDao">
+    
+<!--     	<select id="listF" resultType="somdoong.main.dto.Freeboard"> -->
+<!--    		SELECT -->
+<!--    			fno -->
+<!-- 			title, -->
+<!-- 			write_date, -->
+<!-- 			hit, -->
+<!-- 			userid -->
+<!-- 			,content -->
+<!-- 		FROM  freeboard -->
+<!-- 		WHERE userid =#{userid} -->
+<!--     	</select> -->
+    	
+    	
+<!--     	<select id="listS" resultType="somdoong.main.dto.Showboard" > -->
+<!--    		SELECT -->
+<!--    			sno -->
+<!-- 			title, -->
+<!-- 			write_date, -->
+<!-- 			hit, -->
+<!-- 			userid, -->
+<!-- 			content -->
+<!-- 		FROM  showboard -->
+<!-- 		WHERE userid =#{userid} -->
+<!--     	</select> -->
+    	
+    	<select id="selectCntAll" resultType="int" parameterType="Myboard">
+<!-- 			SELECT count(*) FROM freeboard  -->
+<!-- 			union -->
+<!-- 			SELECT count(*) FROM showboard -->
+<!-- 			union -->
+<!-- 			SELECT count(*) FROM recommendboard -->
+			
+<!-- 		select count(*) -->
+<!-- 		from freeboard f, showboard s, recommendboard r -->
+<!-- 		where f.userid = s.userid -->
+<!--   		and s.userid =	r.userid -->
+			SELECT 
+				( select count(*) from freeboard where userid = #{userid} )
+				 + ( select count(*) from showboard where userid = #{userid})
+				 + (select count(*) from recommendboard where userid = #{userid})
+			FROM dual
+		</select>
+    	
+    	
+    	
+    	<select id="listAll" resultType="Myboard" parameterType="Paging">	
+    	SELECT * FROM (
+			SELECT rownum rnum, M.* FROM (
+			
+    				SELECT fno AS num,title ,hit,userid,content,write_date, 'f' type FROM freeboard
+
+					union		
+							
+					SELECT sno AS num,title ,hit ,userid,content,write_date ,'s' type FROM showboard
+
+					union
+					
+					SELECT rno AS num,title,hit,userid,content,write_date , 'r' type FROM recommendboard
+
+				) M  WHERE userid = #{mUserid}
+			) MYBOARD
+		WHERE rnum BETWEEN #{startNo } AND #{endNo }
+		  
+		
+    	</select>
+    	
+    </mapper>

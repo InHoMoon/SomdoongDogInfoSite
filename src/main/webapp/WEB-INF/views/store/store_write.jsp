@@ -6,7 +6,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	$("#productImg").change(function( e ) {
+	$("#product-content").change(function( e ) {
 		
 		var files = e.target.files;
 		
@@ -26,6 +26,40 @@ $(document).ready(function() {
 		reader.onload = function( data ) {
 			
 			$("#write-content").html(
+				$("<img>").attr({
+					"src": data.target.result
+				})
+			)
+		}
+		reader.readAsDataURL( files[0] );
+	})
+	
+	$("#imgUpload").change(function( e ) {
+		
+		var files = e.target.files;
+		
+		console.log( e.target.files )
+		
+		console.log( this.e )
+		
+		// 이미지 처리 검사
+		if( !files[0].type.includes( "image" ) ) {
+			alert("이미지가 아닙니다.")
+			
+			// 선택 파일 해제
+			e.target.value = null;
+			
+			// 이벤트 처리 중단
+			return false;
+		}
+		
+		var reader = new FileReader();
+		
+		reader.onload = function( data ) {
+			
+			$("#product-img").children().remove();
+			
+			$("#product-img").html(
 				$("<img>").attr({
 					"src": data.target.result
 				})
@@ -74,11 +108,14 @@ body {
 	border: 1px solid #d3d3d3;
 
 	width: 34%;
+	height: 410px;
 	margin-right: 20px;
 	
 	display: flex;
     align-items: center;
     justify-content: center;
+    
+    overflow: hidden;
 }
 
 #product-img > div > img {
@@ -156,7 +193,7 @@ button {
 	<div id="wrap-form">
 		<div id="product-img">
 			<a href="javascript:void(0);" onclick="$('#imgUpload').trigger('click')" class="imgUploadBtn">
-			<img src="/resources/camera.png" width="100px" height="60px" alt="사진 업로드">
+			<img src="/resources/store_camera.png" width="100px" height="60px" alt="사진 업로드">
 			</a>
 			<input type="file" id="imgUpload" style="display:none">
 		</div>
@@ -189,7 +226,7 @@ button {
 					<label style="font-size: 20px; margin-left: 2px;">원</label>
 				</div>
 				<div>
-					<br><input type="file" id="productImg" name="file">
+					<br><input type="file" id="product-content" name="file">
 				</div>
 			</div>
 		</div>
