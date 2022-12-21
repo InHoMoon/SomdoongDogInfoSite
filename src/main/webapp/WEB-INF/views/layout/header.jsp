@@ -190,7 +190,11 @@ footer #footer_wrap {
 		
 		
 		<c:if test="${empty login }">
+<<<<<<< HEAD
 		<li><a href="/member/login">LOGIN</a></li>
+=======
+		<li><a href="/member/login">로그인</a></li>
+>>>>>>> Member_JS
 		</c:if>
 <<<<<<< HEAD
 		<c:choose>
@@ -210,6 +214,7 @@ footer #footer_wrap {
 			<li><a href="#">1:1 문의 내역</a></li>
 		</ul>
 		</li>
+<<<<<<< HEAD
 <<<<<<< HEAD
 		<li><a href="#">LOGOUT</a></li>
 		</c:when>
@@ -242,6 +247,10 @@ footer #footer_wrap {
 		</c:when>
 		</c:choose>
 >>>>>>> 7bebdbf0c39223ab4d14f35d6251a503a930afe2
+=======
+		<li><a href="/member/logout">로그아웃</a></li>
+		</c:if>
+>>>>>>> Member_JS
 	</ul>
 	</nav>
 	</div>

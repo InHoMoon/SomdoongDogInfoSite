@@ -1,7 +1,5 @@
 package somdoong.member.service.face;
 
-import java.util.HashMap;
-
 import somdoong.member.dto.SomDoongMember;
 
 public interface SomDoongMemberService {
@@ -17,6 +15,8 @@ public interface SomDoongMemberService {
 	public SomDoongMember memberIdSearch(SomDoongMember searchMember);
 
 	public SomDoongMember memberPwdCheck(SomDoongMember searchMember);
+
+
 
 	
 

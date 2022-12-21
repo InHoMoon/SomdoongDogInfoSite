@@ -39,6 +39,8 @@ public class SomDoongMemberServiceImpl implements SomDoongMemberService{
 		
 		return somDoongMemberDao.selectName(member) ;
 	}
+	
+
 
 	
 	@Override
@@ -59,7 +61,7 @@ public class SomDoongMemberServiceImpl implements SomDoongMemberService{
 
 	@Override
 	public SomDoongMember memberPwdCheck(SomDoongMember searchMember) {
-		// TODO Auto-generated method stub
+		
 		return somDoongMemberDao.memberPwSearch(searchMember);
 	}
 

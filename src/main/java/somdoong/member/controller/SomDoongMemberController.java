@@ -36,33 +36,33 @@ public class SomDoongMemberController {
 		
 	}
 	
-	@GetMapping("join")
+	@GetMapping("/join")
 	public void join() {
 		logger.info("/member/join [GET] 요청완료!");
 	}
 	
 	
-	@PostMapping("join")
+	@PostMapping("/join")
 	public String joinProcess(SomDoongMember joinproc) {
 		
 		logger.info("/member/join [POST] 요청완료!");
-		logger.info("전달 파라미터{}",joinproc);
+		logger.info("전달 파라미터{}",joinproc); 
 		
 		
 		somDoongMemberService.join(joinproc);
 		
 		return "redirect:/member/login";
-	}
+	} 
 	
 
 	
-	@GetMapping("login")
+	@GetMapping("/login")
 	public void login() {
 		logger.info("login [GET] 요청완료!");
 		
 	}
 	
-	@PostMapping("login")
+	@PostMapping("/login")
 	public String loginProcess(SomDoongMember member, HttpSession session, HttpServletRequest request, HttpServletResponse response ) throws IOException {
 		logger.info("{}", member);
 		
@@ -76,7 +76,8 @@ public class SomDoongMemberController {
 			session.setAttribute("userid", member.getUserid());
 			session.setAttribute("username",somDoongMemberService.getUsername(member));
 			
-			return "redirect:/member/loginsuc";
+			
+			return "redirect:/main/main";
 			
 		}else {
 			logger.info("로그인 실패");
@@ -94,14 +95,14 @@ public class SomDoongMemberController {
 		
 	}
 	
-	@RequestMapping("loginsuc")
+	@RequestMapping("/loginsuc")
 	public void loginsuc() {
 		logger.info("/member/loginsuc 요청완료!");
 	}
 	
 	
 	//로그아웃
-	@RequestMapping("logout")
+	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		logger.info("/login/logout");
 		
@@ -111,12 +112,12 @@ public class SomDoongMemberController {
 	}
 
 	
-	@RequestMapping("idfind")
+	@RequestMapping("/idfind")
 	public void idfind() {
 		
 	}
 	
-	@RequestMapping("idfindresult")
+	@RequestMapping("/idfindresult")
 	public String idfindresult(HttpServletRequest request, Model model,
 		    @RequestParam(required = true, value = "username") String username, 
 		    @RequestParam(required = true, value = "userphone") String userphone,
@@ -138,12 +139,12 @@ public class SomDoongMemberController {
 	}
 	
 	
-	@RequestMapping("pwfind")
+	@RequestMapping("/pwfind")
 	public void pwfind() {
 		
 	}
 	
-	@RequestMapping("pwfindresult")
+	@RequestMapping("/pwfindresult")
 	public String pwfindresult(HttpServletRequest request, Model model,
 		    @RequestParam(required = true, value = "userid") String userid, 
 		    @RequestParam(required = true, value = "email") String email,    

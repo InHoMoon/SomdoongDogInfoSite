@@ -52,7 +52,7 @@ function toggleSubmitButton() {
     submitButton.disabled = true;
   }
 }
-
+ 
 checkAll.addEventListener("click", (e) => {
   const { checked } = e.target;
   if (checked) {
