@@ -12,11 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import somdoong.community.dto.Freeboard;
-import somdoong.community.dto.Showboard;
 import somdoong.mypage.dto.Myboard;
 import somdoong.mypage.service.face.MyboardService;
-import somdoong.util.Paging;
+import somdoong.util.MyboardPaging;
 
 @Controller
 @RequestMapping("/mypage/myboard")
@@ -41,14 +39,14 @@ public class MyboardController {
 		myboard.setUserid((String) session.getAttribute("userid"));
 		
 		
-		Paging paging = myboardService.getPaging(curPage,myboard);
+		MyboardPaging paging = myboardService.getPaging(curPage,myboard);
 		logger.debug("{}" , paging);
 		model.addAttribute("paging", paging);
 		
 //		model.addAttribute("list", listF);
 		
 //		model.addAttribute("list", listS);
-		paging.setiUserid((String) session.getAttribute("userid"));
+		paging.setmUserid((String) session.getAttribute("userid"));
      	List<Myboard> listAll = myboardService.listAll(paging);
      	for (Myboard M : listAll) logger.debug("{}", M);
 		model.addAttribute("listAll" ,listAll);
@@ -61,4 +59,7 @@ public class MyboardController {
 		
 		return "/mypage/myboard/list";
 	}
+	
+	
+
 }

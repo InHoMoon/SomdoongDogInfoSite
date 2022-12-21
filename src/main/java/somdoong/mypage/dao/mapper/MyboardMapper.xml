@@ -31,35 +31,41 @@
 <!-- 		WHERE userid =#{userid} -->
 <!--     	</select> -->
     	
-    	
     	<select id="selectCntAll" resultType="int" parameterType="Myboard">
-			SELECT count(*) FROM freeboard
-		
+<!-- 			SELECT count(*) FROM freeboard  -->
+<!-- 			union -->
+<!-- 			SELECT count(*) FROM showboard -->
+<!-- 			union -->
+<!-- 			SELECT count(*) FROM recommendboard -->
 			
+<!-- 		select count(*) -->
+<!-- 		from freeboard f, showboard s, recommendboard r -->
+<!-- 		where f.userid = s.userid -->
+<!--   		and s.userid =	r.userid -->
+			SELECT 
+				( select count(*) from freeboard where userid = #{userid} )
+				 + ( select count(*) from showboard where userid = #{userid})
+				 + (select count(*) from recommendboard where userid = #{userid})
+			FROM dual
 		</select>
     	
     	
     	
-    	<select id="listAll" resultType="Myboard" parameterType="Paging">	
+    	<select id="listAll" resultType="Myboard" parameterType="MyboardPaging">	
     	SELECT * FROM (
 			SELECT rownum rnum, M.* FROM (
 			
-    				SELECT fno AS num,title ,hit,userid,content,write_date, 'f' type FROM freeboard
-<!--     					WHERE userid = #{mUserid}	 -->
-					union		
-							
-					SELECT sno AS num,title ,hit ,userid,content,write_date ,'s' type FROM showboard
-<!-- 					WHERE userid = #{mUserid} -->
+    				SELECT fno,title ,hit,userid,content,write_date, 'f' type FROM freeboard
+					union			
+					SELECT sno,title ,hit ,userid,content,write_date ,'s' type FROM showboard
 					union
-					
-					SELECT rno AS num,title,hit,userid,content,write_date , 'r' type FROM recommendboard
-<!-- 					WHERE userid = #{mUserid}    	 -->
+					SELECT rno,title,hit,userid,content,write_date , 'r' type FROM recommendboard
+
 				) M  WHERE userid = #{mUserid}
 			) MYBOARD
 		WHERE rnum BETWEEN #{startNo } AND #{endNo }
 		  
 		
     	</select>
-    	
     	
     </mapper>

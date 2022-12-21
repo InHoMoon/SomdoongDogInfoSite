@@ -6,13 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import somdoong.mypage.dto.IBoardFile;
 import somdoong.mypage.dto.Inquire;
+import somdoong.util.InquirePaging;
 import somdoong.util.Paging;
+import somdoong.util.myinquirePaging;
 
 public interface InquireService {
 
-	public Paging getPaging(int curPage);
+	public InquirePaging getPaging(int curPage, Inquire inquire);
 
-	public List<Inquire> list(Paging paging);
+	public List<Inquire> list(InquirePaging paging);
 
 	public Inquire view(Inquire viewInquire);
 
@@ -25,5 +27,9 @@ public interface InquireService {
 	public void update(Inquire inquire, MultipartFile file);
 
 	public void delete(Inquire inquire);
+
+	public myinquirePaging getPagingmyname(int curPage, Inquire inquire);
+
+	public List<Inquire> listmyname(myinquirePaging paging);
 
 }

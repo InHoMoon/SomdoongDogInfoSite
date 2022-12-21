@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:import url="../layout/header.jsp" />
+<c:import url="../../layout/header.jsp" />
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -15,20 +15,6 @@ $(document).ready(function(){
 </script>
 
 <style type="text/css">
-
-
-#btnWrite{
-	float: right;
-    width: 54px;
-    height: 34px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    color: #555;
-    border: 1px solid #ccc;
-}
-
-
 table {
 	table-layout: fixed;
 }
@@ -56,7 +42,6 @@ td:nth-child(3) {
 		<th style="width: 20%;">작성자</th>
 		<th style="width: 10%;">조회수</th>
 		<th style="width: 15%;">작성일</th>
-
 	</tr>
 </thead>
 <tbody>
@@ -76,12 +61,13 @@ td:nth-child(3) {
 </tbody>
 </table>
 
-<span class="pull-right">게시글 수 : ${paging.totalCount }</span>
+<button id="btnWrite"  class="btn btn-default">글쓰기</button>
+<span class="pull-right">total : ${paging.totalCount }</span>
 <div class="clearfix"></div>
 
-<c:import url="/WEB-INF/views/layout/mypageListPaging.jsp" />
+<c:import url="/WEB-INF/views/layout/mypagemyinquirelistPaging.jsp" />
 
 
 </div><!-- .container -->
 
-<c:import url="../layout/footer.jsp" />
+<c:import url="../../layout/footer.jsp" />

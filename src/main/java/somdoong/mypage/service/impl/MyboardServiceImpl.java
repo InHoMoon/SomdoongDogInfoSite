@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import somdoong.mypage.dao.face.MyboardDao;
 import somdoong.mypage.dto.Myboard;
 import somdoong.mypage.service.face.MyboardService;
+import somdoong.util.MyboardPaging;
 import somdoong.util.Paging;
 
 @Service
@@ -29,18 +30,17 @@ public class MyboardServiceImpl implements MyboardService {
 //	}
 //	
 	@Override
-	public List<Myboard> listAll(Paging paging) {
+	public List<Myboard> listAll(MyboardPaging paging) {
 		return myboardDao.listAll(paging);
 	}
 	
 	@Override
-	public Paging getPaging(int curPage, Myboard myboard) {
+	public MyboardPaging getPaging(int curPage, Myboard myboard) {
 		
 		int totalCount = myboardDao.selectCntAll(myboard);
 		
-		Paging paging = new Paging(totalCount, curPage);
+		MyboardPaging paging = new MyboardPaging(totalCount, curPage);
 		
 		return paging;
 	}
-	
 }
