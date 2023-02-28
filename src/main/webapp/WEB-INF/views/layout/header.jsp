@@ -171,76 +171,50 @@ footer #footer_wrap {
 	<div class="menu_wrap">
 	<nav>
 	<ul class="dept1">
-		<li><a href="#">HOME</a></li>
+		<li><a href="/main/main">HOME</a></li>
 		<li><a href="#">COMMUNITY</a>
 			<ul class="dept2">
-				<li><a href="#">강아지 자랑</a></li>
-				<li><a href="#">맛집 추천</a></li>
-				<li><a href="#">강아지 Q&A</a></li>
-				<li><a href="#">강아지 연구소</a></li>
+				<li><a href="/community/showlist">강아지 자랑</a></li>
+				<li><a href="/community/recommend/list">맛집 추천</a></li>
+				<li><a href="/community/free/list">강아지 Q&A</a></li>
+				<li><a href="/admin/doginfo/list">강아지 연구소</a></li>
 			</ul>
 		</li>
-		<li><a href="#" style="margin-left: 16px;">STORE</a></li>
+		<li><a href="/store/main" style="margin-left: 16px;">STORE</a></li>
 		<li><a href="#">CUSTOMER</a>
 			<ul class="dept2">
-				<li><a href="#">공지사항</a></li>
-				<li><a href="#">1:1 문의</a></li>
+				<li><a href="/notice/list">공지사항</a></li>
+				<li><a href="/mypage/list">1:1 문의</a></li>
 			</ul>
 		</li>
-		
-		
 		<c:if test="${empty login }">
 		<li><a href="/member/login">LOGIN</a></li>
-		<li><a href="/member/login">로그인</a></li>
 		</c:if>
 		<c:choose>
       	<c:when test="${not empty login }">
-		<li><a href="#">MYPAGE</a>
-		
-		<c:choose>
-		<c:when test="${not empty login }">
-		<li><a href="#">마이페이지</a>
+		<li><a href="/mypage/mypage">MYPAGE</a>
 		<ul class="dept2">
-			<li><a href="#">정보 수정</a></li>
-			<li><a href="#">관심상품</a></li>
-			<li><a href="#">구매내역</a></li>
-			<li><a href="#">게시글 수정</a></li>
-			<li><a href="#">1:1 문의 내역</a></li>
+			<li><a href="/mypage/update/memberUpdateView?userid=${userid }">정보 수정</a></li>
+			<li><a href="/mypage/wishlist/list">관심상품</a></li>
+			<li><a href="/mypage/purchase/list">구매내역</a></li>
+			<li><a href="/mypage/myboard/list?userid=${userid }">게시글 수정</a></li>
+			<li><a href="/mypage/inquire/list">1:1 문의 내역</a></li>
 		</ul>
 		</li>
-		<li><a href="#">LOGOUT</a></li>
+		<li><a href="/member/logout">LOGOUT</a></li>
 		</c:when>
 		<c:when test="${not empty adminlogin }">
 	      <li><a href="/admin/adminpage">ADMIN</a>
 	      <ul class="dept2">
 	         <li><a href="/admin/doginfo/list">강아지연구소</a></li>
-	         <li><a href="#">공지사항</a></li>
-	         <li><a href="#">1대1문의</a></li>
-	         <li><a href="#">상품관리</a></li>
+	         <li><a href="/notice/list">공지사항</a></li>
+	         <li><a href="/mypage/list">1대1문의</a></li>
+	         <li><a href="/store/product">상품관리</a></li>
 	      </ul>
 	      </li>
 	      <li><a href="/admin/logout">LOGOUT</a></li>
 	      </c:when>
 	      </c:choose>
-		<li><a href="./logout">로그아웃</a></li>
-		</c:when>
-				
-		<c:when test="${not empty adminlogin }">
-		<li><a href="/admin/adminpage">AdminPage</a>
-		<ul class="dept2">
-			<li><a href="/admin/doginfo/list">강아지연구소</a></li>
-			<li><a href="#">공지사항</a></li>
-			<li><a href="#">1대1문의</a></li>
-			<li><a href="#">상품관리</a></li>
-		</ul>
-		</li>
-		<li><a href="/admin/logout">로그아웃</a></li>
-		</c:when>
-		</c:choose>
-
-		<li><a href="/member/logout">로그아웃</a></li>
-
-
 	</ul>
 	</nav>
 	</div>

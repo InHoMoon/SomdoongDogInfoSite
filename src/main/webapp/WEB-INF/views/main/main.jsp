@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="../layout/header.jsp"/>
-<style>
+<style type="text/css">
 	.album{
 		float:left; 
 		text-align:center;
@@ -163,7 +163,7 @@
 <!-- 강아지 연구소 -->
 <div class="col-xs-6" id="doginfo">
 <div>
-	<div style="float: right;"><a href="강아지정보 리스트 경로">▷더보기</a></div>
+	<div style="float: right;"><a href="/admin/doginfo/list">▷더보기</a></div>
 	<div style="width: 60px; float: left;"><img src="../resources/info2.jpg" style="width: 53px;"></div>
 	<div style="width: 220px; margin-top: 20px; margin-left: 65px">
 	<span style="font-family: 'Black Han Sans', sans-serif; font-size: 30px;">강아지 연구소</span>
@@ -181,7 +181,7 @@
 	<c:forEach items="${dList }" var="dList" >
 	<tr>
 		<td class="col-md-2" style="text-align: center;">${dList.dno }</td>
-		<td><a href="/강아지정보 상세글 경로?dinfono=${dList.dno }">${dList.dtitle }</a></td>
+		<td><a href="/admin/doginfo/view?dno=${dList.dno }">${dList.dtitle }</a></td>
 		<td class="col-md-2" style="text-align: center;"><fmt:formatDate value="${dList.dwritedate }" pattern="yy-MM-dd" /></td>
 		<td class="col-md-2" style="text-align: center;">${dList.dhit }</td>
 	</tr>
@@ -212,7 +212,7 @@
 	<c:forEach items="${nList }" var="nList" >
 	<tr>
 		<td class="col-md-2" style="text-align: center;">${nList.notino }</td>
-		<td><a href="/notice/view?notino=${nList.notino }">${nList.title }</a></td>
+		<td><a href="/notice/view?notino=${nList.notino }">${nList.ntitle }</a></td>
 		<td class="col-md-2" style="text-align: center;"><fmt:formatDate value="${nList.notidate }" pattern="yy-MM-dd" /></td>
 		<td class="col-md-2" style="text-align: center;">${nList.hit }</td>
 	</tr>

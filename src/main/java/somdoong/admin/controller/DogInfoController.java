@@ -48,7 +48,7 @@ public class DogInfoController {
 	}
 	
 	@RequestMapping("/view")
-	public String view(DogInfo viewDogInfo, Model model, HttpSession session, DoginfoLike dLike) {
+	public String view(DogInfo viewDogInfo, Model model, HttpSession session, DoginfoLike dLike) {   
 		logger.debug("{}", viewDogInfo);
 		
 		//잘못된 게시글 번호 처리
